@@ -8,7 +8,8 @@ services:
     ports:
       - "5488:5488"  # Puerto por defecto
     volumes:
-      - jsreport_data:/app/data  # Persistencia del sistema de archivos de jsreport
+      #- jsreport_data:/app/data  # Persistencia del sistema de archivos de jsreport
+      - ./data:/app/data
       - ./jsreport.config.json:/app/jsreport.config.json  # ¡esto es clave para que funcionen algunas plantillas!
     environment:
       - extensions_authentication_admin_username=admin

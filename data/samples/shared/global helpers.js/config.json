@@ -1,0 +1,15 @@
+{
+    "shortid": "SkMw3X69l",
+    "isSharedHelper": true,
+    "name": "global helpers.js",
+    "creationDate": {
+        "$$date": 1754562576826
+    },
+    "modificationDate": {
+        "$$date": 1754562576826
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "zTexgzvCSNyCFTCU",
+    "$entitySet": "assets"
+}

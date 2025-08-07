@@ -1,0 +1,14 @@
+{
+    "name": "datatestSimple",
+    "shortid": "aV_-PkbeJ",
+    "creationDate": {
+        "$$date": 1754562837941
+    },
+    "modificationDate": {
+        "$$date": 1754562837941
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "Tlhh88AKCAvZIaM7",
+    "$entitySet": "data"
+}

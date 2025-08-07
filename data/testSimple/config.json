@@ -1,0 +1,14 @@
+{
+    "name": "testSimple",
+    "creationDate": {
+        "$$date": 1754562699741
+    },
+    "modificationDate": {
+        "$$date": 1754562699741
+    },
+    "shortid": "v_y_hBl",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "Jl2PXtt1qXKrNEH7",
+    "$entitySet": "folders"
+}
