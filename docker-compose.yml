@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  jsreport:
+    image: jsreport/jsreport:latest
+    container_name: jsreport
+    restart: unless-stopped
+    ports:
+      - "5488:5488"  # Puerto por defecto
+    volumes:
+      - jsreport_data:/app/data  # Persistencia del sistema de archivos de jsreport
+      - ./jsreport.config.json:/app/jsreport.config.json  # ¡esto es clave para que funcionen algunas plantillas!
+    environment:
+      - extensions_authentication_admin_username=admin
+      - extensions_authentication_admin_password=admin
+      - extensions_authentication_enabled=true
+      - extensions_studio_enabled=true
+      - extensions_authentication_cookieSession_secret=1234
+      - store_provider=fs  # Sistema de archivos (por defecto). Puedes cambiar a mongodb si lo prefieres
+
+volumes:
+  jsreport_data:

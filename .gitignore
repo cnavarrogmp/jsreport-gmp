@@ -1,0 +1,14 @@
+# jsreport internal data
+data/temp
+data/reporters
+data/extensions
+data/snapshots
+data/logs
+
+# Node + Docker usuals
+node_modules/
+.env
+.DS_Store
+
+# OS files
+Thumbs.db
