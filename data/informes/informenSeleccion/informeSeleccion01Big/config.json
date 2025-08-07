@@ -1,0 +1,20 @@
+{
+    "name": "informeSeleccion01Big",
+    "creationDate": {
+        "$$date": 1754576251486
+    },
+    "modificationDate": {
+        "$$date": 1754576251486
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "__entitySet": "folders",
+    "__name": "informeSeleccion01",
+    "__shortid": "VweXM-x",
+    "__folder": {
+        "shortid": "e295Hpe"
+    },
+    "shortid": "MTToLfC",
+    "_id": "epEwUfuAVDjdaYWe",
+    "$entitySet": "folders"
+}

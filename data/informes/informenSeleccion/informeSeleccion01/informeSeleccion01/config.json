@@ -1,0 +1,22 @@
+{
+    "name": "informeSeleccion01",
+    "engine": "handlebars",
+    "recipe": "chrome-pdf",
+    "data": {
+        "shortid": "E7u1asv8p"
+    },
+    "shortid": "I7Qp71hqS0",
+    "chrome": {
+        "printBackground": true
+    },
+    "creationDate": {
+        "$$date": 1754567154119
+    },
+    "modificationDate": {
+        "$$date": 1754576158036
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "jEhd8vkLohzdc2Dq",
+    "$entitySet": "templates"
+}

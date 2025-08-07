@@ -1,0 +1,14 @@
+{
+    "name": "informes",
+    "creationDate": {
+        "$$date": 1754567037690
+    },
+    "modificationDate": {
+        "$$date": 1754567037690
+    },
+    "shortid": "Jqrd-G6",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "vJS1GsB5zo8p12K9",
+    "$entitySet": "folders"
+}

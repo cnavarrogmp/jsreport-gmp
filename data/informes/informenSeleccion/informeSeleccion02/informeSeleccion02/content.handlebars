@@ -1,0 +1,190 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 11pt;
+        color: #333;
+        margin: 40px;
+      }
+
+      .header {
+        background: linear-gradient(to right, #e0f7fa, #dcedc8);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 8px;
+      }
+
+      .header .left {
+        font-size: 20pt;
+        font-weight: bold;
+        color: #004d40;
+        line-height: 1.2;
+      }
+
+      .header .right img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+
+      .summary {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+        line-height: 1.6;
+      }
+
+      .summary .column {
+        flex: 1;
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 6px;
+      }
+
+      h2.section-title {
+        font-size: 16pt;
+        margin-top: 30px;
+        border-bottom: 2px solid #b2dfdb;
+        padding-bottom: 5px;
+        color: #00695c;
+      }
+
+      .two-columns {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+      }
+
+      .two-columns .column {
+        flex: 1;
+      }
+
+      .item {
+        margin-bottom: 10px;
+      }
+
+      .item .title {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #444;
+      }
+
+      .item .text {
+        font-size: 10pt;
+        color: #666;
+      }
+
+      .tags {
+        display: flex;
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .tags .tag {
+        flex: 1;
+        background: #eeeeee;
+        padding: 15px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 10pt;
+        color: #777;
+      }
+
+      .final-block {
+        background: linear-gradient(to right, #dcedc8, #e0f7fa);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+        font-size: 11pt;
+        color: #333;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- Cabecera -->
+    <div class="header">
+      <div class="left">
+        {{datosPersonales.nombreCompleto}}
+      </div>
+      <div class="right">
+        {{#if datosPersonales.foto}}
+          <img src="{{datosPersonales.foto}}" alt="Foto perfil" />
+        {{/if}}
+      </div>
+    </div>
+
+    <!-- Resumen -->
+    <div class="summary">
+      <div class="column">
+        {{informe.aspectosPersonales}}
+      </div>
+      <div class="column">
+        {{informe.trayectoriaFormativa}}
+      </div>
+      <div class="column">
+        {{informe.trayectoriaProfesional}}
+      </div>
+    </div>
+
+    <!-- Experiencia y formación -->
+    <h2 class="section-title">Experiencia Laboral</h2>
+    <div class="two-columns">
+      <div class="column">
+        {{#each experienciasLaborales}}
+        <div class="item">
+          <div class="title">{{puesto}}</div>
+          <div class="text">{{empresa}} — {{fechaInicio}} a {{fechaFin}}</div>
+          <div class="text">{{funcionRealizada}}</div>
+        </div>
+        {{/each}}
+      </div>
+      <div class="column">
+        <h2 class="section-title">Formación</h2>
+        {{#each formaciones}}
+        <div class="item">
+          <div class="title">{{nombre}}</div>
+          <div class="text">{{centro}} — {{fechaFin}}</div>
+          <div class="text">{{titulacionAcademica}}</div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <!-- Competencias, referencias, formación complementaria -->
+    <div class="tags">
+      <div class="tag">
+        <strong>Competencias</strong><br />
+        {{#each competencias}}{{competencia}}<br />{{/each}}
+      </div>
+      <div class="tag">
+        <strong>Referencias</strong><br />
+        {{#each referencias}}{{empresa}} - {{referencia}}<br />{{/each}}
+      </div>
+      <div class="tag">
+        <strong>Formación Complementaria</strong><br />
+        {{#each acreditaciones}}{{descripcion}}<br />{{/each}}
+      </div>
+    </div>
+
+    <!-- Entrevista -->
+    {{#if informe.entrevistaPersonal}}
+    <h2 class="section-title">Informe de entrevista</h2>
+    <div>{{informe.entrevistaPersonal}}</div>
+    {{/if}}
+
+    <!-- Valoración final -->
+    {{#if informe.valoracion}}
+    <div class="final-block">
+      <strong>Valoración final:</strong><br />
+      {{informe.valoracion}}
+    </div>
+    {{/if}}
+
+  </body>
+</html>
