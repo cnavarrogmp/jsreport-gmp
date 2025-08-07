@@ -1,3 +1,11 @@
 {
-  "trustUserCode": true
+  "trustUserCode": true,
+  "store": {
+    "provider": "fs"
+  },
+  "blobStorage": {
+    "provider": "fs"
+  },
+  "dataDirectory": "data",
+  "tempDirectory": "temp"
 }
