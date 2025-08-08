@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Candidato</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #2d3748;
+            background: #ffffff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #4a5568;
+        }
+
+        .header-content {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .candidate-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #e2e8f0;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 24px;
+        }
+
+        .candidate-info h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .candidate-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            font-size: 10px;
+            color: #4a5568;
+        }
+
+        .score-badge {
+            background: #4a5568;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-align: center;
+            min-width: 120px;
+        }
+
+        .score-number {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .score-label {
+            font-size: 9px;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Section styling */
+        .section {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            background: #f7fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-content {
+            padding: 20px;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* Experience and Formation tables */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            font-size: 9px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #4a5568;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 10px;
+            vertical-align: top;
+        }
+
+        .table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Competencias */
+        .competencia-item {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .competencia-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .competencia-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .competencia-name {
+            font-weight: 500;
+            color: #2d3748;
+        }
+
+        .competencia-score {
+            display: flex;
+            gap: 2px;
+        }
+
+        .score-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e2e8f0;
+        }
+
+        .score-dot.filled {
+            background: #4a5568;
+        }
+
+        .competencia-observaciones {
+            font-size: 10px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        /* Score display */
+        .score-display {
+            font-weight: 600;
+            color: #4a5568;
+            background: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+        }
+
+        /* Informe evaluation */
+        .evaluation-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .evaluation-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 3px solid #cbd5e0;
+        }
+
+        .evaluation-label {
+            font-size: 10px;
+            font-weight: 500;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .evaluation-text {
+            font-size: 10px;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+
+        /* Skills grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 10px;
+        }
+
+        .skill-name {
+            font-weight: 500;
+        }
+
+        .skill-level {
+            color: #4a5568;
+            font-size: 9px;
+        }
+
+        /* Date formatting */
+        .date-range {
+            font-size: 9px;
+            color: #718096;
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: #718096;
+            font-size: 9px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media print {
+            body { 
+                font-size: 10px; 
+            }
+            .section { 
+                break-inside: avoid; 
+                margin-bottom: 15px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                {{#if datosPersonales.foto}}
+                <img src="{{datosPersonales.foto}}" alt="Foto candidato" class="candidate-photo">
+                {{else}}
+                <div class="candidate-photo">👤</div>
+                {{/if}}
+                
+                <div class="candidate-info">
+                    <h1>{{datosPersonales.nombreCompleto}}</h1>
+                    <div class="candidate-details">
+                        <div>📧 {{datosPersonales.email}}</div>
+                        <div>📱 {{datosPersonales.telefonoMovil}}</div>
+                        <div>📍 {{datosPersonales.municipio}}, {{datosPersonales.pais}}</div>
+                        <div>🆔 {{datosPersonales.nif}} | {{datosPersonales.edad}} años</div>
+                    </div>
+                </div>
+
+                <div class="score-badge">
+                    <div class="score-number">{{informe.puntuacion}}/3</div>
+                    <div class="score-label">Puntuación</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Valoración General -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Valoración General</div>
+            </div>
+            <div class="section-content">
+                <p style="font-size: 11px; line-height: 1.6; color: #2d3748;">{{informe.valoracion}}</p>
+            </div>
+        </div>
+
+        <!-- Evaluación Detallada -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Evaluación Detallada</div>
+            </div>
+            <div class="section-content">
+                <div class="evaluation-grid">
+                    {{#if informe.aspectosPersonales}}
+                    <div class="evaluation-item">
+                        <div class="evaluation-label">Aspectos Personales</div>
+                        <div class="evaluation-text">{{informe.aspectosPersonales}}</div>
+                    </div>
+                    {{/if}}
+                    {{#if informe.trayectoriaFormativa}}
+                    <div class="evaluation-item">
+                        <div class="evaluation-label">Trayectoria Formativa</div>
+                        <div class="evaluation-text">{{informe.trayectoriaFormativa}}</div>
+                    </div>
+                    {{/if}}
+                    {{#if informe.trayectoriaProfesional}}
+                    <div class="evaluation-item">
+                        <div class="evaluation-label">Trayectoria Profesional</div>
+                        <div class="evaluation-text">{{informe.trayectoriaProfesional}}</div>
+                    </div>
+                    {{/if}}
+                    {{#if informe.entrevistaPersonal}}
+                    <div class="evaluation-item">
+                        <div class="evaluation-label">Entrevista Personal</div>
+                        <div class="evaluation-text">{{informe.entrevistaPersonal}}</div>
+                    </div>
+                    {{/if}}
+                    {{#if informe.datosInteres}}
+                    <div class="evaluation-item">
+                        <div class="evaluation-label">Datos de Interés</div>
+                        <div class="evaluation-text">{{informe.datosInteres}}</div>
+                    </div>
+                    {{/if}}
+                    {{#if informe.motivoPresentacion}}
+                    <div class="evaluation-item">
+                        <div class="evaluation-label">Motivo de Presentación</div>
+                        <div class="evaluation-text">{{informe.motivoPresentacion}}</div>
+                    </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Two Column Section -->
+        <div class="two-column">
+            <!-- Competencias -->
+            {{#if competencias}}
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-title">Competencias</div>
+                </div>
+                <div class="section-content">
+                    {{#each competencias}}
+                    <div class="competencia-item">
+                        <div class="competencia-header">
+                            <div class="competencia-name">{{competencia}}</div>
+                            <div class="score-display">{{puntuacion}}/5</div>
+                        </div>
+                        {{#if observaciones}}
+                        <div class="competencia-observaciones">{{observaciones}}</div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            {{/if}}
+
+            <!-- Skills Section -->
+            <div>
+                <!-- Idiomas -->
+                {{#if idiomas}}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">Idiomas</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="skills-grid">
+                            {{#each idiomas}}
+                            <div class="skill-item">
+                                <span class="skill-name">{{idioma}}</span>
+                                <span class="skill-level">{{nivel}}</span>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                <!-- Aplicaciones Informáticas -->
+                {{#if aplicacionesInformaticas}}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">Aplicaciones Informáticas</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="skills-grid">
+                            {{#each aplicacionesInformaticas}}
+                            <div class="skill-item">
+                                <span class="skill-name">{{aplicacion}}</span>
+                                <span class="skill-level">{{nivel}}</span>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+
+                <!-- Acreditaciones -->
+                {{#if acreditaciones}}
+                <div class="section">
+                    <div class="section-header">
+                        <div class="section-title">Acreditaciones</div>
+                    </div>
+                    <div class="section-content">
+                        {{#each acreditaciones}}
+                        <div style="background: #f8f9fa; padding: 10px; border-radius: 4px; margin-bottom: 8px;">
+                            <div style="font-weight: 500; font-size: 10px;">{{descripcion}}</div>
+                            {{#if horas}}<div style="font-size: 9px; color: #718096;">{{horas}} horas</div>{{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- Experiencia Laboral -->
+        {{#if experienciasLaborales}}
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Experiencia Laboral</div>
+            </div>
+            <div class="section-content">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">Periodo</th>
+                            <th style="width: 25%;">Empresa</th>
+                            <th style="width: 25%;">Puesto</th>
+                            <th style="width: 35%;">Funciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each experienciasLaborales}}
+                        <tr>
+                            <td class="date-range">
+                                {{#if fechaInicio}}
+                                {{#if fechaFin}}
+                                2005-2017
+                                {{else}}
+                                Actual
+                                {{/if}}
+                                {{else}}
+                                N/D
+                                {{/if}}
+                            </td>
+                            <td style="font-weight: 500;">{{empresa}}</td>
+                            <td>{{puesto}}</td>
+                            <td>{{funcionRealizada}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Formación -->
+        {{#if formaciones}}
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Formación Académica</div>
+            </div>
+            <div class="section-content">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">Año</th>
+                            <th style="width: 35%;">Titulación</th>
+                            <th style="width: 28%;">Centro</th>
+                            <th style="width: 25%;">Nivel Académico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each formaciones}}
+                        <tr>
+                            <td class="date-range">
+                                {{#if fechaFin}}2002-2017{{else}}N/D{{/if}}
+                            </td>
+                            <td style="font-weight: 500;">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</td>
+                            <td>{{centro}}</td>
+                            <td style="font-size: 9px;">{{titulacionAcademica}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Referencias -->
+        {{#if referencias}}
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Referencias</div>
+            </div>
+            <div class="section-content">
+                <div class="three-column">
+                    {{#each referencias}}
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 4px;">
+                        <div style="font-weight: 500; margin-bottom: 4px;">{{empresa}}</div>
+                        <div style="font-size: 10px; color: #4a5568; margin-bottom: 4px;">{{funcionRealizada}}</div>
+                        <div style="font-size: 9px; color: #718096;">{{referencia}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Informe generado | ID: {{idInformeCvPublicacion}} | Confidencial</p>
+        </div>
+    </div>
+</body>
+</html>

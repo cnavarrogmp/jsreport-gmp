@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Candidato - GRUPOMPLEO</title>
+    <style>
+        /* GRUPOMPLEO - Template CSS inline para evitar problemas de assets */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px; --space-6: 48px; --space-8: 64px;
+            --color-primary: #1e293b; --color-secondary: #475569; --color-accent: #f59e0b; --color-success: #059669;
+            --color-gray-50: #f8fafc; --color-gray-100: #f1f5f9; --color-gray-200: #e2e8f0; --color-gray-300: #cbd5e0;
+            --color-gray-400: #a0aec0; --color-gray-500: #718096; --color-gray-600: #4a5568; --color-gray-700: #2d3748; --color-gray-800: #1a202c;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-size-xs: 10px; --font-size-sm: 11px; --font-size-base: 12px; --font-size-md: 14px; --font-size-lg: 16px; --font-size-xl: 18px; --font-size-2xl: 24px;
+            --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --border-radius: 6px; --border-radius-lg: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-primary); font-size: var(--font-size-sm); line-height: 1.4; color: var(--color-gray-800); background: #ffffff; -webkit-font-smoothing: antialiased; }
+        .landscape-layout { width: 100vw; min-height: 100vh; }
+        .container-fluid { width: 100%; margin: 0 auto; padding: var(--space-2); }
+        .main-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); margin-bottom: var(--space-6); }
+        .module { background: #ffffff; border-radius: var(--border-radius); box-shadow: var(--shadow-base); border: 1px solid var(--color-gray-200); page-break-inside: avoid; margin-bottom: var(--space-2); }
+        .module.span-2 { grid-column: span 2; } .module.span-3 { grid-column: span 3; } .module.span-full { grid-column: 1 / -1; }
+        .page-header { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); color: white; padding: var(--space-3); margin: calc(-1 * var(--space-2)) calc(-1 * var(--space-2)) var(--space-4) calc(-1 * var(--space-2)); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .company-section { flex: 1; } .company-name { font-size: var(--font-size-2xl); font-weight: 700; letter-spacing: -0.5px; margin-bottom: var(--space-1); }
+        .company-subtitle { font-size: var(--font-size-base); opacity: 0.9; font-weight: 300; }
+        .candidate-header { text-align: right; } .candidate-name { font-size: var(--font-size-xl); font-weight: 600; margin-bottom: var(--space-1); }
+        .candidate-meta { display: flex; align-items: center; gap: var(--space-2); justify-content: flex-end; }
+        .score-badge, .date-badge { background: rgba(255, 255, 255, 0.2); padding: var(--space-1) var(--space-2); border-radius: 20px; font-size: var(--font-size-xs); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .score-value { font-weight: 700; font-size: var(--font-size-md); } .score-max { opacity: 0.8; }
+        .sticky-header { position: fixed; top: 0; left: 0; right: 0; background: rgba(30, 41, 59, 0.95); color: white; padding: var(--space-1) 0; font-size: var(--font-size-xs); z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .breadcrumb-context-overlay { position: absolute; top: var(--space-2); left: var(--space-2); background: var(--color-gray-100); border: 1px solid var(--color-gray-200); border-radius: var(--border-radius); padding: var(--space-1) var(--space-2); font-size: var(--font-size-xs); color: var(--color-gray-600); z-index: 100; }
+        .context-badge { position: fixed; top: var(--space-2); right: var(--space-2); background: var(--color-accent); color: white; border-radius: 50px; padding: var(--space-1) var(--space-2); font-size: var(--font-size-xs); font-weight: 500; z-index: 200; box-shadow: var(--shadow-md); max-width: 200px; }
+        .badge-content { display: flex; align-items: center; gap: var(--space-1); } .hidden { display: none !important; }
+        .module-header { background: var(--color-gray-50); border-bottom: 1px solid var(--color-gray-200); padding: var(--space-2); border-radius: var(--border-radius) var(--border-radius) 0 0; }
+        .module-title { font-size: var(--font-size-md); font-weight: 600; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+        .module-content { padding: var(--space-3); }
+        .section { margin-bottom: var(--space-4); } .section:last-child { margin-bottom: 0; }
+        .section-title { font-size: var(--font-size-base); font-weight: 600; color: var(--color-gray-700); margin-bottom: var(--space-2); padding-bottom: var(--space-1); border-bottom: 2px solid var(--color-gray-200); }
+        .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+        .info-item { display: flex; align-items: flex-start; gap: var(--space-2); padding: var(--space-2); background: var(--color-gray-50); border-radius: var(--border-radius); border-left: 3px solid var(--color-accent); }
+        .info-item.span-2 { grid-column: span 2; }
+        .info-icon { width: var(--space-3); height: var(--space-3); background: var(--color-accent); border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; font-size: var(--font-size-xs); flex-shrink: 0; color: white; }
+        .info-content { flex: 1; }
+        .info-label { font-size: var(--font-size-xs); font-weight: 500; color: var(--color-gray-600); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .info-value { font-size: var(--font-size-base); font-weight: 500; color: var(--color-gray-800); }
+        .info-secondary { font-size: var(--font-size-xs); color: var(--color-gray-500); margin-top: 2px; }
+        .text-content { line-height: 1.6; color: var(--color-gray-700); } .text-content p { margin-bottom: var(--space-2); } .text-content p:last-child { margin-bottom: 0; }
+        .evaluation-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); margin-top: var(--space-3); }
+        .evaluation-card { background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--border-radius); padding: var(--space-3); page-break-inside: avoid; }
+        .card-title { font-size: var(--font-size-base); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-2); padding-bottom: var(--space-1); border-bottom: 1px solid var(--color-gray-200); }
+        .card-content { line-height: 1.5; color: var(--color-gray-700); } .card-content p { margin-bottom: var(--space-2); } .card-content p:last-child { margin-bottom: 0; }
+        .competencia-item { background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--border-radius); padding: var(--space-3); margin-bottom: var(--space-2); page-break-inside: avoid; }
+        .competencia-item:last-child { margin-bottom: 0; }
+        .competencia-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2); }
+        .competencia-name { font-size: var(--font-size-base); font-weight: 600; color: var(--color-primary); }
+        .competencia-score { background: var(--color-primary); color: white; padding: 4px var(--space-2); border-radius: 20px; font-size: var(--font-size-xs); font-weight: 600; }
+        .competencia-observaciones { line-height: 1.5; color: var(--color-gray-700); font-size: var(--font-size-sm); }
+        .competencia-observaciones p { margin-bottom: var(--space-1); } .competencia-observaciones p:last-child { margin-bottom: 0; }
+        .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+        .skill-item { display: flex; justify-content: space-between; align-items: center; background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--border-radius); padding: var(--space-2); }
+        .skill-name { font-weight: 500; color: var(--color-gray-800); }
+        .skill-level { font-size: var(--font-size-xs); color: var(--color-gray-600); background: var(--color-gray-200); padding: 2px var(--space-1); border-radius: 12px; font-weight: 500; }
+        .acreditaciones-list { display: flex; flex-direction: column; gap: var(--space-1); }
+        .acreditacion-item { display: flex; justify-content: space-between; align-items: center; background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--border-radius); padding: var(--space-2); }
+        .acreditacion-name { font-weight: 500; color: var(--color-gray-800); }
+        .acreditacion-hours { font-size: var(--font-size-xs); color: white; background: var(--color-accent); padding: 2px var(--space-1); border-radius: 12px; font-weight: 500; }
+        .table-wrapper { overflow-x: auto; border-radius: var(--border-radius); border: 1px solid var(--color-gray-200); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: var(--font-size-sm); }
+        .data-table thead { background: var(--color-gray-100); }
+        .data-table th { padding: var(--space-2); font-weight: 600; color: var(--color-gray-700); text-align: left; border-bottom: 1px solid var(--color-gray-200); font-size: var(--font-size-xs); text-transform: uppercase; letter-spacing: 0.5px; }
+        .data-table td { padding: var(--space-2); border-bottom: 1px solid var(--color-gray-100); vertical-align: top; }
+        .data-table tbody tr:hover { background: var(--color-gray-50); } .data-table tbody tr:last-child td { border-bottom: none; }
+        .col-dates, .col-year { width: 12%; white-space: nowrap; } .col-company, .col-center { width: 25%; } .col-position, .col-title { width: 25%; } .col-functions, .col-academic { width: 38%; }
+        .date-range, .year { font-size: var(--font-size-xs); color: var(--color-gray-600); font-weight: 500; }
+        .company-name, .title-name { font-weight: 600; color: var(--color-primary); }
+        .position-name { font-weight: 500; color: var(--color-gray-700); } .functions-text { line-height: 1.4; color: var(--color-gray-700); }
+        .center-name { color: var(--color-gray-600); } .academic-level { font-size: var(--font-size-xs); color: var(--color-gray-500); line-height: 1.3; }
+        .referencias-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2); }
+        .referencia-card { background: var(--color-gray-50); border: 1px solid var(--color-gray-200); border-radius: var(--border-radius); padding: var(--space-3); border-left: 4px solid var(--color-accent); }
+        .referencia-company { font-size: var(--font-size-base); font-weight: 600; color: var(--color-primary); margin-bottom: var(--space-1); }
+        .referencia-contact { font-size: var(--font-size-sm); color: var(--color-gray-700); margin-bottom: var(--space-1); }
+        .referencia-function { font-size: var(--font-size-xs); color: var(--color-gray-600); }
+        .page-footer { background: var(--color-gray-100); border-top: 1px solid var(--color-gray-200); padding: var(--space-2); margin: var(--space-6) calc(-1 * var(--space-2)) calc(-1 * var(--space-2)) calc(-1 * var(--space-2)); }
+        .footer-content { display: flex; justify-content: space-between; align-items: center; font-size: var(--font-size-xs); color: var(--color-gray-600); }
+        .footer-company { font-weight: 600; color: var(--color-primary); } .footer-separator { margin: 0 var(--space-1); opacity: 0.5; }
+        .footer-confidential { background: #dc2626; color: white; padding: 2px var(--space-1); border-radius: 12px; font-weight: 500; }
+        @media print { body { -webkit-print-color-adjust: exact; color-adjust: exact; font-size: var(--font-size-xs); } .module { page-break-inside: avoid; margin-bottom: var(--space-2); } .module-header { page-break-after: avoid; } .evaluation-card, .competencia-item, .referencia-card { page-break-inside: avoid; } .data-table tr { page-break-inside: avoid; } .sticky-header { display: none !important; } .context-badge.print-show { display: flex !important; } .breadcrumb-context-overlay.print-show { display: block !important; } }
+    </style>
+</head>
+<body class="landscape-layout">
+    
+    <!-- Context Badge (Opción C) -->
+    <div id="context-badge" class="context-badge hidden">
+        <div class="badge-content">
+            <span class="badge-icon">📍</span>
+            <span class="badge-text" id="badge-text"></span>
+        </div>
+    </div>
+
+    <!-- Header Sticky (Opción A) -->
+    <div id="sticky-header" class="sticky-header hidden">
+        <div class="container-fluid">
+            <div class="breadcrumb-context">
+                <span class="company-mini">GRUPOMPLEO</span>
+                <span class="separator">•</span>
+                <span id="current-context">Informe de Candidato</span>
+            </div>
+            <div class="candidate-name-mini">{{datosPersonales.nombreCompleto}}</div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- Page Header -->
+        <header class="page-header">
+            <div class="header-content">
+                <div class="company-section">
+                    <div class="company-name">GRUPOMPLEO</div>
+                    <div class="company-subtitle">Recursos Humanos • Sector Industrial</div>
+                </div>
+                <div class="candidate-header">
+                    <h1 class="candidate-name">{{datosPersonales.nombreCompleto}}</h1>
+                    <div class="candidate-meta">
+                        {{#if informe.puntuacion}}
+                        <div class="score-badge">
+                            <span class="score-value">{{informe.puntuacion}}</span>
+                            <span class="score-max">/3</span>
+                        </div>
+                        {{/if}}
+                        <div class="date-badge">{{formatDate fechaPublicacion}}</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="main-grid">
+            
+            <!-- MÓDULO 1: INFORMACIÓN PERSONAL -->
+            {{#if (or datosPersonales.email datosPersonales.telefonoMovil datosPersonales.direccionTexto)}}
+            <section class="module" data-module="informacion-personal">
+                <div class="module-header">
+                    <h2 class="module-title">Información Personal</h2>
+                </div>
+                <div class="module-content">
+                    <div class="info-grid">
+                        {{#if datosPersonales.email}}
+                        <div class="info-item">
+                            <div class="info-icon">📧</div>
+                            <div class="info-content">
+                                <div class="info-label">Email</div>
+                                <div class="info-value">{{datosPersonales.email}}</div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if datosPersonales.telefonoMovil}}
+                        <div class="info-item">
+                            <div class="info-icon">📱</div>
+                            <div class="info-content">
+                                <div class="info-label">Teléfono</div>
+                                <div class="info-value">{{datosPersonales.telefonoMovil}}</div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if datosPersonales.direccionTexto}}
+                        <div class="info-item span-2">
+                            <div class="info-icon">📍</div>
+                            <div class="info-content">
+                                <div class="info-label">Dirección</div>
+                                <div class="info-value">{{datosPersonales.direccionTexto}}</div>
+                                {{#if datosPersonales.municipio}}
+                                <div class="info-secondary">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</div>
+                                {{/if}}
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if datosPersonales.nif}}
+                        <div class="info-item">
+                            <div class="info-icon">🆔</div>
+                            <div class="info-content">
+                                <div class="info-label">NIF</div>
+                                <div class="info-value">{{datosPersonales.nif}}</div>
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if datosPersonales.edad}}
+                        <div class="info-item">
+                            <div class="info-icon">📅</div>
+                            <div class="info-content">
+                                <div class="info-label">Edad</div>
+                                <div class="info-value">{{datosPersonales.edad}} años</div>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </section>
+            {{/if}}
+
+            <!-- MÓDULO 2: EVALUACIÓN PROFESIONAL -->
+            {{#if (or informe.valoracion informe.aspectosPersonales informe.entrevistaPersonal)}}
+            <section class="module span-2" data-module="evaluacion-profesional">
+                <div class="module-header">
+                    <h2 class="module-title">Evaluación Profesional</h2>
+                </div>
+                <div class="module-content">
+                    {{#if informe.valoracion}}
+                    <div class="section" data-section="valoracion-general">
+                        <h3 class="section-title">Valoración General</h3>
+                        <div class="text-content">
+                            {{#each (splitParagraphs informe.valoracion)}}
+                            <p>{{this}}</p>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    <div class="evaluation-grid">
+                        {{#if informe.aspectosPersonales}}
+                        <div class="evaluation-card" data-apartado="aspectos-personales">
+                            <h4 class="card-title">Aspectos Personales</h4>
+                            <div class="card-content">
+                                {{#each (splitParagraphs informe.aspectosPersonales)}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if informe.entrevistaPersonal}}
+                        <div class="evaluation-card" data-apartado="entrevista-personal">
+                            <h4 class="card-title">Entrevista Personal</h4>
+                            <div class="card-content">
+                                {{#each (splitParagraphs informe.entrevistaPersonal)}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if informe.trayectoriaFormativa}}
+                        <div class="evaluation-card" data-apartado="trayectoria-formativa">
+                            <h4 class="card-title">Trayectoria Formativa</h4>
+                            <div class="card-content">
+                                {{#each (splitParagraphs informe.trayectoriaFormativa)}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if informe.trayectoriaProfesional}}
+                        <div class="evaluation-card" data-apartado="trayectoria-profesional">
+                            <h4 class="card-title">Trayectoria Profesional</h4>
+                            <div class="card-content">
+                                {{#each (splitParagraphs informe.trayectoriaProfesional)}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if informe.datosInteres}}
+                        <div class="evaluation-card" data-apartado="datos-interes">
+                            <h4 class="card-title">Datos de Interés</h4>
+                            <div class="card-content">
+                                {{#each (splitParagraphs informe.datosInteres)}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                        
+                        {{#if informe.motivoPresentacion}}
+                        <div class="evaluation-card" data-apartado="motivo-presentacion">
+                            <h4 class="card-title">Motivo de Presentación</h4>
+                            <div class="card-content">
+                                {{#each (splitParagraphs informe.motivoPresentacion)}}
+                                <p>{{this}}</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </section>
+            {{/if}}
+
+            <!-- MÓDULO 3: COMPETENCIAS -->
+            {{#if competencias}}
+            <section class="module" data-module="competencias">
+                <div class="module-header">
+                    <h2 class="module-title">Competencias</h2>
+                </div>
+                <div class="module-content">
+                    {{#each competencias}}
+                    <div class="competencia-item" data-apartado="competencia-{{@index}}">
+                        <div class="competencia-header">
+                            <h4 class="competencia-name">{{competencia}}</h4>
+                            <div class="competencia-score">
+                                <span class="score-value">{{puntuacion}}</span>
+                                <span class="score-max">/5</span>
+                            </div>
+                        </div>
+                        {{#if observaciones}}
+                        <div class="competencia-observaciones">
+                            {{#each (splitParagraphs observaciones)}}
+                            <p>{{this}}</p>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
+            <!-- MÓDULO 4: HABILIDADES TÉCNICAS -->
+            {{#if (or idiomas aplicacionesInformaticas acreditaciones)}}
+            <section class="module" data-module="habilidades-tecnicas">
+                <div class="module-header">
+                    <h2 class="module-title">Habilidades Técnicas</h2>
+                </div>
+                <div class="module-content">
+                    {{#if idiomas}}
+                    <div class="section" data-section="idiomas">
+                        <h3 class="section-title">Idiomas</h3>
+                        <div class="skills-grid">
+                            {{#each idiomas}}
+                            <div class="skill-item">
+                                <span class="skill-name">{{idioma}}</span>
+                                <span class="skill-level">{{nivel}}</span>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    {{#if aplicacionesInformaticas}}
+                    <div class="section" data-section="informatica">
+                        <h3 class="section-title">Aplicaciones Informáticas</h3>
+                        <div class="skills-grid">
+                            {{#each aplicacionesInformaticas}}
+                            <div class="skill-item">
+                                <span class="skill-name">{{aplicacion}}</span>
+                                <span class="skill-level">{{nivel}}</span>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    {{#if acreditaciones}}
+                    <div class="section" data-section="acreditaciones">
+                        <h3 class="section-title">Acreditaciones</h3>
+                        <div class="acreditaciones-list">
+                            {{#each acreditaciones}}
+                            <div class="acreditacion-item">
+                                <div class="acreditacion-name">{{descripcion}}</div>
+                                {{#if horas}}
+                                <div class="acreditacion-hours">{{horas}}h</div>
+                                {{/if}}
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+            </section>
+            {{/if}}
+
+            <!-- MÓDULO 5: EXPERIENCIA LABORAL -->
+            {{#if experienciasLaborales}}
+            <section class="module span-full" data-module="experiencia-laboral">
+                <div class="module-header">
+                    <h2 class="module-title">Experiencia Laboral</h2>
+                </div>
+                <div class="module-content">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th class="col-dates">Periodo</th>
+                                    <th class="col-company">Empresa</th>
+                                    <th class="col-position">Puesto</th>
+                                    <th class="col-functions">Funciones Realizadas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each experienciasLaborales}}
+                                <tr data-apartado="experiencia-{{@index}}">
+                                    <td class="date-range">
+                                        {{#if fechaInicio}}
+                                        {{formatDate fechaInicio 'year'}}
+                                        {{#if fechaFin}}
+                                        - {{formatDate fechaFin 'year'}}
+                                        {{else}}
+                                        - Actual
+                                        {{/if}}
+                                        {{else}}
+                                        N/D
+                                        {{/if}}
+                                    </td>
+                                    <td class="company-name">{{empresa}}</td>
+                                    <td class="position-name">{{puesto}}</td>
+                                    <td class="functions-text">{{funcionRealizada}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            {{/if}}
+
+            <!-- MÓDULO 6: FORMACIÓN ACADÉMICA -->
+            {{#if formaciones}}
+            <section class="module span-full" data-module="formacion-academica">
+                <div class="module-header">
+                    <h2 class="module-title">Formación Académica</h2>
+                </div>
+                <div class="module-content">
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th class="col-year">Año</th>
+                                    <th class="col-title">Titulación</th>
+                                    <th class="col-center">Centro</th>
+                                    <th class="col-academic">Nivel Académico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each formaciones}}
+                                <tr data-apartado="formacion-{{@index}}">
+                                    <td class="year">
+                                        {{#if fechaFin}}
+                                        {{formatDate fechaFin 'year'}}
+                                        {{else}}
+                                        N/D
+                                        {{/if}}
+                                    </td>
+                                    <td class="title-name">
+                                        {{#if nombre}}
+                                        {{nombre}}
+                                        {{else}}
+                                        {{titulacionAcademica}}
+                                        {{/if}}
+                                    </td>
+                                    <td class="center-name">{{centro}}</td>
+                                    <td class="academic-level">{{titulacionAcademica}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            {{/if}}
+
+            <!-- MÓDULO 7: REFERENCIAS -->
+            {{#if referencias}}
+            <section class="module span-2" data-module="referencias">
+                <div class="module-header">
+                    <h2 class="module-title">Referencias Profesionales</h2>
+                </div>
+                <div class="module-content">
+                    <div class="referencias-grid">
+                        {{#each referencias}}
+                        <div class="referencia-card" data-apartado="referencia-{{@index}}">
+                            <div class="referencia-company">{{empresa}}</div>
+                            <div class="referencia-contact">{{referencia}}</div>
+                            {{#if funcionRealizada}}
+                            <div class="referencia-function">{{funcionRealizada}}</div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </section>
+            {{/if}}
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <span class="footer-company">GRUPOMPLEO</span>
+                    <span class="footer-separator">•</span>
+                    <span class="footer-text">Informe de Evaluación</span>
+                </div>
+                <div class="footer-right">
+                    <span class="footer-id">ID: {{idInformeCvPublicacion}}</span>
+                    <span class="footer-separator">•</span>
+                    <span class="footer-confidential">CONFIDENCIAL</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Breadcrumb Context (Opción B) -->
+    <div id="breadcrumb-context" class="breadcrumb-context-overlay hidden">
+        <div class="breadcrumb-content">
+            <span class="breadcrumb-icon">📄</span>
+            <span id="breadcrumb-text">Módulo > Sección > Apartado</span>
+        </div>
+    </div>
+
+    <script>
+        // Solo incluir helpers que no requieren DOM
+        // Los helpers de Handlebars se registran automáticamente
+        
+        // Script para headers contextuales (solo en navegador)
+        if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+            document.addEventListener('DOMContentLoaded', function() {
+                let currentContext = '';
+                let isFragmented = false;
+                
+                // Funciones auxiliares
+                function getCurrentContext(moduleId, sectionId, apartadoId) {
+                    const contexts = [];
+                    
+                    if (moduleId) contexts.push(getModuleName(moduleId));
+                    if (sectionId) contexts.push(getSectionName(sectionId));
+                    if (apartadoId) contexts.push(getApartadoName(apartadoId));
+                    
+                    return contexts.join(' > ');
+                }
+                
+                function getModuleName(id) {
+                    const modules = {
+                        'informacion-personal': 'Info. Personal',
+                        'evaluacion-profesional': 'Evaluación',
+                        'competencias': 'Competencias',
+                        'habilidades-tecnicas': 'Habilidades',
+                        'experiencia-laboral': 'Experiencia',
+                        'formacion-academica': 'Formación',
+                        'referencias': 'Referencias'
+                    };
+                    return modules[id] || id;
+                }
+                
+                function getSectionName(id) {
+                    const sections = {
+                        'valoracion-general': 'Valoración',
+                        'idiomas': 'Idiomas',
+                        'informatica': 'Informática',
+                        'acreditaciones': 'Acreditaciones'
+                    };
+                    return sections[id] || id;
+                }
+                
+                function getApartadoName(id) {
+                    if (id.includes('experiencia-')) return 'Exp. ' + (parseInt(id.split('-')[1]) + 1);
+                    if (id.includes('formacion-')) return 'Form. ' + (parseInt(id.split('-')[1]) + 1);
+                    if (id.includes('competencia-')) return 'Comp. ' + (parseInt(id.split('-')[1]) + 1);
+                    if (id.includes('referencia-')) return 'Ref. ' + (parseInt(id.split('-')[1]) + 1);
+                    return id.replace(/-/g, ' ');
+                }
+                
+                // Detección de fragmentación de contenido
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const element = entry.target;
+                            const module = element.getAttribute('data-module');
+                            const section = element.getAttribute('data-section');
+                            const apartado = element.getAttribute('data-apartado');
+                            
+                            currentContext = getCurrentContext(module, section, apartado);
+                            updateContextHeaders();
+                        }
+                    });
+                }, {
+                    threshold: 0.1,
+                    rootMargin: '-10px'
+                });
+                
+                // Observar elementos con contexto
+                document.querySelectorAll('[data-module], [data-section], [data-apartado]').forEach(el => {
+                    observer.observe(el);
+                });
+                
+                function updateContextHeaders() {
+                    // Actualizar Sticky Header (Opción A)
+                    const stickyHeader = document.getElementById('sticky-header');
+                    const currentContextSpan = document.getElementById('current-context');
+                    
+                    if (stickyHeader && currentContextSpan && currentContext) {
+                        currentContextSpan.textContent = currentContext;
+                        stickyHeader.classList.remove('hidden');
+                    }
+                    
+                    // Actualizar Context Badge (Opción C)
+                    const contextBadge = document.getElementById('context-badge');
+                    const badgeText = document.getElementById('badge-text');
+                    
+                    if (contextBadge && badgeText && currentContext && isFragmented) {
+                        badgeText.textContent = currentContext;
+                        contextBadge.classList.remove('hidden');
+                    }
+                    
+                    // Actualizar Breadcrumb (Opción B)
+                    const breadcrumbContext = document.getElementById('breadcrumb-context');
+                    const breadcrumbText = document.getElementById('breadcrumb-text');
+                    
+                    if (breadcrumbContext && breadcrumbText && currentContext && isFragmented) {
+                        breadcrumbText.textContent = currentContext;
+                        breadcrumbContext.classList.remove('hidden');
+                    }
+                }
+                
+                // Detectar fragmentación en impresión
+                window.addEventListener('beforeprint', () => {
+                    isFragmented = true;
+                    updateContextHeaders();
+                    
+                    document.querySelectorAll('.context-badge, .breadcrumb-context-overlay').forEach(el => {
+                        el.classList.add('print-show');
+                    });
+                });
+                
+                window.addEventListener('afterprint', () => {
+                    isFragmented = false;
+                    document.querySelectorAll('.print-show').forEach(el => {
+                        el.classList.remove('print-show');
+                    });
+                });
+            });
+        }
+    </script>
+</body>
+</html>

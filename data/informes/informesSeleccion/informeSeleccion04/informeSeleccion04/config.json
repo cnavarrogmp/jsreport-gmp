@@ -1,14 +1,14 @@
 {
-    "name": "informeSeleccion01GigData",
+    "name": "informeSeleccion04",
+    "shortid": "7gswTHcIr",
     "creationDate": {
-        "$$date": 1754576251539
+        "$$date": 1754658148280
     },
     "modificationDate": {
-        "$$date": 1754578311748
+        "$$date": 1754658148280
     },
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
-    "shortid": "giECTa3",
-    "_id": "ZQKmhSoiCUxYOfvw",
+    "_id": "3sIvbXIeuAZyBxv2",
     "$entitySet": "data"
 }
