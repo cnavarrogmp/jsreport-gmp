@@ -14,27 +14,27 @@
         "foto": "34528.jpg",
         "codigoPostal": "48903",
         "municipio": "Barakaldo",
-        "pais": "España",
+        "pais": "Espa\u00F1a",
         "direccionTexto": "Paseo cirilo sagastagoitia n 14 8 b izq",
         "poblacion": "Lutxana",
         "email": "delgaindar@hotmail.com",
-        "telefonoMovil": "+34692714020",
+        "telefonoMovil": "\u002B34692714020",
         "nif": "30686865N",
-        "fechaNacimiento": "1986-04-23T00:00:00.0000000+02:00",
+        "fechaNacimiento": "1986-04-23T00:00:00.0000000\u002B02:00",
         "edad": 39
     },
     "informe": {
         "idInformeCvPublicacionInforme": 10006,
         "idInformeCvPublicacion": 10006,
         "tipoInforme": 0,
-        "valoracion": "Candidata finalista. Presenta un perfil técnico y personal alineado con los requerimientos del puesto. Su experiencia previa, actitud y disponibilidad inmediata hacen que sea una opción muy válida para el rol.",
+        "valoracion": "Candidata finalista. Presenta un perfil t\u00E9cnico y personal alineado con los requerimientos del puesto. Su experiencia previa, actitud y disponibilidad inmediata hacen que sea una opci\u00F3n muy v\u00E1lida para el rol.",
         "puntuacion": 1.5,
-        "aspectosPersonales": "Persona responsable, metódica y con alta orientación al orden y la planificación. Transmite seriedad, compromiso y estabilidad. Destaca por su trato amable y profesional.",
-        "trayectoriaFormativa": "Formación en administración y ofimática, con conocimientos actualizados en herramientas de gestión y entorno Office. Ha complementado su perfil con cursos específicos relacionados con gestión documental y atención al cliente.",
-        "trayectoriaProfesional": "Amplia experiencia como administrativa en distintas empresas, gestionando documentación, atención telefónica, bases de datos y soporte a distintos departamentos. Conocimiento de herramientas ERP y trato con proveedores y clientes.",
-        "entrevistaPersonal": "Durante la entrevista mostró seguridad, claridad en la exposición y buena capacidad para estructurar sus ideas. Se expresa con corrección, mantiene buena escucha activa y demuestra interés por el puesto. Resalta su enfoque práctico y resolutivo.",
-        "datosInteres": "Alta disponibilidad, posibilidad de incorporación inmediata y experiencia en entornos con alto volumen de tareas administrativas. Buena adaptación a distintos entornos de trabajo y equipos.",
-        "motivoPresentacion": "Perfil altamente adecuado para funciones administrativas. Aporta experiencia, madurez profesional, compromiso y capacidad de adaptación. Puede incorporarse con agilidad a tareas diversas dentro del área.",
+        "aspectosPersonales": "Persona responsable, met\u00F3dica y con alta orientaci\u00F3n al orden y la planificaci\u00F3n. Transmite seriedad, compromiso y estabilidad. Destaca por su trato amable y profesional.",
+        "trayectoriaFormativa": "Formaci\u00F3n en administraci\u00F3n y ofim\u00E1tica, con conocimientos actualizados en herramientas de gesti\u00F3n y entorno Office. Ha complementado su perfil con cursos espec\u00EDficos relacionados con gesti\u00F3n documental y atenci\u00F3n al cliente.",
+        "trayectoriaProfesional": "Amplia experiencia como administrativa en distintas empresas, gestionando documentaci\u00F3n, atenci\u00F3n telef\u00F3nica, bases de datos y soporte a distintos departamentos. Conocimiento de herramientas ERP y trato con proveedores y clientes.",
+        "entrevistaPersonal": "Durante la entrevista mostr\u00F3 seguridad, claridad en la exposici\u00F3n y buena capacidad para estructurar sus ideas. Se expresa con correcci\u00F3n, mantiene buena escucha activa y demuestra inter\u00E9s por el puesto. Resalta su enfoque pr\u00E1ctico y resolutivo.",
+        "datosInteres": "Alta disponibilidad, posibilidad de incorporaci\u00F3n inmediata y experiencia en entornos con alto volumen de tareas administrativas. Buena adaptaci\u00F3n a distintos entornos de trabajo y equipos.",
+        "motivoPresentacion": "Perfil altamente adecuado para funciones administrativas. Aporta experiencia, madurez profesional, compromiso y capacidad de adaptaci\u00F3n. Puede incorporarse con agilidad a tareas diversas dentro del \u00E1rea.",
         "conocimientos": null,
         "adecuacion": null,
         "motivacion": null,
@@ -46,7 +46,7 @@
             "idInformeCvPublicacionAcreditacion": 10002,
             "idInformeCvPublicacion": 10006,
             "tipoAcreditacion": "6",
-            "fecha": "2025-06-04T00:00:00.0000000+02:00",
+            "fecha": "2025-06-04T00:00:00.0000000\u002B02:00",
             "descripcion": "Tarjeta profesional del metal",
             "acredita": false,
             "horas": 3,
@@ -72,7 +72,7 @@
             "idInformeCvPublicacion": 10006,
             "competencia": "Esmero",
             "puntuacion": 2.5,
-            "observaciones": "Muestra una capacidad limitada para trabajar con precisión. Aunque hay un esfuerzo por mantener el orden y prestar atención a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentración. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
+            "observaciones": "Muestra una capacidad limitada para trabajar con precisi\u00F3n. Aunque hay un esfuerzo por mantener el orden y prestar atenci\u00F3n a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentraci\u00F3n. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
             "orden": 1
         },
         {
@@ -80,40 +80,8 @@
             "idInformeCvPublicacion": 10006,
             "competencia": "Sociabilidad",
             "puntuacion": 2.5,
-            "observaciones": "La persona demuestra una capacidad básica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los demás está presente, pero aún necesita mejorar",
+            "observaciones": "La persona demuestra una capacidad b\u00E1sica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los dem\u00E1s est\u00E1 presente, pero a\u00FAn necesita mejorar",
             "orden": 2
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10004,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Comunicación",
-            "puntuacion": 3.0,
-            "observaciones": "Se expresa con claridad y es capaz de transmitir información de manera efectiva tanto oral como escrita.",
-            "orden": 3
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10005,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Trabajo en equipo",
-            "puntuacion": 3.5,
-            "observaciones": "Colabora activamente con sus compañeros y contribuye al logro de los objetivos comunes.",
-            "orden": 4
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10006,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Adaptabilidad",
-            "puntuacion": 3.0,
-            "observaciones": "Se adapta con facilidad a los cambios y nuevas situaciones en el entorno laboral.",
-            "orden": 5
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10007,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Gestión del tiempo",
-            "puntuacion": 2.8,
-            "observaciones": "Organiza y prioriza tareas de manera eficiente para cumplir con los plazos establecidos.",
-            "orden": 6
         }
     ],
     "experienciasLaborales": [
@@ -122,29 +90,29 @@
             "idInformeCvPublicacion": 10006,
             "empresa": "Fcc s. a",
             "puesto": "ADMINISTRATIVO/A COMERCIAL",
-            "funcionRealizada": "Atención al público",
-            "fechaInicio": "2005-04-01T00:00:00.0000000+02:00",
-            "fechaFin": "2005-10-01T00:00:00.0000000+02:00",
+            "funcionRealizada": "Atenci\u00F3n al p\u00FAblico",
+            "fechaInicio": "2005-04-01T00:00:00.0000000\u002B02:00",
+            "fechaFin": "2005-10-01T00:00:00.0000000\u002B02:00",
             "orden": 1
         },
         {
             "idInformeCvPublicacionExperienciaLaboral": 10003,
             "idInformeCvPublicacion": 10006,
             "empresa": "Fcc s.a",
-            "puesto": "ADMINISTRATIVO/A DE FACTURACIÓN",
-            "funcionRealizada": "Tareas variadas de administración.",
-            "fechaInicio": "2006-05-01T00:00:00.0000000+02:00",
-            "fechaFin": "2010-03-01T00:00:00.0000000+01:00",
+            "puesto": "ADMINISTRATIVO/A DE FACTURACI\u00D3N",
+            "funcionRealizada": "Tareas variadas de administraci\u00F3n.",
+            "fechaInicio": "2006-05-01T00:00:00.0000000\u002B02:00",
+            "fechaFin": "2010-03-01T00:00:00.0000000\u002B01:00",
             "orden": 2
         },
         {
             "idInformeCvPublicacionExperienciaLaboral": 10004,
             "idInformeCvPublicacion": 10006,
             "empresa": "Precicast bilbao",
-            "puesto": "CARRETILLERO/A RETRÁCTIL",
+            "puesto": "CARRETILLERO/A RETR\u00C1CTIL",
             "funcionRealizada": "Retrabajar piezas y ensayos no destructivos",
-            "fechaInicio": "2007-04-01T00:00:00.0000000+02:00",
-            "fechaFin": "2008-08-01T00:00:00.0000000+02:00",
+            "fechaInicio": "2007-04-01T00:00:00.0000000\u002B02:00",
+            "fechaFin": "2008-08-01T00:00:00.0000000\u002B02:00",
             "orden": 3
         },
         {
@@ -152,19 +120,19 @@
             "idInformeCvPublicacion": 10006,
             "empresa": "Eroski s. coop artea",
             "puesto": "CONSULTOR/A SAP",
-            "funcionRealizada": "Creación de softwares y diseño de la arquitectura de los sistemas",
-            "fechaInicio": "2010-05-01T00:00:00.0000000+02:00",
-            "fechaFin": "2010-08-01T00:00:00.0000000+02:00",
+            "funcionRealizada": "Creaci\u00F3n de softwares y dise\u00F1o de la arquitectura de los sistemas",
+            "fechaInicio": "2010-05-01T00:00:00.0000000\u002B02:00",
+            "fechaFin": "2010-08-01T00:00:00.0000000\u002B02:00",
             "orden": 4
         },
         {
             "idInformeCvPublicacionExperienciaLaboral": 10006,
             "idInformeCvPublicacion": 10006,
-            "empresa": "Leroy merlín artea",
+            "empresa": "Leroy merl\u00EDn artea",
             "puesto": "MANIPULADOR/A DE FRUTAS",
-            "funcionRealizada": "Todo tipo de tareas de almacén",
-            "fechaInicio": "2010-09-01T00:00:00.0000000+02:00",
-            "fechaFin": "2012-11-01T00:00:00.0000000+01:00",
+            "funcionRealizada": "Todo tipo de tareas de almac\u00E9n",
+            "fechaInicio": "2010-09-01T00:00:00.0000000\u002B02:00",
+            "fechaFin": "2012-11-01T00:00:00.0000000\u002B01:00",
             "orden": 5
         },
         {
@@ -172,9 +140,9 @@
             "idInformeCvPublicacion": 10006,
             "empresa": "Frutas iru",
             "puesto": "MANIPULADOR/A DE FRUTAS",
-            "funcionRealizada": "Manipulación de frutas y hortalizas",
-            "fechaInicio": "2013-05-01T00:00:00.0000000+02:00",
-            "fechaFin": "2017-10-01T00:00:00.0000000+02:00",
+            "funcionRealizada": "Manipulaci\u00F3n de frutas y hortalizas",
+            "fechaInicio": "2013-05-01T00:00:00.0000000\u002B02:00",
+            "fechaFin": "2017-10-01T00:00:00.0000000\u002B02:00",
             "orden": 6
         },
         {
@@ -197,51 +165,51 @@
             "centro": "Salesianos cruces",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2002-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2002-01-01T00:00:00.0000000\u002B00:00",
             "orden": 1
         },
         {
             "idInformeCvPublicacionFormacion": 10003,
             "idInformeCvPublicacion": 10006,
-            "titulacionAcademica": "Enseñanzas de bachillerato",
-            "nombre": "Bachillerato tecnológico",
+            "titulacionAcademica": "Ense\u00F1anzas de bachillerato",
+            "nombre": "Bachillerato tecnol\u00F3gico",
             "centro": "I. e. s.  elorrieta-errekamari",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2004-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2004-01-01T00:00:00.0000000\u002B00:00",
             "orden": 2
         },
         {
             "idInformeCvPublicacionFormacion": 10004,
             "idInformeCvPublicacion": 10006,
-            "titulacionAcademica": "Enseñanzas universitarias de segundo ciclo y equivalentes (Licenciado)",
-            "nombre": "Técnico superior teleco e informático",
+            "titulacionAcademica": "Ense\u00F1anzas universitarias de segundo ciclo y equivalentes (Licenciado)",
+            "nombre": "T\u00E9cnico superior teleco e inform\u00E1tico",
             "centro": "I. e. s.  minas",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2007-01-01T01:00:00.0000000+01:00",
+            "fechaFin": "2007-01-01T01:00:00.0000000\u002B01:00",
             "orden": 3
         },
         {
             "idInformeCvPublicacionFormacion": 10005,
             "idInformeCvPublicacion": 10006,
-            "titulacionAcademica": "Enseñanzas universitarias de primer ciclo y equivalentes o personas que han aprobado tres cursos completos de una licenciatura o creditos equivalentes (Diplomado)",
-            "nombre": "Técnico en emergencias sanitarias",
+            "titulacionAcademica": "Ense\u00F1anzas universitarias de primer ciclo y equivalentes o personas que han aprobado tres cursos completos de una licenciatura o creditos equivalentes (Diplomado)",
+            "nombre": "T\u00E9cnico en emergencias sanitarias",
             "centro": "Eurocultum",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2015-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2015-01-01T00:00:00.0000000\u002B00:00",
             "orden": 4
         },
         {
             "idInformeCvPublicacionFormacion": 10006,
             "idInformeCvPublicacion": 10006,
             "titulacionAcademica": "Otros estudios no oficiales",
-            "nombre": "Diseño y documentación técnica en sonorización industrial y.",
+            "nombre": "Dise\u00F1o y documentaci\u00F3n t\u00E9cnica en sonorizaci\u00F3n industrial y.",
             "centro": "Iefps tartanga",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2010-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2010-01-01T00:00:00.0000000\u002B00:00",
             "orden": 5
         },
         {
@@ -249,21 +217,21 @@
             "idInformeCvPublicacion": 10006,
             "titulacionAcademica": "Otros estudios no oficiales",
             "nombre": "Programador de sistemas",
-            "centro": "Fondo formación euskadi",
+            "centro": "Fondo formaci\u00F3n euskadi",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2005-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2005-01-01T00:00:00.0000000\u002B00:00",
             "orden": 6
         },
         {
             "idInformeCvPublicacionFormacion": 10008,
             "idInformeCvPublicacion": 10006,
             "titulacionAcademica": "Otros estudios no oficiales",
-            "nombre": "Formación empresarial",
+            "nombre": "Formaci\u00F3n empresarial",
             "centro": "Dema",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2004-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2004-01-01T00:00:00.0000000\u002B00:00",
             "orden": 7
         },
         {
@@ -274,18 +242,18 @@
             "centro": "Forcalem",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2013-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2013-01-01T00:00:00.0000000\u002B00:00",
             "orden": 8
         },
         {
             "idInformeCvPublicacionFormacion": 10010,
             "idInformeCvPublicacion": 10006,
             "titulacionAcademica": "Otros estudios no oficiales",
-            "nombre": "Gestión de stock y logística básica",
+            "nombre": "Gesti\u00F3n de stock y log\u00EDstica b\u00E1sica",
             "centro": "Cofes",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2017-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2017-01-01T00:00:00.0000000\u002B00:00",
             "orden": 9
         },
         {
@@ -296,7 +264,7 @@
             "centro": "Laboris",
             "titulo": true,
             "duracionHoras": null,
-            "fechaFin": "2016-01-01T00:00:00.0000000+00:00",
+            "fechaFin": "2016-01-01T00:00:00.0000000\u002B00:00",
             "orden": 10
         }
     ],
@@ -304,14 +272,14 @@
         {
             "idInformeCvPublicacionIdioma": 4,
             "idInformeCvPublicacion": 10006,
-            "idioma": "Inglés",
+            "idioma": "Ingl\u00E9s",
             "nivel": "B2",
             "orden": 1
         },
         {
             "idInformeCvPublicacionIdioma": 5,
             "idInformeCvPublicacion": 10006,
-            "idioma": "Alemán",
+            "idioma": "Alem\u00E1n",
             "nivel": "A2",
             "orden": 2
         }
@@ -321,7 +289,7 @@
             "idInformeCvPublicacionInformatica": 3,
             "idInformeCvPublicacion": 10006,
             "aplicacion": "Excel",
-            "nivel": "Básico",
+            "nivel": "B\u00E1sico",
             "orden": 1
         },
         {
@@ -337,16 +305,16 @@
             "idInformeCvPublicacionReferencia": 3,
             "idInformeCvPublicacion": 10006,
             "empresa": "ACINFA",
-            "funcionRealizada": "Logística",
-            "referencia": "Jefe Almacén Jose Luis López",
+            "funcionRealizada": "Log\u00EDstica",
+            "referencia": "Jefe Almac\u00E9n Jose Luis L\u00F3pez",
             "orden": 1
         },
         {
             "idInformeCvPublicacionReferencia": 4,
             "idInformeCvPublicacion": 10006,
             "empresa": "ASIDO",
-            "funcionRealizada": "PEÓN",
-            "referencia": "Jefe Juan Martínez",
+            "funcionRealizada": "PE\u00D3N",
+            "referencia": "Jefe Juan Mart\u00EDnez",
             "orden": 2
         }
     ]
