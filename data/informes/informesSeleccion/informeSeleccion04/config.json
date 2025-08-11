@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "name": "informeSeleccion04",
     "creationDate": {
         "$$date": 1754901672064
@@ -12,3 +13,14 @@
     "_id": "WYh00EyI6rxQYkyR",
     "$entitySet": "folders"
 }
+=======
+  "name": "informeSeleccion04",
+  "creationDate": { "$$date": 1754900503093 },
+  "modificationDate": { "$$date": 1754900503093 },
+  "shortid": "McNy9tdre",
+  "inheritedReadPermissions": [],
+  "inheritedEditPermissions": [],
+  "_id": "2cae0e3a526b406a",
+  "$entitySet": "folders"
+}
+>>>>>>> b096db030b3eb8dd31786cacef3bd99d7407bd43
