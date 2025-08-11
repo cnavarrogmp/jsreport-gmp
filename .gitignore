@@ -4,6 +4,10 @@ data/reporters
 data/extensions
 data/snapshots
 data/logs
+data/fs.journal
+data/fs.version
+data/profiles/
+data/storage/**/*.log
 
 # Node + Docker usuals
 node_modules/
