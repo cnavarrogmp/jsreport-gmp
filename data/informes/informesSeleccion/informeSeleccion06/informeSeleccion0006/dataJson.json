@@ -72,7 +72,7 @@
             "idInformeCvPublicacion": 10006,
             "competencia": "Esmero",
             "puntuacion": 2.5,
-            "observaciones": "Muestra una capacidad limitada para trabajar con precisi\u00F3n. Aunque hay un esfuerzo por mantener el orden y prestar atenci\u00F3n a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentraci\u00F3n. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
+            "observaciones": "Muestra una capacidad limitada para trabajar con precisión. Aunque hay un esfuerzo por mantener el orden y prestar atención a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentración. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
             "orden": 1
         },
         {
@@ -80,8 +80,40 @@
             "idInformeCvPublicacion": 10006,
             "competencia": "Sociabilidad",
             "puntuacion": 2.5,
-            "observaciones": "La persona demuestra una capacidad b\u00E1sica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los dem\u00E1s est\u00E1 presente, pero a\u00FAn necesita mejorar",
+            "observaciones": "La persona demuestra una capacidad básica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los demás está presente, pero aún necesita mejorar",
             "orden": 2
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10004,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Comunicación",
+            "puntuacion": 3.0,
+            "observaciones": "Se expresa con claridad y es capaz de transmitir información de manera efectiva tanto oral como escrita.",
+            "orden": 3
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10005,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Trabajo en equipo",
+            "puntuacion": 3.5,
+            "observaciones": "Colabora activamente con sus compañeros y contribuye al logro de los objetivos comunes.",
+            "orden": 4
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10006,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Adaptabilidad",
+            "puntuacion": 3.0,
+            "observaciones": "Se adapta con facilidad a los cambios y nuevas situaciones en el entorno laboral.",
+            "orden": 5
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10007,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Gestión del tiempo",
+            "puntuacion": 2.8,
+            "observaciones": "Organiza y prioriza tareas de manera eficiente para cumplir con los plazos establecidos.",
+            "orden": 6
         }
     ],
     "experienciasLaborales": [
