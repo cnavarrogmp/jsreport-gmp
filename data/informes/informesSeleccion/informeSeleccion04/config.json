@@ -1,4 +1,10 @@
 {
   "name": "informeSeleccion04",
+  "creationDate": { "$$date": 1754900503093 },
+  "modificationDate": { "$$date": 1754900503093 },
+  "shortid": "McNy9tdre",
+  "inheritedReadPermissions": [],
+  "inheritedEditPermissions": [],
+  "_id": "2cae0e3a526b406a",
   "$entitySet": "folders"
 }
