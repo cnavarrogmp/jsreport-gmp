@@ -1,0 +1,73 @@
+@page {
+  size: A4 landscape;
+  margin: 32px;
+  @top-left {
+    content: string(module) " – " string(section);
+    font-size: 10px;
+    color: #555;
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #222;
+}
+
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.cover-break {
+  page-break-after: always;
+}
+
+.module {
+  margin-bottom: 32px;
+}
+
+.module h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #e2e8f0;
+  string-set: module attr(data-title);
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+.section h3 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  string-set: section attr(data-title);
+}
+
+.item,
+li {
+  page-break-inside: avoid;
+}
+
+.item {
+  margin-bottom: 8px;
+}
+
+p {
+  margin: 0 0 8px 0;
+}
+
+ul {
+  margin: 0 0 8px 16px;
+  padding: 0;
+}
+
+.breadcrumb {
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 8px;
+}

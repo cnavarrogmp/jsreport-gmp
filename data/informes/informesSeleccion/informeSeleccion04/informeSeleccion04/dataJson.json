@@ -82,6 +82,46 @@
             "puntuacion": 2.5,
             "observaciones": "La persona demuestra una capacidad b\u00E1sica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los dem\u00E1s est\u00E1 presente, pero a\u00FAn necesita mejorar",
             "orden": 2
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10004,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Liderazgo",
+            "puntuacion": 3.0,
+            "observaciones": "Capacidad para coordinar equipos y asumir responsabilidades en situaciones de presi\u00F3n. A\u00FAn puede profundizar en la delegaci\u00F3n y seguimiento de tareas.",
+            "orden": 3
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10005,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Trabajo en equipo",
+            "puntuacion": 3.5,
+            "observaciones": "Participa activamente y apoya a los compa\u00F1eros. Busca soluciones conjuntas y comparte informaci\u00F3n de manera fluida.",
+            "orden": 4
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10006,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Resoluci\u00F3n de problemas",
+            "puntuacion": 3.0,
+            "observaciones": "Analiza las incidencias con criterio y propone alternativas viables, aunque en ocasiones necesita apoyo para priorizar.",
+            "orden": 5
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10007,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Iniciativa",
+            "puntuacion": 2.0,
+            "observaciones": "Tiende a esperar instrucciones antes de actuar. Se recomienda fomentar una actitud m\u00E1s proactiva en tareas nuevas.",
+            "orden": 6
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10008,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Adaptabilidad",
+            "puntuacion": 3.0,
+            "observaciones": "Se integra con facilidad en distintos entornos de trabajo y acepta cambios con actitud positiva.",
+            "orden": 7
         }
     ],
     "experienciasLaborales": [

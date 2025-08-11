@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Informe de Candidato - {{datosPersonales.nombreCompleto}}</title>
+  <style>{{{asset "style.css"}}}</style>
+</head>
+<body>
+  {{> (asset "portada.html")}}
+  <main class="report">
+    {{#if datosPersonales}}
+    <section class="module" data-module="datosPersonales">
+      <h2 data-title="Datos personales">Datos personales</h2>
+      <div class="section">
+        <div class="item">
+          <p><strong>Nombre:</strong> {{datosPersonales.nombreCompleto}}</p>
+          <p><strong>Email:</strong> {{datosPersonales.email}}</p>
+          <p><strong>Teléfono:</strong> {{datosPersonales.telefonoMovil}}</p>
+          <p><strong>Edad:</strong> {{datosPersonales.edad}}</p>
+        </div>
+      </div>
+    </section>
+    {{/if}}
+
+    {{#if informe}}
+    <section class="module" data-module="informe">
+      <h2 data-title="Informe">Informe</h2>
+      {{#if informe.valoracion}}
+      <div class="section">
+        <h3 data-title="Valoración">Valoración</h3>
+        <div class="item">
+          {{#each (paragraphs informe.valoracion)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if informe.aspectosPersonales}}
+      <div class="section">
+        <h3 data-title="Aspectos personales">Aspectos personales</h3>
+        <div class="item">
+          {{#each (paragraphs informe.aspectosPersonales)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if informe.trayectoriaFormativa}}
+      <div class="section">
+        <h3 data-title="Trayectoria formativa">Trayectoria formativa</h3>
+        <div class="item">
+          {{#each (paragraphs informe.trayectoriaFormativa)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if informe.trayectoriaProfesional}}
+      <div class="section">
+        <h3 data-title="Trayectoria profesional">Trayectoria profesional</h3>
+        <div class="item">
+          {{#each (paragraphs informe.trayectoriaProfesional)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if informe.entrevistaPersonal}}
+      <div class="section">
+        <h3 data-title="Entrevista personal">Entrevista personal</h3>
+        <div class="item">
+          {{#each (paragraphs informe.entrevistaPersonal)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if informe.datosInteres}}
+      <div class="section">
+        <h3 data-title="Datos de interés">Datos de interés</h3>
+        <div class="item">
+          {{#each (paragraphs informe.datosInteres)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if informe.motivoPresentacion}}
+      <div class="section">
+        <h3 data-title="Motivo de presentación">Motivo de presentación</h3>
+        <div class="item">
+          {{#each (paragraphs informe.motivoPresentacion)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/if}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems acreditaciones)}}
+    <section class="module" data-module="acreditaciones">
+      <h2 data-title="Acreditaciones">Acreditaciones</h2>
+      {{#each acreditaciones}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{descripcion}}</strong> - {{formatDate fecha}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems adjuntos)}}
+    <section class="module" data-module="adjuntos">
+      <h2 data-title="Adjuntos">Adjuntos</h2>
+      {{#each adjuntos}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{tipoAdjunto.value}}</strong> - {{ruta}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems competencias)}}
+    <section class="module" data-module="competencias">
+      <h2 data-title="Competencias">Competencias</h2>
+      {{#each competencias}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{competencia}}</strong> ({{puntuacion}})</p>
+          {{#each (paragraphs observaciones)}}<p>{{this}}</p>{{/each}}
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems experienciasLaborales)}}
+    <section class="module" data-module="experiencias">
+      <h2 data-title="Experiencia laboral">Experiencia laboral</h2>
+      {{#each experienciasLaborales}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{empresa}}</strong> – {{puesto}}</p>
+          <p>{{funcionRealizada}}</p>
+          <p>{{formatDate fechaInicio}} - {{formatDate fechaFin}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems formaciones)}}
+    <section class="module" data-module="formacion">
+      <h2 data-title="Formación">Formación</h2>
+      {{#each formaciones}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{titulacionAcademica}}</strong> - {{nombre}}</p>
+          <p>{{centro}}</p>
+          <p>{{formatDate fechaFin}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems idiomas)}}
+    <section class="module" data-module="idiomas">
+      <h2 data-title="Idiomas">Idiomas</h2>
+      {{#each idiomas}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{idioma}}</strong> - {{nivel}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems aplicacionesInformaticas)}}
+    <section class="module" data-module="aplicaciones">
+      <h2 data-title="Aplicaciones informáticas">Aplicaciones informáticas</h2>
+      {{#each aplicacionesInformaticas}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{aplicacion}}</strong> - {{nivel}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+
+    {{#if (hasItems referencias)}}
+    <section class="module" data-module="referencias">
+      <h2 data-title="Referencias">Referencias</h2>
+      {{#each referencias}}
+      <div class="section">
+        <div class="item">
+          <p><strong>{{empresa}}</strong> - {{funcionRealizada}}</p>
+          <p>{{referencia}}</p>
+        </div>
+      </div>
+      {{/each}}
+    </section>
+    {{/if}}
+  </main>
+</body>
+</html>
