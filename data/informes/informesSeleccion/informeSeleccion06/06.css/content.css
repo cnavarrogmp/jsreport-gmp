@@ -1,0 +1,201 @@
+/* ====== Ajustes generales / A4 Horizontal ====== */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #1a202c;
+  background: #f5f7fb; /* leve gris azulado para pantalla */
+}
+
+/* Tamaño y márgenes de página impresos */
+@page {
+  size: A4 landscape;
+  margin: 18mm; /* MÁS margen alrededor */
+}
+
+/* Contenedor del documento (un poco de aire extra en pantalla) */
+.doc {
+  max-width: 1120px;
+  margin: 24px auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Cada "page" (sección de página) */
+.page {
+  padding: 24px 28px; /* MÁS margen interno */
+  page-break-after: always; /* la portada forzará salto */
+  background: #fff;
+}
+.page:last-child { page-break-after: auto; }
+
+/* ====== Portada ====== */
+.cover {
+  position: relative;
+  min-height: 180mm; /* asegura una altura generosa en landscape */
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Bloque texto portada */
+.cover__info {
+  z-index: 2;
+}
+.cover__title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin: 0 0 8px;
+  color: #111827;
+}
+.cover__subtitle {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 18px;
+}
+.cover__meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  row-gap: 8px;
+  column-gap: 12px;
+  font-size: 13px;
+  color: #374151;
+}
+.cover__label { color: #6b7280; }
+.brand {
+  margin-top: 18px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+/* Bloque geométrico portada (SVG) */
+.cover__art {
+  position: relative;
+  min-height: 120mm;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  background: linear-gradient(135deg, #fff 0%, #f8fafc 40%, #eef2ff 100%);
+}
+.cover__art svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sello/confidencial */
+.badge {
+  display: inline-block;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  font-size: 12px;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  font-weight: 700;
+}
+
+/* ====== Header y estructura contenidos ====== */
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+}
+.company-name { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
+.company-subtitle { font-size: 12px; color: #6b7280; margin-top: 2px; }
+.candidate-name { font-size: 16px; font-weight: 700; }
+.score-badge { display: inline-flex; align-items: center; gap: 6px; background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 999px; padding: 4px 10px; font-size: 12px; margin-top: 6px; }
+.score-value { font-weight: 800; }
+
+/* ====== Grid principal ====== */
+.main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.span-2 { grid-column: span 2; }
+.span-full { grid-column: 1 / -1; }
+
+/* ====== Módulos ====== */
+.module {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+
+  /* Evitar partir módulos entre páginas si cabe razonablemente */
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.module-header { background: #f8fafc; border-bottom: 1px solid #e5e7eb; padding: 10px 14px; }
+.module-title { font-size: 14px; font-weight: 700; color: #111827; }
+.module-content { padding: 14px; }
+
+.h3 { font-size: 12px; font-weight: 700; color: #111827; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid #e5e7eb; }
+.text-content p { margin: 0 0 8px; line-height: 1.45; color: #1f2937; }
+
+/* ====== Info personal ====== */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.info-item {
+  display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: start;
+  padding: 10px; border: 1px solid #e5e7eb; border-radius: 8px; background: #fafafa;
+
+  break-inside: avoid; page-break-inside: avoid; /* no partir items */
+}
+.info-item.span-2 { grid-column: span 2; }
+.info-icon { font-size: 16px; line-height: 1; }
+.info-label { font-size: 11px; color: #6b7280; }
+.info-value { font-size: 13px; font-weight: 600; color: #111827; }
+.info-secondary { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+/* ====== Evaluación ====== */
+.eval-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.eval-card {
+  border: 1px solid #e5e7eb; border-radius: 10px; background: #fcfcfd;
+  break-inside: avoid; page-break-inside: avoid;
+}
+.card-title { padding: 10px 12px; border-bottom: 1px solid #e5e7eb; font-size: 12px; font-weight: 700; color: #111827; background: #f9fafb; }
+.card-content { padding: 12px; }
+.card-content p { margin: 0 0 8px; line-height: 1.45; page-break-inside: avoid; }
+
+/* ====== Competencias ====== */
+.comp-item {
+  border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; background: #fcfcfd;
+  break-inside: avoid; page-break-inside: avoid;
+}
+.comp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.comp-name { font-weight: 700; }
+.comp-score { font-size: 12px; color: #374151; }
+.comp-obs p { margin: 0 0 6px; page-break-inside: avoid; }
+
+/* ====== Skills ====== */
+.mb-24 { margin-bottom: 24px; }
+.skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.skill-item {
+  display: flex; justify-content: space-between; align-items: center;
+  border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; background: #f9fafb;
+  break-inside: avoid; page-break-inside: avoid;
+}
+.skill-name { font-size: 13px; }
+.skill-level { font-size: 12px; color: #6b7280; }
+
+/* ====== Experiencia (cards) ====== */
+.exp-list { display: flex; flex-direction: column; gap: 12px; }
+.exp-card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; background: #fcfcfd; break-inside: avoid; page-break-inside: avoid; }
+.exp-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.exp-company { font-weight: 600; }
+.exp-period { font-size: 12px; color: #6b7280; }
+.exp-position { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.exp-function { margin: 0 0 4px; line-height: 1.45; }
+
+/* ====== Formación (cards) ====== */
+.form-list { display: flex; flex-direction: column; gap: 12px; }
+.form-card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; background: #fcfcfd; break-inside: avoid; page-break-inside: avoid; }
+.form-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.form-title { font-weight: 600; }
+.form-year { font-size: 12px; color: #6b7280; }
+.form-center { font-size: 12px; color: #374151; }
+.form-level { font-size: 12px; color: #6b7280; }
