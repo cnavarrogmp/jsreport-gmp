@@ -15,7 +15,7 @@
       {{#if @index}}
         <div style="page-break-before: always;"></div>
       {{/if}}
-      {{#with (lookup ../$pdf.pages @index)}}
+      {{#with (lookup ../$pdf.pageItems @index)}}
         {{#if modulo}}
           <div class="header">{{modulo}}{{#if seccion}} - {{seccion}}{{/if}}</div>
         {{/if}}
