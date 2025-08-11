@@ -34,7 +34,7 @@ body {
 /* ====== Portada ====== */
 .cover {
   position: relative;
-  min-height: 170mm; /* asegura una altura generosa en landscape */
+  min-height: 150mm; /* asegura una altura generosa en landscape */
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 24px;
