@@ -100,361 +100,354 @@
 
             <!-- INFORMACIÓN PERSONAL -->
             {{#if (or datosPersonales.email datosPersonales.telefonoMovil datosPersonales.direccionTexto)}}
-                {{#pdfAddPageItem modulo="Información" seccion="Personal"}}
-                    <div class="module">
-                        <div class="module-header">
-                            <div class="module-title">Información Personal</div>
-                        </div>
-                        <div class="module-content">
-                            <div class="info-grid">
-                                {{#if datosPersonales.email}}
-                                    <div class="info-item">
-                                        <div class="info-icon">📧</div>
-                                        <div>
-                                            <div class="info-label">Email</div>
-                                            <div class="info-value">{{datosPersonales.email}}</div>
-                                        </div>
+                {{{pdfAddPageItem modulo="Información" seccion="Personal"}}}
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Información Personal</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="info-grid">
+                            {{#if datosPersonales.email}}
+                                <div class="info-item">
+                                    <div class="info-icon">📧</div>
+                                    <div>
+                                        <div class="info-label">Email</div>
+                                        <div class="info-value">{{datosPersonales.email}}</div>
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if datosPersonales.telefonoMovil}}
-                                    <div class="info-item">
-                                        <div class="info-icon">📱</div>
-                                        <div>
-                                            <div class="info-label">Teléfono</div>
-                                            <div class="info-value">{{datosPersonales.telefonoMovil}}</div>
-                                        </div>
+                            {{#if datosPersonales.telefonoMovil}}
+                                <div class="info-item">
+                                    <div class="info-icon">📱</div>
+                                    <div>
+                                        <div class="info-label">Teléfono</div>
+                                        <div class="info-value">{{datosPersonales.telefonoMovil}}</div>
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if datosPersonales.direccionTexto}}
-                                    <div class="info-item span-2">
-                                        <div class="info-icon">📍</div>
-                                        <div>
-                                            <div class="info-label">Dirección</div>
-                                            <div class="info-value">{{datosPersonales.direccionTexto}}</div>
-                                            {{#if datosPersonales.municipio}}
-                                                <div class="info-secondary">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</div>
-                                            {{/if}}
-                                        </div>
+                            {{#if datosPersonales.direccionTexto}}
+                                <div class="info-item span-2">
+                                    <div class="info-icon">📍</div>
+                                    <div>
+                                        <div class="info-label">Dirección</div>
+                                        <div class="info-value">{{datosPersonales.direccionTexto}}</div>
+                                        {{#if datosPersonales.municipio}}
+                                            <div class="info-secondary">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</div>
+                                        {{/if}}
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if datosPersonales.nif}}
-                                    <div class="info-item">
-                                        <div class="info-icon">🆔</div>
-                                        <div>
-                                            <div class="info-label">NIF</div>
-                                            <div class="info-value">{{datosPersonales.nif}}</div>
-                                        </div>
+                            {{#if datosPersonales.nif}}
+                                <div class="info-item">
+                                    <div class="info-icon">🆔</div>
+                                    <div>
+                                        <div class="info-label">NIF</div>
+                                        <div class="info-value">{{datosPersonales.nif}}</div>
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if datosPersonales.edad}}
-                                    <div class="info-item">
-                                        <div class="info-icon">📅</div>
-                                        <div>
-                                            <div class="info-label">Edad</div>
-                                            <div class="info-value">{{datosPersonales.edad}} años</div>
-                                        </div>
+                            {{#if datosPersonales.edad}}
+                                <div class="info-item">
+                                    <div class="info-icon">📅</div>
+                                    <div>
+                                        <div class="info-label">Edad</div>
+                                        <div class="info-value">{{datosPersonales.edad}} años</div>
                                     </div>
-                                {{/if}}
-                            </div>
+                                </div>
+                            {{/if}}
                         </div>
                     </div>
-                {{/pdfAddPageItem}}
+                </div>
             {{/if}}
 
             <!-- EVALUACIÓN PROFESIONAL -->
             {{#if (or informe.valoracion informe.aspectosPersonales informe.entrevistaPersonal informe.trayectoriaFormativa informe.trayectoriaProfesional informe.datosInteres informe.motivoPresentacion)}}
-                {{#pdfAddPageItem modulo="Evaluación" seccion="Profesional"}}
-                    <div class="module span-2">
-                        <div class="module-header">
-                            <div class="module-title">Evaluación Profesional</div>
-                        </div>
-                        <div class="module-content">
-                            {{#if informe.valoracion}}
-                                <div style="margin-bottom: 24px;">
-                                    <h3 class="h3">Valoración General</h3>
-                                    <div class="text-content">
-                                        {{#each (splitParagraphs informe.valoracion)}}
+                {{{pdfAddPageItem modulo="Evaluación" seccion="Profesional"}}}
+                <div class="module span-2">
+                    <div class="module-header">
+                        <div class="module-title">Evaluación Profesional</div>
+                    </div>
+                    <div class="module-content">
+                        {{#if informe.valoracion}}
+                            <div style="margin-bottom: 24px;">
+                                <h3 class="h3">Valoración General</h3>
+                                <div class="text-content">
+                                    {{#each (splitParagraphs informe.valoracion)}}
+                                        <p>{{this}}</p>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        {{/if}}
+
+                        <div class="eval-grid">
+                            {{#if informe.aspectosPersonales}}
+                                <div class="eval-card">
+                                    <div class="card-title">Aspectos Personales</div>
+                                    <div class="card-content">
+                                        {{#each (splitParagraphs informe.aspectosPersonales)}}
                                             <p>{{this}}</p>
                                         {{/each}}
                                     </div>
                                 </div>
                             {{/if}}
 
-                            <div class="eval-grid">
-                                {{#if informe.aspectosPersonales}}
-                                    <div class="eval-card">
-                                        <div class="card-title">Aspectos Personales</div>
-                                        <div class="card-content">
-                                            {{#each (splitParagraphs informe.aspectosPersonales)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
-                                        </div>
+                            {{#if informe.entrevistaPersonal}}
+                                <div class="eval-card">
+                                    <div class="card-title">Entrevista Personal</div>
+                                    <div class="card-content">
+                                        {{#each (splitParagraphs informe.entrevistaPersonal)}}
+                                            <p>{{this}}</p>
+                                        {{/each}}
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if informe.entrevistaPersonal}}
-                                    <div class="eval-card">
-                                        <div class="card-title">Entrevista Personal</div>
-                                        <div class="card-content">
-                                            {{#each (splitParagraphs informe.entrevistaPersonal)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
-                                        </div>
+                            {{#if informe.trayectoriaFormativa}}
+                                <div class="eval-card">
+                                    <div class="card-title">Trayectoria Formativa</div>
+                                    <div class="card-content">
+                                        {{#each (splitParagraphs informe.trayectoriaFormativa)}}
+                                            <p>{{this}}</p>
+                                        {{/each}}
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if informe.trayectoriaFormativa}}
-                                    <div class="eval-card">
-                                        <div class="card-title">Trayectoria Formativa</div>
-                                        <div class="card-content">
-                                            {{#each (splitParagraphs informe.trayectoriaFormativa)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
-                                        </div>
+                            {{#if informe.trayectoriaProfesional}}
+                                <div class="eval-card">
+                                    <div class="card-title">Trayectoria Profesional</div>
+                                    <div class="card-content">
+                                        {{#each (splitParagraphs informe.trayectoriaProfesional)}}
+                                            <p>{{this}}</p>
+                                        {{/each}}
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if informe.trayectoriaProfesional}}
-                                    <div class="eval-card">
-                                        <div class="card-title">Trayectoria Profesional</div>
-                                        <div class="card-content">
-                                            {{#each (splitParagraphs informe.trayectoriaProfesional)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
-                                        </div>
+                            {{#if informe.datosInteres}}
+                                <div class="eval-card">
+                                    <div class="card-title">Datos de Interés</div>
+                                    <div class="card-content">
+                                        {{#each (splitParagraphs informe.datosInteres)}}
+                                            <p>{{this}}</p>
+                                        {{/each}}
                                     </div>
-                                {{/if}}
+                                </div>
+                            {{/if}}
 
-                                {{#if informe.datosInteres}}
-                                    <div class="eval-card">
-                                        <div class="card-title">Datos de Interés</div>
-                                        <div class="card-content">
-                                            {{#each (splitParagraphs informe.datosInteres)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
-                                        </div>
+                            {{#if informe.motivoPresentacion}}
+                                <div class="eval-card">
+                                    <div class="card-title">Motivo de Presentación</div>
+                                    <div class="card-content">
+                                        {{#each (splitParagraphs informe.motivoPresentacion)}}
+                                            <p>{{this}}</p>
+                                        {{/each}}
                                     </div>
-                                {{/if}}
-
-                                {{#if informe.motivoPresentacion}}
-                                    <div class="eval-card">
-                                        <div class="card-title">Motivo de Presentación</div>
-                                        <div class="card-content">
-                                            {{#each (splitParagraphs informe.motivoPresentacion)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
-                                        </div>
-                                    </div>
-                                {{/if}}
-                            </div>
+                                </div>
+                            {{/if}}
                         </div>
                     </div>
-                {{/pdfAddPageItem}}
+                </div>
             {{/if}}
 
             <!-- COMPETENCIAS -->
             {{#if competencias}}
-                {{#pdfAddPageItem modulo="Competencias"}}
-                    <div class="module">
-                        <div class="module-header">
-                            <div class="module-title">Competencias</div>
-                        </div>
-                        <div class="module-content">
-                            {{#each competencias}}
-                                <div class="comp-item">
-                                    <div class="comp-header">
-                                        <div class="comp-name">{{competencia}}</div>
-                                        <div class="comp-score">{{puntuacion}}/5</div>
+                {{{pdfAddPageItem modulo="Competencias"}}}
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Competencias</div>
+                    </div>
+                    <div class="module-content">
+                        {{#each competencias}}
+                            <div class="comp-item">
+                                <div class="comp-header">
+                                    <div class="comp-name">{{competencia}}</div>
+                                    <div class="comp-score">{{puntuacion}}/5</div>
+                                </div>
+                                {{#if observaciones}}
+                                    <div class="comp-obs">
+                                        {{#each (splitParagraphs observaciones)}}
+                                            <p>{{this}}</p>
+                                        {{/each}}
                                     </div>
-                                    {{#if observaciones}}
-                                        <div class="comp-obs">
-                                            {{#each (splitParagraphs observaciones)}}
-                                                <p>{{this}}</p>
-                                            {{/each}}
+                                {{/if}}
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/if}}
+
+            <!-- HABILIDADES TÉCNICAS -->
+            {{#if (or idiomas aplicacionesInformaticas acreditaciones)}}
+                {{{pdfAddPageItem modulo="Habilidades" seccion="Técnicas"}}}
+                <div class="module">
+                    <div class="module-header">
+                        <div class="module-title">Habilidades Técnicas</div>
+                    </div>
+                    <div class="module-content">
+                        {{#if idiomas}}
+                            <div class="mb-24">
+                                <h3 class="h3">Idiomas</h3>
+                                <div class="skills-grid">
+                                    {{#each idiomas}}
+                                        <div class="skill-item">
+                                            <span class="skill-name">{{idioma}}</span>
+                                            <span class="skill-level">{{nivel}}</span>
                                         </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        {{/if}}
+
+                        {{#if aplicacionesInformaticas}}
+                            <div class="mb-24">
+                                <h3 class="h3">Aplicaciones Informáticas</h3>
+                                <div class="skills-grid">
+                                    {{#each aplicacionesInformaticas}}
+                                        <div class="skill-item">
+                                            <span class="skill-name">{{aplicacion}}</span>
+                                            <span class="skill-level">{{nivel}}</span>
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        {{/if}}
+
+                        {{#if acreditaciones}}
+                            <div>
+                                <h3 class="h3">Acreditaciones</h3>
+                                <div class="acred-list">
+                                    {{#each acreditaciones}}
+                                        <div class="acred-item">
+                                            <div class="acred-name">{{descripcion}}</div>
+                                            {{#if horas}}
+                                                <div class="acred-hours">{{horas}}h</div>
+                                            {{/if}}
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+            {{/if}}
+
+            <!-- EXPERIENCIA LABORAL -->
+            {{#if experienciasLaborales}}
+                {{{pdfAddPageItem modulo="Experiencia" seccion="Laboral"}}}
+                <div class="module span-full">
+                    <div class="module-header">
+                        <div class="module-title">Experiencia Laboral</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                <tr>
+                                    <th class="col-dates">Periodo</th>
+                                    <th class="col-company">Empresa</th>
+                                    <th class="col-position">Puesto</th>
+                                    <th class="col-functions">Funciones Realizadas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each experienciasLaborales}}
+                                    <tr>
+                                        <td class="date-range">
+                                            {{#if fechaInicio}}
+                                                {{formatDate fechaInicio 'year'}}
+                                                {{#if fechaFin}}
+                                                    - {{formatDate fechaFin 'year'}}
+                                                {{else}}
+                                                    - Actual
+                                                {{/if}}
+                                            {{else}}
+                                                N/D
+                                            {{/if}}
+                                        </td>
+                                        <td class="company-name-table">{{empresa}}</td>
+                                        <td class="position-name">{{puesto}}</td>
+                                        <td class="functions-text">{{funcionRealizada}}</td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            <!-- FORMACIÓN ACADÉMICA -->
+            {{#if formaciones}}
+                {{{pdfAddPageItem modulo="Formación" seccion="Académica"}}}
+                <div class="module span-full">
+                    <div class="module-header">
+                        <div class="module-title">Formación Académica</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="table-wrap">
+                            <table class="data-table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 12%;">Año</th>
+                                    <th style="width: 35%;">Titulación</th>
+                                    <th style="width: 28%;">Centro</th>
+                                    <th style="width: 25%;">Nivel Académico</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each formaciones}}
+                                    <tr>
+                                        <td class="date-range">
+                                            {{#if fechaFin}}
+                                                {{formatDate fechaFin 'year'}}
+                                            {{else}}
+                                                N/D
+                                            {{/if}}
+                                        </td>
+                                        <td class="company-name-table">
+                                            {{#if nombre}}
+                                                {{nombre}}
+                                            {{else}}
+                                                {{titulacionAcademica}}
+                                            {{/if}}
+                                        </td>
+                                        <td class="td-center">{{centro}}</td>
+                                        <td class="td-muted">{{titulacionAcademica}}</td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+
+            <!-- REFERENCIAS PROFESIONALES -->
+            {{#if referencias}}
+                {{{pdfAddPageItem modulo="Referencias" seccion="Profesionales"}}}
+                <div class="module span-2">
+                    <div class="module-header">
+                        <div class="module-title">Referencias Profesionales</div>
+                    </div>
+                    <div class="module-content">
+                        <div class="ref-grid">
+                            {{#each referencias}}
+                                <div class="ref-card">
+                                    <div class="ref-company">{{empresa}}</div>
+                                    <div class="ref-contact">{{referencia}}</div>
+                                    {{#if funcionRealizada}}
+                                        <div class="ref-function">{{funcionRealizada}}</div>
                                     {{/if}}
                                 </div>
                             {{/each}}
                         </div>
                     </div>
-                {{/pdfAddPageItem}}
-            {{/if}}
-
-            <!-- HABILIDADES TÉCNICAS -->
-            {{#if (or idiomas aplicacionesInformaticas acreditaciones)}}
-                {{#pdfAddPageItem modulo="Habilidades" seccion="Técnicas"}}
-                    <div class="module">
-                        <div class="module-header">
-                            <div class="module-title">Habilidades Técnicas</div>
-                        </div>
-                        <div class="module-content">
-                            {{#if idiomas}}
-                                <div class="mb-24">
-                                    <h3 class="h3">Idiomas</h3>
-                                    <div class="skills-grid">
-                                        {{#each idiomas}}
-                                            <div class="skill-item">
-                                                <span class="skill-name">{{idioma}}</span>
-                                                <span class="skill-level">{{nivel}}</span>
-                                            </div>
-                                        {{/each}}
-                                    </div>
-                                </div>
-                            {{/if}}
-
-                            {{#if aplicacionesInformaticas}}
-                                <div class="mb-24">
-                                    <h3 class="h3">Aplicaciones Informáticas</h3>
-                                    <div class="skills-grid">
-                                        {{#each aplicacionesInformaticas}}
-                                            <div class="skill-item">
-                                                <span class="skill-name">{{aplicacion}}</span>
-                                                <span class="skill-level">{{nivel}}</span>
-                                            </div>
-                                        {{/each}}
-                                    </div>
-                                </div>
-                            {{/if}}
-
-                            {{#if acreditaciones}}
-                                <div>
-                                    <h3 class="h3">Acreditaciones</h3>
-                                    <div class="acred-list">
-                                        {{#each acreditaciones}}
-                                            <div class="acred-item">
-                                                <div class="acred-name">{{descripcion}}</div>
-                                                {{#if horas}}
-                                                    <div class="acred-hours">{{horas}}h</div>
-                                                {{/if}}
-                                            </div>
-                                        {{/each}}
-                                    </div>
-                                </div>
-                            {{/if}}
-                        </div>
-                    </div>
-                {{/pdfAddPageItem}}
-            {{/if}}
-
-            <!-- EXPERIENCIA LABORAL -->
-            {{#if experienciasLaborales}}
-                {{#pdfAddPageItem modulo="Experiencia" seccion="Laboral"}}
-                    <div class="module span-full">
-                        <div class="module-header">
-                            <div class="module-title">Experiencia Laboral</div>
-                        </div>
-                        <div class="module-content">
-                            <div class="table-wrap">
-                                <table class="data-table">
-                                    <thead>
-                                    <tr>
-                                        <th class="col-dates">Periodo</th>
-                                        <th class="col-company">Empresa</th>
-                                        <th class="col-position">Puesto</th>
-                                        <th class="col-functions">Funciones Realizadas</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each experienciasLaborales}}
-                                        <tr>
-                                            <td class="date-range">
-                                                {{#if fechaInicio}}
-                                                    {{formatDate fechaInicio 'year'}}
-                                                    {{#if fechaFin}}
-                                                        - {{formatDate fechaFin 'year'}}
-                                                    {{else}}
-                                                        - Actual
-                                                    {{/if}}
-                                                {{else}}
-                                                    N/D
-                                                {{/if}}
-                                            </td>
-                                            <td class="company-name-table">{{empresa}}</td>
-                                            <td class="position-name">{{puesto}}</td>
-                                            <td class="functions-text">{{funcionRealizada}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                {{/pdfAddPageItem}}
-            {{/if}}
-
-            <!-- FORMACIÓN ACADÉMICA -->
-            {{#if formaciones}}
-                {{#pdfAddPageItem modulo="Formación" seccion="Académica"}}
-                    <div class="module span-full">
-                        <div class="module-header">
-                            <div class="module-title">Formación Académica</div>
-                        </div>
-                        <div class="module-content">
-                            <div class="table-wrap">
-                                <table class="data-table">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 12%;">Año</th>
-                                        <th style="width: 35%;">Titulación</th>
-                                        <th style="width: 28%;">Centro</th>
-                                        <th style="width: 25%;">Nivel Académico</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each formaciones}}
-                                        <tr>
-                                            <td class="date-range">
-                                                {{#if fechaFin}}
-                                                    {{formatDate fechaFin 'year'}}
-                                                {{else}}
-                                                    N/D
-                                                {{/if}}
-                                            </td>
-                                            <td class="company-name-table">
-                                                {{#if nombre}}
-                                                    {{nombre}}
-                                                {{else}}
-                                                    {{titulacionAcademica}}
-                                                {{/if}}
-                                            </td>
-                                            <td class="td-center">{{centro}}</td>
-                                            <td class="td-muted">{{titulacionAcademica}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                {{/pdfAddPageItem}}
-            {{/if}}
-
-            <!-- REFERENCIAS PROFESIONALES -->
-            {{#if referencias}}
-                {{#pdfAddPageItem modulo="Referencias" seccion="Profesionales"}}
-                    <div class="module span-2">
-                        <div class="module-header">
-                            <div class="module-title">Referencias Profesionales</div>
-                        </div>
-                        <div class="module-content">
-                            <div class="ref-grid">
-                                {{#each referencias}}
-                                    <div class="ref-card">
-                                        <div class="ref-company">{{empresa}}</div>
-                                        <div class="ref-contact">{{referencia}}</div>
-                                        {{#if funcionRealizada}}
-                                            <div class="ref-function">{{funcionRealizada}}</div>
-                                        {{/if}}
-                                    </div>
-                                {{/each}}
-                            </div>
-                        </div>
-                    </div>
-                {{/pdfAddPageItem}}
+                </div>
             {{/if}}
 
         </div>
