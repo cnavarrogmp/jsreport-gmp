@@ -1,0 +1,14 @@
+{
+    "name": "informeSeleccion0006",
+    "shortid": "data06",
+    "creationDate": {
+        "$$date": 1754662852448
+    },
+    "modificationDate": {
+        "$$date": 1754662852448
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "data06id",
+    "$entitySet": "data"
+}

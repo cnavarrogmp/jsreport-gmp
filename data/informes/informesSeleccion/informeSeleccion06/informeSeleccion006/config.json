@@ -1,0 +1,22 @@
+{
+    "name": "informeSeleccion006",
+    "recipe": "chrome-pdf",
+    "shortid": "Sel006",
+    "engine": "handlebars",
+    "data": {
+        "shortid": "data06"
+    },
+    "chrome": {
+        "printBackground": true
+    },
+    "creationDate": {
+        "$$date": 1754662802412
+    },
+    "modificationDate": {
+        "$$date": 1754662872208
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "tmpl06",
+    "$entitySet": "templates"
+}
