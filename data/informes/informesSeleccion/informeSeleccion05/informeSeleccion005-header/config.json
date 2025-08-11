@@ -1,0 +1,12 @@
+{
+  "shortid": "r1U1YcO9m",
+  "name": "informeSeleccion005-header",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "chrome": {
+    "marginTop": "0cm",
+    "marginRight": "0cm",
+    "marginBottom": "0cm",
+    "marginLeft": "0cm"
+  }
+}

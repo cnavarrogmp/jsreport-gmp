@@ -8,10 +8,15 @@
     },
     "chrome": {
         "printBackground": true,
-        "marginTop": "20mm",
-        "headerHeight": "10mm",
-        "headerTemplate": "<div class='crumb'>{{modulo}} › {{seccion}} › {{apartado}} — pág. <span class='pageNumber'></span>/<span class='totalPages'></span></div>"
+        "marginTop": "20mm"
     },
+    "pdfOperations": [
+        {
+            "type": "merge",
+            "templateShortid": "r1U1YcO9m",
+            "mergeWholeDocument": true
+        }
+    ],
     "creationDate": {
         "$$date": 1754662802412
     },
