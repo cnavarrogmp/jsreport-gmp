@@ -102,6 +102,7 @@
 
         <!-- INFORMACIÓN PERSONAL -->
         {{#if (or datosPersonales.email datosPersonales.telefonoMovil datosPersonales.direccionTexto)}}
+        {{{pdfAddPageItem { modulo: 'Información', seccion: 'Personal' }}}}
         <div class="module">
           <div class="module-header">
             <div class="module-title">Información Personal</div>
@@ -167,6 +168,7 @@
 
         <!-- EVALUACIÓN PROFESIONAL -->
         {{#if (or informe.valoracion informe.aspectosPersonales informe.entrevistaPersonal informe.trayectoriaFormativa informe.trayectoriaProfesional informe.datosInteres informe.motivoPresentacion)}}
+        {{{pdfAddPageItem { modulo: 'Evaluación', seccion: 'Profesional' }}}}
         <div class="module span-2">
           <div class="module-header">
             <div class="module-title">Evaluación Profesional</div>
@@ -256,6 +258,7 @@
 
         <!-- COMPETENCIAS -->
         {{#if competencias}}
+        {{{pdfAddPageItem { modulo: 'Competencias' }}}}
         <div class="module">
           <div class="module-header">
             <div class="module-title">Competencias</div>
@@ -282,6 +285,7 @@
 
         <!-- HABILIDADES TÉCNICAS -->
         {{#if (or idiomas aplicacionesInformaticas acreditaciones)}}
+        {{{pdfAddPageItem { modulo: 'Habilidades', seccion: 'Técnicas' }}}}
         <div class="module">
           <div class="module-header">
             <div class="module-title">Habilidades Técnicas</div>
@@ -336,6 +340,7 @@
 
         <!-- EXPERIENCIA LABORAL -->
         {{#if experienciasLaborales}}
+        {{{pdfAddPageItem { modulo: 'Experiencia', seccion: 'Laboral' }}}}
         <div class="module span-full">
           <div class="module-header">
             <div class="module-title">Experiencia Laboral</div>
@@ -380,6 +385,7 @@
 
         <!-- FORMACIÓN ACADÉMICA -->
         {{#if formaciones}}
+        {{{pdfAddPageItem { modulo: 'Formación', seccion: 'Académica' }}}}
         <div class="module span-full">
           <div class="module-header">
             <div class="module-title">Formación Académica</div>
@@ -425,6 +431,7 @@
 
         <!-- REFERENCIAS PROFESIONALES -->
         {{#if referencias}}
+        {{{pdfAddPageItem { modulo: 'Referencias', seccion: 'Profesionales' }}}}
         <div class="module span-2">
           <div class="module-header">
             <div class="module-title">Referencias Profesionales</div>
