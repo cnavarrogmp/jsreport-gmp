@@ -1,0 +1,6 @@
+{
+  "_id": "folderSelV2",
+  "shortid": "SelV2",
+  "$entitySet": "folders",
+  "name": "InformeSeleccionV2"
+}

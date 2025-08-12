@@ -1,0 +1,18 @@
+<!-- Carga Paged.js desde CDN; si tu servidor no permite Internet, reemplaza esto por un asset local del polyfill -->
+<script>
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/pagedjs/dist/paged.polyfill.js';
+    s.onload = function(){
+      class GMPHandler extends window.Paged.Handler {
+        afterPage(page){ var first = page.element.querySelector('[data-break-start]'); if(first) first.classList.add('at-page-break'); }
+        onFragment(fragment){ if(fragment && fragment.after && fragment.after.node){ fragment.after.node.classList.add('continued'); } }
+      }
+      window.Paged.registerHandlers(GMPHandler);
+    };
+    document.head.appendChild(s);
+  })();
+</script>
+<style>
+  .continued::before { content: 'Continuación'; display:block; color:#5d6670; font-size:9pt; margin-bottom:2px; }
+</style>

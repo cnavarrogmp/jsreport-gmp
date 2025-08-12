@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es" class="{{#if __layout.isLandscape}}landscape{{/if}}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Informe de Candidatura · Selección</title>
+  <style>
+    {{{asset "v2-styles.css"}}}
+  </style>
+</head>
+<body class="report">
+  {{{asset "pagedjs.html"}}}
+
+  <header class="brand-header no-print-gap">
+    <div class="brand">
+      <span class="brand__logo"></span>
+      <span class="brand__name">Documentos Gmp · Informe de Selección</span>
+    </div>
+    <div class="meta">
+      <span>Pedido #{{idPedidoMaster}}</span><span class="sep">·</span>
+      <span>Publicado: {{formatDate fechaPublicacion}}</span>
+    </div>
+  </header>
+
+  <!-- Running breadcrumb (Paged.js) -->
+  <div class="breadcrumbs" data-breadcrumb=""></div>
+
+  <!-- ========================================================== -->
+  <!-- Módulo A · PRESENTACIÓN                                   -->
+  <!-- ========================================================== -->
+  <section class="module module--A unit" data-breadcrumb="Módulo A · Presentación">
+    <!-- Sección: Datos Básicos -->
+    <header class="section__header unit" data-breadcrumb="Módulo A · Presentación · Datos básicos">
+      <h2 class="title">Datos básicos</h2>
+    </header>
+    <div class="grid grid--2col">
+      <div class="card no-break">
+        <h3 class="block__title">{{datosPersonales.nombreCompleto}}</h3>
+        <ul class="kv">
+          {{#if datosPersonales.pais}}<li><b>País</b><span>{{datosPersonales.pais}}</span></li>{{/if}}
+          {{#if datosPersonales.municipio}}<li><b>Lugar de residencia</b><span>{{datosPersonales.municipio}}</span></li>{{/if}}
+          {{#if datosPersonales.edad}}<li><b>Edad</b><span>{{datosPersonales.edad}}</span></li>{{/if}}
+          {{#if datosPersonales.email}}<li><b>Email</b><span>{{datosPersonales.email}}</span></li>{{/if}}
+          {{#if datosPersonales.telefonoMovil}}<li><b>Móvil</b><span>{{datosPersonales.telefonoMovil}}</span></li>{{/if}}
+        </ul>
+      </div>
+      <div class="card no-break photo">
+        {{#if datosPersonales.foto}}
+          <img src="{{datosPersonales.foto}}" alt="Foto de perfil" />
+        {{else}}
+          <div class="muted">Sin foto</div>
+        {{/if}}
+      </div>
+    </div>
+
+    <!-- Sección: Datos destacados -->
+    <section class="section" data-breadcrumb="Módulo A · Presentación · Datos destacados">
+      <header class="section__header unit"><h2 class="title">Datos destacados</h2></header>
+      <div class="grid grid--2col">
+        {{#each (qualBlocks informe)}}
+          <article class="block unit" data-breadcrumb="Módulo A · Presentación · {{label}}">
+            <h3 class="block__title">{{label}}</h3>
+            <p class="text">{{value}}</p>
+          </article>
+        {{/each}}
+      </div>
+    </section>
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- Módulo B · EXPERIENCIA Y FORMACIÓN                         -->
+  <!-- ========================================================== -->
+  <section class="module module--B" data-breadcrumb="Módulo B · Experiencia y formación">
+    <!-- Sección: Experiencia -->
+    {{#if experienciasLaborales.length}}
+    <section class="section" data-breadcrumb="Módulo B · Experiencia">
+      <header class="section__header unit"><h2 class="title">Experiencia laboral</h2></header>
+      <div class="timeline">
+        {{#each experienciasLaborales}}
+        <div class="timeline__item unit" data-breadcrumb="Módulo B · Experiencia · {{empresa}}">
+          <div class="timeline__head">
+            <div class="role">{{puesto}}</div>
+            <div class="when">{{formatRange fechaInicio fechaFin}}</div>
+            <div class="place">{{empresa}}</div>
+          </div>
+          {{#if funcionRealizada}}<p class="text">{{funcionRealizada}}</p>{{/if}}
+        </div>
+        {{/each}}
+      </div>
+    </section>
+    {{/if}}
+
+    <!-- Sección: Formación -->
+    {{#if formaciones.length}}
+    <section class="section" data-breadcrumb="Módulo B · Formación">
+      <header class="section__header unit"><h2 class="title">Formación</h2></header>
+      <ul class="list list--edu">
+        {{#each formaciones}}
+          <li class="unit" data-breadcrumb="Módulo B · Formación · {{titulacionAcademica}}">
+            <div class="edu__title">{{titulacionAcademica}}{{#if nombre}} — {{nombre}}{{/if}}</div>
+            <div class="edu__meta">{{centro}} · {{formatYear fechaFin}}</div>
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+    {{/if}}
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- Módulo C · FORMACIÓN COMPLEMENTARIA / COMPETENCIAS / REF.  -->
+  <!-- ========================================================== -->
+  <section class="module module--C" data-breadcrumb="Módulo C · Formación compl., competencias, referencias">
+    <!-- Formación complementaria: Acreditaciones -->
+    {{#if acreditaciones.length}}
+    <section class="section" data-breadcrumb="Módulo C · Formación complementaria">
+      <header class="section__header unit"><h2 class="title">Formación complementaria</h2></header>
+      <ul class="list list--plain">
+        {{#each acreditaciones}}
+          <li class="unit" data-breadcrumb="Módulo C · Acreditaciones · {{descripcion}}">
+            {{formatYear fecha}} — {{descripcion}}{{#if horas}} ({{horas}} h){{/if}}
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+    {{/if}}
+
+    <!-- Competencias -->
+    {{#if competencias.length}}
+    <section class="section" data-breadcrumb="Módulo C · Competencias">
+      <header class="section__header unit"><h2 class="title">Competencias</h2></header>
+      <div class="grid grid--2col">
+        {{#each competencias}}
+          <div class="card no-break" data-breadcrumb="Módulo C · Competencia · {{competencia}}">
+            <h4 class="chip">{{competencia}}</h4>
+            <div class="score"><span class="score__label">Puntuación</span><span class="score__value">{{puntuacion}}</span></div>
+            {{#if observaciones}}<p class="text">{{observaciones}}</p>{{/if}}
+          </div>
+        {{/each}}
+      </div>
+    </section>
+    {{/if}}
+
+    <!-- Referencias -->
+    {{#if referencias.length}}
+    <section class="section" data-breadcrumb="Módulo C · Referencias">
+      <header class="section__header unit"><h2 class="title">Referencias</h2></header>
+      <ul class="list list--plain">
+        {{#each referencias}}
+          <li class="unit" data-breadcrumb="Módulo C · Referencia · {{empresa}}">
+            <b>{{empresa}}</b> — {{funcionRealizada}}. {{referencia}}
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+    {{/if}}
+  </section>
+
+  <!-- ========================================================== -->
+  <!-- Módulo D · ENTREVISTA PERSONAL / VALORACIÓN FINAL          -->
+  <!-- ========================================================== -->
+  <section class="module module--D" data-breadcrumb="Módulo D · Entrevista y valoración">
+    {{#if informe.entrevistaPersonal}}
+    <section class="section" data-breadcrumb="Módulo D · Entrevista">
+      <header class="section__header unit"><h2 class="title">Informe de entrevista</h2></header>
+      <p class="text">{{informe.entrevistaPersonal}}</p>
+    </section>
+    {{/if}}
+
+    {{#if informe.valoracion}}
+    <section class="section" data-breadcrumb="Módulo D · Valoración final">
+      <header class="section__header unit"><h2 class="title">Valoración final</h2></header>
+      <p class="text">{{informe.valoracion}}</p>
+    </section>
+    {{/if}}
+
+    {{#if informe.potencial}}
+    <section class="section" data-breadcrumb="Módulo D · Potencial">
+      <header class="section__header unit"><h2 class="title">Potencial</h2></header>
+      <p class="text">{{informe.potencial}}</p>
+    </section>
+    {{/if}}
+  </section>
+
+  <footer class="page-footer">
+    <span>Documento confidencial — Uso exclusivo del cliente</span>
+    <span class="pagecount">Pág. <span class="pageNumber"></span> / <span class="totalPages"></span></span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "InformeSeleccionV2",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "shortid": "tmplSelV2",
+  "data": { "shortid": "dataSelV2" },
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "marginTop": "18mm",
+    "marginRight": "16mm",
+    "marginBottom": "20mm",
+    "marginLeft": "16mm"
+  },
+  "scripts": [ { "shortid": "paginateSelV2" } ],
+  "helpers": "function formatDate(dateStr) {\n  if (!dateStr) return \"\";\n  var d = new Date(dateStr);\n  if (isNaN(d)) return \"\";\n  return d.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });\n}\nfunction formatYear(dateStr) {\n  if (!dateStr) return \"\";\n  var d = new Date(dateStr);\n  if (isNaN(d)) return \"\";\n  return String(d.getFullYear());\n}\nfunction formatRange(start, end) {\n  var s = formatDate(start);\n  var e = end ? formatDate(end) : 'Actualidad';\n  return [s, e].filter(Boolean).join(' — ');\n}\nfunction qualBlocks(informe) {\n  var map = [\n    ['motivoPresentacion','Motivo de presentación'],\n    ['aspectosPersonales','Aspectos personales'],\n    ['trayectoriaFormativa','Trayectoria formativa'],\n    ['trayectoriaProfesional','Trayectoria profesional'],\n    ['datosInteres','Datos de interés']\n  ];\n  if (!informe) return [];\n  return map.map(function(p){\n    var k = p[0], label = p[1];\n    var val = (informe[k] || '').toString().trim();\n    return val ? { key: k, label: label, value: val } : null;\n  }).filter(Boolean);\n}"
+}
