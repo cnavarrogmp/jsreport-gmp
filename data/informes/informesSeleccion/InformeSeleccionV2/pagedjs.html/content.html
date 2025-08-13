@@ -1,0 +1,44 @@
+<!-- 1) Cargar el polyfill local (EJECUTÁNDOLO) -->
+<script>{{{asset "paged.polyfill.js"}}}</script>
+
+<!-- 2) Configurar Paged.js + trigger para jsreport -->
+<script>
+(function () {
+  function done () { window.JSREPORT_READY_TO_START = true; }
+
+  // Si por lo que sea Paged no está disponible, no bloqueamos la impresión
+  if (!window.Paged || !window.Paged.Handler) {
+    return done();
+  }
+
+  class GMPHandler extends window.Paged.Handler {
+    afterPage(page) {
+      var first = page.element.querySelector('[data-break-start]');
+      if (first) first.classList.add('at-page-break');
+    }
+    onFragment(fragment) {
+      if (fragment && fragment.after && fragment.after.node) {
+        fragment.after.node.classList.add('continued');
+      }
+    }
+  }
+  window.Paged.registerHandlers(GMPHandler);
+
+  // Avisamos a jsreport cuando Paged.js termina de maquetar
+  document.addEventListener('pagedjs:rendered', done);
+
+  // Salvavidas por si el evento no llega
+  setTimeout(done, 3000);
+})();
+</script>
+
+<style>
+  .continued::before {
+    content: 'Continuación';
+    display:block;
+    color:#5d6670;
+    font-size:9pt;
+    margin-bottom:2px;
+  }
+</style>
+

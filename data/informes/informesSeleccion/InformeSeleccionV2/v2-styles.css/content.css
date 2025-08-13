@@ -11,6 +11,12 @@ html.landscape @page { size: A4 landscape; }
 
 /* Running header (Paged.js) */
 .breadcrumbs { string-set: breadcrumb attr(data-breadcrumb); }
+/* Cualquier elemento con data-breadcrumb actualiza el running header */
+[data-breadcrumb] { string-set: breadcrumb attr(data-breadcrumb); }
+
+/* (Opcional) valor por defecto en la portada */
+body::before { string-set: breadcrumb "Informe de Selección"; }
+
 @page { @top-left { content: string(breadcrumb); color: #39424c; } }
 @page { @bottom-right { content: "Pág. " counter(page) " / " counter(pages); } }
 

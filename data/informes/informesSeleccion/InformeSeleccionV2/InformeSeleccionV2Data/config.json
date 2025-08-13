@@ -1,1 +1,14 @@
-{ "name": "InformeSeleccionV2Data", "shortid": "dataSelV2", "$entitySet": "data" }
+{
+    "name": "InformeSeleccionV2Data",
+    "shortid": "9AO6Eq_XQ",
+    "creationDate": {
+        "$$date": 1755002888091
+    },
+    "modificationDate": {
+        "$$date": 1755003029838
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "b0HMyqmnfA0W8Olb",
+    "$entitySet": "data"
+}

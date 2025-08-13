@@ -1,1 +1,15 @@
-{ "name": "v2-styles.css", "shortid": "v2css", "$entitySet": "assets" }
+{
+    "name": "v2-styles.css",
+    "sharedHelpersScope": null,
+    "creationDate": {
+        "$$date": 1755002931977
+    },
+    "modificationDate": {
+        "$$date": 1755105901423
+    },
+    "shortid": "eFMlKTI",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "1upKJ0AG7UILHKM5",
+    "$entitySet": "assets"
+}

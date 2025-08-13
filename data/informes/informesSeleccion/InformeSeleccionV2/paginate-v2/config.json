@@ -1,1 +1,15 @@
-{ "name": "paginate-v2", "shortid": "paginateSelV2", "$entitySet": "scripts" }
+{
+    "name": "paginate-v2",
+    "scope": "template",
+    "shortid": "pNosjoaLu_",
+    "creationDate": {
+        "$$date": 1755002884232
+    },
+    "modificationDate": {
+        "$$date": 1755003901292
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "s4uVLlXmmEo2DKcb",
+    "$entitySet": "scripts"
+}
