@@ -1,44 +1,41 @@
-<!-- 1) Cargar el polyfill local (EJECUTÁNDOLO) -->
-<script>{{{asset "paged.polyfill.js"}}}</script>
-
-<!-- 2) Configurar Paged.js + trigger para jsreport -->
 <script>
-(function () {
-  function done () { window.JSREPORT_READY_TO_START = true; }
+    (function () {
+        // Trigger para chrome-pdf si tienes “wait for printing trigger”
+        function done(){ window.JSREPORT_READY_TO_START = true; }
 
-  // Si por lo que sea Paged no está disponible, no bloqueamos la impresión
-  if (!window.Paged || !window.Paged.Handler) {
-    return done();
-  }
+        if (!window.Paged) { setTimeout(done, 0); return; }
 
-  class GMPHandler extends window.Paged.Handler {
-    afterPage(page) {
-      var first = page.element.querySelector('[data-break-start]');
-      if (first) first.classList.add('at-page-break');
-    }
-    onFragment(fragment) {
-      if (fragment && fragment.after && fragment.after.node) {
-        fragment.after.node.classList.add('continued');
-      }
-    }
-  }
-  window.Paged.registerHandlers(GMPHandler);
+        // Estado del breadcrumb “actual”
+        window.__currentBreadcrumb = 'Informe de Selección';
 
-  // Avisamos a jsreport cuando Paged.js termina de maquetar
-  document.addEventListener('pagedjs:rendered', done);
+        class GMPHandler extends window.Paged.Handler {
+            renderNode (node) {
+                if (node && node.nodeType === 1 && node.hasAttribute('data-breadcrumb')) {
+                    window.__currentBreadcrumb = node.getAttribute('data-breadcrumb') || window.__currentBreadcrumb;
+                }
+            }
+            afterPage (page) {
+                var content = page && page.element && page.element.querySelector('.pagedjs_page_content');
+                if (!content) return;
+                var hdr = document.createElement('div');
+                hdr.className = 'page-breadcrumb';
+                hdr.textContent = window.__currentBreadcrumb;
+                content.insertBefore(hdr, content.firstChild);
+            }
+            onFragment (fragment) {  // “Continuación” cuando parte un bloque
+                if (fragment && fragment.after && fragment.after.node) {
+                    fragment.after.node.classList.add('continued');
+                }
+            }
+        }
 
-  // Salvavidas por si el evento no llega
-  setTimeout(done, 3000);
-})();
+        window.Paged.registerHandlers(GMPHandler);
+        document.addEventListener('pagedjs:rendered', done);
+        setTimeout(done, 3000); // salvavidas
+    })();
 </script>
 
 <style>
-  .continued::before {
-    content: 'Continuación';
-    display:block;
-    color:#5d6670;
-    font-size:9pt;
-    margin-bottom:2px;
-  }
+    .page-breadcrumb{ font-size:9pt; color:#39424c; margin:0 0 6mm 0; line-height:1.2; }
+    .continued::before{ content:'Continuación'; display:block; color:#5d6670; font-size:9pt; margin-bottom:2mm; }
 </style>
-

@@ -9,7 +9,11 @@
   </style>
 </head>
 <body class="report">
-  {{{asset "pagedjs.html"}}}
+<!-- 1) Polyfill Paged.js (asset local, vía link) -->
+<script src="{#asset paged.polyfill.js @encoding=link}"></script>
+
+<!-- 2) Handler + trigger -->
+{{{asset "pagedjs.html"}}}
 
   <header class="brand-header no-print-gap">
     <div class="brand">

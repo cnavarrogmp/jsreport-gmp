@@ -19,18 +19,14 @@ html.landscape @page { size: A4 landscape; }
     height: 0;
 }
 
-/* Pinta ese elemento en el margen superior de cada página */
-@page {
-    @top-left {
-        content: element(breadcrumbHdr);
-        color: #39424c;
-    }
-}
+/* === Encabezado de miga inyectado por Paged.js === */
+.pagedjs_page_content { position: relative; }
 
-/* Fallback: miga por defecto para la primera página */
-body::before {
-    content: "Informe de Selección";
-    position: running(breadcrumbHdr);
+.page-breadcrumb {
+    font-size: 9pt;
+    color: #39424c;
+    margin: 0 0 6mm 0;     /* empuja el contenido hacia abajo */
+    line-height: 1.2;
 }
 @page { @bottom-right { content: "Pág. " counter(page) " / " counter(pages); } }
 
