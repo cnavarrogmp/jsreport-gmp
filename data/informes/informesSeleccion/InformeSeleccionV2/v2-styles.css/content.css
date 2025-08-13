@@ -9,15 +9,29 @@ body.report { font-family: var(--font-sans); color: var(--fg); background: var(-
 @page { size: A4; margin: 18mm 16mm 20mm; }
 html.landscape @page { size: A4 landscape; }
 
-/* Running header (Paged.js) */
-.breadcrumbs { string-set: breadcrumb attr(data-breadcrumb); }
-/* Cualquier elemento con data-breadcrumb actualiza el running header */
-[data-breadcrumb] { string-set: breadcrumb attr(data-breadcrumb); }
+/* --- MIGA CON RUNNING ELEMENT (fiable) --- */
 
-/* (Opcional) valor por defecto en la portada */
-body::before { string-set: breadcrumb "Informe de Selección"; }
+/* Cada cabecera de sección crea un “elemento en ejecución” con el breadcrumb */
+.section__header::after{
+    content: attr(data-breadcrumb);
+    position: running(breadcrumbHdr);
+    visibility: hidden;
+    height: 0;
+}
 
-@page { @top-left { content: string(breadcrumb); color: #39424c; } }
+/* Pinta ese elemento en el margen superior de cada página */
+@page {
+    @top-left {
+        content: element(breadcrumbHdr);
+        color: #39424c;
+    }
+}
+
+/* Fallback: miga por defecto para la primera página */
+body::before {
+    content: "Informe de Selección";
+    position: running(breadcrumbHdr);
+}
 @page { @bottom-right { content: "Pág. " counter(page) " / " counter(pages); } }
 
 /* Control de cortes */
