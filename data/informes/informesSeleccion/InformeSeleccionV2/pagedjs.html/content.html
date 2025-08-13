@@ -5,25 +5,13 @@
 
         if (!window.Paged) { setTimeout(done, 0); return; }
 
-        // Estado del breadcrumb “actual”
-        window.__currentBreadcrumb = 'Informe de Selección';
-
         class GMPHandler extends window.Paged.Handler {
-            renderNode (node) {
-                if (node && node.nodeType === 1 && node.hasAttribute('data-breadcrumb')) {
-                    window.__currentBreadcrumb = node.getAttribute('data-breadcrumb') || window.__currentBreadcrumb;
-                }
-            }
-            afterPage (page) {
-                var content = page && page.element && page.element.querySelector('.pagedjs_page_content');
-                if (!content) return;
-                var hdr = document.createElement('div');
-                hdr.className = 'page-breadcrumb';
-                hdr.textContent = window.__currentBreadcrumb;
-                content.insertBefore(hdr, content.firstChild);
-            }
-            onFragment (fragment) {  // “Continuación” cuando parte un bloque
+            onFragment (fragment) {
                 if (fragment && fragment.after && fragment.after.node) {
+                    var crumb = fragment.node.getAttribute('data-breadcrumb');
+                    if (crumb) {
+                        fragment.after.node.setAttribute('data-breadcrumb', crumb);
+                    }
                     fragment.after.node.classList.add('continued');
                 }
             }
@@ -34,8 +22,3 @@
         setTimeout(done, 3000); // salvavidas
     })();
 </script>
-
-<style>
-    .page-breadcrumb{ font-size:9pt; color:#39424c; margin:0 0 6mm 0; line-height:1.2; }
-    .continued::before{ content:'Continuación'; display:block; color:#5d6670; font-size:9pt; margin-bottom:2mm; }
-</style>
