@@ -6,29 +6,21 @@
 }
 * { box-sizing: border-box; }
 body.report { font-family: var(--font-sans); color: var(--fg); background: var(--bg); font-size: 11pt; line-height: 1.45; }
-@page { size: A4; margin: 18mm 16mm 20mm; }
-html.landscape @page { size: A4 landscape; }
-
-/* --- MIGA CON RUNNING ELEMENT (fiable) --- */
-
-/* Cada cabecera de sección crea un “elemento en ejecución” con el breadcrumb */
-.section__header::after{
-    content: attr(data-breadcrumb);
-    position: running(breadcrumbHdr);
-    visibility: hidden;
-    height: 0;
-}
-
-/* === Encabezado de miga inyectado por Paged.js === */
-.pagedjs_page_content { position: relative; }
-
-.page-breadcrumb {
+@page {
+  size: A4;
+  margin: 18mm 16mm 20mm;
+  @top-left {
+    content: string(breadcrumb);
     font-size: 9pt;
     color: #39424c;
-    margin: 0 0 6mm 0;     /* empuja el contenido hacia abajo */
-    line-height: 1.2;
+  }
+  @bottom-right {
+    content: "Pág. " counter(page) " / " counter(pages);
+  }
 }
-@page { @bottom-right { content: "Pág. " counter(page) " / " counter(pages); } }
+html.landscape @page { size: A4 landscape; }
+[data-breadcrumb] { string-set: breadcrumb attr(data-breadcrumb); }
+.continued::before{ content:'Continuación'; display:block; color: var(--muted); font-size:9pt; margin-bottom:2mm; }
 
 /* Control de cortes */
 .unit, .no-break, li, .card, .timeline__item { break-inside: avoid; }
