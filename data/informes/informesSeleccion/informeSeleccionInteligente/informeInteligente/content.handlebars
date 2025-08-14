@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Inteligente - {{datosPersonales.nombreCompleto}}</title>
+  <style>{{{asset "inteligente-styles.css"}}}</style>
+</head>
+<body class="report {{#if __layout.isLandscape}}landscape{{/if}}" data-breadcrumb="Informe de Selección">
+  
+  <!-- HEADER PRINCIPAL -->
+  <header class="main-header" data-breadcrumb="Cabecera">
+    <div class="header-grid">
+      <div class="brand-section">
+        <img src="{{assetUrl 'logos/grupoempleo-logo.png'}}" alt="GrupoEmpleo" class="logo">
+        <div class="brand-text">
+          <h1 class="brand-name">GRUPO EMPLEO</h1>
+          <p class="brand-tagline">Recursos Humanos · Sector Industrial</p>
+        </div>
+      </div>
+      <div class="report-meta">
+        <span class="report-type">{{tipoInforme}}</span>
+        <span class="report-date">{{formatDate fechaEmision}}</span>
+        <span class="report-id">#{{idInforme}}</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- INFORMACIÓN DEL CANDIDATO -->
+  <section class="candidate-header module" data-breadcrumb="Datos del Candidato">
+    <div class="candidate-grid">
+      <div class="candidate-photo-wrapper">
+        {{#if datosPersonales.foto}}
+          <img src="{{datosPersonales.foto}}" alt="Foto" class="candidate-photo">
+        {{else}}
+          <img src="{{assetUrl 'profiles/candidate-neutral-01.jpg'}}" alt="Foto" class="candidate-photo">
+        {{/if}}
+      </div>
+      <div class="candidate-info">
+        <h2 class="candidate-name">{{datosPersonales.nombreCompleto}}</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Edad</span>
+            <span class="info-value">{{datosPersonales.edad}} años</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Ubicación</span>
+            <span class="info-value">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Email</span>
+            <span class="info-value">{{datosPersonales.email}}</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Teléfono</span>
+            <span class="info-value">{{datosPersonales.telefonoMovil}}</span>
+          </div>
+        </div>
+      </div>
+      {{#if informe.puntuacion}}
+      <div class="candidate-score">
+        <div class="score-circle">
+          <span class="score-value">{{informe.puntuacion}}</span>
+          <span class="score-max">/10</span>
+        </div>
+        <span class="score-label">Puntuación Global</span>
+      </div>
+      {{/if}}
+    </div>
+  </section>
+
+  <!-- ITERACIÓN DE MÓDULOS DINÁMICOS -->
+  {{#each modulos}}
+  <section class="module module-{{@index}}" data-breadcrumb="{{this.titulo}}">
+    <header class="module-header">
+      <h2 class="module-title">{{this.titulo}}</h2>
+      {{#if this.subtitulo}}
+        <p class="module-subtitle">{{this.subtitulo}}</p>
+      {{/if}}
+    </header>
+    
+    <div class="module-content">
+      {{#each this.secciones}}
+      <div class="section" data-breadcrumb="{{../titulo}} › {{this.nombre}}">
+        <h3 class="section-title">{{this.nombre}}</h3>
+        
+        {{#if this.tipo}}
+          {{#ifEquals this.tipo "texto"}}
+            <div class="text-content">
+              {{#each (splitParagraphs this.contenido)}}
+                <p class="paragraph no-break">{{this}}</p>
+              {{/each}}
+            </div>
+          {{/ifEquals}}
+          
+          {{#ifEquals this.tipo "lista"}}
+            <ul class="list-content">
+              {{#each this.items}}
+                <li class="list-item no-break" data-breadcrumb="{{../../titulo}} › {{../nombre}} › Item {{@index}}">
+                  {{#if this.titulo}}<strong>{{this.titulo}}</strong>{{/if}}
+                  {{#if this.descripcion}}<span class="item-desc">{{this.descripcion}}</span>{{/if}}
+                  {{#if this.fecha}}<span class="item-date">{{formatDate this.fecha}}</span>{{/if}}
+                </li>
+              {{/each}}
+            </ul>
+          {{/ifEquals}}
+          
+          {{#ifEquals this.tipo "tabla"}}
+            <div class="table-wrapper">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    {{#each this.columnas}}
+                      <th>{{this}}</th>
+                    {{/each}}
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each this.filas}}
+                    <tr class="no-break">
+                      {{#each this}}
+                        <td>{{this}}</td>
+                      {{/each}}
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          {{/ifEquals}}
+          
+          {{#ifEquals this.tipo "cards"}}
+            <div class="cards-grid">
+              {{#each this.items}}
+                <div class="card no-break" data-breadcrumb="{{../../titulo}} › {{../nombre}} › {{this.titulo}}">
+                  <h4 class="card-title">{{this.titulo}}</h4>
+                  {{#if this.puntuacion}}
+                    <div class="card-score">{{this.puntuacion}}</div>
+                  {{/if}}
+                  <p class="card-content">{{this.contenido}}</p>
+                </div>
+              {{/each}}
+            </div>
+          {{/ifEquals}}
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </section>
+  {{/each}}
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-content">
+      <span class="confidential">CONFIDENCIAL - Uso exclusivo del cliente</span>
+      <span class="page-info">
+        <span class="page-number"></span> / <span class="total-pages"></span>
+      </span>
+    </div>
+  </footer>
+
+  <!-- MEASUREMENT SERVICE -->
+  <script>
+    // Se inyectará desde measurement-service.js
+    if (typeof window.MeasurementService !== 'undefined') {
+      const service = new window.MeasurementService();
+      service.initialize();
+    }
+  </script>
+</body>
+</html>

@@ -1,15 +1,15 @@
 {
-    "name": "05.css",
+    "name": "inteligente-styles.css",
     "sharedHelpersScope": null,
     "creationDate": {
-        "$$date": 1754662710165
+        "$$date": 1723701000000
     },
     "modificationDate": {
-        "$$date": 1754662719454
+        "$$date": 1723701000000
     },
-    "shortid": "IooF-3E",
+    "shortid": "IntelCSS",
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
-    "_id": "dvWXObNVPgQmD7eh",
+    "_id": "intel_css_id",
     "$entitySet": "assets"
 }

@@ -1,0 +1,6 @@
+{
+    "_id": "inteligente_main",
+    "shortid": "IntelMain",
+    "$entitySet": "folders",
+    "name": "informeSeleccionInteligente"
+}

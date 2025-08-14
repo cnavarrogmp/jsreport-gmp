@@ -1,14 +1,14 @@
 {
-    "name": "informeSeleccion0005",
-    "shortid": "fh6zH92Hz",
+    "name": "informeInteligenteData",
+    "shortid": "IntelData",
     "creationDate": {
-        "$$date": 1754662852448
+        "$$date": 1723701000000
     },
     "modificationDate": {
-        "$$date": 1754662852448
+        "$$date": 1723701000000
     },
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
-    "_id": "YX8snTnqpC4r08cr",
+    "_id": "intel_data_id",
     "$entitySet": "data"
 }

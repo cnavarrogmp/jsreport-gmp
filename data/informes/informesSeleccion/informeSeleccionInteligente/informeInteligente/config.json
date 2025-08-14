@@ -1,0 +1,34 @@
+{
+    "name": "informeInteligente",
+    "engine": "handlebars",
+    "recipe": "chrome-pdf",
+    "data": {
+        "shortid": "IntelData"
+    },
+    "shortid": "IntelTmpl",
+    "chrome": {
+        "printBackground": true,
+        "waitForJS": true,
+        "waitForNetworkIdle": false,
+        "format": "A4",
+        "marginTop": "18mm",
+        "marginBottom": "18mm",
+        "marginLeft": "16mm",
+        "marginRight": "16mm"
+    },
+    "creationDate": {
+        "$$date": 1723701000000
+    },
+    "modificationDate": {
+        "$$date": 1723701000000
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "intel_template_id",
+    "$entitySet": "templates",
+    "scripts": [
+        {
+            "shortid": "IntelScript"
+        }
+    ]
+}
