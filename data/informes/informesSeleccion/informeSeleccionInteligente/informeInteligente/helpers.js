@@ -158,11 +158,20 @@ function or() {
 function and() {
   const args = Array.prototype.slice.call(arguments, 0, -1);
   const options = arguments[arguments.length - 1];
-  
+
   if (args.every(Boolean)) {
     return options.fn(this);
   }
   return options.inverse(this);
+}
+
+/**
+ * Concatena múltiples cadenas
+ * @param {...string} args - Cadenas a unir
+ * @returns {string} Resultado de la concatenación
+ */
+function concat() {
+  return Array.prototype.slice.call(arguments, 0, -1).join('');
 }
 
 /**
