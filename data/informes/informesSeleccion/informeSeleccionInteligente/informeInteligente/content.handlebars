@@ -12,7 +12,7 @@
   <header class="main-header" data-breadcrumb="Cabecera">
     <div class="header-grid">
       <div class="brand-section">
-        <img src="{{assetUrl 'logos/grupoempleo-logo.png'}}" alt="GrupoEmpleo" class="logo">
+        <img src="{{asset 'logos/grupoempleo-logo.svg' @encoding=dataURI}}" alt="GrupoEmpleo" class="logo">
         <div class="brand-text">
           <h1 class="brand-name">GRUPO EMPLEO</h1>
           <p class="brand-tagline">Recursos Humanos · Sector Industrial</p>
@@ -31,9 +31,9 @@
     <div class="candidate-grid">
       <div class="candidate-photo-wrapper">
         {{#if datosPersonales.foto}}
-          <img src="{{datosPersonales.foto}}" alt="Foto" class="candidate-photo">
+          <img src="{{asset (concat 'profiles/' datosPersonales.foto) @encoding=dataURI}}" alt="Foto" class="candidate-photo">
         {{else}}
-          <img src="{{assetUrl 'profiles/candidate-neutral-01.jpg'}}" alt="Foto" class="candidate-photo">
+          <img src="{{asset 'profiles/candidate-neutral-01.svg' @encoding=dataURI}}" alt="Foto" class="candidate-photo">
         {{/if}}
       </div>
       <div class="candidate-info">
@@ -159,8 +159,8 @@
   </footer>
 
   <!-- MEASUREMENT SERVICE -->
+  <script>{{{asset "../measurement-service.js"}}}</script>
   <script>
-    // Se inyectará desde measurement-service.js
     if (typeof window.MeasurementService !== 'undefined') {
       const service = new window.MeasurementService();
       service.initialize();

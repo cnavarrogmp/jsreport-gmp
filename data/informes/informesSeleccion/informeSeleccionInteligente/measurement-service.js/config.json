@@ -1,6 +1,5 @@
 {
     "name": "measurement-service.js",
-    "scope": "global",
     "creationDate": {
         "$$date": 1723701000000
     },
@@ -11,5 +10,5 @@
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
     "_id": "intel_script_id",
-    "$entitySet": "scripts"
+    "$entitySet": "assets"
 }

@@ -25,10 +25,5 @@
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
     "_id": "intel_template_id",
-    "$entitySet": "templates",
-    "scripts": [
-        {
-            "shortid": "IntelScript"
-        }
-    ]
+    "$entitySet": "templates"
 }
