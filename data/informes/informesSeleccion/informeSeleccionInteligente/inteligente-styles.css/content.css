@@ -164,6 +164,10 @@ p {
   display: flex;
   align-items: center;
   gap: var(--grid-2);
+
+ 
+
+ 
 }
 
 .logo {

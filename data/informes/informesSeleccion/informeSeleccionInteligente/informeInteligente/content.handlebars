@@ -12,7 +12,7 @@
   <header class="main-header" data-breadcrumb="Cabecera">
     <div class="header-grid">
       <div class="brand-section">
-        <img src="{{assetUrl 'logos/grupoempleo-logo.png'}}" alt="GrupoEmpleo" class="logo">
+        <img class="logo" src="{{asset '/assets/logos/001LogotipoGrupompleo.png' 'dataURI'}}" alt="Grupo Empleo" />
         <div class="brand-text">
           <h1 class="brand-name">GRUPO EMPLEO</h1>
           <p class="brand-tagline">Recursos Humanos · Sector Industrial</p>
@@ -30,12 +30,14 @@
   <section class="candidate-header module" data-breadcrumb="Datos del Candidato">
     <div class="candidate-grid">
       <div class="candidate-photo-wrapper">
-        {{#if datosPersonales.foto}}
-          <img src="{{datosPersonales.foto}}" alt="Foto" class="candidate-photo">
-        {{else}}
-          <img src="{{assetUrl 'profiles/candidate-neutral-01.jpg'}}" alt="Foto" class="candidate-photo">
-        {{/if}}
-      </div>
+  {{#if datosPersonales.foto}}
+      <img
+    class="candidate-photo"
+    src="{{asset '/assets/profiles/voluntario.png' 'dataURI'}}"
+    alt="Foto"
+  />
+  {{/if}}
+</div>
       <div class="candidate-info">
         <h2 class="candidate-name">{{datosPersonales.nombreCompleto}}</h2>
         <div class="info-grid">
@@ -147,6 +149,11 @@
     </div>
   </section>
   {{/each}}
+  
+  <div> {{debug modulos}} </div>
+
+  
+
 
   <!-- FOOTER -->
   <footer class="page-footer">
@@ -166,5 +173,11 @@
       service.initialize();
     }
   </script>
+
+  <script>
+  window.addEventListener('load', () => {
+    window.JSREPORT_READY_TO_START = true;
+  });
+</script>
 </body>
 </html>
