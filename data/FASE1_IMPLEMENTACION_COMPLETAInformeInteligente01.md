@@ -18,7 +18,7 @@ Se ha completado exitosamente la **FASE 1 - FUNDAMENTOS** del Sistema Inteligent
 
 /data/assets/
 ├── logos/
-│   └── grupoempleo-logo.png    # Logo placeholder
+│   └── grupoempleo-logo.svg    # Logo placeholder
 ├── profiles/
 │   ├── candidate-male-01.jpg
 │   ├── candidate-female-01.jpg

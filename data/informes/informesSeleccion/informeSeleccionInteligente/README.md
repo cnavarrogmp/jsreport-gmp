@@ -7,7 +7,7 @@ Esta carpeta contiene los recursos gráficos necesarios para el proyecto informe
 ```
 /data/assets/
 ├── logos/
-│   └── grupoempleo-logo.png       # Logo corporativo (placeholder)
+│   └── grupoempleo-logo.svg       # Logo corporativo (placeholder)
 ├── profiles/
 │   ├── candidate-male-01.jpg      # Foto placeholder hombre
 │   ├── candidate-female-01.jpg    # Foto placeholder mujer
@@ -20,9 +20,9 @@ Esta carpeta contiene los recursos gráficos necesarios para el proyecto informe
 ## Especificaciones Técnicas
 
 ### Logos
-- **Formato**: PNG con transparencia
+- **Formato**: SVG vectorial
 - **Tamaño**: 200x60px (ratio 10:3)
-- **Resolución**: 300 DPI para impresión
+- **Resolución**: infinita (escalable)
 - **Colores**: Paleta corporativa GrupoEmpleo
 
 ### Profiles  
