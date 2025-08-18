@@ -20,11 +20,15 @@
         "$$date": 1723701000000
     },
     "modificationDate": {
-        "$$date": 1755509600507
+        "$$date": 1755533837337
     },
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
     "_id": "intel_template_id",
     "$entitySet": "templates",
-    "scripts": []
+    "scripts": [
+        {
+            "shortid": "hlprs"
+        }
+    ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "industrial-bg-svg",
+  "contentType": "image/svg+xml",
+  "_id": "industrial-bg-svg",
+  "shortid": "industsv",
+  "$entitySet": "assets",
+  "isInline": true,
+  "creationDate": {
+    "$$date": 1737198000000
+  },
+  "modificationDate": {
+    "$$date": 1737198000000
+  }
+}

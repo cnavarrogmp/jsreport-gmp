@@ -1,0 +1,14 @@
+{
+    "name": "A.jpg",
+    "creationDate": {
+        "$$date": 1755533703716
+    },
+    "modificationDate": {
+        "$$date": 1755533703716
+    },
+    "shortid": "gKvZSXb",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "JFht3DoPz450uXl6",
+    "$entitySet": "assets"
+}

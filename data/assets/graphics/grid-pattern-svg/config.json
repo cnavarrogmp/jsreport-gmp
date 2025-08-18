@@ -1,0 +1,14 @@
+{
+  "name": "grid-pattern-svg",
+  "contentType": "image/svg+xml",
+  "_id": "grid-pattern-svg",
+  "shortid": "grid-psv",
+  "$entitySet": "assets",
+  "isInline": true,
+  "creationDate": {
+    "$$date": 1737198000000
+  },
+  "modificationDate": {
+    "$$date": 1737198000000
+  }
+}

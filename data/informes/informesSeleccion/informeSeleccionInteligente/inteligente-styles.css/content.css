@@ -143,10 +143,78 @@ p {
 }
 
 /* =====================================================
-   COMPONENTES
+   ESTILOS ADICIONALES PARA PLACEHOLDER
    ===================================================== */
 
-/* Header principal */
+.candidate-photo-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-2xl);
+  color: var(--gray-500);
+  border: 2px solid var(--gray-300);
+}
+
+/* =====================================================
+   PORTADA INTRODUCTORIA
+   ===================================================== */
+
+.cover-page {
+  page-break-after: always;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cover-metadata {
+  margin-top: var(--grid-6);
+  padding: var(--grid-4);
+  background: var(--gray-100);
+  border-radius: var(--grid-2);
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--grid-3);
+}
+
+.metadata-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--grid-2);
+  background: white;
+  border-radius: var(--grid-1);
+  border-left: 3px solid var(--color-primary);
+}
+
+.metadata-label {
+  font-size: var(--font-size-xs);
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.metadata-value {
+  font-size: var(--font-size-base);
+  color: var(--gray-900);
+  font-weight: 500;
+}
+
+/* Branding y gráficos de la portada - LIMPIADO */
+/* Estas reglas fueron para los gráficos SVG que se han eliminado */
+
+/* =====================================================
+   COMPONENTES ORIGINALES
+   ===================================================== */
+
+/* Header principal (mantenido para compatibilidad) */
 .main-header {
   padding: var(--grid-3) 0;
   border-bottom: 2px solid var(--color-primary);
@@ -173,6 +241,23 @@ p {
 .logo {
   height: var(--grid-6);
   width: auto;
+}
+
+.grafico {
+  width: 100%;
+  height: auto;
+  max-height: 130mm;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.cover-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: var(--grid-2) 0;
 }
 
 .brand-name {
@@ -368,40 +453,282 @@ p {
   margin-bottom: 0;
 }
 
-/* Listas */
-.list-content {
-  list-style: none;
-  padding: 0;
-}
-
-.list-item {
-  padding: var(--grid-2);
-  margin-bottom: var(--grid-1);
+/* Texto editorial (para datos destacados) */
+.texto-editorial {
   background: var(--gray-100);
-  border-left: 3px solid var(--color-accent);
-  border-radius: 0 var(--grid-1) var(--grid-1) 0;
+  padding: var(--grid-3);
+  border-radius: var(--grid-1);
+  margin-top: var(--grid-2);
 }
 
-.list-item strong {
-  display: block;
+.bloque-editorial {
+  margin-bottom: var(--grid-3);
+  padding: var(--grid-2);
+  background: white;
+  border-radius: var(--grid-1);
+  border-left: 4px solid var(--color-accent);
+}
+
+.bloque-editorial:last-child {
+  margin-bottom: 0;
+}
+
+.editorial-subtitulo {
+  font-size: var(--font-size-md);
+  font-weight: 600;
   color: var(--color-primary);
+  margin-bottom: var(--grid-2);
+}
+
+.editorial-contenido {
+  color: var(--gray-800);
+}
+
+.editorial-contenido .paragraph {
+  text-align: justify;
+  hyphens: auto;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Listas - Diseño simplificado y compacto */
+.lista-content {
+  margin-top: var(--grid-1);
+}
+
+.lista-item {
+  padding: var(--grid-2);
+  border-bottom: 1px solid var(--gray-200);
+  position: relative; /* Necesario para que funcionen las líneas verticales */
+}
+
+.lista-item:last-child {
+  border-bottom: none;
+}
+
+/* Items con borde vertical */
+.item-with-border {
+  position: relative;
+  padding-left: var(--grid-3);
+}
+
+.item-with-border::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-primary);
+}
+
+.item-border-line {
+  /* Ya no necesitamos este elemento */
+  display: none;
+}
+
+.item-content {
+  /* Simplificamos el contenido */
+}
+
+/* EXPERIENCIA LABORAL */
+.experiencia-item::before {
+  background: var(--color-primary);
+}
+
+.experiencia-item .puesto {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 4px 0;
+}
+
+.experiencia-item .empresa-rango {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
   margin-bottom: 4px;
 }
 
-.item-desc {
-  display: block;
+.experiencia-item .empresa {
   color: var(--gray-700);
   font-size: var(--font-size-sm);
 }
 
-.item-date {
-  display: inline-block;
-  margin-top: 4px;
-  padding: 2px var(--grid-1);
-  background: white;
-  border-radius: 4px;
+.experiencia-item .rango-anos {
   font-size: var(--font-size-xs);
+  color: var(--gray-500);
+}
+
+.experiencia-item .funcion {
   color: var(--gray-600);
+  font-size: var(--font-size-sm);
+  margin: 0;
+  line-height: var(--line-height-base);
+}
+
+/* FORMACIÓN ACADÉMICA */
+.formacion-item::before {
+  background: var(--color-accent);
+}
+
+.formacion-item .titulacion {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0 0 4px 0;
+}
+
+.formacion-item .centro-ano {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.formacion-item .centro {
+  color: var(--gray-600);
+  font-size: var(--font-size-sm);
+}
+
+.formacion-item .ano {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+}
+
+.formacion-item .titulado-status {
+  font-size: var(--font-size-xs);
+  color: var(--color-success);
+}
+
+/* REFERENCIAS PROFESIONALES */
+.referencia-item::before {
+  background: var(--color-secondary);
+}
+
+.referencia-item .ref-empresa {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0 0 4px 0;
+}
+
+.referencia-item .ref-funcion,
+.referencia-item .ref-contacto {
+  color: var(--gray-600);
+  font-size: var(--font-size-sm);
+  margin: 0;
+}
+
+/* IDIOMAS */
+.idioma-item::before {
+  background: var(--gray-500);
+}
+
+.idioma-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.idioma-item .idioma {
+  color: var(--gray-700);
+  font-size: var(--font-size-sm);
+}
+
+.idioma-item .nivel {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+}
+
+/* SOFTWARE/INFORMÁTICA */
+.software-item::before {
+  background: var(--gray-600);
+}
+
+.software-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.software-item .aplicacion {
+  color: var(--gray-700);
+  font-size: var(--font-size-sm);
+}
+
+.software-item .nivel {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+}
+
+/* ACREDITACIONES */
+.acreditacion-item::before {
+  background: var(--color-warning);
+}
+
+.acreditacion-item .acred-tipo {
+  font-weight: 500;
+  color: var(--gray-700);
+  font-size: var(--font-size-sm);
+}
+
+.acreditacion-item .acred-ano {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+  margin-left: var(--grid-1);
+}
+
+.acreditacion-item .acred-desc {
+  color: var(--gray-600);
+  font-size: var(--font-size-xs);
+  margin: 2px 0 0 0;
+}
+
+/* ADJUNTOS */
+.adjunto-item::before {
+  background: var(--gray-400);
+}
+
+.adjunto-item {
+  display: flex;
+  align-items: center;
+  gap: var(--grid-1);
+  font-size: var(--font-size-sm);
+}
+
+.adjunto-item .adj-tipo {
+  color: var(--gray-600);
+}
+
+.adjunto-item .adj-ruta {
+  flex: 1;
+  color: var(--gray-500);
+  font-size: var(--font-size-xs);
+}
+
+.adjunto-item .adj-horas {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
+}
+
+/* ITEM GENÉRICO (fallback) */
+.item-generico {
+  padding: var(--grid-1) 0;
+}
+
+.item-generico strong {
+  color: var(--gray-700);
+  font-size: var(--font-size-sm);
+}
+
+.item-desc {
+  color: var(--gray-600);
+  font-size: var(--font-size-sm);
+}
+
+.item-date {
+  font-size: var(--font-size-xs);
+  color: var(--gray-500);
 }
 
 /* Tablas */

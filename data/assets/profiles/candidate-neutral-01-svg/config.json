@@ -1,0 +1,14 @@
+{
+  "name": "candidate-neutral-01-svg",
+  "contentType": "image/svg+xml",
+  "_id": "candidate-neutral-01-svg",
+  "shortid": "candidsv",
+  "$entitySet": "assets",
+  "isInline": true,
+  "creationDate": {
+    "$$date": 1737198000000
+  },
+  "modificationDate": {
+    "$$date": 1737198000000
+  }
+}

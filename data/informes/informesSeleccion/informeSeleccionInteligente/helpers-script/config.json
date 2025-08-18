@@ -1,0 +1,12 @@
+{
+  "name": "helpers-script",
+  "shortid": "hlprs",
+  "_id": "helpers-script-id",
+  "$entitySet": "scripts",
+  "creationDate": {
+    "$$date": 1737198000000
+  },
+  "modificationDate": {
+    "$$date": 1737198000000
+  }
+}

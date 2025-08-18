@@ -1,0 +1,14 @@
+{
+  "name": "grupoempleo-logo-svg",
+  "contentType": "image/svg+xml",
+  "_id": "grupoempleo-logo-svg",
+  "shortid": "gelogo",
+  "$entitySet": "assets",
+  "isInline": true,
+  "creationDate": {
+    "$$date": 1737198000000
+  },
+  "modificationDate": {
+    "$$date": 1737198000000
+  }
+}
