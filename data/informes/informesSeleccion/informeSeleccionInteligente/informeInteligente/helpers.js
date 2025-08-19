@@ -280,6 +280,15 @@ function debug(context) {
 }
 
 /**
+ * Helper JSON para serializar objetos en templates
+ * @param {*} obj - Objeto a serializar
+ * @returns {string} JSON string
+ */
+function json(obj) {
+  return JSON.stringify(obj);
+}
+
+/**
  * Hook beforeRender para procesar datos antes del renderizado
  * Este se ejecuta ANTES del renderizado del template
  * @param {Object} req - Request de JSReport
@@ -690,6 +699,35 @@ function beforeRender(req, res) {
     enableContinuationHeaders: true
   };
   
+  // ================================================================================
+  // 🚀 FASE 2 - MOTOR DE CÁLCULO AVANZADO
+  // ================================================================================
+  console.log('🚀 [FASE 2] Iniciando integración en beforeRender');
+  
+  try {
+    // Los scripts FASE 2 (calculation-engine, measurement-database, measurement-cache)
+    // se cargarán e inicializarán automáticamente en el navegador
+    // Este hook solo prepara los datos para el cálculo
+    
+    data.__layout.fase2 = {
+      enabled: true,
+      timestamp: new Date().toISOString(),
+      calculationRequested: true,
+      phantomRenderEnabled: true,
+      diagnosticsEnabled: true
+    };
+    
+    console.log('✅ [FASE 2] Metadata FASE 2 inyectada en __layout');
+    
+  } catch (error) {
+    console.error('❌ [FASE 2] Error en integración beforeRender:', error);
+    data.__layout.fase2 = {
+      enabled: false,
+      error: error.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+  
   // Inyectar el CSS como string
   data.styles = req.template.styles || '';
   
@@ -716,7 +754,8 @@ function configureHelpers() {
     lowercase,
     formatNumber,
     percentage,
-    debug
+    debug,
+    json
   };
 }
 

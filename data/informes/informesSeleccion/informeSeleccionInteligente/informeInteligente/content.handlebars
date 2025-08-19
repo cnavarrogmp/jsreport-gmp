@@ -344,19 +344,293 @@
     </div>
 </footer>
 
-<!-- MEASUREMENT SERVICE -->
-<script>
-    // Se inyectará desde measurement-service.js
-    if (typeof window.MeasurementService !== 'undefined') {
-        const service = new window.MeasurementService();
-        service.initialize();
-    }
-</script>
+{{#if __layout.fase2.diagnosticsEnabled}}
+<!-- ================================================================================ -->
+<!-- 📊 PANEL DE DIAGNÓSTICO FASE 2 - MOTOR DE CÁLCULO AVANZADO -->
+<!-- ================================================================================ -->
+<section class="diagnostics-panel" style="
+    margin-top: 40px; 
+    padding: 20px; 
+    background: #f8f9fa; 
+    border: 1px solid #dee2e6; 
+    font-family: monospace; 
+    font-size: 11px;
+    page-break-before: always;
+">
+    <h3 style="color: #495057; margin: 0 0 16px 0; font-size: 14px;">
+        🚀 Diagnóstico FASE 2 - Motor de Cálculo Avanzado
+    </h3>
+    
+    <!-- Información del beforeRender -->
+    <div style="margin-bottom: 16px;">
+        <strong>📋 Procesamiento beforeRender:</strong><br>
+        • Timestamp: {{__layout.fase2.timestamp}}<br>
+        • Estado: {{#if __layout.fase2.enabled}}✅ Habilitado{{else}}❌ Error: {{__layout.fase2.error}}{{/if}}<br>
+        • Módulos procesados: {{__layout.moduleCount}}<br>
+        • Orientación: {{#if __layout.isLandscape}}Landscape{{else}}Portrait{{/if}}<br>
+        • Caracteres totales: {{__layout.totalChars}}<br>
+        • Elementos totales: {{__layout.totalItems}}<br>
+    </div>
+    
+    <!-- Información de scripts FASE 2 -->
+    <div style="margin-bottom: 16px;">
+        <strong>🔧 Scripts FASE 2 (se inicializarán en navegador):</strong><br>
+        • PhantomRenderer: Pre-cálculo de medidas<br>
+        • CalculationEngine: Motor coordinador<br>
+        • MeasurementDatabase: Base de datos de medidas<br>
+        • MeasurementCache: Cache inteligente con TTL<br>
+        • MeasurementService: Servicio mejorado (FASE 1 + FASE 2)<br>
+    </div>
+    
+    <!-- Placeholder para resultados del navegador -->
+    <div id="diagnostics-browser-results" style="margin-bottom: 16px;">
+        <strong>⏱️ Resultados del navegador (se llenarán dinámicamente):</strong><br>
+        <span id="phantom-status">• PhantomRenderer: Pendiente...</span><br>
+        <span id="calculation-status">• CalculationEngine: Pendiente...</span><br>
+        <span id="cache-status">• Cache: Pendiente...</span><br>
+    </div>
+    
+    <!-- Debug de módulos -->
+    <div style="margin-bottom: 16px;">
+        <strong>📦 Módulos detectados:</strong><br>
+        {{#each modulos}}
+        • Módulo {{@index}}: {{titulo}} ({{moduleType}}) - {{secciones.length}} secciones<br>
+        {{/each}}
+    </div>
+    
+    <div style="font-size: 10px; color: #6c757d; margin-top: 12px;">
+        Generado por informeSeleccionInteligente FASE 2 - Motor de Cálculo Avanzado
+    </div>
+</section>
+{{/if}}
+
+<!-- ================================================================================ -->
+<!-- 🚀 FASE 2 SIMPLIFICADA - MOTOR DE CÁLCULO INTEGRADO -->
+<!-- ================================================================================ -->
 
 <script>
-    window.addEventListener('load', () => {
+// FASE 2 - Versión simplificada integrada
+(function() {
+    'use strict';
+    
+    /**
+     * MEASUREMENT CACHE SIMPLIFICADO - FASE 2
+     */
+    class SimpleMeasurementCache {
+        constructor() {
+            this.cache = new Map();
+            this.maxSize = 100;
+            this.ttl = 300000; // 5 minutos
+            this.stats = { hits: 0, misses: 0 };
+        }
+        
+        set(key, value) {
+            if (this.cache.size >= this.maxSize) {
+                const firstKey = this.cache.keys().next().value;
+                this.cache.delete(firstKey);
+            }
+            
+            this.cache.set(key, {
+                value,
+                timestamp: Date.now()
+            });
+        }
+        
+        get(key) {
+            const item = this.cache.get(key);
+            if (!item) {
+                this.stats.misses++;
+                return null;
+            }
+            
+            if (Date.now() - item.timestamp > this.ttl) {
+                this.cache.delete(key);
+                this.stats.misses++;
+                return null;
+            }
+            
+            this.stats.hits++;
+            return item.value;
+        }
+        
+        getStats() {
+            return { ...this.stats, size: this.cache.size };
+        }
+    }
+    
+    /**
+     * MEASUREMENT DATABASE SIMPLIFICADO - FASE 2
+     */
+    class SimpleMeasurementDatabase {
+        constructor() {
+            this.standards = {
+                'h1': { height: 40, confidence: 0.9 },
+                'h2': { height: 32, confidence: 0.9 },
+                'h3': { height: 24, confidence: 0.9 },
+                'paragraph': { height: 20, confidence: 0.8 },
+                'module': { height: 60, confidence: 0.7 },
+                'section': { height: 40, confidence: 0.8 },
+                'competency-card': { height: 50, confidence: 0.9 },
+                'experience-item': { height: 80, confidence: 0.8 },
+                'generic': { height: 30, confidence: 0.6 }
+            };
+        }
+        
+        getStandardMeasurement(elementType) {
+            return this.standards[elementType] || this.standards['generic'];
+        }
+        
+        getConfidence(elementType) {
+            const standard = this.getStandardMeasurement(elementType);
+            return standard ? standard.confidence : 0.5;
+        }
+    }
+    
+    /**
+     * PHANTOM RENDERER SIMPLIFICADO - FASE 2
+     */
+    class SimplePhantomRenderer {
+        constructor() {
+            this.measurements = [];
+        }
+        
+        async measureElements() {
+            console.log('🔍 [FASE 2] Iniciando medición simplificada de elementos...');
+            
+            const elements = document.querySelectorAll('.module, .section, h1, h2, h3, p');
+            const measurements = [];
+            
+            elements.forEach((element, index) => {
+                const rect = element.getBoundingClientRect();
+                const measurement = {
+                    index,
+                    element: element.tagName.toLowerCase(),
+                    className: element.className,
+                    height: rect.height,
+                    width: rect.width,
+                    text: element.textContent.substring(0, 50),
+                    complexity: this.calculateComplexity(element)
+                };
+                measurements.push(measurement);
+            });
+            
+            this.measurements = measurements;
+            console.log(`📏 [FASE 2] Medidos ${measurements.length} elementos`);
+            return measurements;
+        }
+        
+        calculateComplexity(element) {
+            let complexity = 1;
+            complexity += element.children.length * 0.5;
+            complexity += Math.min(element.textContent.length / 100, 2);
+            return Math.min(complexity, 5);
+        }
+        
+        calculateDistribution() {
+            const pageHeight = 1100; // Aproximado A4
+            let currentHeight = 0;
+            let pageCount = 1;
+            let elementsPerPage = [];
+            let currentPageElements = [];
+            
+            this.measurements.forEach((measurement) => {
+                if (currentHeight + measurement.height > pageHeight) {
+                    elementsPerPage.push(currentPageElements);
+                    currentPageElements = [measurement];
+                    currentHeight = measurement.height;
+                    pageCount++;
+                } else {
+                    currentPageElements.push(measurement);
+                    currentHeight += measurement.height;
+                }
+            });
+            
+            if (currentPageElements.length > 0) {
+                elementsPerPage.push(currentPageElements);
+            }
+            
+            return { pageCount, elementsPerPage, totalHeight: currentHeight };
+        }
+    }
+    
+    // Exponer globalmente
+    window.SimpleMeasurementCache = SimpleMeasurementCache;
+    window.SimpleMeasurementDatabase = SimpleMeasurementDatabase;
+    window.SimplePhantomRenderer = SimplePhantomRenderer;
+    
+})();
+
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('🚀 [FASE 2] Inicializando sistema simplificado...');
+    
+    try {
+        // Debug: Verificar estado de FASE 2
+        console.log('🔍 [FASE 2] Debug __layout:', {{{json __layout}}});
+        
+        // Forzar habilitación de FASE 2 para testing
+        const fase2Enabled = {{#if __layout.fase2.enabled}}true{{else}}false{{/if}};
+        const fase2Exists = {{#if __layout.fase2}}true{{else}}false{{/if}};
+        
+        console.log('🔍 [FASE 2] Estado detallado:', { fase2Exists, fase2Enabled });
+        
+        // Ejecutar FASE 2 independientemente del estado (para debugging)
+        console.log('🚀 [FASE 2] Ejecutando FASE 2 (modo forzado para testing)');
+        
+        // Actualizar diagnósticos en tiempo real
+        const updateDiagnostics = (id, message, success = true) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.textContent = `• ${message}`;
+                element.style.color = success ? '#28a745' : '#dc3545';
+            }
+        };
+        
+        // 1. Inicializar componentes simplificados FASE 2
+        const cache = new window.SimpleMeasurementCache();
+        const database = new window.SimpleMeasurementDatabase();
+        const phantomRenderer = new window.SimplePhantomRenderer();
+        
+        updateDiagnostics('cache-status', 'Cache: ✅ Cache simplificado inicializado');
+        console.log('✅ [FASE 2] Cache simplificado inicializado');
+        
+        // 2. Ejecutar medición y cálculo
+        updateDiagnostics('phantom-status', 'PhantomRenderer: ⏳ Midiendo elementos...');
+        updateDiagnostics('calculation-status', 'CalculationEngine: ⏳ Calculando distribución...');
+        
+        try {
+            // Medir elementos
+            const measurements = await phantomRenderer.measureElements();
+            
+            // Calcular distribución
+            const distribution = phantomRenderer.calculateDistribution();
+            
+            updateDiagnostics('phantom-status', `PhantomRenderer: ✅ ${measurements.length} elementos medidos`);
+            updateDiagnostics('calculation-status', `CalculationEngine: ✅ ${distribution.pageCount} páginas estimadas`);
+            
+            console.log('✅ [FASE 2] Cálculo completado:', { measurements: measurements.length, pages: distribution.pageCount });
+            
+            // Mostrar estadísticas
+            const cacheStats = cache.getStats();
+            console.log('📊 [FASE 2] Estadísticas cache:', cacheStats);
+            
+        } catch (error) {
+            updateDiagnostics('phantom-status', 'PhantomRenderer: ❌ Error en medición', false);
+            updateDiagnostics('calculation-status', 'CalculationEngine: ❌ Error en cálculo', false);
+            console.error('❌ [FASE 2] Error en cálculo:', error);
+        }
+        
+        // Continuar con la ejecución independientemente del estado
+        
+    } catch (error) {
+        console.error('❌ [FASE 2] Error crítico:', error);
+    }
+    
+    // Señalar que JSReport puede continuar
+    setTimeout(() => {
         window.JSREPORT_READY_TO_START = true;
-    });
+        console.log('🏁 [FASE 2] JSReport ready signal enviado');
+    }, 500);
+});
 </script>
 </body>
 </html>

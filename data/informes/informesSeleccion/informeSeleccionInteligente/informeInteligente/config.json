@@ -8,19 +8,20 @@
     "shortid": "IntelTmpl",
     "chrome": {
         "printBackground": true,
-        "waitForJS": false,
+        "waitForJS": true,
         "waitForNetworkIdle": false,
         "format": "A4",
         "marginTop": "18mm",
-        "marginBottom": "18mm",
+        "marginBottom": "20mm",
         "marginLeft": "16mm",
-        "marginRight": "16mm"
+        "marginRight": "16mm",
+        "displayHeaderFooter": true
     },
     "creationDate": {
         "$$date": 1723701000000
     },
     "modificationDate": {
-        "$$date": 1755533837337
+        "$$date": 1755611878195
     },
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],

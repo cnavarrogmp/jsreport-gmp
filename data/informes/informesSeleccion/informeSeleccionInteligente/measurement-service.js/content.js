@@ -1,9 +1,11 @@
 /**
  * MEASUREMENT SERVICE - SERVICIO DE MEDICIÓN DINÁMICA
- * FASE 1 - Implementación básica
+ * FASE 1 + FASE 2 - Implementación básica + Motor de Cálculo Avanzado
  * 
  * Este servicio se ejecuta en el navegador durante la generación del PDF
  * para realizar mediciones dinámicas del contenido y optimizar el layout.
+ * 
+ * FASE 2: Integración con CalculationEngine, MeasurementCache y MeasurementDatabase
  */
 
 (function() {
@@ -36,7 +38,15 @@
         minContentAfterHeader: 100 // píxeles mínimos tras header
       };
       
+      // FASE 2: Referencias a componentes avanzados
+      this.fase2Components = {
+        cache: null,        // MeasurementCache
+        database: null,     // MeasurementDatabase
+        engine: null        // CalculationEngine
+      };
+      
       this.isInitialized = false;
+      this.fase2Enabled = false;
     }
     
     /**
@@ -45,7 +55,10 @@
     initialize() {
       if (this.isInitialized) return;
       
-      console.log('🔧 Inicializando MeasurementService - FASE 1');
+      console.log('🔧 Inicializando MeasurementService - FASE 1 + FASE 2');
+      
+      // FASE 2: Intentar conectar con componentes avanzados
+      this.initializeFase2Components();
       
       // Establecer variables CSS dinámicas
       this.setDynamicCSS();
@@ -62,7 +75,45 @@
       // Señalar que está listo para JSReport
       this.signalReady();
       
-      console.log('✅ MeasurementService inicializado', this.measurements);
+      const phase = this.fase2Enabled ? 'FASE 1 + FASE 2' : 'FASE 1';
+      console.log(`✅ MeasurementService inicializado (${phase})`, this.measurements);
+    }
+    
+    /**
+     * FASE 2: Inicializa componentes avanzados si están disponibles
+     */
+    initializeFase2Components() {
+      try {
+        // Conectar con MeasurementCache global
+        if (typeof window !== 'undefined' && window.globalCache) {
+          this.fase2Components.cache = window.globalCache;
+          console.log('✅ [FASE 2] Conectado con MeasurementCache');
+        }
+        
+        // Conectar con MeasurementDatabase global
+        if (typeof window !== 'undefined' && window.globalDatabase) {
+          this.fase2Components.database = window.globalDatabase;
+          console.log('✅ [FASE 2] Conectado con MeasurementDatabase');
+        }
+        
+        // Verificar disponibilidad de CalculationEngine
+        if (typeof window !== 'undefined' && window.CalculationEngine) {
+          console.log('✅ [FASE 2] CalculationEngine disponible');
+        }
+        
+        // Marcar FASE 2 como habilitada si al menos una conexión funciona
+        this.fase2Enabled = !!(this.fase2Components.cache || this.fase2Components.database);
+        
+        if (this.fase2Enabled) {
+          console.log('🚀 [FASE 2] Componentes avanzados habilitados');
+        } else {
+          console.log('⚠️ [FASE 2] Componentes avanzados no disponibles, usando FASE 1');
+        }
+        
+      } catch (error) {
+        console.error('❌ [FASE 2] Error inicializando componentes avanzados:', error);
+        this.fase2Enabled = false;
+      }
     }
     
     /**
@@ -130,8 +181,19 @@
      * @returns {Object} Medición del elemento
      */
     measureElement(element, id) {
-      // Usar cache si existe
+      // FASE 2: Usar cache avanzado si está disponible
       const cacheKey = `${id}-${element.outerHTML.length}`;
+      
+      // Intentar obtener de cache FASE 2 primero
+      if (this.fase2Enabled && this.fase2Components.cache) {
+        const cachedMeasurement = this.fase2Components.cache.get(cacheKey);
+        if (cachedMeasurement) {
+          console.log(`📦 [FASE 2] Medición obtenida de cache avanzado: ${id}`);
+          return cachedMeasurement;
+        }
+      }
+      
+      // Fallback a cache FASE 1
       if (this.cache.has(cacheKey)) {
         return this.cache.get(cacheKey);
       }
@@ -164,10 +226,48 @@
       // Estimar complejidad del contenido
       measurement.complexity = this.calculateComplexity(element);
       
-      // Guardar en cache
-      this.cache.set(cacheKey, measurement);
+      // FASE 2: Enriquecer medición con base de datos si está disponible
+      if (this.fase2Enabled && this.fase2Components.database) {
+        const elementType = this.getElementType(element);
+        const standardMeasurement = this.fase2Components.database.getStandardMeasurement(elementType);
+        
+        if (standardMeasurement) {
+          measurement.standardHeight = standardMeasurement.height;
+          measurement.variance = Math.abs(measurement.height - standardMeasurement.height);
+          measurement.confidence = this.fase2Components.database.getConfidence(elementType);
+          console.log(`📊 [FASE 2] Medición enriquecida con datos estándar: ${elementType}`);
+        }
+      }
+      
+      // Guardar en cache FASE 2 si está disponible
+      if (this.fase2Enabled && this.fase2Components.cache) {
+        this.fase2Components.cache.set(cacheKey, measurement);
+        console.log(`💾 [FASE 2] Medición guardada en cache avanzado: ${id}`);
+      } else {
+        // Fallback a cache FASE 1
+        this.cache.set(cacheKey, measurement);
+      }
       
       return measurement;
+    }
+    
+    /**
+     * FASE 2: Determina el tipo de elemento para consulta en base de datos
+     * @param {Element} element - Elemento a clasificar
+     * @returns {string} Tipo de elemento
+     */
+    getElementType(element) {
+      if (element.classList.contains('module')) return 'module';
+      if (element.classList.contains('section')) return 'section';
+      if (element.tagName.toLowerCase() === 'h1') return 'h1';
+      if (element.tagName.toLowerCase() === 'h2') return 'h2';
+      if (element.tagName.toLowerCase() === 'h3') return 'h3';
+      if (element.tagName.toLowerCase() === 'p') return 'paragraph';
+      if (element.tagName.toLowerCase() === 'table') return 'table';
+      if (element.tagName.toLowerCase() === 'ul' || element.tagName.toLowerCase() === 'ol') return 'list';
+      if (element.classList.contains('competency-card')) return 'competency-card';
+      if (element.classList.contains('experience-item')) return 'experience-item';
+      return 'generic';
     }
     
     /**
