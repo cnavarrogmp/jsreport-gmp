@@ -8,11 +8,12 @@ data/fs.*
 data/profiles/
 data/storage/
 
-# Node + Docker usuals
+# Renders de prueba
+*.pdf
+
+# Node + IDE
 node_modules/
 .env
 .DS_Store
-
-# IDEs / OS
 Thumbs.db
 .idea/
