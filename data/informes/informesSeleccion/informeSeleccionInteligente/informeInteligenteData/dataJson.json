@@ -314,7 +314,28 @@
             "idioma": "Alem\u00E1n",
             "nivel": "A2",
             "orden": 2
-        }
+        },
+      {
+        "idInformeCvPublicacionIdioma": 6,
+        "idInformeCvPublicacion": 10006,
+        "idioma": "Portugues",
+        "nivel": "B2",
+        "orden": 3
+      },
+      {
+        "idInformeCvPublicacionIdioma": 6,
+        "idInformeCvPublicacion": 10006,
+        "idioma": "Gallego",
+        "nivel": "B2",
+        "orden": 4
+      },
+      {
+        "idInformeCvPublicacionIdioma": 6,
+        "idInformeCvPublicacion": 10006,
+        "idioma": "Griego",
+        "nivel": "B2",
+        "orden": 5
+      }
     ],
     "aplicacionesInformaticas": [
         {

@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Informe Inteligente - {{datosPersonales.nombreCompleto}}</title>
-  <style>{{{asset "inteligente-styles.css"}}}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Inteligente - {{datosPersonales.nombreCompleto}}</title>
+    <style>{{{asset "inteligente-styles.css"}}}</style>
 </head>
 <body class="report {{#if __layout.isLandscape}}landscape{{/if}}" data-breadcrumb="Informe de Selección">
-  
-  <!-- MÓDULO 0: PORTADA INTRODUCTORIA -->
-  <section class="module cover-page" data-breadcrumb="Portada">
+
+<!-- MÓDULO 0: PORTADA INTRODUCTORIA -->
+<section class="module cover-page" data-breadcrumb="Portada">
     <!-- HEADER PRINCIPAL - PORTADA INTRODUCTORIA -->
     <header class="main-header" data-breadcrumb="Portada Introductoria">
-      <div class="header-grid">
-        <div class="brand-section">
-          <img class="logo" src="{{asset '/assets/logos/001LogotipoGrupompleo.png' 'dataURI'}}" alt="Grupo Empleo" />
-          <div class="brand-text">
-            <h1 class="brand-name">GRUPOMPLEO</h1>
-            <p class="brand-tagline">Recursos Humanos · Sector Industrial</p>
-          </div>
+        <div class="header-grid">
+            <div class="brand-section">
+                <img class="logo" src="{{asset '/assets/logos/001LogotipoGrupompleo.png' 'dataURI'}}"
+                     alt="Grupo Empleo"/>
+                <div class="brand-text">
+                    <h1 class="brand-name">GRUPOMPLEO</h1>
+                    <p class="brand-tagline">Recursos Humanos · Sector Industrial</p>
+                </div>
+            </div>
+            <div class="report-meta">
+                <span class="report-type">{{tipoInforme}}</span>
+                <span class="report-date">{{formatDate fechaEmision}}</span>
+                <span class="report-id">#{{idInforme}}</span>
+            </div>
         </div>
-        <div class="report-meta">
-          <span class="report-type">{{tipoInforme}}</span>
-          <span class="report-date">{{formatDate fechaEmision}}</span>
-          <span class="report-id">#{{idInforme}}</span>
-        </div>
-      </div>
     </header>
 
     <!-- BRANDING Y GRÁFICOS INDUSTRIALES -->
@@ -36,321 +37,326 @@
     </div> -->
 
     <div class="cover-image-container">
-      <img class="grafico" src="{{asset '/assets/graphics/GeoColor.png' 'dataURI'}}" alt="Grupo Empleo" />
+        <img class="grafico" src="{{asset '/assets/graphics/GeoColor.png' 'dataURI'}}" alt="Grupo Empleo"/>
     </div>
-    
+
     <!-- DATOS ADICIONALES DEL INFORME -->
     <div class="cover-metadata">
-      <div class="metadata-grid">
-        <div class="metadata-item">
-          <span class="metadata-label">ID Publicación</span>
-          <span class="metadata-value">{{idInformeCvPublicacion}}</span>
+        <div class="metadata-grid">
+            <div class="metadata-item">
+                <span class="metadata-label">ID Publicación</span>
+                <span class="metadata-value">{{idInformeCvPublicacion}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">ID Pedido</span>
+                <span class="metadata-value">{{idPedidoMaster}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Fecha Publicación</span>
+                <span class="metadata-value">{{formatDate fechaPublicacion}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Estado</span>
+                <span class="metadata-value">{{#if publicado}}Publicado{{else}}En proceso{{/if}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Tipo Informe</span>
+                <span class="metadata-value">{{idTipoInforme}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Usuario Creador</span>
+                <span class="metadata-value">{{idUsuarioCreador}}</span>
+            </div>
         </div>
-        <div class="metadata-item">
-          <span class="metadata-label">ID Pedido</span>
-          <span class="metadata-value">{{idPedidoMaster}}</span>
-        </div>
-        <div class="metadata-item">
-          <span class="metadata-label">Fecha Publicación</span>
-          <span class="metadata-value">{{formatDate fechaPublicacion}}</span>
-        </div>
-        <div class="metadata-item">
-          <span class="metadata-label">Estado</span>
-          <span class="metadata-value">{{#if publicado}}Publicado{{else}}En proceso{{/if}}</span>
-        </div>
-        <div class="metadata-item">
-          <span class="metadata-label">Tipo Informe</span>
-          <span class="metadata-value">{{idTipoInforme}}</span>
-        </div>
-        <div class="metadata-item">
-          <span class="metadata-label">Usuario Creador</span>
-          <span class="metadata-value">{{idUsuarioCreador}}</span>
-        </div>
-      </div>
     </div>
-    
-    
-  </section>
-  
-  <!-- ITERACIÓN DE MÓDULOS DINÁMICOS -->
-  {{#each modulos}}
-  <section class="module module-{{@index}}" data-breadcrumb="{{this.titulo}}">
-    
-    {{!-- MÓDULO 1: Presentación - Incluye datos básicos del candidato y datos destacados --}}
-    {{#ifEquals @index 0}}
-      <!-- INFORMACIÓN DEL CANDIDATO - DATOS BÁSICOS -->
-      <section class="candidate-header" data-breadcrumb="Datos del Candidato">
-        <div class="candidate-grid">
-          <div class="candidate-photo-wrapper">
-        {{#if ../datosPersonales.foto}}
-            <img
-          class="candidate-photo"
-          src="{{asset '/assets/profiles/AA.jpg' 'dataURI'}}"
-          alt="Foto"
-        />
-        {{/if}}
-      </div>
-          <div class="candidate-info">
-            <h2 class="candidate-name">{{../datosPersonales.nombreCompleto}}</h2>
-            <div class="info-grid">
-              <div class="info-item">
-                <span class="info-label">Edad</span>
-                <span class="info-value">{{../datosPersonales.edad}} años</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Ubicación</span>
-                <span class="info-value">{{../datosPersonales.municipio}}, {{../datosPersonales.pais}}</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Email</span>
-                <span class="info-value">{{../datosPersonales.email}}</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Teléfono</span>
-                <span class="info-value">{{../datosPersonales.telefonoMovil}}</span>
-              </div>
-            </div>
-          </div>
-          {{#if ../informe.puntuacion}}
-          <div class="candidate-score">
-            <div class="score-circle">
-              <span class="score-value">{{../informe.puntuacion}}</span>
-              <span class="score-max">/10</span>
-            </div>
-            <span class="score-label">Puntuación Global</span>
-          </div>
-          {{/if}}
-        </div>
-      </section>
-    {{/ifEquals}}
-    
-    {{!-- HEADER DEL MÓDULO --}}
-    <header class="module-header">
-      <h2 class="module-title">{{this.titulo}}</h2>
-      {{#if this.subtitulo}}
-        <p class="module-subtitle">{{this.subtitulo}}</p>
-      {{/if}}
-    </header>
-    
-    <div class="module-content">
-      {{#each this.secciones}}
-      <div class="section" data-breadcrumb="{{../titulo}} › {{this.nombre}}">
-        <h3 class="section-title">{{this.nombre}}</h3>
-        
-        {{#if this.tipo}}
-          {{!-- TIPO datos-basicos eliminado: ya se muestra en header del candidato --}}
-          
-          {{!-- TIPO: texto-editorial (bloques editoriales con subtítulos) --}}
-          {{#ifEquals this.tipo "texto-editorial"}}
-            <div class="texto-editorial">
-              {{#each this.items}}
-                <div class="bloque-editorial no-break">
-                  <h4 class="editorial-subtitulo">{{this.subtitulo}}</h4>
-                  <div class="editorial-contenido">
-                    {{#each (splitParagraphs this.contenido)}}
-                      <p class="paragraph">{{this}}</p>
-                    {{/each}}
-                  </div>
-                </div>
-              {{/each}}
-            </div>
-          {{/ifEquals}}
-          
-          {{!-- TIPO: texto (párrafos simples) --}}
-          {{#ifEquals this.tipo "texto"}}
-            <div class="text-content">
-              {{#each (splitParagraphs this.contenido)}}
-                <p class="paragraph no-break">{{this}}</p>
-              {{/each}}
-            </div>
-          {{/ifEquals}}
-          
-          {{!-- TIPO: lista (experiencia, formación, referencias, etc.) --}}
-          {{#ifEquals this.tipo "lista"}}
-            <div class="lista-content">
-              {{#each this.items}}
-                <div class="lista-item no-break" data-breadcrumb="{{../../titulo}} › {{../nombre}} › Item {{@index}}">
-                  
-                  {{!-- Lista de experiencia --}}
-                  {{#if this.puesto}}
-                    <div class="experiencia-item item-with-border">
-                        <h4 class="puesto">{{this.puesto}}</h4>
-                        <div class="empresa-rango">
-                          <span class="empresa">{{this.empresa}}</span>
-                          <span class="rango-anos">{{this.rangoAnos}}</span>
-                        </div>
-                        {{#if this.funcion}}
-                          <p class="funcion">{{this.funcion}}</p>
+
+
+</section>
+
+<!-- ITERACIÓN DE MÓDULOS DINÁMICOS -->
+{{#each modulos}}
+    <section class="module module-{{@index}}" data-breadcrumb="{{this.titulo}}">
+
+        {{!-- MÓDULO 1: Presentación - Incluye datos básicos del candidato y datos destacados --}}
+        {{#ifEquals @index 0}}
+            <!-- INFORMACIÓN DEL CANDIDATO - DATOS BÁSICOS -->
+            <section class="candidate-header" data-breadcrumb="Datos del Candidato">
+                <div class="candidate-grid">
+                    <div class="candidate-photo-wrapper">
+                        {{#if ../datosPersonales.foto}}
+                            <img
+                                    class="candidate-photo"
+                                    src="{{asset '/assets/profiles/AA.jpg' 'dataURI'}}"
+                                    alt="Foto"
+                            />
                         {{/if}}
                     </div>
-                  {{/if}}
-                  
-                  {{!-- Lista de formación --}}
-                  {{#if this.nombreTitulacion}}
-                    <div class="formacion-item item-with-border">
-                        <h4 class="titulacion">{{this.nombreTitulacion}}</h4>
-                        <div class="centro-ano">
-                          <span class="centro">{{this.centro}}</span>
-                          <span class="ano">{{this.ano}}</span>
+                    <div class="candidate-info">
+                        <h2 class="candidate-name">{{../datosPersonales.nombreCompleto}}</h2>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Edad</span>
+                                <span class="info-value">{{../datosPersonales.edad}} años</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Ubicación</span>
+                                <span class="info-value">{{../datosPersonales.municipio}}
+                                    , {{../datosPersonales.pais}}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">{{../datosPersonales.email}}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Teléfono</span>
+                                <span class="info-value">{{../datosPersonales.telefonoMovil}}</span>
+                            </div>
                         </div>
-                        <span class="titulado-status">{{this.titulado}}</span>
                     </div>
-                  {{/if}}
-                  
-                  {{!-- Lista de referencias - Buscar por empresa sin campo puesto --}}
-                  {{#if this.contacto}}
-                    <div class="referencia-item item-with-border">
-                        <h4 class="ref-empresa">{{this.empresa}}</h4>
-                        <p class="ref-funcion">{{this.funcion}}</p>
-                        <p class="ref-contacto">{{this.contacto}}</p>
-                    </div>
-                  {{/if}}
-                  
-                  {{!-- Lista de idiomas --}}
-                  {{#if this.idioma}}
-                    <div class="idioma-item item-with-border">
-                        <span class="idioma">{{this.idioma}}</span>
-                        <span class="nivel">{{this.nivel}}</span>
-                    </div>
-                  {{/if}}
-                  
-                  {{!-- Lista de informática --}}
-                  {{#if this.aplicacion}}
-                    <div class="software-item item-with-border">
-                        <span class="aplicacion">{{this.aplicacion}}</span>
-                        <span class="nivel">{{this.nivel}}</span>
-                    </div>
-                  {{/if}}
-                  
-                  {{!-- Lista de acreditaciones --}}
-                  {{#if this.tipo}}
-                    <div class="acreditacion-item item-with-border">
-                        <span class="acred-tipo">{{this.tipo}}</span>
-                        <span class="acred-ano">{{this.ano}}</span>
-                        {{#if this.descripcion}}
-                          <p class="acred-desc">{{this.descripcion}}</p>
-                        {{/if}}
-                    </div>
-                  {{/if}}
-                  
-                  {{!-- Lista de adjuntos --}}
-                  {{#if this.ruta}}
-                    <div class="adjunto-item item-with-border">
-                        <span class="adj-tipo">{{this.tipo}}</span>
-                        <span class="adj-ruta">{{this.ruta}}</span>
-                        <span class="adj-horas">{{this.horas}}</span>
-                    </div>
-                  {{/if}}
-                  
-                  {{!-- Fallback para listas genéricas --}}
-                  {{#unless this.puesto}}{{#unless this.nombreTitulacion}}{{#unless this.empresa}}{{#unless this.idioma}}{{#unless this.aplicacion}}{{#unless this.tipo}}{{#unless this.ruta}}
-                    <div class="item-generico">
-                      {{#if this.titulo}}<strong>{{this.titulo}}</strong>{{/if}}
-                      {{#if this.descripcion}}<span class="item-desc">{{this.descripcion}}</span>{{/if}}
-                      {{#if this.fecha}}<span class="item-date">{{formatDate this.fecha}}</span>{{/if}}
-                    </div>
-                  {{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}
+                    {{#if ../informe.puntuacion}}
+                        <div class="candidate-score">
+                            <div class="score-circle">
+                                <span class="score-value">{{../informe.puntuacion}}</span>
+                                <span class="score-max">/10</span>
+                            </div>
+                            <span class="score-label">Puntuación Global</span>
+                        </div>
+                    {{/if}}
                 </div>
-              {{/each}}
-            </div>
-          {{/ifEquals}}
-          
-          {{!-- TIPO: cards (competencias) --}}
-          {{#ifEquals this.tipo "cards"}}
-            <div class="cards-grid">
-              {{#each this.items}}
-                <div class="card no-break" data-breadcrumb="{{../../titulo}} › {{../nombre}} › {{this.competencia}}">
-                  <h4 class="card-title">{{this.competencia}}</h4>
-                  {{#if this.puntuacion}}
-                    <div class="card-score">{{this.puntuacion}}/10</div>
-                  {{/if}}
-                  <p class="card-content">{{this.observaciones}}</p>
+            </section>
+        {{/ifEquals}}
+
+        {{!-- HEADER DEL MÓDULO --}}
+        <header class="module-header">
+            <h2 class="module-title">{{this.titulo}}</h2>
+            {{#if this.subtitulo}}
+                <p class="module-subtitle">{{this.subtitulo}}</p>
+            {{/if}}
+        </header>
+
+        <div class="module-content">
+            {{#each this.secciones}}
+                <div class="section" data-breadcrumb="{{../titulo}} › {{this.nombre}}">
+                    <h3 class="section-title">{{this.nombre}}</h3>
+
+                    {{#if this.tipo}}
+                    {{!-- TIPO datos-basicos eliminado: ya se muestra en header del candidato --}}
+
+                    {{!-- TIPO: texto-editorial (bloques editoriales con subtítulos) --}}
+                        {{#ifEquals this.tipo "texto-editorial"}}
+                            <div class="texto-editorial">
+                                {{#each this.items}}
+                                    <div class="bloque-editorial no-break">
+                                        <h4 class="editorial-subtitulo">{{this.subtitulo}}</h4>
+                                        <div class="editorial-contenido">
+                                            {{#each (splitParagraphs this.contenido)}}
+                                                <p class="paragraph">{{this}}</p>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        {{/ifEquals}}
+
+                        {{!-- TIPO: texto (párrafos simples) --}}
+                        {{#ifEquals this.tipo "texto"}}
+                            <div class="text-content">
+                                {{#each (splitParagraphs this.contenido)}}
+                                    <p class="paragraph no-break">{{this}}</p>
+                                {{/each}}
+                            </div>
+                        {{/ifEquals}}
+
+                        {{!-- TIPO: lista (experiencia, formación, referencias, etc.) --}}
+                        {{#ifEquals this.tipo "lista"}}
+                            <div class="lista-content">
+                                {{#each this.items}}
+                                    <div class="lista-item no-break"
+                                         data-breadcrumb="{{../../titulo}} › {{../nombre}} › Item {{@index}}">
+
+                                        {{!-- Lista de experiencia --}}
+                                        {{#if this.puesto}}
+                                            <div class="experiencia-item item-with-border">
+                                                <h4 class="puesto">{{this.puesto}}</h4>
+                                                <div class="empresa-rango">
+                                                    <span class="empresa">{{this.empresa}}</span>
+                                                    <span class="rango-anos">{{this.rangoAnos}}</span>
+                                                </div>
+                                                {{#if this.funcion}}
+                                                    <p class="funcion">{{this.funcion}}</p>
+                                                {{/if}}
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Lista de formación --}}
+                                        {{#if this.nombreTitulacion}}
+                                            <div class="formacion-item item-with-border">
+                                                <h4 class="titulacion">{{this.nombreTitulacion}}</h4>
+                                                <div class="centro-ano">
+                                                    <span class="centro">{{this.centro}}</span>
+                                                    <span class="ano">{{this.ano}}</span>
+                                                </div>
+                                                <span class="titulado-status">{{this.titulado}}</span>
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Lista de referencias - Buscar por empresa sin campo puesto --}}
+                                        {{#if this.contacto}}
+                                            <div class="referencia-item item-with-border">
+                                                <h4 class="ref-empresa">{{this.empresa}}</h4>
+                                                <p class="ref-funcion">{{this.funcion}}</p>
+                                                <p class="ref-contacto">{{this.contacto}}</p>
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Lista de idiomas --}}
+                                        {{#if this.idioma}}
+                                            <div class="idioma-item item-with-border">
+                                                <span class="idioma">{{this.idioma}}</span>
+                                                <span class="nivel">{{this.nivel}}</span>
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Lista de informática --}}
+                                        {{#if this.aplicacion}}
+                                            <div class="software-item item-with-border">
+                                                <span class="aplicacion">{{this.aplicacion}}</span>
+                                                <span class="nivel">{{this.nivel}}</span>
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Lista de acreditaciones --}}
+                                        {{#if this.tipo}}
+                                            <div class="acreditacion-item item-with-border">
+                                                <span class="acred-tipo">{{this.tipo}}</span>
+                                                <span class="acred-ano">{{this.ano}}</span>
+                                                {{#if this.descripcion}}
+                                                    <p class="acred-desc">{{this.descripcion}}</p>
+                                                {{/if}}
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Lista de adjuntos --}}
+                                        {{#if this.ruta}}
+                                            <div class="adjunto-item item-with-border">
+                                                <span class="adj-tipo">{{this.tipo}}</span>
+                                                <span class="adj-ruta">{{this.ruta}}</span>
+                                                <span class="adj-horas">{{this.horas}}</span>
+                                            </div>
+                                        {{/if}}
+
+                                        {{!-- Fallback para listas genéricas --}}
+                                        {{#unless this.puesto}}{{#unless this.nombreTitulacion}}{{#unless
+                                                this.empresa}}{{#unless this.idioma}}{{#unless
+                                                this.aplicacion}}{{#unless this.tipo}}{{#unless this.ruta}}
+                                            <div class="item-generico">
+                                                {{#if this.titulo}}<strong>{{this.titulo}}</strong>{{/if}}
+                                                {{#if this.descripcion}}
+                                                    <span class="item-desc">{{this.descripcion}}</span>{{/if}}
+                                                {{#if this.fecha}}
+                                                    <span class="item-date">{{formatDate this.fecha}}</span>{{/if}}
+                                            </div>
+                                        {{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}{{/unless}}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        {{/ifEquals}}
+
+                        {{!-- TIPO: cards (competencias) --}}
+                        {{#ifEquals this.tipo "cards"}}
+                            <div class="cards-grid">
+                                {{#each this.items}}
+                                    <div class="card no-break"
+                                         data-breadcrumb="{{../../titulo}} › {{../nombre}} › {{this.competencia}}">
+                                        <h4 class="card-title">{{this.competencia}}</h4>
+                                        {{#if this.puntuacion}}
+                                            <div class="card-score">{{this.puntuacion}}/10</div>
+                                        {{/if}}
+                                        <p class="card-content">{{this.observaciones}}</p>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        {{/ifEquals}}
+
+                        {{!-- TIPO: puntuacion-final (bloque numérico) --}}
+                        {{#ifEquals this.tipo "puntuacion-final"}}
+                            <div class="puntuacion-final no-break">
+                                <div class="score-display">
+                                    <span class="score-value">{{this.puntuacion}}</span>
+                                    <span class="score-separator">/</span>
+                                    <span class="score-max">{{this.maxPuntuacion}}</span>
+                                </div>
+                                <p class="score-label">Puntuación Global</p>
+                            </div>
+                        {{/ifEquals}}
+
+                        {{!-- TIPO: tabla (fallback para tablas genéricas) --}}
+                        {{#ifEquals this.tipo "tabla"}}
+                            <div class="table-wrapper">
+                                <table class="data-table">
+                                    <thead>
+                                    <tr>
+                                        {{#each this.columnas}}
+                                            <th>{{this}}</th>
+                                        {{/each}}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each this.filas}}
+                                        <tr class="no-break">
+                                            {{#each this}}
+                                                <td>{{this}}</td>
+                                            {{/each}}
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {{/ifEquals}}
+                    {{/if}}
                 </div>
-              {{/each}}
-            </div>
-          {{/ifEquals}}
-          
-          {{!-- TIPO: puntuacion-final (bloque numérico) --}}
-          {{#ifEquals this.tipo "puntuacion-final"}}
-            <div class="puntuacion-final no-break">
-              <div class="score-display">
-                <span class="score-value">{{this.puntuacion}}</span>
-                <span class="score-separator">/</span>
-                <span class="score-max">{{this.maxPuntuacion}}</span>
-              </div>
-              <p class="score-label">Puntuación Global</p>
-            </div>
-          {{/ifEquals}}
-          
-          {{!-- TIPO: tabla (fallback para tablas genéricas) --}}
-          {{#ifEquals this.tipo "tabla"}}
-            <div class="table-wrapper">
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    {{#each this.columnas}}
-                      <th>{{this}}</th>
-                    {{/each}}
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each this.filas}}
-                    <tr class="no-break">
-                      {{#each this}}
-                        <td>{{this}}</td>
-                      {{/each}}
-                    </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-            </div>
-          {{/ifEquals}}
-        {{/if}}
-      </div>
-      {{/each}}
-    </div>
-  </section>
-  {{/each}}
-  
-  <!-- DEBUG: Verificar si los módulos se están creando -->
-  <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 10px;">
+            {{/each}}
+        </div>
+    </section>
+{{/each}}
+
+<!-- DEBUG: Verificar si los módulos se están creando -->
+<div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 10px;">
     <strong>DEBUG - Total módulos:</strong> {{modulos.length}}<br>
     {{#if modulos}}
-      <strong>Módulos encontrados:</strong><br>
-      {{#each modulos}}
-        - {{@index}}: {{this.titulo}} ({{this.secciones.length}} secciones)<br>
-      {{/each}}
+        <strong>Módulos encontrados:</strong><br>
+        {{#each modulos}}
+            - {{@index}}: {{this.titulo}} ({{this.secciones.length}} secciones)<br>
+        {{/each}}
     {{else}}
-      <strong style="color: red;">⚠️ NO HAY MÓDULOS - beforeRender no se ejecutó</strong>
+        <strong style="color: red;">⚠️ NO HAY MÓDULOS - beforeRender no se ejecutó</strong>
     {{/if}}
-  </div>
-
-  
+</div>
 
 
-  <!-- FOOTER -->
-  <footer class="page-footer">
+<!-- FOOTER -->
+<footer class="page-footer">
     <div class="footer-content">
-      <span class="confidential">CONFIDENCIAL - Uso exclusivo del cliente</span>
-      <span class="page-info">
+        <span class="confidential">CONFIDENCIAL - Uso exclusivo del cliente</span>
+        <span class="page-info">
         <span class="page-number"></span> / <span class="total-pages"></span>
       </span>
     </div>
-  </footer>
+</footer>
 
-  <!-- MEASUREMENT SERVICE -->
-  <script>
+<!-- MEASUREMENT SERVICE -->
+<script>
     // Se inyectará desde measurement-service.js
     if (typeof window.MeasurementService !== 'undefined') {
-      const service = new window.MeasurementService();
-      service.initialize();
+        const service = new window.MeasurementService();
+        service.initialize();
     }
-  </script>
+</script>
 
-  <script>
-  window.addEventListener('load', () => {
-    window.JSREPORT_READY_TO_START = true;
-  });
+<script>
+    window.addEventListener('load', () => {
+        window.JSREPORT_READY_TO_START = true;
+    });
 </script>
 </body>
 </html>
