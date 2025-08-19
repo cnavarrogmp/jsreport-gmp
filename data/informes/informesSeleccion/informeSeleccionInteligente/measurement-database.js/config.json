@@ -1,0 +1,7 @@
+{
+    "name": "measurement-database.js",
+    "shortid": "MeasDB",
+    "$entitySet": "assets",
+    "isSharedHelper": false,
+    "encoding": "utf8"
+}

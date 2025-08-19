@@ -1,0 +1,7 @@
+{
+    "name": "measurement-cache.js",
+    "shortid": "MeasCache",
+    "$entitySet": "assets",
+    "isSharedHelper": false,
+    "encoding": "utf8"
+}

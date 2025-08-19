@@ -1,0 +1,7 @@
+{
+    "name": "calculation-engine.js",
+    "shortid": "CalcEng",
+    "$entitySet": "assets",
+    "isSharedHelper": false,
+    "encoding": "utf8"
+}
