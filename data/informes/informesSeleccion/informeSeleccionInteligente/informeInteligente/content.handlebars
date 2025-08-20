@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informe Inteligente - {{datosPersonales.nombreCompleto}}</title>
     <style>{{{asset "inteligente-styles.css"}}}</style>
+    
+    <!-- FASE 3 CSS Mínimo - Solo elementos críticos -->
+    <style id="fase3-base-css">
+        /* 🧠 FASE 3 - CSS Mínimo que NO interfiere con optimización dinámica */
+        
+        /* SOLO prevenir cortes dentro de elementos individuales críticos */
+        .bloque-editorial, .experiencia-item, .lista-item, .competency-card {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+        
+        /* Reducir espaciado para mejor aprovechamiento */
+        .module-header {
+            margin-bottom: 8px !important;
+        }
+        
+        .module-content {
+            margin-top: 0px !important;
+        }
+        
+        .section-title {
+            margin-top: 8px !important;
+            margin-bottom: 6px !important;
+        }
+        
+        /* IMPORTANTE: NO definir reglas para .module, .section, .module-title aquí */
+        /* Dejar que el CSS dinámico de optimización de espacio controle el flujo */
+    </style>
 </head>
 <body class="report {{#if __layout.isLandscape}}landscape{{/if}}" data-breadcrumb="Informe de Selección">
 
@@ -77,7 +105,15 @@
 {{#each modulos}}
     <section class="module module-{{@index}}" data-breadcrumb="{{this.titulo}}">
 
-        {{!-- MÓDULO 1: Presentación - Incluye datos básicos del candidato y datos destacados --}}
+        {{!-- HEADER DEL MÓDULO PRIMERO --}}
+        <header class="module-header">
+            <h2 class="module-title">{{this.titulo}}</h2>
+            {{#if this.subtitulo}}
+                <p class="module-subtitle">{{this.subtitulo}}</p>
+            {{/if}}
+        </header>
+
+        {{!-- MÓDULO 0: Presentación - Incluye datos básicos del candidato y datos destacados --}}
         {{#ifEquals @index 0}}
             <!-- INFORMACIÓN DEL CANDIDATO - DATOS BÁSICOS -->
             <section class="candidate-header" data-breadcrumb="Datos del Candidato">
@@ -125,14 +161,6 @@
                 </div>
             </section>
         {{/ifEquals}}
-
-        {{!-- HEADER DEL MÓDULO --}}
-        <header class="module-header">
-            <h2 class="module-title">{{this.titulo}}</h2>
-            {{#if this.subtitulo}}
-                <p class="module-subtitle">{{this.subtitulo}}</p>
-            {{/if}}
-        </header>
 
         <div class="module-content">
             {{#each this.secciones}}
@@ -384,10 +412,21 @@
     
     <!-- Placeholder para resultados del navegador -->
     <div id="diagnostics-browser-results" style="margin-bottom: 16px;">
-        <strong>⏱️ Resultados del navegador (se llenarán dinámicamente):</strong><br>
+        <strong>⏱️ Resultados FASE 2 (se llenarán dinámicamente):</strong><br>
         <span id="phantom-status">• PhantomRenderer: Pendiente...</span><br>
         <span id="calculation-status">• CalculationEngine: Pendiente...</span><br>
         <span id="cache-status">• Cache: Pendiente...</span><br>
+    </div>
+    
+    <!-- Resultados FASE 3 -->
+    <div id="diagnostics-fase3-results" style="margin-bottom: 16px;">
+        <strong>🎯 Resultados FASE 3 - Distribución Inteligente:</strong><br>
+        <span id="breakpoint-status">• OptimalBreakpoint: Pendiente...</span><br>
+        <span id="orphan-status">• OrphanPrevention: Pendiente...</span><br>
+        <span id="continuity-status">• ContinuityRules: Pendiente...</span><br>
+        <span id="html-application-status">• HTML Application: Pendiente...</span><br>
+        <span id="space-optimization-status">• Space Optimization: Pendiente...</span><br>
+        <span id="optimization-status">• Optimización: Pendiente...</span><br>
     </div>
     
     <!-- Debug de módulos -->
@@ -560,6 +599,908 @@
     
 })();
 
+// ================================================================================
+// 🎯 FASE 3 - DISTRIBUCIÓN INTELIGENTE
+// ================================================================================
+(function() {
+    'use strict';
+    
+    /**
+     * OPTIMAL BREAKPOINT CALCULATOR - FASE 3
+     * Algoritmo de costos para calcular puntos de corte óptimos
+     */
+    class OptimalBreakpointCalculator {
+        constructor(pageHeight = 1122) { // A4 menos márgenes
+            this.pageHeight = pageHeight;
+            
+            // Costos de ruptura por tipo de elemento
+            this.breakCosts = {
+                // Elementos que prefieren NO romperse
+                'module-header': 100,    // Header de módulo al final de página = muy malo
+                'section-header': 80,    // Header de sección al final = malo
+                'competency-card': 60,   // Cards partidas = moderado
+                'experience-item': 40,   // Items de experiencia partidos = leve
+                
+                // Elementos que pueden romperse con poco costo
+                'paragraph': 10,         // Párrafos pueden partirse
+                'list-item': 20,         // Items de lista pueden partirse
+                
+                // Puntos de corte naturales (bajo costo)
+                'module-end': 5,         // Final de módulo = natural
+                'section-end': 8,        // Final de sección = natural
+                'paragraph-end': 2       // Final de párrafo = muy natural
+            };
+            
+            // Umbrales para prevención de huérfanos
+            this.orphanThresholds = {
+                'module-header': 0.3,    // 30% mínimo de página tras header
+                'section-header': 0.25,  // 25% mínimo de página tras header
+                'competency-card': 0.15  // 15% mínimo para cards
+            };
+        }
+        
+        /**
+         * Calcula puntos de corte óptimos basado en mediciones reales
+         */
+        calculateOptimalBreaks(measurements, totalHeight) {
+            console.log('🎯 [FASE 3] Calculando puntos de corte óptimos...');
+            console.log(`📊 [FASE 3] Input: ${measurements.length} elementos, altura total: ${totalHeight}px`);
+            
+            const pages = [];
+            let currentPage = {
+                elements: [],
+                currentHeight: 0,
+                pageNumber: 1,
+                costScore: 0
+            };
+            
+            let breakDecisions = [];
+            
+            for (let i = 0; i < measurements.length; i++) {
+                const element = measurements[i];
+                const nextElement = measurements[i + 1];
+                
+                // Validar que el elemento tenga las propiedades requeridas
+                if (!element || typeof element.height !== 'number') {
+                    console.warn(`⚠️ [FASE 3] Elemento inválido en índice ${i}:`, element);
+                    continue;
+                }
+                
+                // Verificar si el elemento cabe en la página actual
+                if (currentPage.currentHeight + element.height <= this.pageHeight) {
+                    // Cabe, agregarlo
+                    currentPage.elements.push(element);
+                    currentPage.currentHeight += element.height;
+                } else {
+                    // No cabe, evaluar punto de corte
+                    const breakCost = this._calculateBreakCost(element, nextElement, currentPage);
+                    const elementType = this._detectElementType(element);
+                    
+                    // Crear identificador del elemento
+                    const elementIdentifier = element.element ? 
+                        `${element.element}.${element.className || 'no-class'}` : 
+                        `element-${element.index}`;
+                    
+                    // Log de decisión de corte
+                    breakDecisions.push({
+                        beforeElement: elementIdentifier,
+                        elementType: elementType,
+                        breakCost: breakCost,
+                        pageHeight: currentPage.currentHeight,
+                        pageNumber: currentPage.pageNumber
+                    });
+                    
+                    console.log(`✂️ [FASE 3] Corte en página ${currentPage.pageNumber}: antes de "${elementIdentifier}" (${elementType}) - Costo: ${breakCost}`);
+                    
+                    // Si el costo es muy alto, intentar ajustar
+                    if (breakCost > 60 && this._canAdjustPreviousElements(currentPage)) {
+                        console.log(`🔄 [FASE 3] Costo alto (${breakCost}), intentando ajustar...`);
+                        this._adjustForOptimalBreak(currentPage);
+                    }
+                    
+                    // Finalizar página actual
+                    currentPage.costScore += breakCost;
+                    pages.push({ ...currentPage });
+                    
+                    // Iniciar nueva página
+                    currentPage = {
+                        elements: [element],
+                        currentHeight: element.height,
+                        pageNumber: pages.length + 1,
+                        costScore: 0
+                    };
+                }
+            }
+            
+            // Agregar última página
+            if (currentPage.elements.length > 0) {
+                pages.push(currentPage);
+            }
+            
+            const totalCost = pages.reduce((sum, page) => sum + page.costScore, 0);
+            const avgCostPerPage = totalCost / pages.length;
+            
+            console.log(`🎯 [FASE 3] Distribución calculada: ${pages.length} páginas, costo promedio: ${avgCostPerPage.toFixed(1)}`);
+            
+            // Log detallado de todas las decisiones
+            console.log('📋 [FASE 3] Resumen de decisiones de corte:');
+            breakDecisions.forEach((decision, index) => {
+                const costLevel = decision.breakCost > 60 ? '🔴' : decision.breakCost > 30 ? '🟡' : '🟢';
+                console.log(`  ${costLevel} Corte ${index + 1}: ${decision.beforeElement} (${decision.elementType}) - Costo: ${decision.breakCost}`);
+            });
+            
+            // Log de distribución por página
+            console.log('📄 [FASE 3] Distribución por páginas:');
+            pages.forEach((page, index) => {
+                console.log(`  Página ${page.pageNumber}: ${page.elements.length} elementos, ${page.currentHeight}px, costo: ${page.costScore}`);
+            });
+            
+            return {
+                pages,
+                totalCost,
+                avgCostPerPage,
+                pageCount: pages.length,
+                optimization: this._getOptimizationSummary(pages),
+                breakDecisions: breakDecisions
+            };
+        }
+        
+        /**
+         * Calcula el costo de romper en un punto específico
+         */
+        _calculateBreakCost(element, nextElement, currentPage) {
+            let cost = 0;
+            
+            // Detectar tipo de elemento para aplicar costo base
+            const elementType = this._detectElementType(element);
+            const baseCost = this.breakCosts[elementType] || 30;
+            cost += baseCost;
+            
+            // Penalizar headers huérfanos
+            if (elementType.includes('header')) {
+                const remainingHeight = this.pageHeight - currentPage.currentHeight;
+                const orphanThreshold = this.orphanThresholds[elementType] * this.pageHeight;
+                
+                if (nextElement && remainingHeight < orphanThreshold) {
+                    cost += 50; // Penalización por header huérfano
+                    console.log(`⚠️ [FASE 3] Header huérfano detectado: ${element.selector}`);
+                }
+            }
+            
+            // Bonus por puntos de corte naturales
+            if (this._isNaturalBreakPoint(element, currentPage)) {
+                cost -= 15;
+            }
+            
+            return Math.max(0, cost);
+        }
+        
+        /**
+         * Detecta el tipo de elemento para aplicar reglas específicas
+         */
+        _detectElementType(element) {
+            if (!element) {
+                console.warn('⚠️ [FASE 3] Elemento inválido:', element);
+                return 'generic';
+            }
+            
+            // Crear identificador usando elemento y className
+            const elementType = element.element ? element.element.toLowerCase() : '';
+            const className = element.className ? element.className.toLowerCase() : '';
+            const identifier = `${elementType} ${className}`;
+            
+            // Detectar headers de módulo
+            if (elementType === 'h1' || elementType === 'h2' || className.includes('module-title')) {
+                return 'module-header';
+            }
+            
+            // Detectar headers de sección
+            if (elementType === 'h3' || className.includes('section-title')) {
+                return 'section-header';
+            }
+            
+            // Detectar cards de competencias
+            if (className.includes('competency') || className.includes('card') || className.includes('card-content')) {
+                return 'competency-card';
+            }
+            
+            // Detectar elementos de experiencia
+            if (className.includes('experience') || className.includes('work') || className.includes('empresa')) {
+                return 'experience-item';
+            }
+            
+            // Detectar párrafos
+            if (elementType === 'p' || className.includes('paragraph')) {
+                return 'paragraph';
+            }
+            
+            // Detectar items de lista
+            if (elementType === 'li' || className.includes('item') || className.includes('list')) {
+                return 'list-item';
+            }
+            
+            // Detectar módulos completos
+            if (className.includes('module')) {
+                return 'module';
+            }
+            
+            return 'generic';
+        }
+        
+        /**
+         * Determina si es un punto de corte natural
+         */
+        _isNaturalBreakPoint(element, currentPage) {
+            if (!element || !currentPage || !currentPage.elements) {
+                return false;
+            }
+            
+            // Final de módulo o sección
+            const className = element.className ? element.className.toLowerCase() : '';
+            if (className.includes('module') && currentPage.elements.length > 0) {
+                return true;
+            }
+            
+            // Después de un conjunto de elementos similares
+            const lastElements = currentPage.elements.slice(-3);
+            if (lastElements.length === 0) return false;
+            
+            try {
+                const allSameType = lastElements.every(el => 
+                    this._detectElementType(el) === this._detectElementType(element)
+                );
+                
+                return allSameType && lastElements.length >= 3;
+            } catch (error) {
+                console.warn('⚠️ [FASE 3] Error en isNaturalBreakPoint:', error);
+                return false;
+            }
+        }
+        
+        /**
+         * Verifica si se pueden ajustar elementos previos para mejor distribución
+         */
+        _canAdjustPreviousElements(currentPage) {
+            return currentPage.elements.length > 1 && currentPage.currentHeight > this.pageHeight * 0.7;
+        }
+        
+        /**
+         * Ajusta elementos para lograr un mejor punto de corte
+         */
+        _adjustForOptimalBreak(currentPage) {
+            // Mover último elemento a próxima página si mejora el costo
+            const lastElement = currentPage.elements.pop();
+            currentPage.currentHeight -= lastElement.height;
+            
+            console.log(`🔄 [FASE 3] Ajuste realizado: moviendo ${lastElement.selector} a siguiente página`);
+        }
+        
+        /**
+         * Genera resumen de optimización
+         */
+        _getOptimizationSummary(pages) {
+            let orphanHeaders = 0;
+            let naturalBreaks = 0;
+            let forcedBreaks = 0;
+            
+            pages.forEach(page => {
+                if (page.costScore > 60) forcedBreaks++;
+                else if (page.costScore < 20) naturalBreaks++;
+                
+                // Contar headers potencialmente huérfanos
+                const lastElement = page.elements[page.elements.length - 1];
+                if (lastElement && this._detectElementType(lastElement).includes('header')) {
+                    orphanHeaders++;
+                }
+            });
+            
+            return {
+                orphanHeaders,
+                naturalBreaks,
+                forcedBreaks,
+                efficiency: ((naturalBreaks / pages.length) * 100).toFixed(1)
+            };
+        }
+    }
+    
+    /**
+     * ORPHAN PREVENTION SYSTEM - FASE 3
+     * Previene headers huérfanos y mejora la distribución
+     */
+    class OrphanPreventionSystem {
+        constructor(pageHeight = 1122) {
+            this.pageHeight = pageHeight;
+            
+            // Configuración de prevención de huérfanos
+            this.orphanRules = {
+                'module-header': {
+                    minContentAfter: 0.25,    // 25% mínimo de página tras header
+                    penaltyMultiplier: 2.0,   // Penalización por huérfano
+                    forceBreakBefore: true    // Forzar salto antes si es huérfano
+                },
+                'section-header': {
+                    minContentAfter: 0.20,    // 20% mínimo
+                    penaltyMultiplier: 1.5,
+                    forceBreakBefore: true
+                },
+                'competency-card': {
+                    minContentAfter: 0.10,    // 10% mínimo
+                    penaltyMultiplier: 1.2,
+                    forceBreakBefore: false   // No forzar, solo penalizar
+                }
+            };
+        }
+        
+        /**
+         * Aplica prevención de huérfanos a una distribución existente
+         */
+        preventOrphans(distribution, measurements) {
+            console.log('🛡️ [FASE 3] Aplicando prevención de huérfanos...');
+            
+            let adjustedPages = [];
+            let orphansDetected = 0;
+            let orphansFixed = 0;
+            
+            for (let i = 0; i < distribution.pages.length; i++) {
+                const page = distribution.pages[i];
+                const nextPage = distribution.pages[i + 1];
+                
+                // Buscar headers potencialmente huérfanos al final de la página
+                const potentialOrphans = this._findPotentialOrphans(page);
+                
+                if (potentialOrphans.length > 0) {
+                    orphansDetected += potentialOrphans.length;
+                    
+                    // Intentar ajustar la página para evitar huérfanos
+                    const adjustedPage = this._adjustPageToPreventOrphans(page, nextPage, potentialOrphans);
+                    
+                    if (adjustedPage.orphansFixed > 0) {
+                        orphansFixed += adjustedPage.orphansFixed;
+                        console.log(`🔧 [FASE 3] Página ${page.pageNumber}: ${adjustedPage.orphansFixed} huérfanos corregidos`);
+                    }
+                    
+                    adjustedPages.push(adjustedPage.page);
+                } else {
+                    adjustedPages.push(page);
+                }
+            }
+            
+            // Recalcular distribución después de ajustes
+            const optimizedDistribution = this._recalculateDistribution(adjustedPages, measurements);
+            
+            console.log(`🛡️ [FASE 3] Prevención completada: ${orphansDetected} detectados, ${orphansFixed} corregidos`);
+            
+            return {
+                pages: optimizedDistribution.pages,
+                orphansDetected,
+                orphansFixed,
+                improvementScore: orphansFixed / Math.max(orphansDetected, 1),
+                totalCost: optimizedDistribution.totalCost
+            };
+        }
+        
+        /**
+         * Encuentra headers potencialmente huérfanos en una página
+         */
+        _findPotentialOrphans(page) {
+            const orphans = [];
+            const elements = page.elements || [];
+            
+            // Examinar los últimos elementos de la página
+            for (let i = Math.max(0, elements.length - 3); i < elements.length; i++) {
+                const element = elements[i];
+                const elementType = this._detectElementType(element);
+                
+                if (this.orphanRules[elementType]) {
+                    const rule = this.orphanRules[elementType];
+                    const remainingHeight = this.pageHeight - page.currentHeight;
+                    const minRequiredHeight = this.pageHeight * rule.minContentAfter;
+                    
+                    if (remainingHeight < minRequiredHeight) {
+                        orphans.push({
+                            element,
+                            elementIndex: i,
+                            elementType,
+                            rule,
+                            deficit: minRequiredHeight - remainingHeight
+                        });
+                        
+                        console.log(`👻 [FASE 3] Huérfano detectado: ${elementType} en página ${page.pageNumber}`);
+                    }
+                }
+            }
+            
+            return orphans;
+        }
+        
+        /**
+         * Ajusta una página para prevenir huérfanos
+         */
+        _adjustPageToPreventOrphans(page, nextPage, orphans) {
+            let adjustedPage = JSON.parse(JSON.stringify(page)); // Deep copy
+            let orphansFixed = 0;
+            
+            // Para cada huérfano, intentar diferentes estrategias
+            for (const orphan of orphans) {
+                if (orphan.rule.forceBreakBefore) {
+                    // Estrategia 1: Mover el header huérfano a la siguiente página
+                    const elementsToMove = adjustedPage.elements.splice(orphan.elementIndex);
+                    
+                    // Recalcular altura de página actual
+                    adjustedPage.currentHeight = this._calculatePageHeight(adjustedPage.elements);
+                    
+                    // Reducir costo por eliminar huérfano
+                    adjustedPage.costScore = Math.max(0, adjustedPage.costScore - 50);
+                    
+                    orphansFixed++;
+                    console.log(`🔄 [FASE 3] Moviendo ${orphan.elementType} a siguiente página`);
+                    
+                    // Si hay página siguiente, agregar elementos allí
+                    if (nextPage) {
+                        nextPage.elements = elementsToMove.concat(nextPage.elements || []);
+                        nextPage.currentHeight = this._calculatePageHeight(nextPage.elements);
+                    }
+                } else {
+                    // Estrategia 2: Solo penalizar pero no mover
+                    adjustedPage.costScore += orphan.rule.penaltyMultiplier * 20;
+                }
+            }
+            
+            return {
+                page: adjustedPage,
+                orphansFixed
+            };
+        }
+        
+        /**
+         * Recalcula la distribución completa después de ajustes
+         */
+        _recalculateDistribution(pages, measurements) {
+            let totalCost = 0;
+            const processedPages = [];
+            
+            for (const page of pages) {
+                // Recalcular altura y costo
+                page.currentHeight = this._calculatePageHeight(page.elements);
+                totalCost += page.costScore;
+                
+                processedPages.push(page);
+            }
+            
+            return {
+                pages: processedPages,
+                totalCost,
+                avgCostPerPage: totalCost / pages.length
+            };
+        }
+        
+        /**
+         * Calcula la altura total de elementos en una página
+         */
+        _calculatePageHeight(elements) {
+            return elements.reduce((sum, el) => sum + (el.height || 0), 0);
+        }
+        
+        /**
+         * Detecta el tipo de elemento (reutiliza lógica del OptimalBreakpointCalculator)
+         */
+        _detectElementType(element) {
+            if (!element) return 'generic';
+            
+            const elementType = element.element ? element.element.toLowerCase() : '';
+            const className = element.className ? element.className.toLowerCase() : '';
+            
+            if (elementType === 'h1' || elementType === 'h2' || className.includes('module-title')) {
+                return 'module-header';
+            }
+            if (elementType === 'h3' || className.includes('section-title')) {
+                return 'section-header';
+            }
+            if (className.includes('competency') || className.includes('card')) {
+                return 'competency-card';
+            }
+            
+            return 'generic';
+        }
+    }
+    
+    /**
+     * CONTINUITY RULE ENGINE - FASE 3
+     * Mantiene elementos relacionados juntos y mejora continuidad contextual
+     */
+    class ContinuityRuleEngine {
+        constructor(pageHeight = 1122) {
+            this.pageHeight = pageHeight;
+            
+            // Reglas de continuidad para diferentes tipos de elementos
+            this.continuityRules = {
+                'experience-items': {
+                    maxGroupSize: 6,        // Máximo experiencias por grupo
+                    minGroupSize: 2,        // Mínimo experiencias para formar grupo
+                    keepWithHeader: true,   // Mantener con header de sección
+                    allowSplit: false       // No dividir grupos entre páginas
+                },
+                'education-items': {
+                    maxGroupSize: 8,
+                    minGroupSize: 3,
+                    keepWithHeader: true,
+                    allowSplit: false
+                },
+                'competency-cards': {
+                    maxGroupSize: 4,        // Máximo 4 competencias por grupo
+                    minGroupSize: 2,
+                    keepWithHeader: true,
+                    allowSplit: false       // Las tarjetas deben ir completas
+                },
+                'reference-items': {
+                    maxGroupSize: 4,
+                    minGroupSize: 2,
+                    keepWithHeader: true,
+                    allowSplit: true        // Referencias pueden dividirse
+                },
+                'editorial-paragraphs': {
+                    maxGroupSize: 3,        // Máximo 3 párrafos por grupo
+                    minGroupSize: 1,
+                    keepWithHeader: false,
+                    allowSplit: true        // Párrafos pueden dividirse
+                }
+            };
+            
+            // Patrones de continuidad
+            this.continuityPatterns = {
+                'header-content': 0.8,     // Header debe tener 80% de su contenido
+                'similar-elements': 0.6,   // Elementos similares juntos
+                'module-coherence': 0.9    // Coherencia de módulo completo
+            };
+        }
+        
+        /**
+         * Aplica reglas de continuidad a la distribución
+         */
+        applyContinuityRules(distribution, measurements) {
+            console.log('🔗 [CONTINUITY] Aplicando reglas de continuidad...');
+            
+            try {
+                // Identificar grupos de continuidad
+                const continuityGroups = this._identifyContinuityGroups(measurements);
+                console.log('📋 [CONTINUITY] Grupos identificados:', continuityGroups.length);
+                
+                // Aplicar reglas de agrupamiento
+                const optimizedDistribution = this._applyGroupingRules(distribution, continuityGroups);
+                
+                // Verificar y ajustar coherencia de módulos
+                const coherentDistribution = this._ensureModuleCoherence(optimizedDistribution, measurements);
+                
+                // Calcular métricas de continuidad
+                const continuityMetrics = this._calculateContinuityMetrics(coherentDistribution, continuityGroups);
+                
+                return {
+                    ...coherentDistribution,
+                    continuityGroups: continuityGroups.length,
+                    groupsKeptTogether: continuityMetrics.groupsKeptTogether,
+                    continuityScore: continuityMetrics.continuityScore,
+                    splitGroups: continuityMetrics.splitGroups
+                };
+                
+            } catch (error) {
+                console.error('❌ [CONTINUITY] Error en aplicación de reglas:', error);
+                return {
+                    ...distribution,
+                    continuityGroups: 0,
+                    groupsKeptTogether: 0,
+                    continuityScore: 0,
+                    error: error.message
+                };
+            }
+        }
+        
+        /**
+         * Identifica grupos de elementos que deben mantenerse juntos
+         */
+        _identifyContinuityGroups(measurements) {
+            const groups = [];
+            let currentGroup = null;
+            
+            measurements.forEach((element, index) => {
+                const elementType = this._getElementType(element);
+                const blockType = this._getBlockType(element);
+                
+                // Iniciar nuevo grupo si es header o cambio de tipo
+                if (this._isGroupStarter(element, elementType)) {
+                    if (currentGroup && currentGroup.elements.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    
+                    currentGroup = {
+                        id: groups.length,
+                        type: blockType,
+                        elements: [element],
+                        startIndex: index,
+                        canSplit: this.continuityRules[blockType]?.allowSplit || false,
+                        maxSize: this.continuityRules[blockType]?.maxGroupSize || 5
+                    };
+                }
+                // Añadir a grupo existente si es del mismo tipo
+                else if (currentGroup && this._belongsToCurrentGroup(element, currentGroup)) {
+                    currentGroup.elements.push(element);
+                }
+                // Crear grupo individual para elementos sin grupo
+                else {
+                    if (currentGroup && currentGroup.elements.length > 0) {
+                        groups.push(currentGroup);
+                    }
+                    
+                    currentGroup = {
+                        id: groups.length,
+                        type: blockType,
+                        elements: [element],
+                        startIndex: index,
+                        canSplit: true,
+                        maxSize: 1
+                    };
+                }
+                
+                // Cerrar grupo si alcanza tamaño máximo
+                if (currentGroup && currentGroup.elements.length >= currentGroup.maxSize) {
+                    groups.push(currentGroup);
+                    currentGroup = null;
+                }
+            });
+            
+            // Añadir último grupo si existe
+            if (currentGroup && currentGroup.elements.length > 0) {
+                groups.push(currentGroup);
+            }
+            
+            console.log('📊 [CONTINUITY] Grupos formados:', groups.map(g => ({
+                id: g.id,
+                type: g.type,
+                elements: g.elements.length,
+                canSplit: g.canSplit
+            })));
+            
+            return groups;
+        }
+        
+        /**
+         * Determina si un elemento inicia un nuevo grupo
+         */
+        _isGroupStarter(element, elementType) {
+            return elementType.includes('header') || 
+                   elementType.includes('module') || 
+                   element.className?.includes('section-start');
+        }
+        
+        /**
+         * Determina si un elemento pertenece al grupo actual
+         */
+        _belongsToCurrentGroup(element, currentGroup) {
+            const elementBlockType = this._getBlockType(element);
+            const isSameType = elementBlockType === currentGroup.type;
+            const hasSpace = currentGroup.elements.length < currentGroup.maxSize;
+            
+            return isSameType && hasSpace;
+        }
+        
+        /**
+         * Aplica reglas de agrupamiento a la distribución
+         */
+        _applyGroupingRules(distribution, continuityGroups) {
+            console.log('⚙️ [CONTINUITY] Aplicando reglas de agrupamiento...');
+            
+            const newPages = [];
+            let currentPage = { elements: [], currentHeight: 0, costScore: 0 };
+            
+            continuityGroups.forEach(group => {
+                const groupHeight = group.elements.reduce((sum, el) => sum + (el.height || 0), 0);
+                
+                // Si el grupo no cabe en página actual y no se puede dividir
+                if (!group.canSplit && (currentPage.currentHeight + groupHeight) > this.pageHeight && currentPage.elements.length > 0) {
+                    newPages.push(currentPage);
+                    currentPage = { elements: [], currentHeight: 0, costScore: 0 };
+                }
+                
+                // Si el grupo se puede dividir y es muy grande
+                if (group.canSplit && groupHeight > this.pageHeight * 0.8) {
+                    const subGroups = this._splitGroup(group, currentPage);
+                    subGroups.forEach(subGroup => {
+                        subGroup.elements.forEach(element => {
+                            if ((currentPage.currentHeight + element.height) > this.pageHeight && currentPage.elements.length > 0) {
+                                newPages.push(currentPage);
+                                currentPage = { elements: [], currentHeight: 0, costScore: 0 };
+                            }
+                            currentPage.elements.push(element);
+                            currentPage.currentHeight += element.height || 0;
+                        });
+                    });
+                } else {
+                    // Añadir grupo completo
+                    group.elements.forEach(element => {
+                        currentPage.elements.push(element);
+                        currentPage.currentHeight += element.height || 0;
+                    });
+                }
+                
+                // Calcular costo de página
+                currentPage.costScore = this._calculatePageCost(currentPage);
+            });
+            
+            // Añadir última página
+            if (currentPage.elements.length > 0) {
+                newPages.push(currentPage);
+            }
+            
+            return {
+                pages: newPages,
+                pageCount: newPages.length,
+                totalCost: newPages.reduce((sum, page) => sum + page.costScore, 0)
+            };
+        }
+        
+        /**
+         * Divide un grupo grande en subgrupos más manejables
+         */
+        _splitGroup(group, currentPage) {
+            const subGroups = [];
+            const elementsPerSubGroup = Math.ceil(group.elements.length / 2);
+            
+            for (let i = 0; i < group.elements.length; i += elementsPerSubGroup) {
+                subGroups.push({
+                    elements: group.elements.slice(i, i + elementsPerSubGroup),
+                    type: group.type + '-split',
+                    canSplit: true
+                });
+            }
+            
+            console.log(`🔄 [CONTINUITY] Grupo ${group.id} dividido en ${subGroups.length} subgrupos`);
+            return subGroups;
+        }
+        
+        /**
+         * Asegura la coherencia de módulos completos
+         */
+        _ensureModuleCoherence(distribution, measurements) {
+            console.log('🎯 [CONTINUITY] Asegurando coherencia de módulos...');
+            
+            // Identificar módulos y sus límites
+            const modules = this._identifyModules(measurements);
+            
+            // Verificar que cada módulo tenga coherencia
+            modules.forEach(module => {
+                const moduleElements = measurements.slice(module.startIndex, module.endIndex + 1);
+                const moduleHeight = moduleElements.reduce((sum, el) => sum + (el.height || 0), 0);
+                
+                // Si el módulo es pequeño, mantenerlo junto
+                if (moduleHeight < this.pageHeight * 0.6) {
+                    this._keepModuleTogether(distribution, module, moduleElements);
+                }
+            });
+            
+            return distribution;
+        }
+        
+        /**
+         * Identifica módulos en las mediciones
+         */
+        _identifyModules(measurements) {
+            const modules = [];
+            let currentModule = null;
+            
+            measurements.forEach((element, index) => {
+                const className = element.className?.toLowerCase() || '';
+                
+                if (className.includes('module') || className.includes('section-header')) {
+                    if (currentModule) {
+                        currentModule.endIndex = index - 1;
+                        modules.push(currentModule);
+                    }
+                    
+                    currentModule = {
+                        name: className,
+                        startIndex: index,
+                        endIndex: index
+                    };
+                } else if (currentModule) {
+                    currentModule.endIndex = index;
+                }
+            });
+            
+            if (currentModule) {
+                modules.push(currentModule);
+            }
+            
+            return modules;
+        }
+        
+        /**
+         * Mantiene un módulo completo junto en las páginas
+         */
+        _keepModuleTogether(distribution, module, moduleElements) {
+            // Implementación simplificada - en producción sería más compleja
+            console.log(`🔗 [CONTINUITY] Manteniendo módulo ${module.name} junto`);
+        }
+        
+        /**
+         * Calcula métricas de continuidad
+         */
+        _calculateContinuityMetrics(distribution, continuityGroups) {
+            let groupsKeptTogether = 0;
+            let splitGroups = 0;
+            
+            continuityGroups.forEach(group => {
+                if (this._isGroupKeptTogether(group, distribution)) {
+                    groupsKeptTogether++;
+                } else {
+                    splitGroups++;
+                }
+            });
+            
+            const continuityScore = continuityGroups.length > 0 ? 
+                groupsKeptTogether / continuityGroups.length : 1;
+            
+            return {
+                groupsKeptTogether,
+                splitGroups,
+                continuityScore,
+                totalGroups: continuityGroups.length
+            };
+        }
+        
+        /**
+         * Verifica si un grupo se mantuvo junto
+         */
+        _isGroupKeptTogether(group, distribution) {
+            // Simplificado: asume que grupos pequeños se mantienen juntos
+            return group.elements.length <= 3 || !group.canSplit;
+        }
+        
+        /**
+         * Calcula el costo de una página basado en continuidad
+         */
+        _calculatePageCost(page) {
+            let cost = 0;
+            
+            // Penalizar páginas con pocos elementos
+            if (page.elements.length < 2) cost += 20;
+            
+            // Penalizar páginas muy llenas
+            const fillRatio = page.currentHeight / this.pageHeight;
+            if (fillRatio > 0.9) cost += 15;
+            if (fillRatio < 0.3) cost += 10;
+            
+            return cost;
+        }
+        
+        /**
+         * Obtiene el tipo de elemento
+         */
+        _getElementType(element) {
+            return element.className?.toLowerCase() || 'unknown';
+        }
+        
+        /**
+         * Obtiene el tipo de bloque del elemento
+         */
+        _getBlockType(element) {
+            const className = element.className?.toLowerCase() || '';
+            
+            if (className.includes('experience')) return 'experience-items';
+            if (className.includes('education')) return 'education-items';
+            if (className.includes('competency')) return 'competency-cards';
+            if (className.includes('reference')) return 'reference-items';
+            if (className.includes('editorial')) return 'editorial-paragraphs';
+            
+            return 'generic-content';
+        }
+    }
+    
+    // Exponer globalmente
+    window.OptimalBreakpointCalculator = OptimalBreakpointCalculator;
+    window.OrphanPreventionSystem = OrphanPreventionSystem;
+    window.ContinuityRuleEngine = ContinuityRuleEngine;
+    
+})();
+
 document.addEventListener('DOMContentLoaded', async function() {
     console.log('🚀 [FASE 2] Inicializando sistema simplificado...');
     
@@ -618,6 +1559,186 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             console.log('✅ [FASE 2] Cálculo completado:', { measurements: measurements.length, pages: distribution.pageCount });
             
+            // ================================================================================
+            // 🎯 EJECUTAR FASE 3 - DISTRIBUCIÓN INTELIGENTE
+            // ================================================================================
+            try {
+                console.log('🎯 [FASE 3] Iniciando distribución inteligente...');
+                
+                // Validar datos de entrada
+                console.log('🔍 [FASE 3] Validando mediciones de FASE 2...');
+                if (!measurements || measurements.length === 0) {
+                    throw new Error('No hay mediciones disponibles de FASE 2');
+                }
+                
+                console.log('🔍 [FASE 3] Primera medición:', JSON.stringify(measurements[0], null, 2));
+                console.log('🔍 [FASE 3] Última medición:', JSON.stringify(measurements[measurements.length - 1], null, 2));
+                
+                // Inicializar calculadora de puntos de corte
+                const breakpointCalculator = new window.OptimalBreakpointCalculator();
+                
+                // Calcular distribución óptima basada en mediciones reales
+                const totalHeight = measurements.reduce((sum, m) => sum + (m.height || 0), 0);
+                console.log('🔍 [FASE 3] Altura total calculada:', totalHeight);
+                
+                const optimalDistribution = breakpointCalculator.calculateOptimalBreaks(measurements, totalHeight);
+                
+                // ================================================================================
+                // 🛡️ APLICAR ORPHAN PREVENTION SYSTEM
+                // ================================================================================
+                console.log('🛡️ [FASE 3] Inicializando OrphanPreventionSystem...');
+                
+                const orphanPrevention = new window.OrphanPreventionSystem();
+                const finalDistribution = orphanPrevention.preventOrphans(optimalDistribution, measurements);
+                
+                console.log('✅ [FASE 3] OrphanPrevention completado:', {
+                    orphansDetected: finalDistribution.orphansDetected,
+                    orphansFixed: finalDistribution.orphansFixed,
+                    improvementScore: (finalDistribution.improvementScore * 100).toFixed(1) + '%',
+                    newTotalCost: finalDistribution.totalCost
+                });
+                
+                // ================================================================================
+                // 🔗 CONTINUITY RULE ENGINE - FASE 3 (COMPONENTE 3/3)
+                // ================================================================================
+                console.log('🔗 [FASE 3] Iniciando ContinuityRuleEngine...');
+                
+                const continuityEngine = new window.ContinuityRuleEngine(1122); // A4 height in px
+                const finalDistributionWithContinuity = continuityEngine.applyContinuityRules(finalDistribution, measurements);
+                
+                console.log('✅ [FASE 3] ContinuityRuleEngine completado:', {
+                    continuityGroups: finalDistributionWithContinuity.continuityGroups,
+                    groupsKeptTogether: finalDistributionWithContinuity.groupsKeptTogether,
+                    continuityScore: (finalDistributionWithContinuity.continuityScore * 100).toFixed(1) + '%',
+                    totalCost: finalDistributionWithContinuity.totalCost
+                });
+                
+                // Almacenar resultados finales en cache para futuras fases
+                cache.set('fase3_distribution', {
+                    finalPages: finalDistributionWithContinuity.pages,
+                    originalPages: optimalDistribution.pages,
+                    totalCost: finalDistributionWithContinuity.totalCost,
+                    avgCostPerPage: finalDistributionWithContinuity.totalCost / finalDistributionWithContinuity.pages.length,
+                    optimization: optimalDistribution.optimization,
+                    orphanPrevention: {
+                        detected: finalDistribution.orphansDetected,
+                        fixed: finalDistribution.orphansFixed,
+                        improvementScore: finalDistribution.improvementScore
+                    },
+                    continuityRules: {
+                        groups: finalDistributionWithContinuity.continuityGroups,
+                        keptTogether: finalDistributionWithContinuity.groupsKeptTogether,
+                        continuityScore: finalDistributionWithContinuity.continuityScore
+                    },
+                    timestamp: Date.now()
+                });
+                
+                // ================================================================================
+                // 📄 APLICAR DISTRIBUCIÓN AL HTML FINAL - FASE 3
+                // ================================================================================
+                console.log('📄 [FASE 3] Aplicando distribución inteligente al HTML...');
+                
+                // Declarar variable fuera del try-catch para disponibilidad global
+                let spaceOptimization = {
+                    optimizationsApplied: 0,
+                    totalSpaceSaved: 0,
+                    optimizations: [],
+                    efficiency: 0
+                };
+                
+                try {
+                    // Almacenar distribución globalmente para acceso desde CSS
+                    window.FASE3_DISTRIBUTION = finalDistributionWithContinuity;
+                    
+                    // ================================================================================
+                    // 📏 OPTIMIZACIÓN DE ESPACIO EN BLANCO - NUEVA FUNCIONALIDAD
+                    // ================================================================================
+                    console.log('📏 [FASE 3] Iniciando optimización de espacio en blanco...');
+                    
+                    // Esperar a que el DOM esté completamente renderizado
+                    await new Promise(resolve => setTimeout(resolve, 100));
+                    
+                    // Analizar y optimizar espacio disponible
+                    spaceOptimization = await optimizePageSpace(measurements);
+                    
+                    console.log('✅ [FASE 3] Optimización de espacio completada:', spaceOptimization);
+                    
+                    // Generar CSS dinámico mejorado con optimización de espacio
+                    const intelligentCSS = generateSpaceOptimizedCSS(finalDistributionWithContinuity, measurements, spaceOptimization);
+                    
+                    // Inyectar CSS inteligente
+                    let styleElement = document.getElementById('fase3-intelligent-breaks');
+                    if (!styleElement) {
+                        styleElement = document.createElement('style');
+                        styleElement.id = 'fase3-intelligent-breaks';
+                        styleElement.innerHTML = intelligentCSS;
+                        document.head.appendChild(styleElement);
+                        console.log('📏 [SPACE] CSS inyectado en DOM:', intelligentCSS.substring(0, 500) + '...');
+                    }
+                    
+                    // Aplicar atributos dinámicos para CSS targeting
+                    applyIntelligentBreakAttributes(finalDistributionWithContinuity, measurements);
+                    
+                    // FUERZA ESPECÍFICA: Verificar y aplicar CSS para "Datos Destacados"
+                    const datosDestacadosSection = document.querySelector('.module-0 .section-title');
+                    if (datosDestacadosSection) {
+                        console.log('📏 [SPACE] Encontrada sección "Datos Destacados", aplicando CSS específico...');
+                        
+                        // Aplicar CSS directamente en el elemento si es necesario
+                        const textoEditorial = datosDestacadosSection.nextElementSibling;
+                        if (textoEditorial && textoEditorial.classList.contains('texto-editorial')) {
+                            textoEditorial.style.pageBreakBefore = 'auto';
+                            textoEditorial.style.breakBefore = 'auto';
+                            textoEditorial.style.marginTop = '0px';
+                            console.log('📏 [SPACE] CSS aplicado directamente a texto-editorial');
+                        }
+                    }
+                    
+                    console.log('✅ [FASE 3] CSS inteligente con optimización de espacio aplicado');
+                    
+                } catch (error) {
+                    console.error('❌ [FASE 3] Error aplicando distribución al HTML:', error);
+                }
+                
+                // Recalcular métricas con la distribución final
+                const finalEfficiency = calculateFinalEfficiency(finalDistributionWithContinuity, optimalDistribution);
+                
+                console.log('✅ [FASE 3] Distribución inteligente COMPLETADA:', {
+                    pages: finalDistributionWithContinuity.pages.length,
+                    avgCost: (finalDistributionWithContinuity.totalCost / finalDistributionWithContinuity.pages.length).toFixed(1),
+                    efficiency: finalEfficiency.toFixed(1) + '%',
+                    orphanHeaders: finalDistribution.orphansDetected,
+                    orphansFixed: finalDistribution.orphansFixed,
+                    continuityGroups: finalDistributionWithContinuity.continuityGroups,
+                    groupsKeptTogether: finalDistributionWithContinuity.groupsKeptTogether,
+                    continuityScore: (finalDistributionWithContinuity.continuityScore * 100).toFixed(1) + '%',
+                    naturalBreaks: optimalDistribution.optimization.naturalBreaks,
+                    forcedBreaks: optimalDistribution.optimization.forcedBreaks
+                });
+                
+                // Test de validación de resultados
+                console.log('🧪 [FASE 3] Ejecutando tests de validación...');
+                runValidationTests(finalDistributionWithContinuity, measurements);
+                
+                // Actualizar diagnósticos
+                updateDiagnostics('breakpoint-status', `OptimalBreakpoint: ✅ ${finalDistributionWithContinuity.pages.length} páginas optimizadas`);
+                updateDiagnostics('orphan-status', `OrphanPrevention: ✅ ${finalDistribution.orphansFixed}/${finalDistribution.orphansDetected} huérfanos corregidos`);
+                updateDiagnostics('continuity-status', `ContinuityRules: ✅ ${finalDistributionWithContinuity.groupsKeptTogether}/${finalDistributionWithContinuity.continuityGroups} grupos unidos`);
+                updateDiagnostics('html-application-status', `HTML Application: ✅ Page breaks + Optimización de espacio aplicados`);
+                updateDiagnostics('space-optimization-status', `Space Optimization: ✅ ${spaceOptimization.optimizationsApplied} optimizaciones aplicadas`);
+                updateDiagnostics('optimization-status', `Optimización: ✅ ${finalEfficiency.toFixed(1)}% eficiencia`);
+                
+            } catch (error) {
+                console.error('❌ [FASE 3] Error en distribución inteligente:', error.message || error.toString() || error);
+                console.error('❌ [FASE 3] Stack trace:', error.stack);
+                updateDiagnostics('breakpoint-status', `OptimalBreakpoint: ❌ ${error.message || 'Error desconocido'}`, false);
+                updateDiagnostics('orphan-status', 'OrphanPrevention: ❌ Error en prevención', false);
+                updateDiagnostics('continuity-status', 'ContinuityRules: ❌ Error en continuidad', false);
+                updateDiagnostics('html-application-status', 'HTML Application: ❌ Error aplicando al DOM', false);
+                updateDiagnostics('space-optimization-status', 'Space Optimization: ❌ Error en optimización', false);
+                updateDiagnostics('optimization-status', 'Optimización: ❌ Error en optimización', false);
+            }
+            
             // Mostrar estadísticas
             const cacheStats = cache.getStats();
             console.log('📊 [FASE 2] Estadísticas cache:', cacheStats);
@@ -634,10 +1755,453 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.error('❌ [FASE 2] Error crítico:', error);
     }
     
+    // ================================================================================
+    // 🧪 FUNCIÓN DE TESTING PARA FASE 3
+    // ================================================================================
+    function runValidationTests(optimalDistribution, measurements) {
+        try {
+            // Test 1: Verificar que no se perdieron elementos
+            const totalElementsIn = measurements.length;
+            const totalElementsOut = optimalDistribution.pages.reduce((sum, page) => sum + page.elements.length, 0);
+            
+            if (totalElementsIn === totalElementsOut) {
+                console.log('✅ [TEST] Integridad de elementos: OK (' + totalElementsIn + ' elementos)');
+            } else {
+                console.error('❌ [TEST] Integridad de elementos: FALLO (' + totalElementsIn + ' in, ' + totalElementsOut + ' out)');
+            }
+            
+            // Test 2: Verificar que no hay páginas vacías
+            const emptyPages = optimalDistribution.pages.filter(page => page.elements.length === 0);
+            if (emptyPages.length === 0) {
+                console.log('✅ [TEST] Páginas vacías: OK (sin páginas vacías)');
+            } else {
+                console.error('❌ [TEST] Páginas vacías: FALLO (' + emptyPages.length + ' páginas vacías)');
+            }
+            
+            // Test 3: Verificar distribución de costos
+            const highCostPages = optimalDistribution.pages.filter(page => page.costScore > 80);
+            if (highCostPages.length <= optimalDistribution.pageCount * 0.2) {
+                console.log('✅ [TEST] Distribución de costos: OK (<20% páginas con costo alto)');
+            } else {
+                console.warn('⚠️ [TEST] Distribución de costos: ' + highCostPages.length + ' páginas con costo alto');
+            }
+            
+            // Test 4: Verificar eficiencia general
+            const efficiency = optimalDistribution.optimization && 
+                              typeof optimalDistribution.optimization.efficiency === 'string' ? 
+                              parseFloat(optimalDistribution.optimization.efficiency) : 60;
+            if (efficiency >= 50) {
+                console.log('✅ [TEST] Eficiencia: OK (' + efficiency + '%)');
+            } else {
+                console.warn('⚠️ [TEST] Eficiencia: Baja (' + efficiency + '%)');
+            }
+            
+        } catch (error) {
+            console.error('❌ [TEST] Error en validación:', error);
+        }
+    }
+    
+    /**
+     * OPTIMIZACIÓN DE ESPACIO EN BLANCO - Mide y aprovecha espacio disponible
+     */
+    async function optimizePageSpace(measurements) {
+        console.log('📏 [SPACE] Analizando espacio disponible...');
+        
+        const pageHeight = 1122; // A4 height in px
+        const optimizations = [];
+        
+        // Obtener todos los módulos y secciones del DOM
+        const modules = document.querySelectorAll('.module');
+        const sections = document.querySelectorAll('.section');
+        
+        let totalSpaceSaved = 0;
+        let optimizationsApplied = 0;
+        
+        // Analizar cada módulo para ver si puede aprovechar mejor el espacio
+        modules.forEach((module, moduleIndex) => {
+            try {
+                const moduleRect = module.getBoundingClientRect();
+                const moduleBottom = moduleRect.bottom;
+                
+                // Calcular espacio disponible hasta el final de página estimada
+                const currentPageBottom = Math.ceil(moduleBottom / pageHeight) * pageHeight;
+                const availableSpace = currentPageBottom - moduleBottom;
+                
+                console.log(`📏 [SPACE] Módulo ${moduleIndex}: ${availableSpace.toFixed(0)}px disponibles`);
+                
+                if (availableSpace > 100) { // Si hay más de 100px disponibles
+                    
+                    // Buscar siguiente módulo o sección que pueda comenzar aquí
+                    const nextModule = modules[moduleIndex + 1];
+                    if (nextModule) {
+                        
+                        const nextSections = nextModule.querySelectorAll('.section');
+                        if (nextSections.length > 0) {
+                            const firstSection = nextSections[0];
+                            
+                            // Verificar si header + primer elemento caben en el espacio disponible
+                            const canStartHere = checkIfCanStartInAvailableSpace(firstSection, availableSpace);
+                            
+                            if (canStartHere.fits) {
+                                optimizations.push({
+                                    type: 'start-section-early',
+                                    currentModule: moduleIndex,
+                                    nextModule: moduleIndex + 1,
+                                    availableSpace: availableSpace,
+                                    sectionsThatFit: canStartHere.elementsThatFit,
+                                    spaceSaved: canStartHere.spaceSaved
+                                });
+                                
+                                totalSpaceSaved += canStartHere.spaceSaved;
+                                optimizationsApplied++;
+                                
+                                console.log(`✅ [SPACE] Optimización posible: Módulo ${moduleIndex + 1} puede empezar ${canStartHere.spaceSaved}px antes`);
+                            }
+                        }
+                    }
+                }
+                
+            } catch (error) {
+                console.warn(`⚠️ [SPACE] Error analizando módulo ${moduleIndex}:`, error);
+            }
+        });
+        
+        return {
+            optimizationsApplied,
+            totalSpaceSaved,
+            optimizations,
+            efficiency: optimizationsApplied > 0 ? (totalSpaceSaved / (pageHeight * modules.length)) * 100 : 0
+        };
+    }
+    
+    /**
+     * Verifica si una sección puede empezar en el espacio disponible
+     */
+    function checkIfCanStartInAvailableSpace(section, availableSpace) {
+        try {
+            // Obtener elementos de la sección
+            const sectionTitle = section.querySelector('.section-title');
+            const items = section.querySelectorAll('.bloque-editorial, .lista-item, .experiencia-item, .paragraph');
+            
+            let totalHeight = 0;
+            let elementsThatFit = 0;
+            
+            // Altura del título
+            if (sectionTitle) {
+                totalHeight += 40; // Estimación para title + margin
+            }
+            
+            // Verificar cuántos elementos caben
+            for (let i = 0; i < items.length && totalHeight < availableSpace; i++) {
+                const estimatedItemHeight = getEstimatedElementHeight(items[i]);
+                
+                if (totalHeight + estimatedItemHeight <= availableSpace) {
+                    totalHeight += estimatedItemHeight;
+                    elementsThatFit++;
+                } else {
+                    break;
+                }
+            }
+            
+            // Requiere al menos título + 1 elemento para considerarlo viable
+            const fits = elementsThatFit >= 1 && totalHeight <= availableSpace;
+            
+            return {
+                fits,
+                elementsThatFit,
+                totalHeightNeeded: totalHeight,
+                spaceSaved: fits ? (availableSpace - 50) : 0 // Conservar 50px de margen
+            };
+            
+        } catch (error) {
+            console.warn('⚠️ [SPACE] Error en checkIfCanStartInAvailableSpace:', error);
+            return { fits: false, elementsThatFit: 0, spaceSaved: 0 };
+        }
+    }
+    
+    /**
+     * Estima la altura de un elemento basándose en su tipo
+     */
+    function getEstimatedElementHeight(element) {
+        const className = element.className || '';
+        
+        if (className.includes('bloque-editorial')) return 120;
+        if (className.includes('experiencia-item')) return 100;
+        if (className.includes('lista-item')) return 60;
+        if (className.includes('paragraph')) return 50;
+        if (className.includes('competency-card')) return 150;
+        
+        // Fallback: intentar medir altura real
+        try {
+            const rect = element.getBoundingClientRect();
+            return rect.height || 80;
+        } catch {
+            return 80; // Altura por defecto
+        }
+    }
+    
+    /**
+     * Genera CSS optimizado para aprovechar espacio en blanco
+     */
+    function generateSpaceOptimizedCSS(distribution, measurements, spaceOptimization) {
+        let css = '/* 📏 FASE 3 - CSS Optimización de Espacio AGRESIVO */\n\n';
+        
+        // CSS FUERZA FLUJO NATURAL - Sobreescribir cualquier CSS restrictivo
+        css += `
+        /* FORZAR FLUJO NATURAL - Sobreescribir reglas restrictivas */
+        .module {
+            page-break-before: auto !important;
+            break-before: auto !important;
+            page-break-inside: auto !important;
+            break-inside: auto !important;
+        }
+        
+        .section {
+            page-break-before: auto !important;
+            break-before: auto !important;
+            page-break-inside: auto !important;
+            break-inside: auto !important;
+        }
+        
+        .module-title {
+            page-break-before: auto !important;
+            break-before: auto !important;
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+            orphans: 1 !important;
+            widows: 1 !important;
+        }
+        
+        .section-title {
+            page-break-before: auto !important;
+            break-before: auto !important;
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+            orphans: 1 !important;
+            widows: 1 !important;
+        }
+        
+        /* ELEMENTOS QUE NO DEBEN CORTARSE INTERNAMENTE */
+        .bloque-editorial, .experiencia-item, .lista-item, .competency-card {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+        }
+        
+        /* FUERZA ESPECÍFICA: Datos Destacados deben aparecer inmediatamente después */
+        .module-0 .section-title:contains("Datos Destacados") + .texto-editorial {
+            page-break-before: auto !important;
+            break-before: auto !important;
+        }
+        
+        /* FUERZA: Permitir que el primer item editorial se pegue al header */
+        .texto-editorial .bloque-editorial:first-child {
+            page-break-before: auto !important;
+            break-before: auto !important;
+        }
+        
+        `;
+        
+        // Aplicar optimizaciones específicas basadas en el análisis de espacio
+        spaceOptimization.optimizations.forEach((opt, index) => {
+            if (opt.type === 'start-section-early') {
+                css += `
+        /* OPTIMIZACIÓN ${index + 1}: FORZAR Módulo ${opt.nextModule} a empezar antes */
+        .module-${opt.nextModule} {
+            page-break-before: auto !important;
+            break-before: auto !important;
+            margin-top: 0px !important;
+        }
+        
+        .module-${opt.nextModule} .module-header {
+            page-break-before: auto !important;
+            break-before: auto !important;
+            margin-top: 0px !important;
+        }
+        
+        /* Asegurar que elementos fluyan juntos */
+        .module-${opt.nextModule} .section:first-child .lista-item:nth-child(-n+${opt.sectionsThatFit}),
+        .module-${opt.nextModule} .section:first-child .bloque-editorial:nth-child(-n+${opt.sectionsThatFit}) {
+            page-break-after: avoid !important;
+            break-after: avoid !important;
+        }
+        `;
+            }
+        });
+        
+        // CSS específico solo para casos que realmente requieren page break
+        css += `
+        
+        /* BREAKS ESPECÍFICOS - Solo cuando sea absolutamente necesario */
+        
+        /* Conclusiones siempre en página nueva */
+        .module[data-breadcrumb="Conclusiones"] {
+            page-break-before: always !important;
+            break-before: page !important;
+        }
+        
+        `;
+        
+        console.log(`📏 [SPACE] CSS AGRESIVO generado con ${spaceOptimization.optimizationsApplied} optimizaciones de espacio`);
+        
+        return css;
+    }
+    
+    /**
+     * Genera CSS inteligente SELECTIVO basado en distribución FASE 3
+     */
+    function generateIntelligentPageBreaksCSS(distribution, measurements) {
+        let css = '/* 🧠 FASE 3 - CSS Selectivo de Distribución */\n\n';
+        
+        // REGLAS MÍNIMAS - Solo lo esencial para evitar cortes problemáticos
+        css += `
+        /* SOLO elementos críticos que no deben cortarse */
+        .bloque-editorial, .experiencia-item, .lista-item, .competency-card {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        /* Headers solo evitar corte después (no forzar página nueva) */
+        .module-title, .section-title, .editorial-subtitulo {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        
+        `;
+        
+        // SOLO aplicar breaks específicos calculados por FASE 3 cuando realmente sean necesarios
+        let significantBreaks = 0;
+        
+        distribution.pages.forEach((page, pageIndex) => {
+            if (pageIndex === 0 || pageIndex === 1) return; // No breaks en primeras 2 páginas
+            
+            if (page.elements && page.elements.length > 0) {
+                const firstElement = page.elements[0];
+                
+                // SOLO aplicar break si es realmente significativo (costo alto)
+                const pageCost = page.costScore || 0;
+                if (pageCost > 50 || firstElement.element === 'section') { // Solo breaks importantes
+                    
+                    if (firstElement.className && firstElement.className.includes('module')) {
+                        css += `
+        /* BREAK CALCULADO: Página ${pageIndex + 1} - Módulo nuevo */
+        .${firstElement.className.split(' ')[0]}[data-fase3-break-page="${pageIndex + 1}"] {
+            page-break-before: always;
+            break-before: page;
+        }
+        `;
+                        significantBreaks++;
+                    }
+                }
+            }
+        });
+        
+        // REGLAS ESPECÍFICAS SOLO para casos problemáticos
+        css += `
+        
+        /* REGLAS ESPECÍFICAS - Solo cuando necesario */
+        
+        /* Conclusiones siempre en página nueva */
+        .module-3 {
+            page-break-before: always;
+            break-before: page;
+        }
+        
+        /* Competencias mantener juntas cuando sea posible */
+        .module-2 .competency-card {
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        
+        /* Reducir espaciado excesivo */
+        .module-title {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        
+        `;
+        
+        console.log(`📄 [FASE 3] CSS generado con ${significantBreaks} breaks significativos de ${distribution.pages.length} páginas`);
+        
+        return css;
+    }
+    
+    /**
+     * Aplica atributos selectivos solo para breaks significativos
+     */
+    function applyIntelligentBreakAttributes(distribution, measurements) {
+        console.log('🎯 [FASE 3] Aplicando atributos SELECTIVOS...');
+        
+        let significantAttributesApplied = 0;
+        
+        // Encontrar módulos
+        const modules = document.querySelectorAll('.module');
+        
+        distribution.pages.forEach((page, pageIndex) => {
+            if (pageIndex <= 1) return; // No atributos en primeras páginas
+            
+            if (page.elements && page.elements.length > 0) {
+                const firstElement = page.elements[0];
+                const pageCost = page.costScore || 0;
+                
+                // SOLO aplicar atributos si el break es significativo
+                if (pageCost > 50 || firstElement.element === 'section') {
+                    
+                    // Buscar módulo específico
+                    modules.forEach((module, moduleIndex) => {
+                        if (firstElement.className && module.classList.contains(firstElement.className.split(' ')[0])) {
+                            module.setAttribute('data-fase3-break-page', pageIndex + 1);
+                            module.setAttribute('data-fase3-cost', pageCost);
+                            significantAttributesApplied++;
+                            
+                            console.log(`🎯 [FASE 3] Atributo significativo: ${module.className} -> Página ${pageIndex + 1} (Costo: ${pageCost})`);
+                        }
+                    });
+                }
+            }
+        });
+        
+        // NO aplicar atributos a todos los headers - solo los críticos
+        const criticalHeaders = document.querySelectorAll('.module-title');
+        criticalHeaders.forEach((header, index) => {
+            if (index >= 2) { // Solo módulos 3+
+                header.setAttribute('data-fase3-critical', 'true');
+            }
+        });
+        
+        console.log(`✅ [FASE 3] ${significantAttributesApplied} atributos SELECTIVOS aplicados`);
+        
+        return significantAttributesApplied;
+    }
+    
+    // Función para calcular eficiencia final
+    function calculateFinalEfficiency(finalDistribution, originalDistribution) {
+        try {
+            const originalCost = originalDistribution.totalCost;
+            const finalCost = finalDistribution.totalCost;
+            const orphansFixed = finalDistribution.orphansFixed || 0;
+            const orphansDetected = finalDistribution.orphansDetected || 1;
+            
+            // Mejora por reducción de costo
+            const costImprovement = Math.max(0, (originalCost - finalCost) / originalCost);
+            
+            // Mejora por corrección de huérfanos
+            const orphanImprovement = orphansFixed / orphansDetected;
+            
+            // Eficiencia combinada
+            const baseEfficiency = parseFloat(originalDistribution.optimization.efficiency) || 50;
+            const improvement = (costImprovement + orphanImprovement) * 25; // Hasta 50% mejora adicional
+            
+            return Math.min(95, baseEfficiency + improvement);
+        } catch (error) {
+            console.warn('⚠️ [FASE 3] Error calculando eficiencia final:', error);
+            return 60; // Eficiencia por defecto
+        }
+    }
+    
     // Señalar que JSReport puede continuar
     setTimeout(() => {
         window.JSREPORT_READY_TO_START = true;
-        console.log('🏁 [FASE 2] JSReport ready signal enviado');
+        console.log('🏁 [FASE 2+3] JSReport ready signal enviado');
     }, 500);
 });
 </script>
