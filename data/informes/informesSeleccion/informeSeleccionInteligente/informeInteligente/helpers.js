@@ -703,8 +703,15 @@ function beforeRender(req, res) {
   // 🚀 FASE 2 - MOTOR DE CÁLCULO AVANZADO
   // ================================================================================
   console.log('🚀 [FASE 2] Iniciando integración en beforeRender');
+  console.log('📊 [FASE 2] Estado __layout antes de FASE 2:', JSON.stringify(data.__layout, null, 2));
   
   try {
+    // Asegurar que __layout existe
+    if (!data.__layout) {
+      console.error('❌ [FASE 2] __layout no existe, creándolo...');
+      data.__layout = {};
+    }
+    
     // Los scripts FASE 2 (calculation-engine, measurement-database, measurement-cache)
     // se cargarán e inicializarán automáticamente en el navegador
     // Este hook solo prepara los datos para el cálculo
@@ -718,6 +725,7 @@ function beforeRender(req, res) {
     };
     
     console.log('✅ [FASE 2] Metadata FASE 2 inyectada en __layout');
+    console.log('📊 [FASE 2] Estado __layout después de FASE 2:', JSON.stringify(data.__layout, null, 2));
     
   } catch (error) {
     console.error('❌ [FASE 2] Error en integración beforeRender:', error);
@@ -759,3 +767,8 @@ function configureHelpers() {
   };
 }
 
+// Exportar helpers y beforeRender para JSReport
+module.exports = {
+  helpers: configureHelpers(),
+  beforeRender: beforeRender
+};

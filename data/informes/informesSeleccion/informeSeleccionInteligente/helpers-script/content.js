@@ -280,6 +280,15 @@ function debug(context) {
 }
 
 /**
+ * Helper JSON para serializar objetos en templates
+ * @param {*} obj - Objeto a serializar
+ * @returns {string} JSON string
+ */
+function json(obj) {
+  return JSON.stringify(obj);
+}
+
+/**
  * Hook beforeRender para procesar datos antes del renderizado
  * Este se ejecuta ANTES del renderizado del template
  * @param {Object} req - Request de JSReport
@@ -690,33 +699,48 @@ function beforeRender(req, res) {
     enableContinuationHeaders: true
   };
   
+  // ================================================================================
+  // 🚀 FASE 2 - MOTOR DE CÁLCULO AVANZADO
+  // ================================================================================
+  console.log('🚀 [FASE 2] Iniciando integración en beforeRender');
+  console.log('📊 [FASE 2] Estado __layout antes de FASE 2:', JSON.stringify(data.__layout, null, 2));
+  
+  try {
+    // Asegurar que __layout existe
+    if (!data.__layout) {
+      console.error('❌ [FASE 2] __layout no existe, creándolo...');
+      data.__layout = {};
+    }
+    
+    // Los scripts FASE 2 (calculation-engine, measurement-database, measurement-cache)
+    // se cargarán e inicializarán automáticamente en el navegador
+    // Este hook solo prepara los datos para el cálculo
+    
+    data.__layout.fase2 = {
+      enabled: true,
+      timestamp: new Date().toISOString(),
+      calculationRequested: true,
+      phantomRenderEnabled: true,
+      diagnosticsEnabled: true
+    };
+    
+    console.log('✅ [FASE 2] Metadata FASE 2 inyectada en __layout');
+    console.log('📊 [FASE 2] Estado __layout después de FASE 2:', JSON.stringify(data.__layout, null, 2));
+    
+  } catch (error) {
+    console.error('❌ [FASE 2] Error en integración beforeRender:', error);
+    data.__layout.fase2 = {
+      enabled: false,
+      error: error.message,
+      timestamp: new Date().toISOString()
+    };
+  }
+  
   // Inyectar el CSS como string
   data.styles = req.template.styles || '';
   
   req.data = data;
 }
 
-// REGISTRAR TODOS LOS HELPERS PARA HANDLEBARS EN JSREPORT
-function configureHelpers() {
-  return {
-    formatDate,
-    formatDateRange,
-    getYear,
-    splitParagraphs,
-    parseBullets,
-    ifEquals,
-    ifInArray,
-    or,
-    and,
-    truncate,
-    calculateAge,
-    assetUrl,
-    capitalize,
-    uppercase,
-    lowercase,
-    formatNumber,
-    percentage,
-    debug
-  };
-}
-
+// En JSReport, simplemente definir las funciones las hace disponibles como helpers
+// No necesitamos exportar ni registrar manualmente

@@ -567,14 +567,23 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Debug: Verificar estado de FASE 2
         console.log('🔍 [FASE 2] Debug __layout:', {{{json __layout}}});
         
-        // Forzar habilitación de FASE 2 para testing
+        // Verificar habilitación real de FASE 2
         const fase2Enabled = {{#if __layout.fase2.enabled}}true{{else}}false{{/if}};
         const fase2Exists = {{#if __layout.fase2}}true{{else}}false{{/if}};
         
-        console.log('🔍 [FASE 2] Estado detallado:', { fase2Exists, fase2Enabled });
+        console.log('🔍 [FASE 2] Estado detallado:', { 
+            fase2Exists, 
+            fase2Enabled,
+            metadata: {{#if __layout.fase2}}{{{json __layout.fase2}}}{{else}}null{{/if}}
+        });
         
-        // Ejecutar FASE 2 independientemente del estado (para debugging)
-        console.log('🚀 [FASE 2] Ejecutando FASE 2 (modo forzado para testing)');
+        // Ejecutar FASE 2 solo si está habilitada
+        if (!fase2Enabled) {
+            console.warn('⚠️ [FASE 2] FASE 2 no está habilitada. Verificar beforeRender en helpers.js');
+            return;
+        }
+        
+        console.log('✅ [FASE 2] FASE 2 habilitada correctamente, ejecutando...');
         
         // Actualizar diagnósticos en tiempo real
         const updateDiagnostics = (id, message, success = true) => {
