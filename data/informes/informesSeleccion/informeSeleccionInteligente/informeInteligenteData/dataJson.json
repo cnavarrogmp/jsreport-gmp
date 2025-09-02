@@ -27,7 +27,7 @@
         "idInformeCvPublicacionInforme": 10006,
         "idInformeCvPublicacion": 10006,
         "tipoInforme": 0,
-        "valoracion": "Candidata finalista. Presenta un perfil t\u00E9cnico y personal alineado con los requerimientos del puesto. Su experiencia previa, actitud y disponibilidad inmediata hacen que sea una opci\u00F3n muy v\u00E1lida para el rol. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempus vestibulum libero, id egestas urna bibendum eget. In vehicula tempor libero in sagittis. Sed tempus, odio vitae venenatis ornare, odio diam efficitur erat, suscipit ullamcorper ipsum purus vitae turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec in fermentum ante. Duis et interdum massa. Quisque sed eros at eros volutpat elementum. Vestibulum nec nisi eget urna viverra iaculis eu in risus. Nullam pulvinar velit convallis dui dignissim porta. Fusce elementum dui in hendrerit consequat. Phasellus vitae lacus porttitor, tempor tortor eget, eleifend nisl. Curabitur imperdiet, metus non interdum placerat, mi lacus congue est, vel vestibulum lorem sapien ut justo. Curabitur cursus, ligula quis volutpat mollis, orci dolor rhoncus sem, ut blandit orci ante non augue. Ut non dui at elit blandit dictum. Quisque quis mollis elit, sed aliquet erat. Duis eu tellus id lorem bibendum viverra.\n\nDonec euismod nisi a luctus vestibulum. Cras a tortor tortor. Maecenas lacinia nec dui at aliquam. Nulla ut augue leo. Aliquam interdum, lectus convallis tempor hendrerit, ex sem ullamcorper leo, a laoreet ante dolor a eros. Suspendisse volutpat lobortis feugiat. Mauris in ipsum sed orci posuere tincidunt eu nec sem. Etiam quis egestas libero. Curabitur ut dolor est. In tempus odio nec risus vehicula venenatis. Pellentesque ultricies dui nec magna interdum venenatis. Quisque sed est sit amet magna auctor ornare. Sed tincidunt viverra diam, vel luctus magna consectetur aliquam. Phasellus interdum diam nec lectus laoreet, non cursus tortor elementum.",
+        "valoracion": "Candidata finalista. Presenta un perfil t\u00E9cnico y personal alineado con los requerimientos del puesto. Su experiencia previa, actitud y disponibilidad inmediata hacen que sea una opci\u00F3n muy v\u00E1lida para el rol.",
         "puntuacion": 1.5,
         "aspectosPersonales": "Persona responsable, met\u00F3dica y con alta orientaci\u00F3n al orden y la planificaci\u00F3n. Transmite seriedad, compromiso y estabilidad. Destaca por su trato amable y profesional.",
         "trayectoriaFormativa": "Formaci\u00F3n en administraci\u00F3n y ofim\u00E1tica, con conocimientos actualizados en herramientas de gesti\u00F3n y entorno Office. Ha complementado su perfil con cursos espec\u00EDficos relacionados con gesti\u00F3n documental y atenci\u00F3n al cliente.",
@@ -72,7 +72,7 @@
             "idInformeCvPublicacion": 10006,
             "competencia": "Esmero",
             "puntuacion": 2.5,
-            "observaciones": "Muestra una capacidad limitada para trabajar con precisión. Aunque hay un esfuerzo por mantener el orden y prestar atención a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentración. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
+            "observaciones": "Muestra una capacidad limitada para trabajar con precisi\u00F3n. Aunque hay un esfuerzo por mantener el orden y prestar atenci\u00F3n a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentraci\u00F3n. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
             "orden": 1
         },
         {
@@ -80,40 +80,8 @@
             "idInformeCvPublicacion": 10006,
             "competencia": "Sociabilidad",
             "puntuacion": 2.5,
-            "observaciones": "La persona demuestra una capacidad básica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los demás está presente, pero aún necesita mejorar",
+            "observaciones": "La persona demuestra una capacidad b\u00E1sica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los dem\u00E1s est\u00E1 presente, pero a\u00FAn necesita mejorar",
             "orden": 2
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10004,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Comunicación",
-            "puntuacion": 3.0,
-            "observaciones": "Se expresa con claridad y es capaz de transmitir información de manera efectiva tanto oral como escrita.",
-            "orden": 3
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10005,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Trabajo en equipo",
-            "puntuacion": 3.5,
-            "observaciones": "Colabora activamente con sus compañeros y contribuye al logro de los objetivos comunes.",
-            "orden": 4
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10006,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Adaptabilidad",
-            "puntuacion": 3.0,
-            "observaciones": "Se adapta con facilidad a los cambios y nuevas situaciones en el entorno laboral.",
-            "orden": 5
-        },
-        {
-            "idInformeCvPublicacionCompetencia": 10007,
-            "idInformeCvPublicacion": 10006,
-            "competencia": "Gestión del tiempo",
-            "puntuacion": 2.8,
-            "observaciones": "Organiza y prioriza tareas de manera eficiente para cumplir con los plazos establecidos.",
-            "orden": 6
         }
     ],
     "experienciasLaborales": [
@@ -314,28 +282,7 @@
             "idioma": "Alem\u00E1n",
             "nivel": "A2",
             "orden": 2
-        },
-      {
-        "idInformeCvPublicacionIdioma": 6,
-        "idInformeCvPublicacion": 10006,
-        "idioma": "Portugues",
-        "nivel": "B2",
-        "orden": 3
-      },
-      {
-        "idInformeCvPublicacionIdioma": 6,
-        "idInformeCvPublicacion": 10006,
-        "idioma": "Gallego",
-        "nivel": "B2",
-        "orden": 4
-      },
-      {
-        "idInformeCvPublicacionIdioma": 6,
-        "idInformeCvPublicacion": 10006,
-        "idioma": "Griego",
-        "nivel": "B2",
-        "orden": 5
-      }
+        }
     ],
     "aplicacionesInformaticas": [
         {
