@@ -1,4 +1,9 @@
 /**
+ * TEST BREAKING - SI ESTE ARCHIVO SE USA, JSREPORT DARÁ ERROR
+ */
+SYNTAX_ERROR_FOR_TESTING();
+
+/**
  * HELPERS PARA INFORME INTELIGENTE
  * FASE 1 - Fundamentos
  * Funciones auxiliares para el template Handlebars
@@ -761,6 +766,12 @@ function beforeRender(req, res) {
       timestamp: new Date().toISOString()
     };
   }
+  
+  // DEBUGGING: Imprimir cantidad de módulos generados
+  console.log(`📊 [DEBUG] Módulos generados: ${data.modulos.length}`);
+  data.modulos.forEach((modulo, index) => {
+    console.log(`   ${index}: ${modulo.titulo} (${modulo.secciones.length} secciones)`);
+  });
   
   // Inyectar el CSS como string
   data.styles = req.template.styles || '';
