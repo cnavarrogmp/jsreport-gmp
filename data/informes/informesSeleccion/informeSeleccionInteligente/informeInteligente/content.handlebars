@@ -103,7 +103,7 @@
 
 <!-- ITERACIÓN DE MÓDULOS DINÁMICOS -->
 {{#each modulos}}
-    <section class="module module-{{@index}}" data-breadcrumb="{{this.titulo}}">
+    <section class="module module-{{@index}} {{#if this.allowSplit}}module-can-split{{else}}module-no-split{{/if}}" data-breadcrumb="{{this.titulo}}">
 
         {{!-- HEADER DEL MÓDULO PRIMERO --}}
         <header class="module-header">

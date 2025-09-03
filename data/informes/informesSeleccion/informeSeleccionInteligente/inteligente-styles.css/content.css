@@ -122,13 +122,21 @@ body.landscape {
   page-break-inside: avoid;
 }
 
-.module {
+/* Módulos que NO pueden dividirse (módulo 1 por ejemplo) */
+.module-no-split {
   break-inside: avoid;
   page-break-inside: avoid;
 }
 
+/* Módulos que SÍ pueden dividirse - dejar fluir naturalmente */
+.module-can-split {
+  /* No aplicar restricciones de página */
+}
+
 .section {
-  break-inside: avoid-page;
+  /* Permitir que las secciones fluyan, solo evitar cortes en medio del contenido */
+  orphans: 3;
+  widows: 3;
 }
 
 h1, h2, h3, h4, h5, h6 {
