@@ -624,17 +624,25 @@ function beforeRender(req, res) {
     }
   }
   
-  if (seccionesConclusiones.length > 0) {
-    data.modulos.push({
-      titulo: 'Conclusiones',
-      subtitulo: 'Evaluación final y recomendaciones',
-      secciones: seccionesConclusiones,
-      moduleType: 'conclusiones',
-      priority: 4,
-      allowSplit: true, // Permitir que las secciones fluyan naturalmente
-      pageType: 'closing' // Cierre del informe
-    });
-  }
+  // ================================================================================
+  // PRUEBA DIAGNÓSTICO: Módulo 4 con contenido igual al módulo 2
+  // ================================================================================
+  
+  // Reutilizar las mismas secciones que el módulo 2
+  data.modulos.push({
+    titulo: 'TEST Conclusiones (copia módulo 2)',
+    subtitulo: 'Mismo contenido que Experiencia & Formación',
+    secciones: seccionesExperienciaFormacion.length > 0 ? seccionesExperienciaFormacion : [{
+      nombre: 'Test Simple',
+      tipo: 'texto',
+      contenido: 'Este es un texto de prueba para ver si el módulo 4 fluye igual que el módulo 2.',
+      breakable: true
+    }],
+    moduleType: 'test-conclusiones',
+    priority: 4,
+    allowSplit: true,
+    pageType: 'content' // Usar mismo pageType que módulo 2
+  });
   
   // Asegurar que los arrays existen (para compatibilidad)
   const arrays = [
