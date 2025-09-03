@@ -632,7 +632,7 @@ function beforeRender(req, res) {
       moduleType: 'conclusiones',
       priority: 4,
       allowSplit: true, // Permitir que las secciones fluyan naturalmente
-      pageType: 'closing' // Cierre del informe
+      pageType: 'content' // Cambio: content en lugar de closing para permitir flujo
     });
   }
   

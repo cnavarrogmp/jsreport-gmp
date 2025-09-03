@@ -1,9 +1,4 @@
 /**
- * TEST BREAKING - SI ESTE ARCHIVO SE USA, JSREPORT DARÁ ERROR
- */
-SYNTAX_ERROR_FOR_TESTING();
-
-/**
  * HELPERS PARA INFORME INTELIGENTE
  * FASE 1 - Fundamentos
  * Funciones auxiliares para el template Handlebars
@@ -629,44 +624,6 @@ function beforeRender(req, res) {
     }
   }
   
-  // ================================================================================
-  // PRUEBA DIAGNÓSTICO: Módulo 4 con contenido igual al módulo 2
-  // ================================================================================
-  
-  // Reutilizar las mismas secciones que el módulo 2
-  data.modulos.push({
-    titulo: 'TEST Conclusiones (copia módulo 2)',
-    subtitulo: 'Mismo contenido que Experiencia & Formación',
-    secciones: seccionesExperienciaFormacion.length > 0 ? seccionesExperienciaFormacion : [{
-      nombre: 'Test Simple',
-      tipo: 'texto',
-      contenido: 'Este es un texto de prueba para ver si el módulo 4 fluye igual que el módulo 2.',
-      breakable: true
-    }],
-    moduleType: 'test-conclusiones',
-    priority: 4,
-    allowSplit: true,
-    pageType: 'content' // Usar mismo pageType que módulo 2
-  });
-  
-  // ================================================================================
-  // MÓDULO DUMMY 5 - Para que el módulo 4 NO sea el último
-  // ================================================================================
-  data.modulos.push({
-    titulo: 'DUMMY - Módulo Final',
-    subtitulo: 'Este módulo está aquí para testing',
-    secciones: [{
-      nombre: 'Sección Dummy',
-      tipo: 'texto',
-      contenido: 'Solo texto de prueba.',
-      breakable: true
-    }],
-    moduleType: 'dummy',
-    priority: 5,
-    allowSplit: true,
-    pageType: 'content'
-  });
-  
   // Asegurar que los arrays existen (para compatibilidad)
   const arrays = [
     'modulos',
@@ -767,11 +724,6 @@ function beforeRender(req, res) {
     };
   }
   
-  // DEBUGGING: Imprimir cantidad de módulos generados
-  console.log(`📊 [DEBUG] Módulos generados: ${data.modulos.length}`);
-  data.modulos.forEach((modulo, index) => {
-    console.log(`   ${index}: ${modulo.titulo} (${modulo.secciones.length} secciones)`);
-  });
   
   // Inyectar el CSS como string
   data.styles = req.template.styles || '';
