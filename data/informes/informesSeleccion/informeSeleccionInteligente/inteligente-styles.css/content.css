@@ -157,6 +157,16 @@ body.landscape {
   page-break-inside: avoid;
 }
 
+/* FORZAR CONTINUIDAD DEL MÓDULO 4 (Conclusiones) - REGLA MUY ESPECÍFICA */
+.module-3, 
+.module-3 .module-header,
+.module-3 .module-title {
+  page-break-before: avoid !important;
+  break-before: avoid !important;
+  break-inside: auto !important;
+  page-break-inside: auto !important;
+}
+
 .section {
   /* Permitir que las secciones fluyan, solo evitar cortes en medio del contenido */
   orphans: 3;
