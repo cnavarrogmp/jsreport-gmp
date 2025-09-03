@@ -2204,6 +2204,9 @@ document.addEventListener('DOMContentLoaded', async function() {
         console.log('🏁 [FASE 2+3] JSReport ready signal enviado');
     }, 500);
 });
+
+// Inyectar datos del template para acceso desde helpers-script
+window.reportData = {{{stringify this}}};
 </script>
 </body>
 </html>
