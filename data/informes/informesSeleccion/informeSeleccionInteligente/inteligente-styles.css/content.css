@@ -841,14 +841,4 @@ p {
   padding-left: var(--grid-2);
 }
 
-/* Clases para control de flujo de módulos (FASE 4 preparación) */
-.module-no-split {
-  /* Los módulos que no se pueden dividir mantienen las reglas existentes */
-  break-inside: avoid;
-  page-break-inside: avoid;
-}
-
-.module-can-split {
-  /* Los módulos que sí se pueden dividir permiten flujo natural */
-  /* No aplicar restricciones de página - permite continuidad */
-}
+/* Eliminadas definiciones duplicadas - ver líneas 127-135 para las reglas principales */
