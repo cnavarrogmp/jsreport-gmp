@@ -134,6 +134,29 @@ body.landscape {
   /* No aplicar restricciones de página */
 }
 
+/* Párrafos en secciones breakables - permiten división */
+.breakable-paragraph {
+  /* Permitir que se dividan entre páginas si es necesario */
+  break-inside: auto;
+  page-break-inside: auto;
+  orphans: 2;
+  widows: 2;
+}
+
+/* Secciones breakables - permiten división entre páginas */
+.section-breakable {
+  break-inside: auto;
+  page-break-inside: auto;
+  orphans: 2;
+  widows: 2;
+}
+
+/* Secciones no breakables - mantienen comportamiento original */
+.section-no-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 .section {
   /* Permitir que las secciones fluyan, solo evitar cortes en medio del contenido */
   orphans: 3;

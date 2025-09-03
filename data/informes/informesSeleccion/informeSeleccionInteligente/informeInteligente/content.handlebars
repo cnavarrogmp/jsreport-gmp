@@ -164,7 +164,7 @@
 
         <div class="module-content">
             {{#each this.secciones}}
-                <div class="section" data-breadcrumb="{{../titulo}} › {{this.nombre}}">
+                <div class="section {{#if this.breakable}}section-breakable{{else}}section-no-break{{/if}}" data-breadcrumb="{{../titulo}} › {{this.nombre}}">
                     <h3 class="section-title">{{this.nombre}}</h3>
 
                     {{#if this.tipo}}
@@ -190,7 +190,7 @@
                         {{#ifEquals this.tipo "texto"}}
                             <div class="text-content">
                                 {{#each (splitParagraphs this.contenido)}}
-                                    <p class="paragraph no-break">{{this}}</p>
+                                    <p class="paragraph {{#if ../breakable}}breakable-paragraph{{else}}no-break{{/if}}">{{this}}</p>
                                 {{/each}}
                             </div>
                         {{/ifEquals}}
