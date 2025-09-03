@@ -644,6 +644,24 @@ function beforeRender(req, res) {
     pageType: 'content' // Usar mismo pageType que módulo 2
   });
   
+  // ================================================================================
+  // MÓDULO DUMMY 5 - Para que el módulo 4 NO sea el último
+  // ================================================================================
+  data.modulos.push({
+    titulo: 'DUMMY - Módulo Final',
+    subtitulo: 'Este módulo está aquí para testing',
+    secciones: [{
+      nombre: 'Sección Dummy',
+      tipo: 'texto',
+      contenido: 'Solo texto de prueba.',
+      breakable: true
+    }],
+    moduleType: 'dummy',
+    priority: 5,
+    allowSplit: true,
+    pageType: 'content'
+  });
+  
   // Asegurar que los arrays existen (para compatibilidad)
   const arrays = [
     'modulos',
