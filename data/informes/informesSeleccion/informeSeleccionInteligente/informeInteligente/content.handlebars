@@ -2206,7 +2206,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // Inyectar datos del template para acceso desde helpers-script
-window.reportData = {{{stringify this}}};
+window.reportData = JSON.parse('{{{stringify this}}}');
 </script>
 </body>
 </html>
