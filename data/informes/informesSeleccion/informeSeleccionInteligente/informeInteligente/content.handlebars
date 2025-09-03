@@ -2205,8 +2205,120 @@ document.addEventListener('DOMContentLoaded', async function() {
     }, 500);
 });
 
-// Inyectar datos del template para acceso desde helpers-script
+// Inyectar datos del template para acceso desde script de navegador
 window.reportData = JSON.parse('{{{stringify this}}}');
+
+/**
+ * FASE 2-3: Script de navegador para cálculo avanzado
+ */
+
+// Variables globales para JSReport
+window.jsreportReady = false;
+
+/**
+ * FASE 2: Inicialización del motor de cálculo avanzado
+ */
+function initializePhase2() {
+  try {
+    // Verificar que tengamos los datos necesarios
+    if (!window.reportData || !window.reportData.__layout) {
+      console.warn('⚠️ [FASE 2] Datos de layout no disponibles');
+      return false;
+    }
+
+    const layout = window.reportData.__layout;
+    
+    // Solo continuar si FASE 2 está habilitada
+    if (!layout.fase2 || !layout.fase2.enabled) {
+      console.log('ℹ️ [FASE 2] Motor avanzado deshabilitado');
+      return false;
+    }
+
+    console.log('✅ [FASE 2] Motor de cálculo inicializado');
+    return true;
+  } catch (error) {
+    console.error('❌ [FASE 2] Error en inicialización:', error);
+    return false;
+  }
+}
+
+/**
+ * FASE 3: Optimización de distribución
+ */
+function optimizeLayout() {
+  try {
+    // Aplicar optimizaciones de layout
+    const modules = document.querySelectorAll('.module');
+    modules.forEach((module, index) => {
+      const moduleData = window.reportData.modulos && window.reportData.modulos[index];
+      if (moduleData && moduleData.allowSplit) {
+        // Permitir flujo natural para módulos que pueden dividirse
+        module.style.breakInside = 'auto';
+        module.style.pageBreakInside = 'auto';
+      }
+    });
+
+    console.log('✅ [FASE 3] Optimización de layout aplicada');
+    return true;
+  } catch (error) {
+    console.error('❌ [FASE 3] Error en optimización:', error);
+    return false;
+  }
+}
+
+/**
+ * Función principal que se ejecuta cuando el DOM está listo
+ */
+function initializeBrowserScript() {
+  // Esperar a que el DOM esté completamente cargado
+  if (document.readyState !== 'complete') {
+    setTimeout(initializeBrowserScript, 100);
+    return;
+  }
+
+  try {
+    // Inicializar FASE 2
+    const phase2Success = initializePhase2();
+    
+    // Inicializar FASE 3 si FASE 2 fue exitosa
+    if (phase2Success) {
+      setTimeout(() => {
+        optimizeLayout();
+        
+        // Marcar como listo para JSReport
+        window.jsreportReady = true;
+        
+        // Enviar señal a JSReport si waitForJS está habilitado
+        if (window.jsreportRender && typeof window.jsreportRender === 'function') {
+          window.jsreportRender();
+        }
+        
+        console.log('🏁 [SCRIPT] Informe listo para renderizado');
+      }, 100);
+    } else {
+      // Si FASE 2 falla, continuar con renderizado básico
+      window.jsreportReady = true;
+      if (window.jsreportRender) {
+        window.jsreportRender();
+      }
+    }
+    
+  } catch (error) {
+    // En caso de error, no bloquear el renderizado
+    console.error('❌ [SCRIPT] Error crítico:', error);
+    window.jsreportReady = true;
+    if (window.jsreportRender) {
+      window.jsreportRender();
+    }
+  }
+}
+
+// Inicializar cuando el script se carga
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeBrowserScript);
+} else {
+  initializeBrowserScript();
+}
 </script>
 </body>
 </html>
