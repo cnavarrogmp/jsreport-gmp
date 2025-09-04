@@ -341,25 +341,28 @@
                                 </table>
                             </div>
                         {{/ifEquals}}
+                        
+                        {{!-- TIPO: diagnostico-debug (para el módulo de debug) --}}
+                        {{#ifEquals this.tipo "diagnostico-debug"}}
+                            <!-- DEBUG: Verificar si los módulos se están creando -->
+                            <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 10px; page-break-before: always;">
+                                <strong>DEBUG - Total módulos:</strong> {{../../modulos.length}}<br>
+                                {{#if ../../modulos}}
+                                    <strong>Módulos encontrados:</strong><br>
+                                    {{#each ../../modulos}}
+                                        - {{@index}}: {{this.titulo}} ({{this.secciones.length}} secciones)<br>
+                                    {{/each}}
+                                {{else}}
+                                    <strong style="color: red;">⚠️ NO HAY MÓDULOS - beforeRender no se ejecutó</strong>
+                                {{/if}}
+                            </div>
+                        {{/ifEquals}}
                     {{/if}}
                 </div>
             {{/each}}
         </div>
     </section>
 {{/each}}
-
-<!-- DEBUG: Verificar si los módulos se están creando -->
-<div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 10px;">
-    <strong>DEBUG - Total módulos:</strong> {{modulos.length}}<br>
-    {{#if modulos}}
-        <strong>Módulos encontrados:</strong><br>
-        {{#each modulos}}
-            - {{@index}}: {{this.titulo}} ({{this.secciones.length}} secciones)<br>
-        {{/each}}
-    {{else}}
-        <strong style="color: red;">⚠️ NO HAY MÓDULOS - beforeRender no se ejecutó</strong>
-    {{/if}}
-</div>
 
 
 <!-- FOOTER -->

@@ -301,6 +301,9 @@ function beforeRender(req, res) {
   // Compatible con FASES 2-7: Cada módulo tendrá metadata para medición y distribución
   data.modulos = [];
   
+  // Variable global para datosDestacados - necesaria para módulo de prueba
+  let datosDestacados = [];
+  
   // ================================================================================
   // MÓDULO 1 · PRESENTACIÓN (Datos Básicos + Datos Destacados)
   // ================================================================================
@@ -309,7 +312,7 @@ function beforeRender(req, res) {
   // Los datos básicos ya se muestran en el header del candidato, no duplicamos
   
   // SECCIÓN: Datos Destacados (párrafos editoriales)
-  const datosDestacados = [];
+  datosDestacados = []; // Reutilizar la variable global
   if (data.informe) {
     if (data.informe.motivoPresentacion) {
       datosDestacados.push({
@@ -664,6 +667,31 @@ function beforeRender(req, res) {
       priority: 4,
       allowSplit: true, // FASE 4: Permitir flujo natural del módulo
       pageType: 'closing' // Cierre del informe
+    });
+  }
+  
+  // ================================================================================
+  // MÓDULO 5 · DEBUG Y DIAGNÓSTICO (Solo si está habilitado)
+  // ================================================================================
+  // Mover los logs a un módulo separado para que no interfieran con el flujo
+  if (data.__layout && data.__layout.fase2 && data.__layout.fase2.diagnosticsEnabled) {
+    const seccionesDiagnostico = [];
+    
+    seccionesDiagnostico.push({
+      nombre: 'Información de Debug',
+      tipo: 'diagnostico-debug',
+      contenido: 'Panel de diagnóstico FASE 2-3'
+    });
+    
+    data.modulos.push({
+      titulo: 'Diagnóstico del Sistema',
+      subtitulo: 'Información técnica y debugging',
+      secciones: seccionesDiagnostico,
+      moduleType: 'diagnostico',
+      priority: 99, // Último módulo
+      allowSplit: true,
+      pageType: 'debug',
+      isDebugModule: true // Marcador especial para el template
     });
   }
   
