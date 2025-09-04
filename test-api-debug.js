@@ -88,6 +88,9 @@ async function testJSReportAPI() {
       options: {
         debug: {
           logsToResponseHeader: true
+        },
+        reports: {
+          save: true
         }
       }
     });
@@ -109,14 +112,28 @@ async function testJSReportAPI() {
     const renderResponse = await makeRequest(renderOptions, requestPayload);
     
     // Paso 4: Analizar logs de renderizado
-    console.log('\n📋 PASO 4: Analizando logs de renderizado...');
-    const logs = renderResponse.headers['debug-logs'];
+    console.log('\n📋 PASO 4: Analizando logs y headers de renderizado...');
+    
+    // Mostrar todos los headers para debugging
+    console.log('🔍 TODOS LOS HEADERS:');
+    Object.keys(renderResponse.headers).forEach(key => {
+      console.log(`  ${key}: ${renderResponse.headers[key]}`);
+    });
+    
+    const logs = renderResponse.headers['debug-logs'] || renderResponse.headers['x-jsreport-logs'];
     if (logs) {
-      console.log('🔍 LOGS DE JSREPORT:');
+      console.log('\n🔍 LOGS DE JSREPORT:');
       console.log('=' .repeat(40));
       const decodedLogs = Buffer.from(logs, 'base64').toString('utf-8');
       console.log(decodedLogs);
       console.log('=' .repeat(40));
+      
+      // Buscar específicamente los console.log de helpers.js
+      if (decodedLogs.includes('DEBUG') || decodedLogs.includes('datosDestacados')) {
+        console.log('✅ ¡ENCONTRADOS LOGS DE HELPERS.JS!');
+      } else {
+        console.log('⚠️ No se encontraron logs específicos de helpers.js');
+      }
     } else {
       console.log('⚠️ No se encontraron logs en la respuesta');
     }
