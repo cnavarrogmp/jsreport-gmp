@@ -574,7 +574,11 @@ function beforeRender(req, res) {
   // ESTE ES UN MÓDULO DE PRUEBA PARA DIAGNOSTICAR EL PROBLEMA DE FLUJO DE PÁGINAS
   const seccionesPresentacionCopia = [];
   
-  // Copiar los mismos datos destacados del módulo 1
+  // DEBUG: Verificar contenido de datosDestacados
+  console.log('🔍 [DEBUG] datosDestacados.length:', datosDestacados.length);
+  console.log('🔍 [DEBUG] datosDestacados:', JSON.stringify(datosDestacados, null, 2));
+  
+  // Copiar los mismos datos destacados del módulo 1 - FORZAR CREACIÓN PARA PRUEBAS
   if (datosDestacados.length > 0) {
     seccionesPresentacionCopia.push({
       nombre: 'Datos Destacados (COPIA DE PRUEBA)',
@@ -585,9 +589,23 @@ function beforeRender(req, res) {
       minHeight: 120,
       blockType: 'editorial-paragraphs'
     });
+  } else {
+    // FORZAR MÓDULO DE PRUEBA AUN SIN DATOS
+    seccionesPresentacionCopia.push({
+      nombre: 'MÓDULO DE PRUEBA FORZADO',
+      tipo: 'texto',
+      contenido: 'Este es un módulo de prueba creado para diagnosticar el problema de flujo de páginas. Si ves este módulo, significa que se está creando correctamente.',
+      priority: 2,
+      breakable: true,
+      minHeight: 60,
+      blockType: 'test-content'
+    });
   }
   
+  console.log('🔍 [DEBUG] seccionesPresentacionCopia.length:', seccionesPresentacionCopia.length);
+  
   if (seccionesPresentacionCopia.length > 0) {
+    console.log('🔍 [DEBUG] Creando módulo de prueba...');
     data.modulos.push({
       titulo: 'MÓDULO DE PRUEBA - Copia Presentación',
       subtitulo: 'Este es un módulo de prueba para verificar flujo de páginas',
@@ -597,6 +615,9 @@ function beforeRender(req, res) {
       allowSplit: true, // Permitir flujo natural como el módulo 4
       pageType: 'test' // Tipo de prueba
     });
+    console.log('🔍 [DEBUG] Módulo de prueba creado. Total módulos:', data.modulos.length);
+  } else {
+    console.log('❌ [DEBUG] NO se creó el módulo de prueba - seccionesPresentacionCopia está vacío');
   }
   
   // ================================================================================
@@ -694,6 +715,12 @@ function beforeRender(req, res) {
       isDebugModule: true // Marcador especial para el template
     });
   }
+  
+  // DEBUG FINAL: Mostrar todos los módulos creados
+  console.log('🔍 [DEBUG FINAL] Total módulos creados:', data.modulos.length);
+  data.modulos.forEach((modulo, index) => {
+    console.log(`🔍 [DEBUG] Módulo ${index}: ${modulo.titulo} (${modulo.secciones.length} secciones, allowSplit: ${modulo.allowSplit})`);
+  });
   
   // Asegurar que los arrays existen (para compatibilidad)
   const arrays = [
