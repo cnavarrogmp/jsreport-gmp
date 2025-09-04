@@ -362,7 +362,7 @@ function beforeRender(req, res) {
       secciones: seccionesPresentacion,
       moduleType: 'presentacion',
       priority: 1,
-      allowSplit: false, // La presentación debe ir completa
+      allowSplit: false, // La presentación debe ir completa en una página
       pageType: 'opening' // Equivale a "Página 1"
     });
   }
@@ -631,8 +631,8 @@ function beforeRender(req, res) {
       secciones: seccionesConclusiones,
       moduleType: 'conclusiones',
       priority: 4,
-      allowSplit: false, // Las conclusiones deben ir completas
-      pageType: 'closing' // Cierre del informe
+      allowSplit: true, // Permitir que las secciones fluyan naturalmente
+      pageType: 'content' // Cambio: content en lugar de closing para permitir flujo
     });
   }
   

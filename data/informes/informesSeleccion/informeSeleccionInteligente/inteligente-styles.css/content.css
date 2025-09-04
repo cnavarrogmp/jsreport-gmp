@@ -7,6 +7,7 @@
 :root {
   /* Grid base 8px */
   --grid-unit: 8px;
+  --grid-1: 8px;   /* 1x grid unit - faltaba esta definición */
   --grid-2: 16px;
   --grid-3: 24px;
   --grid-4: 32px;
@@ -122,13 +123,54 @@ body.landscape {
   page-break-inside: avoid;
 }
 
-.module {
+/* Módulos que NO pueden dividirse (módulo 1 por ejemplo) */
+.module-no-split {
   break-inside: avoid;
   page-break-inside: avoid;
 }
 
+/* Módulos que SÍ pueden dividirse - dejar fluir naturalmente */
+.module-can-split {
+  /* No aplicar restricciones de página */
+}
+
+/* Párrafos en secciones breakables - permiten división */
+.breakable-paragraph {
+  /* Permitir que se dividan entre páginas si es necesario */
+  break-inside: auto;
+  page-break-inside: auto;
+  orphans: 2;
+  widows: 2;
+}
+
+/* Secciones breakables - permiten división entre páginas */
+.section-breakable {
+  break-inside: auto;
+  page-break-inside: auto;
+  orphans: 2;
+  widows: 2;
+}
+
+/* Secciones no breakables - mantienen comportamiento original */
+.section-no-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* FORZAR CONTINUIDAD DEL MÓDULO 4 (Conclusiones) - REGLA MUY ESPECÍFICA */
+.module-3, 
+.module-3 .module-header,
+.module-3 .module-title {
+  page-break-before: avoid !important;
+  break-before: avoid !important;
+  break-inside: auto !important;
+  page-break-inside: auto !important;
+}
+
 .section {
-  break-inside: avoid-page;
+  /* Permitir que las secciones fluyan, solo evitar cortes en medio del contenido */
+  orphans: 3;
+  widows: 3;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -142,22 +184,7 @@ p {
   widows: 3;
 }
 
-/* =====================================================
-   ESTILOS ADICIONALES PARA PLACEHOLDER
-   ===================================================== */
-
-.candidate-photo-placeholder {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: var(--gray-200);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-2xl);
-  color: var(--gray-500);
-  border: 2px solid var(--gray-300);
-}
+/* Sección de placeholder eliminada - no se usa en template actual */
 
 /* =====================================================
    PORTADA INTRODUCTORIA
@@ -521,14 +548,7 @@ p {
   background: var(--color-primary);
 }
 
-.item-border-line {
-  /* Ya no necesitamos este elemento */
-  display: none;
-}
-
-.item-content {
-  /* Simplificamos el contenido */
-}
+/* Clases .item-border-line e .item-content eliminadas - obsoletas */
 
 /* EXPERIENCIA LABORAL */
 .experiencia-item::before {
@@ -832,29 +852,26 @@ p {
 }
 
 /* =====================================================
-   UTILIDADES
+   CLASES NECESARIAS PARA TEMPLATE
    ===================================================== */
 
-/* Márgenes basados en grid */
-.mt-1 { margin-top: var(--grid-1); }
-.mt-2 { margin-top: var(--grid-2); }
-.mt-3 { margin-top: var(--grid-3); }
-.mt-4 { margin-top: var(--grid-4); }
-
-.mb-1 { margin-bottom: var(--grid-1); }
-.mb-2 { margin-bottom: var(--grid-2); }
-.mb-3 { margin-bottom: var(--grid-3); }
-.mb-4 { margin-bottom: var(--grid-4); }
-
-/* Padding basado en grid */
-.p-1 { padding: var(--grid-1); }
-.p-2 { padding: var(--grid-2); }
-.p-3 { padding: var(--grid-3); }
-.p-4 { padding: var(--grid-4); }
-
-/* Ocultar en impresión */
-@media print {
-  .no-print {
-    display: none !important;
-  }
+/* Clases usadas en el template Handlebars pero faltantes en CSS */
+.brand-text {
+  display: flex;
+  flex-direction: column;
 }
+
+.candidate-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+}
+
+.candidate-info {
+  flex: 1;
+  padding-left: var(--grid-2);
+}
+
+/* Eliminadas definiciones duplicadas - ver líneas 127-135 para las reglas principales */
