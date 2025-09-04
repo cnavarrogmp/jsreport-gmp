@@ -74,6 +74,7 @@ async function testJSReportAPI() {
   try {
     // Paso 1: Verificar conexión
     console.log('📡 PASO 1: Verificando conexión con JSReport...');
+    
     const versionOptions = {
       hostname: 'localhost',
       port: 5488,
@@ -82,8 +83,16 @@ async function testJSReportAPI() {
     };
     
     const healthCheck = await makeRequest(versionOptions);
-    const versionData = JSON.parse(healthCheck.data.toString());
-    console.log('✅ Conexión exitosa. Versión JSReport:', versionData);
+    console.log('📋 Status de respuesta:', healthCheck.status);
+    console.log('📋 Datos recibidos (raw):', healthCheck.data.toString());
+    
+    if (healthCheck.status === 200 && healthCheck.data.length > 0) {
+      const versionData = JSON.parse(healthCheck.data.toString());
+      console.log('✅ Conexión exitosa. Versión JSReport:', versionData);
+    } else {
+      console.log('⚠️ Respuesta inesperada del servidor');
+      return;
+    }
     
     // Paso 3: Renderizar PDF directamente (saltamos paso 2 para simplificar)
     console.log('\n🎨 PASO 3: Renderizando PDF con datos de prueba...');
