@@ -346,15 +346,17 @@
                         {{#ifEquals this.tipo "diagnostico-debug"}}
                             <!-- DEBUG: Verificar si los módulos se están creando -->
                             <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; font-size: 10px; page-break-before: always;">
-                                <strong>DEBUG - Total módulos:</strong> {{../../modulos.length}}<br>
+                                <strong>🔥 DEBUG ACTUALIZADO - Total módulos:</strong> {{../../modulos.length}}<br>
+                                <strong>🔥 TIMESTAMP: 2025-09-04T08:40:00</strong><br>
                                 {{#if ../../modulos}}
                                     <strong>Módulos encontrados:</strong><br>
                                     {{#each ../../modulos}}
-                                        - {{@index}}: {{this.titulo}} ({{this.secciones.length}} secciones)<br>
+                                        - {{@index}}: {{this.titulo}} ({{this.secciones.length}} secciones, allowSplit: {{this.allowSplit}})<br>
                                     {{/each}}
                                 {{else}}
                                     <strong style="color: red;">⚠️ NO HAY MÓDULOS - beforeRender no se ejecutó</strong>
                                 {{/if}}
+                                <strong style="color: blue;">🔥 SI VES ESTE MENSAJE, EL ARCHIVO SE ACTUALIZÓ CORRECTAMENTE</strong>
                             </div>
                         {{/ifEquals}}
                     {{/if}}
