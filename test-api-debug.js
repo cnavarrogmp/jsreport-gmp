@@ -72,27 +72,8 @@ async function testJSReportAPI() {
   console.log('=' .repeat(50));
   
   try {
-    // Paso 1: Verificar conexión
-    console.log('📡 PASO 1: Verificando conexión con JSReport...');
-    
-    const versionOptions = {
-      hostname: 'localhost',
-      port: 5488,
-      path: '/api/version',
-      method: 'GET'
-    };
-    
-    const healthCheck = await makeRequest(versionOptions);
-    console.log('📋 Status de respuesta:', healthCheck.status);
-    console.log('📋 Datos recibidos (raw):', healthCheck.data.toString());
-    
-    if (healthCheck.status === 200 && healthCheck.data.length > 0) {
-      const versionData = JSON.parse(healthCheck.data.toString());
-      console.log('✅ Conexión exitosa. Versión JSReport:', versionData);
-    } else {
-      console.log('⚠️ Respuesta inesperada del servidor');
-      return;
-    }
+    // Paso 1: Saltar verificación y ir directo al renderizado
+    console.log('📡 PASO 1: JSReport requiere auth, pasando directo al renderizado...');
     
     // Paso 3: Renderizar PDF directamente (saltamos paso 2 para simplificar)
     console.log('\n🎨 PASO 3: Renderizando PDF con datos de prueba...');
