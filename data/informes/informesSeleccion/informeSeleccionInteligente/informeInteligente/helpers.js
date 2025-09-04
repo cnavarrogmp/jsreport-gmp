@@ -311,6 +311,25 @@ function beforeRender(req, res) {
   console.log('📥 [INPUT] datosGenerales:', JSON.stringify(data.datosGenerales || {}, null, 2));
   console.log('📥 [INPUT] datosDestacados count:', data.datosDestacados ? data.datosDestacados.length : 0);
   
+  // MAPEAR DATOS PARA EL TEMPLATE
+  if (data.datosGenerales) {
+    // Template busca datosPersonales.nombreCompleto, mapear desde datosGenerales
+    data.datosPersonales = data.datosPersonales || {};
+    data.datosPersonales.nombreCompleto = data.datosGenerales.nombreCandidato || 'Sin nombre';
+    data.datosPersonales.edad = data.datosGenerales.edad;
+    data.datosPersonales.estadoCivil = data.datosGenerales.estadoCivil;
+    data.datosPersonales.direccion = data.datosGenerales.direccion;
+    data.datosPersonales.telefono = data.datosGenerales.telefono;
+    data.datosPersonales.email = data.datosGenerales.email;
+    
+    console.log('📥 [MAPEO] datosPersonales creado:', JSON.stringify(data.datosPersonales, null, 2));
+  }
+  
+  // MAPEAR CAMPOS QUE EL TEMPLATE ESPERA
+  data.tipoInforme = 'Informe de Selección Inteligente';
+  data.fechaEmision = new Date().toISOString().split('T')[0];
+  data.idInforme = 'INF-' + Date.now();
+  
   if (data.datosDestacados && data.datosDestacados.length > 0) {
     console.log('📥 [INPUT] datosDestacados detalle:');
     data.datosDestacados.forEach((item, idx) => {

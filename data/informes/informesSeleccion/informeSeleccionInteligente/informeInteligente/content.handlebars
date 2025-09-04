@@ -36,6 +36,11 @@
 </head>
 <body class="report {{#if __layout.isLandscape}}landscape{{/if}}" data-breadcrumb="Informe de Selección">
 
+<!-- 🔍 TEXTO DE CONTROL DIRECTO - ELIMINAR DESPUÉS DE DEBUGGING -->
+<div style="background: red; color: white; padding: 10px; font-weight: bold;">
+    🚨 CONTROL: Template se está renderizando correctamente - {{formatDate 'now'}}
+</div>
+
 <!-- MÓDULO 0: PORTADA INTRODUCTORIA -->
 <section class="module cover-page" data-breadcrumb="Portada">
     <!-- HEADER PRINCIPAL - PORTADA INTRODUCTORIA -->
@@ -128,7 +133,14 @@
                         {{/if}}
                     </div>
                     <div class="candidate-info">
-                        <h2 class="candidate-name">{{../datosPersonales.nombreCompleto}}</h2>
+                        <!-- 🔍 CONTROL: Datos del candidato -->
+                        <div style="background: yellow; padding: 5px; border: 2px solid orange;">
+                            <strong>🔍 DEBUG CANDIDATO:</strong><br>
+                            datosPersonales.nombreCompleto: "{{../datosPersonales.nombreCompleto}}"<br>
+                            datosGenerales.nombreCandidato: "{{../datosGenerales.nombreCandidato}}"<br>
+                            JSON keys: {{#each ..}}{{@key}}, {{/each}}
+                        </div>
+                        <h2 class="candidate-name">{{../datosPersonales.nombreCompleto}}{{../datosGenerales.nombreCandidato}}</h2>
                         <div class="info-grid">
                             <div class="info-item">
                                 <span class="info-label">Edad</span>
@@ -365,6 +377,25 @@
         </div>
     </section>
 {{/each}}
+
+<!-- 🧪 MÓDULO DE PRUEBA DIRECTO - CONTROL COMPLETO DEL RENDERIZADO -->
+<section class="module module-test" style="background: lightblue; border: 3px solid blue; padding: 20px; margin: 20px 0;">
+    <header class="module-header">
+        <h2 class="module-title">🧪 MÓDULO DE PRUEBA DIRECTO</h2>
+        <div class="module-subtitle">Insertado directamente en template Handlebars</div>
+    </header>
+    <div class="module-content">
+        <p><strong>✅ CONTROL: Template se renderiza correctamente</strong></p>
+        <p>Si aparece este texto azul, el template Handlebars funciona.</p>
+        <p><strong>Módulos detectados por helpers:</strong> {{modulos.length}}</p>
+        <div style="font-family: monospace; font-size: 12px; background: white; padding: 10px; border: 1px solid #ccc;">
+        {{#each modulos}}
+            <strong>{{@index}}:</strong> {{this.titulo}} ({{this.secciones.length}} secciones)<br>
+        {{/each}}
+        </div>
+        <p><strong>Timestamp:</strong> Renderizado en {{now}}</p>
+    </div>
+</section>
 
 
 <!-- FOOTER -->
