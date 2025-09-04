@@ -1,0 +1,223 @@
+{
+  "datosGenerales": {
+    "nombreCandidato": "Juan Carlos Martínez López",
+    "puestoAspira": "Director de Tecnología e Innovación",
+    "fechaEvaluacion": "2025-09-04",
+    "edad": 38,
+    "estadoCivil": "Casado",
+    "direccion": "Calle Mayor 123, Madrid",
+    "telefono": "+34 666 123 456",
+    "email": "jcmartinez@email.com"
+  },
+  "datosDestacados": [
+    {
+      "nombreCompetencia": "Liderazgo Estratégico",
+      "valorObtenido": 8.5,
+      "valorEsperado": 8.0,
+      "descripcion": "Capacidad excepcional para definir visión estratégica y motivar equipos hacia objetivos comunes"
+    },
+    {
+      "nombreCompetencia": "Innovación y Creatividad",
+      "valorObtenido": 9.2,
+      "valorEsperado": 8.5,
+      "descripcion": "Destacada habilidad para proponer soluciones innovadoras y pensar fuera de los esquemas tradicionales"
+    },
+    {
+      "nombreCompetencia": "Gestión del Cambio",
+      "valorObtenido": 7.8,
+      "valorEsperado": 8.0,
+      "descripcion": "Buena capacidad para liderar procesos de transformación organizacional"
+    },
+    {
+      "nombreCompetencia": "Comunicación Ejecutiva",
+      "valorObtenido": 8.9,
+      "valorEsperado": 8.0,
+      "descripcion": "Excelente capacidad de comunicación con stakeholders de alto nivel"
+    },
+    {
+      "nombreCompetencia": "Orientación a Resultados",
+      "valorObtenido": 9.0,
+      "valorEsperado": 8.5,
+      "descripcion": "Fuerte enfoque en el logro de objetivos y KPIs establecidos"
+    },
+    {
+      "nombreCompetencia": "COMPETENCIA DE PRUEBA",
+      "valorObtenido": 7.5,
+      "valorEsperado": 7.0,
+      "descripcion": "Esta es una competencia adicional para verificar el flujo de páginas y el módulo de prueba"
+    }
+  ],
+  "experienciasLaborales": [
+    {
+      "empresa": "TechCorp Internacional S.A.",
+      "cargo": "CTO - Chief Technology Officer",
+      "fechaInicio": "2020-03-01",
+      "fechaFin": null,
+      "descripcion": "Liderazgo del área tecnológica de empresa multinacional con 500+ empleados. Gestión de presupuesto de 5M€ anuales. Implementación de estrategia de transformación digital que incrementó la eficiencia operativa en 35%.",
+      "logros": [
+        "Reducción de costes tecnológicos en 25%",
+        "Implementación exitosa de arquitectura cloud",
+        "Creación de equipo de innovación de 20 personas"
+      ]
+    },
+    {
+      "empresa": "Innovación Digital SL",
+      "cargo": "Director de Innovación",
+      "fechaInicio": "2017-06-15",
+      "fechaFin": "2020-02-28",
+      "descripcion": "Responsable de la estrategia de innovación y desarrollo de nuevos productos digitales. Gestión de portfolio de 15 proyectos simultáneos.",
+      "logros": [
+        "Lanzamiento de 3 productos digitales exitosos",
+        "Incremento del 40% en satisfacción del cliente",
+        "Premio a la innovación empresarial 2019"
+      ]
+    },
+    {
+      "empresa": "Consultoría Estratégica Plus",
+      "cargo": "Senior Manager - Transformación Digital",
+      "fechaInicio": "2014-09-01",
+      "fechaFin": "2017-06-01",
+      "descripcion": "Consultoría estratégica para grandes empresas en procesos de transformación digital. Gestión de equipos multidisciplinarios en proyectos de alto impacto.",
+      "logros": [
+        "Gestión de proyectos por valor de 10M€",
+        "Tasa de éxito del 95% en proyectos liderados",
+        "Desarrollo de metodología propia de transformación"
+      ]
+    },
+    {
+      "empresa": "StartUp Tecnológica",
+      "cargo": "Co-fundador y CTO",
+      "fechaInicio": "2011-01-15",
+      "fechaFin": "2014-08-15",
+      "descripcion": "Co-fundación de startup tecnológica especializada en soluciones SaaS para el sector retail. Desarrollo completo del producto desde cero.",
+      "logros": [
+        "Captación de 2M€ en rondas de inversión",
+        "Base de 50+ clientes enterprise",
+        "Venta exitosa de la empresa en 2014"
+      ]
+    }
+  ],
+  "formaciones": [
+    {
+      "nombre": "Executive MBA",
+      "centro": "IESE Business School",
+      "fechaInicio": "2018-09-01",
+      "fechaFin": "2020-06-30",
+      "titulo": true,
+      "descripcion": "Especialización en Estrategia Digital y Liderazgo Transformacional"
+    },
+    {
+      "nombre": "Máster en Inteligencia Artificial",
+      "centro": "Universidad Politécnica de Madrid",
+      "fechaInicio": "2015-09-01",
+      "fechaFin": "2017-06-30",
+      "titulo": true,
+      "descripcion": "Especialización en Machine Learning y Deep Learning aplicado a negocio"
+    },
+    {
+      "nombre": "Ingeniería en Informática",
+      "centro": "Universidad Complutense de Madrid",
+      "fechaInicio": "2005-09-01",
+      "fechaFin": "2010-06-30",
+      "titulo": true,
+      "descripcion": "Graduado con mención de honor. Mejor expediente de la promoción"
+    },
+    {
+      "nombre": "Certificación PMP",
+      "centro": "Project Management Institute",
+      "fechaInicio": "2013-03-01",
+      "fechaFin": "2013-06-01",
+      "titulo": true,
+      "descripcion": "Certificación en gestión de proyectos según estándares PMI"
+    },
+    {
+      "nombre": "Programa de Alta Dirección",
+      "centro": "ESADE Business School",
+      "fechaInicio": "2021-02-01",
+      "fechaFin": "2021-07-30",
+      "titulo": true,
+      "descripcion": "Programa intensivo para altos directivos y CEOs"
+    }
+  ],
+  "competencias": [
+    {
+      "competencia": "Liderazgo Transformacional",
+      "puntuacion": 9,
+      "observaciones": "Capacidad probada para liderar equipos en procesos de cambio complejos"
+    },
+    {
+      "competencia": "Pensamiento Estratégico",
+      "puntuacion": 8.5,
+      "observaciones": "Excelente visión de negocio y capacidad de análisis estratégico"
+    },
+    {
+      "competencia": "Gestión de Equipos",
+      "puntuacion": 8.8,
+      "observaciones": "Experiencia gestionando equipos de hasta 50 personas"
+    },
+    {
+      "competencia": "Innovación Disruptiva",
+      "puntuacion": 9.2,
+      "observaciones": "Track record probado en implementación de innovaciones disruptivas"
+    },
+    {
+      "competencia": "Comunicación Ejecutiva",
+      "puntuacion": 8.7,
+      "observaciones": "Habilidad para comunicar ideas complejas de forma clara y persuasiva"
+    },
+    {
+      "competencia": "Negociación",
+      "puntuacion": 8.3,
+      "observaciones": "Experiencia en negociaciones de alto nivel con resultados exitosos"
+    }
+  ],
+  "idiomas": [
+    {
+      "idioma": "Español",
+      "nivel": "Nativo"
+    },
+    {
+      "idioma": "Inglés",
+      "nivel": "C2 - Proficiency"
+    },
+    {
+      "idioma": "Francés",
+      "nivel": "B2 - Intermedio alto"
+    },
+    {
+      "idioma": "Alemán",
+      "nivel": "B1 - Intermedio"
+    }
+  ],
+  "referencias": [
+    {
+      "empresa": "TechCorp Internacional",
+      "referencia": "María González - CEO",
+      "funcionRealizada": "Reporte directo como CTO",
+      "telefono": "+34 600 111 222",
+      "email": "mgonzalez@techcorp.com"
+    },
+    {
+      "empresa": "Innovación Digital SL",
+      "referencia": "Carlos Ruiz - Director General",
+      "funcionRealizada": "Colaboración en proyectos estratégicos",
+      "telefono": "+34 600 333 444",
+      "email": "cruiz@innovaciondigital.com"
+    },
+    {
+      "empresa": "IESE Business School",
+      "referencia": "Prof. Dr. Antonio López",
+      "funcionRealizada": "Profesor y mentor en Executive MBA",
+      "telefono": "+34 600 555 666",
+      "email": "alopez@iese.edu"
+    }
+  ],
+  "informe": {
+    "motivoPresentacion": "El candidato se presenta para la posición de Director de Tecnología e Innovación motivado por la oportunidad de liderar la transformación digital de una organización de primer nivel. Su interés radica en aplicar su experiencia de más de 14 años en el sector tecnológico para impulsar la innovación y el crecimiento sostenible de la empresa. Muestra especial entusiasmo por el desafío de construir y liderar equipos de alto rendimiento en un entorno internacional.",
+    "aspectosPersonales": "Juan Carlos Martínez se presenta como un profesional maduro y equilibrado, con 38 años de edad y una sólida trayectoria profesional. Casado y con dos hijos, demuestra estabilidad personal y capacidad de gestión del equilibrio vida-trabajo. Su presentación es impecable, transmitiendo profesionalidad y confianza. Durante la entrevista mostró excelentes habilidades comunicativas, escucha activa y capacidad de síntesis. Destaca su energía positiva y su orientación natural hacia la resolución de problemas.",
+    "trayectoriaFormativa": "La formación académica del candidato es excepcional, combinando una sólida base técnica con formación ejecutiva de primer nivel. Su Ingeniería Informática le proporciona el conocimiento técnico fundamental, complementado con un Máster en Inteligencia Artificial que le sitúa en la vanguardia tecnológica. El Executive MBA del IESE demuestra su preparación para roles de alta dirección, mientras que las certificaciones adicionales (PMP) y el Programa de Alta Dirección de ESADE reflejan un compromiso continuo con el aprendizaje y el desarrollo profesional. Esta combinación única de formación técnica y empresarial le posiciona idealmente para roles de liderazgo en tecnología e innovación.",
+    "trayectoriaProfesional": "La carrera profesional de Juan Carlos muestra una progresión coherente y ascendente, desde roles técnicos hasta posiciones de alta dirección. Su experiencia emprendedora como co-fundador de una startup exitosa (con venta posterior) demuestra capacidad de innovación y visión de negocio. La transición a consultoría estratégica le proporcionó exposición a múltiples industrias y problemáticas empresariales. Sus roles más recientes como Director de Innovación y CTO en empresas de tamaño considerable evidencian su capacidad para gestionar grandes equipos, presupuestos significativos y proyectos de transformación complejos. Destaca especialmente su track record en implementación exitosa de estrategias digitales con resultados medibles.",
+    "entrevistaPersonal": "Durante la entrevista, el candidato demostró un profundo conocimiento del sector y las tendencias tecnológicas actuales. Articuló claramente su visión sobre el rol de la tecnología como habilitador de negocio, no como un fin en sí mismo. Presentó casos concretos de éxitos pasados, siendo especialmente notable su descripción del proceso de transformación digital en TechCorp, donde logró resultados significativos en eficiencia y reducción de costes. \n\nMostró gran interés por la empresa, habiendo investigado en profundidad nuestros desafíos actuales y oportunidades de mejora. Propuso ideas preliminares sobre cómo abordar la modernización de nuestra infraestructura tecnológica y la creación de una cultura de innovación. \n\nSus respuestas a preguntas situacionales fueron estructuradas y reflejaron un estilo de liderazgo colaborativo pero decisivo. Demostró capacidad de autocrítica al hablar de aprendizajes de proyectos que no alcanzaron los objetivos esperados, mostrando madurez profesional.",
+    "valoracion": "Juan Carlos Martínez López se presenta como un candidato ALTAMENTE RECOMENDABLE para la posición de Director de Tecnología e Innovación. \n\nFORTALEZAS PRINCIPALES:\n- Combinación única de expertise técnica y visión de negocio\n- Experiencia probada en transformación digital y gestión del cambio\n- Liderazgo demostrado con equipos de gran tamaño\n- Track record de resultados medibles y significativos\n- Formación académica de primer nivel\n- Habilidades comunicativas excepcionales\n- Red de contactos relevante en el sector\n\nÁREAS DE DESARROLLO:\n- Podría beneficiarse de mayor exposición a mercados asiáticos\n- Experiencia limitada en sector industrial específico (aunque compensa con rápida curva de aprendizaje)\n\nVALORACIÓN GLOBAL: 9.0/10\n\nEl candidato cumple y excede los requisitos para el puesto. Su combinación de formación, experiencia y habilidades personales le posicionan como un activo estratégico para liderar la agenda de tecnología e innovación de la organización. Se recomienda proceder con una oferta competitiva acorde con su nivel de senioridad y las condiciones del mercado para este tipo de perfiles."
+  }
+}

@@ -137,40 +137,34 @@ async function step4_GeneratePDF() {
   console.log('\n🔹 PASO 4: GENERAR PDF VIA API');
   console.log('=' .repeat(50));
   
-  // Datos de prueba mejorados con módulo extra
-  const testData = {
-    datosGenerales: {
-      nombreCandidato: "CANDIDATO DE PRUEBA",
-      puestoAspira: "Puesto de Prueba",
-      fechaEvaluacion: new Date().toISOString().split('T')[0]
-    },
-    datosDestacados: [
-      {
-        nombreCompetencia: "Competencia 1",
-        valorObtenido: 8.5,
-        valorEsperado: 7.0,
-        descripcion: "Descripción de competencia 1"
+  // Cargar datos completos desde archivo
+  let testData;
+  try {
+    testData = JSON.parse(fs.readFileSync(path.join(__dirname, 'datos-completos-test.json'), 'utf-8'));
+    console.log('📄 Datos cargados desde datos-completos-test.json');
+    console.log(`   - ${testData.datosDestacados.length} competencias destacadas`);
+    console.log(`   - ${testData.experienciasLaborales.length} experiencias laborales`);
+    console.log(`   - ${testData.formaciones.length} formaciones`);
+    console.log(`   - ${testData.competencias.length} competencias`);
+    console.log(`   - Informe completo incluido`);
+  } catch (error) {
+    console.log('⚠️ No se pudo cargar datos-completos-test.json, usando datos básicos');
+    testData = {
+      datosGenerales: {
+        nombreCandidato: "CANDIDATO DE PRUEBA",
+        puestoAspira: "Puesto de Prueba",
+        fechaEvaluacion: new Date().toISOString().split('T')[0]
       },
-      {
-        nombreCompetencia: "Competencia 2", 
-        valorObtenido: 7.2,
-        valorEsperado: 8.0,
-        descripcion: "Descripción de competencia 2"
-      },
-      {
-        nombreCompetencia: "Competencia 3",
-        valorObtenido: 9.1,
-        valorEsperado: 8.5,
-        descripcion: "Descripción de competencia 3"
-      },
-      {
-        nombreCompetencia: "Competencia 4 (TEST)",
-        valorObtenido: 7.8,
-        valorEsperado: 7.5,
-        descripcion: "Módulo de prueba para verificar flujo"
-      }
-    ]
-  };
+      datosDestacados: [
+        {
+          nombreCompetencia: "Competencia 1",
+          valorObtenido: 8.5,
+          valorEsperado: 7.0,
+          descripcion: "Descripción de competencia 1"
+        }
+      ]
+    };
+  }
   
   return new Promise((resolve, reject) => {
     const requestPayload = JSON.stringify({
