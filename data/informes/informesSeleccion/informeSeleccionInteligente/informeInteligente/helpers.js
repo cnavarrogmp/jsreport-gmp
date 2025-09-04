@@ -631,7 +631,7 @@ function beforeRender(req, res) {
       secciones: seccionesConclusiones,
       moduleType: 'conclusiones',
       priority: 4,
-      allowSplit: false, // Las conclusiones deben ir completas
+      allowSplit: true, // FASE 4: Permitir flujo natural del módulo
       pageType: 'closing' // Cierre del informe
     });
   }
