@@ -566,6 +566,37 @@ function beforeRender(req, res) {
   }
   
   // ================================================================================
+  // MÓDULO DE PRUEBA - COPIA DE PRESENTACIÓN DESPUÉS DE COMPETENCIAS
+  // ================================================================================
+  // ESTE ES UN MÓDULO DE PRUEBA PARA DIAGNOSTICAR EL PROBLEMA DE FLUJO DE PÁGINAS
+  const seccionesPresentacionCopia = [];
+  
+  // Copiar los mismos datos destacados del módulo 1
+  if (datosDestacados.length > 0) {
+    seccionesPresentacionCopia.push({
+      nombre: 'Datos Destacados (COPIA DE PRUEBA)',
+      tipo: 'texto-editorial',
+      items: datosDestacados, // Reutilizar los mismos datos
+      priority: 2,
+      breakable: true,
+      minHeight: 120,
+      blockType: 'editorial-paragraphs'
+    });
+  }
+  
+  if (seccionesPresentacionCopia.length > 0) {
+    data.modulos.push({
+      titulo: 'MÓDULO DE PRUEBA - Copia Presentación',
+      subtitulo: 'Este es un módulo de prueba para verificar flujo de páginas',
+      secciones: seccionesPresentacionCopia,
+      moduleType: 'prueba-presentacion',
+      priority: 3.5, // Entre módulo 3 y 4
+      allowSplit: true, // Permitir flujo natural como el módulo 4
+      pageType: 'test' // Tipo de prueba
+    });
+  }
+  
+  // ================================================================================
   // MÓDULO 4 · CONCLUSIONES
   // ================================================================================
   const seccionesConclusiones = [];
