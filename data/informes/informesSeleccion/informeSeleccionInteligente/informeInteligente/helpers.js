@@ -330,10 +330,41 @@ function beforeRender(req, res) {
   // ================================================================================
   const seccionesPresentacion = [];
   
-  // Los datos básicos ya se muestran en el header del candidato, no duplicamos
+  // SECCIÓN: Datos Básicos del Candidato
+  if (data.datosGenerales) {
+    const itemsDatosBasicos = [];
+    if (data.datosGenerales.edad) itemsDatosBasicos.push({ label: 'Edad', value: data.datosGenerales.edad + ' años' });
+    if (data.datosGenerales.estadoCivil) itemsDatosBasicos.push({ label: 'Estado Civil', value: data.datosGenerales.estadoCivil });
+    if (data.datosGenerales.direccion) itemsDatosBasicos.push({ label: 'Dirección', value: data.datosGenerales.direccion });
+    if (data.datosGenerales.telefono) itemsDatosBasicos.push({ label: 'Teléfono', value: data.datosGenerales.telefono });
+    if (data.datosGenerales.email) itemsDatosBasicos.push({ label: 'Email', value: data.datosGenerales.email });
+    
+    if (itemsDatosBasicos.length > 0) {
+      seccionesPresentacion.push({
+        nombre: 'Datos Personales',
+        tipo: 'lista-compacta',
+        items: itemsDatosBasicos,
+        priority: 1,
+        blockType: 'personal-data'
+      });
+    }
+  }
   
-  // SECCIÓN: Datos Destacados (párrafos editoriales)
+  // SECCIÓN: Datos Destacados - AHORA DESDE data.datosDestacados DEL JSON
   datosDestacados = []; // Reutilizar la variable global
+  
+  // Primero intentar desde data.datosDestacados (JSON de prueba)
+  if (data.datosDestacados && Array.isArray(data.datosDestacados) && data.datosDestacados.length > 0) {
+    console.log('📥 [MAPEO] Usando datosDestacados del JSON:', data.datosDestacados.length);
+    data.datosDestacados.forEach(item => {
+      datosDestacados.push({
+        subtitulo: item.nombreCompetencia || 'Competencia',
+        contenido: `${item.descripcion || ''} (Valor: ${item.valorObtenido}/${item.valorEsperado})`
+      });
+    });
+  }
+  
+  // Luego agregar datos del informe si existen
   if (data.informe) {
     if (data.informe.motivoPresentacion) {
       datosDestacados.push({
@@ -597,49 +628,57 @@ function beforeRender(req, res) {
   
   // DEBUG: Verificar contenido de datosDestacados
   console.log('🔍 [DEBUG] datosDestacados.length:', datosDestacados.length);
-  console.log('🔍 [DEBUG] datosDestacados:', JSON.stringify(datosDestacados, null, 2));
+  console.log('🔍 [DEBUG] Primeros 2 items:', datosDestacados.slice(0, 2));
   
-  // Copiar los mismos datos destacados del módulo 1 - FORZAR CREACIÓN PARA PRUEBAS
+  // SIEMPRE crear el módulo de prueba con contenido mixto
+  seccionesPresentacionCopia.push({
+    nombre: '🧪 MÓDULO DE PRUEBA - Verificación de Flujo',
+    tipo: 'texto',
+    contenido: `Este módulo de prueba se creó exitosamente. Contiene ${datosDestacados.length} datos destacados.`,
+    priority: 1,
+    breakable: false,
+    minHeight: 40,
+    blockType: 'test-header'
+  });
+  
+  // Si hay datos destacados, mostrar algunos
   if (datosDestacados.length > 0) {
     seccionesPresentacionCopia.push({
       nombre: 'Datos Destacados (COPIA DE PRUEBA)',
       tipo: 'texto-editorial',
-      items: datosDestacados, // Reutilizar los mismos datos
+      items: datosDestacados.slice(0, 3), // Solo primeros 3 para no ocupar mucho
       priority: 2,
       breakable: true,
       minHeight: 120,
       blockType: 'editorial-paragraphs'
     });
-  } else {
-    // FORZAR MÓDULO DE PRUEBA AUN SIN DATOS
-    seccionesPresentacionCopia.push({
-      nombre: 'MÓDULO DE PRUEBA FORZADO',
-      tipo: 'texto',
-      contenido: 'Este es un módulo de prueba creado para diagnosticar el problema de flujo de páginas. Si ves este módulo, significa que se está creando correctamente.',
-      priority: 2,
-      breakable: true,
-      minHeight: 60,
-      blockType: 'test-content'
-    });
   }
+  
+  // Siempre agregar contenido de prueba adicional
+  seccionesPresentacionCopia.push({
+    nombre: 'Prueba de Flujo de Página',
+    tipo: 'texto',
+    contenido: 'Si este texto aparece después del módulo de Competencias y antes de Conclusiones, el flujo de páginas está funcionando correctamente. Este párrafo debe fluir naturalmente sin forzar un salto de página.',
+    priority: 3,
+    breakable: true,
+    minHeight: 60,
+    blockType: 'test-content'
+  });
   
   console.log('🔍 [DEBUG] seccionesPresentacionCopia.length:', seccionesPresentacionCopia.length);
   
-  if (seccionesPresentacionCopia.length > 0) {
-    console.log('🔍 [DEBUG] Creando módulo de prueba...');
-    data.modulos.push({
-      titulo: 'MÓDULO DE PRUEBA - Copia Presentación',
-      subtitulo: 'Este es un módulo de prueba para verificar flujo de páginas',
-      secciones: seccionesPresentacionCopia,
-      moduleType: 'prueba-presentacion',
-      priority: 3.5, // Entre módulo 3 y 4
-      allowSplit: true, // Permitir flujo natural como el módulo 4
-      pageType: 'test' // Tipo de prueba
-    });
-    console.log('🔍 [DEBUG] Módulo de prueba creado. Total módulos:', data.modulos.length);
-  } else {
-    console.log('❌ [DEBUG] NO se creó el módulo de prueba - seccionesPresentacionCopia está vacío');
-  }
+  // SIEMPRE crear el módulo de prueba (ya no verificamos length porque siempre tiene contenido)
+  console.log('🔍 [DEBUG] Creando módulo de prueba con', seccionesPresentacionCopia.length, 'secciones...');
+  data.modulos.push({
+    titulo: '🧪 MÓDULO DE PRUEBA - Verificación Flujo',
+    subtitulo: 'Este módulo verifica el flujo correcto de páginas',
+    secciones: seccionesPresentacionCopia,
+    moduleType: 'prueba-presentacion',
+    priority: 3.5, // Entre módulo 3 y 4
+    allowSplit: true, // Permitir flujo natural como el módulo 4
+    pageType: 'test' // Tipo de prueba
+  });
+  console.log('✅ [DEBUG] Módulo de prueba creado exitosamente. Total módulos:', data.modulos.length);
   
   // ================================================================================
   // MÓDULO 4 · CONCLUSIONES
@@ -800,12 +839,19 @@ function beforeRender(req, res) {
   // FASE 1: Lógica simple, se refinará en fases posteriores
   const isLandscape = totalChars > 5000 || totalItems > 50;
   
+  // Cálculo más realista de páginas basado en contenido real
+  const charsPerPage = 2500; // Aproximadamente una página A4
+  const itemsPerPage = 8; // Items promedio por página
+  const estimatedFromChars = Math.ceil(totalChars / charsPerPage);
+  const estimatedFromItems = Math.ceil(totalItems / itemsPerPage);
+  const estimatedPages = Math.max(estimatedFromChars, estimatedFromItems, 3); // Mínimo 3 páginas
+  
   // Inyectar información de layout con metadata para FASES 2-7
   data.__layout = {
     isLandscape,
     totalChars,
     totalItems,
-    estimatedPages: Math.ceil((totalChars + totalItems * 100) / 3000),
+    estimatedPages,
     // Metadata para FASE 2 - Motor de Cálculo
     moduleCount: data.modulos.length,
     requiresMeasurement: true,

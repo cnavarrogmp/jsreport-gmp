@@ -157,7 +157,8 @@ body.landscape {
   page-break-inside: avoid;
 }
 
-/* FORZAR CONTINUIDAD DEL MÓDULO 4 (Conclusiones) - REGLA MUY ESPECÍFICA */
+/* PERMITIR FLUJO NATURAL DE MÓDULOS - COMENTADO PARA FASE 4 */
+/* 
 .module-3, 
 .module-3 .module-header,
 .module-3 .module-title {
@@ -166,6 +167,7 @@ body.landscape {
   break-inside: auto !important;
   page-break-inside: auto !important;
 }
+*/
 
 .section {
   /* Permitir que las secciones fluyan, solo evitar cortes en medio del contenido */
