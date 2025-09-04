@@ -297,6 +297,27 @@ function json(obj) {
 function beforeRender(req, res) {
   const data = req.data || {};
   
+  // ============================
+  // 🚨 LOGS DE DEBUG MEJORADOS - PIPELINE TEST
+  // ============================
+  console.log('');
+  console.log('=' .repeat(80));
+  console.log('🚀 INICIANDO beforeRender - PIPELINE TEST');
+  console.log('⏰ Timestamp:', new Date().toISOString());
+  console.log('=' .repeat(80));
+  
+  // Verificar datos de entrada
+  console.log('📥 [INPUT] Claves en data:', Object.keys(data));
+  console.log('📥 [INPUT] datosGenerales:', JSON.stringify(data.datosGenerales || {}, null, 2));
+  console.log('📥 [INPUT] datosDestacados count:', data.datosDestacados ? data.datosDestacados.length : 0);
+  
+  if (data.datosDestacados && data.datosDestacados.length > 0) {
+    console.log('📥 [INPUT] datosDestacados detalle:');
+    data.datosDestacados.forEach((item, idx) => {
+      console.log(`   [${idx}] ${item.nombreCompetencia || 'Sin nombre'}: ${item.valorObtenido || 0}/${item.valorEsperado || 0}`);
+    });
+  }
+  
   // NUEVA ESTRUCTURA MODULAR - 4 MÓDULOS LÓGICOS
   // Compatible con FASES 2-7: Cada módulo tendrá metadata para medición y distribución
   data.modulos = [];
@@ -717,10 +738,19 @@ function beforeRender(req, res) {
   }
   
   // DEBUG FINAL: Mostrar todos los módulos creados
-  console.log('🔍 [DEBUG FINAL] Total módulos creados:', data.modulos.length);
+  console.log('');
+  console.log('=' .repeat(80));
+  console.log('📊 [RESULTADO FINAL] MÓDULOS CREADOS');
+  console.log('=' .repeat(80));
+  console.log('✅ Total módulos creados:', data.modulos.length);
   data.modulos.forEach((modulo, index) => {
-    console.log(`🔍 [DEBUG] Módulo ${index}: ${modulo.titulo} (${modulo.secciones.length} secciones, allowSplit: ${modulo.allowSplit})`);
+    console.log(`📦 Módulo ${index + 1}: ${modulo.titulo}`);
+    console.log(`   - Secciones: ${modulo.secciones.length}`);
+    console.log(`   - AllowSplit: ${modulo.allowSplit}`);
+    console.log(`   - Priority: ${modulo.priority}`);
+    console.log(`   - Type: ${modulo.moduleType}`);
   });
+  console.log('=' .repeat(80));
   
   // Asegurar que los arrays existen (para compatibilidad)
   const arrays = [
