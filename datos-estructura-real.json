@@ -1,0 +1,253 @@
+{
+    "idInformeCvPublicacion": 10006,
+    "idPedidoMaster": 320033,
+    "fechaPublicacion": "2025-06-12T15:43:30.1700000+00:00",
+    "publicado": true,
+    "resumen": null,
+    "idTipoInforme": 2,
+    "idEmpresaCentro": 0,
+    "idUsuarioCreador": 0,
+    "datosPersonales": {
+        "idInformeCvPublicacionDatosPersonales": 10006,
+        "idInformeCvPublicacion": 10006,
+        "nombreCompleto": "Alberto Delgado Ortiz",
+        "foto": "34528.jpg",
+        "codigoPostal": "48903",
+        "municipio": "Barakaldo",
+        "pais": "España",
+        "direccionTexto": "Paseo cirilo sagastagoitia n 14 8 b izq",
+        "poblacion": "Lutxana",
+        "email": "delgaindar@hotmail.com",
+        "telefonoMovil": "+34692714020",
+        "nif": "30686865N",
+        "fechaNacimiento": "1986-04-23T00:00:00.0000000+02:00",
+        "edad": 39
+    },
+    "informe": {
+        "idInformeCvPublicacionInforme": 10006,
+        "idInformeCvPublicacion": 10006,
+        "tipoInforme": 0,
+        "valoracion": "Candidato finalista. Presenta un perfil técnico y personal alineado con los requerimientos del puesto. Su experiencia previa, actitud y disponibilidad inmediata hacen que sea una opción muy válida para el rol.",
+        "puntuacion": 8.5,
+        "aspectosPersonales": "Persona responsable, metódica y con alta orientación al orden y la planificación. Transmite seriedad, compromiso y estabilidad. Destaca por su trato amable y profesional.",
+        "trayectoriaFormativa": "Formación en administración y ofimática, con conocimientos actualizados en herramientas de gestión y entorno Office. Ha complementado su perfil con cursos específicos relacionados con gestión documental y atención al cliente.",
+        "trayectoriaProfesional": "Amplia experiencia como administrativa en distintas empresas, gestionando documentación, atención telefónica, bases de datos y soporte a distintos departamentos. Conocimiento de herramientas ERP y trato con proveedores y clientes.",
+        "entrevistaPersonal": "Durante la entrevista mostró seguridad, claridad en la exposición y buena capacidad para estructurar sus ideas. Se expresa con corrección, mantiene buena escucha activa y demuestra interés por el puesto. Resalta su enfoque práctico y resolutivo.",
+        "datosInteres": "Alta disponibilidad, posibilidad de incorporación inmediata y experiencia en entornos con alto volumen de tareas administrativas. Buena adaptación a distintos entornos de trabajo y equipos.",
+        "motivoPresentacion": "Perfil altamente adecuado para funciones administrativas. Aporta experiencia, madurez profesional, compromiso y capacidad de adaptación. Puede incorporarse con agilidad a tareas diversas dentro del área.",
+        "conocimientos": null,
+        "adecuacion": null,
+        "motivacion": null,
+        "evolucionProfesional": null,
+        "potencial": null
+    },
+    "acreditaciones": [
+        {
+            "idInformeCvPublicacionAcreditacion": 10002,
+            "idInformeCvPublicacion": 10006,
+            "tipoAcreditacion": "6",
+            "fecha": "2025-06-04T00:00:00.0000000+02:00",
+            "descripcion": "Tarjeta profesional del metal",
+            "acredita": false,
+            "horas": 3,
+            "orden": 1
+        }
+    ],
+    "adjuntos": [
+        {
+            "idInformeCvPublicacionAdjunto": 2,
+            "idInformeCvPublicacion": 10006,
+            "ruta": "prueba/CDFF",
+            "duracionHoras": null,
+            "tipoAdjunto": {
+                "id": 1,
+                "value": "Prueba Psicotecnica"
+            },
+            "orden": 1
+        }
+    ],
+    "competencias": [
+        {
+            "idInformeCvPublicacionCompetencia": 10002,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Esmero",
+            "puntuacion": 2.5,
+            "observaciones": "Muestra una capacidad limitada para trabajar con precisión. Aunque hay un esfuerzo por mantener el orden y prestar atención a los detalles, estos esfuerzos son inconsistentes y a menudo se ven eclipsados por la falta de concentración. Aunque se reconocen los plazos y las normas, la capacidad para cumplirlos de manera efectiva es variable",
+            "orden": 1
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10003,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Sociabilidad",
+            "puntuacion": 2.5,
+            "observaciones": "La persona demuestra una capacidad básica para interactuar socialmente. Puede establecer relaciones y mantener conversaciones, pero a veces puede ser malinterpretado. La capacidad para trabajar en equipo y colaborar con los demás está presente, pero aún necesita mejorar",
+            "orden": 2
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10004,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Liderazgo",
+            "puntuacion": 7.0,
+            "observaciones": "Demuestra capacidad de liderazgo en situaciones estructuradas. Puede motivar y guiar a otros cuando tiene claros los objetivos y procesos.",
+            "orden": 3
+        }
+    ],
+    "experienciasLaborales": [
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10002,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "Fcc s. a",
+            "puesto": "ADMINISTRATIVO/A COMERCIAL",
+            "funcionRealizada": "Atención al público",
+            "fechaInicio": "2005-04-01T00:00:00.0000000+02:00",
+            "fechaFin": "2005-10-01T00:00:00.0000000+02:00",
+            "orden": 1
+        },
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10003,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "Fcc s.a",
+            "puesto": "ADMINISTRATIVO/A DE FACTURACIÓN",
+            "funcionRealizada": "Tareas variadas de administración.",
+            "fechaInicio": "2006-05-01T00:00:00.0000000+02:00",
+            "fechaFin": "2010-03-01T00:00:00.0000000+01:00",
+            "orden": 2
+        },
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10004,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "Precicast bilbao",
+            "puesto": "CARRETILLERO/A RETRÁCTIL",
+            "funcionRealizada": "Retrabajar piezas y ensayos no destructivos",
+            "fechaInicio": "2007-04-01T00:00:00.0000000+02:00",
+            "fechaFin": "2008-08-01T00:00:00.0000000+02:00",
+            "orden": 3
+        },
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10005,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "Eroski s. coop artea",
+            "puesto": "CONSULTOR/A SAP",
+            "funcionRealizada": "Creación de softwares y diseño de la arquitectura de los sistemas",
+            "fechaInicio": "2010-05-01T00:00:00.0000000+02:00",
+            "fechaFin": "2010-08-01T00:00:00.0000000+02:00",
+            "orden": 4
+        },
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10006,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "Leroy merlín artea",
+            "puesto": "MANIPULADOR/A DE FRUTAS",
+            "funcionRealizada": "Todo tipo de tareas de almacén",
+            "fechaInicio": "2010-09-01T00:00:00.0000000+02:00",
+            "fechaFin": "2012-11-01T00:00:00.0000000+01:00",
+            "orden": 5
+        },
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10007,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "Frutas iru",
+            "puesto": "MANIPULADOR/A DE FRUTAS",
+            "funcionRealizada": "Manipulación de frutas y hortalizas",
+            "fechaInicio": "2013-05-01T00:00:00.0000000+02:00",
+            "fechaFin": "2017-10-01T00:00:00.0000000+02:00",
+            "orden": 6
+        }
+    ],
+    "formaciones": [
+        {
+            "idInformeCvPublicacionFormacion": 10002,
+            "idInformeCvPublicacion": 10006,
+            "titulacionAcademica": "Primera etapa de la educacion secundaria con titulo de graduado escolar o equivalente",
+            "nombre": null,
+            "centro": "Salesianos cruces",
+            "titulo": true,
+            "duracionHoras": null,
+            "fechaFin": "2002-01-01T00:00:00.0000000+00:00",
+            "orden": 1
+        },
+        {
+            "idInformeCvPublicacionFormacion": 10003,
+            "idInformeCvPublicacion": 10006,
+            "titulacionAcademica": "Enseñanzas de bachillerato",
+            "nombre": "Bachillerato tecnológico",
+            "centro": "I. e. s. elorrieta-errekamari",
+            "titulo": true,
+            "duracionHoras": null,
+            "fechaFin": "2004-01-01T00:00:00.0000000+00:00",
+            "orden": 2
+        },
+        {
+            "idInformeCvPublicacionFormacion": 10004,
+            "idInformeCvPublicacion": 10006,
+            "titulacionAcademica": "Enseñanzas universitarias de segundo ciclo y equivalentes (Licenciado)",
+            "nombre": "Técnico superior teleco e informático",
+            "centro": "I. e. s. minas",
+            "titulo": true,
+            "duracionHoras": null,
+            "fechaFin": "2007-01-01T01:00:00.0000000+01:00",
+            "orden": 3
+        },
+        {
+            "idInformeCvPublicacionFormacion": 10005,
+            "idInformeCvPublicacion": 10006,
+            "titulacionAcademica": "Enseñanzas universitarias de primer ciclo y equivalentes o personas que han aprobado tres cursos completos de una licenciatura o creditos equivalentes (Diplomado)",
+            "nombre": "Técnico en emergencias sanitarias",
+            "centro": "Eurocultum",
+            "titulo": true,
+            "duracionHoras": null,
+            "fechaFin": "2015-01-01T00:00:00.0000000+00:00",
+            "orden": 4
+        }
+    ],
+    "idiomas": [
+        {
+            "idInformeCvPublicacionIdioma": 4,
+            "idInformeCvPublicacion": 10006,
+            "idioma": "Inglés",
+            "nivel": "B2",
+            "orden": 1
+        },
+        {
+            "idInformeCvPublicacionIdioma": 5,
+            "idInformeCvPublicacion": 10006,
+            "idioma": "Alemán",
+            "nivel": "A2",
+            "orden": 2
+        }
+    ],
+    "aplicacionesInformaticas": [
+        {
+            "idInformeCvPublicacionInformatica": 3,
+            "idInformeCvPublicacion": 10006,
+            "aplicacion": "Excel",
+            "nivel": "Básico",
+            "orden": 1
+        },
+        {
+            "idInformeCvPublicacionInformatica": 4,
+            "idInformeCvPublicacion": 10006,
+            "aplicacion": "Autocad",
+            "nivel": "Intermedio",
+            "orden": 2
+        }
+    ],
+    "referencias": [
+        {
+            "idInformeCvPublicacionReferencia": 3,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "ACINFA",
+            "funcionRealizada": "Logística",
+            "referencia": "Jefe Almacén Jose Luis López",
+            "orden": 1
+        },
+        {
+            "idInformeCvPublicacionReferencia": 4,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "ASIDO",
+            "funcionRealizada": "PEÓN",
+            "referencia": "Jefe Juan Martínez",
+            "orden": 2
+        }
+    ]
+}

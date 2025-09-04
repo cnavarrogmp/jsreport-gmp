@@ -137,16 +137,18 @@ async function step4_GeneratePDF() {
   console.log('\n🔹 PASO 4: GENERAR PDF VIA API');
   console.log('=' .repeat(50));
   
-  // Cargar datos completos desde archivo
+  // Cargar datos ESTRUCTURA REAL desde archivo
   let testData;
   try {
-    testData = JSON.parse(fs.readFileSync(path.join(__dirname, 'datos-completos-test.json'), 'utf-8'));
-    console.log('📄 Datos cargados desde datos-completos-test.json');
-    console.log(`   - ${testData.datosDestacados.length} competencias destacadas`);
+    testData = JSON.parse(fs.readFileSync(path.join(__dirname, 'datos-estructura-real.json'), 'utf-8'));
+    console.log('📄 Datos cargados desde datos-estructura-real.json');
     console.log(`   - ${testData.experienciasLaborales.length} experiencias laborales`);
     console.log(`   - ${testData.formaciones.length} formaciones`);
     console.log(`   - ${testData.competencias.length} competencias`);
-    console.log(`   - Informe completo incluido`);
+    console.log(`   - ${testData.idiomas.length} idiomas`);
+    console.log(`   - ${testData.referencias.length} referencias`);
+    console.log(`   - Estructura REAL del sistema`);
+    console.log(`   - Candidato: ${testData.datosPersonales.nombreCompleto}`);
   } catch (error) {
     console.log('⚠️ No se pudo cargar datos-completos-test.json, usando datos básicos');
     testData = {

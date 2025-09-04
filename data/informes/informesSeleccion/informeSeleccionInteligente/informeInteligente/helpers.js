@@ -311,30 +311,21 @@ function beforeRender(req, res) {
   console.log('📥 [INPUT] datosGenerales:', JSON.stringify(data.datosGenerales || {}, null, 2));
   console.log('📥 [INPUT] datosDestacados count:', data.datosDestacados ? data.datosDestacados.length : 0);
   
-  // MAPEAR DATOS PARA EL TEMPLATE
-  if (data.datosGenerales) {
-    // Template busca datosPersonales.nombreCompleto, mapear desde datosGenerales
-    data.datosPersonales = data.datosPersonales || {};
-    data.datosPersonales.nombreCompleto = data.datosGenerales.nombreCandidato || 'Sin nombre';
-    data.datosPersonales.edad = data.datosGenerales.edad;
-    data.datosPersonales.estadoCivil = data.datosGenerales.estadoCivil;
-    data.datosPersonales.direccion = data.datosGenerales.direccion;
-    data.datosPersonales.telefono = data.datosGenerales.telefono;
-    data.datosPersonales.email = data.datosGenerales.email;
-    
-    console.log('📥 [MAPEO] datosPersonales creado:', JSON.stringify(data.datosPersonales, null, 2));
-  }
-  
-  // MAPEAR CAMPOS QUE EL TEMPLATE ESPERA
+  // MAPEAR CAMPOS QUE EL TEMPLATE ESPERA - ESTRUCTURA REAL
   data.tipoInforme = 'Informe de Selección Inteligente';
-  data.fechaEmision = new Date().toISOString().split('T')[0];
-  data.idInforme = 'INF-' + Date.now();
+  data.fechaEmision = data.fechaPublicacion ? data.fechaPublicacion.split('T')[0] : new Date().toISOString().split('T')[0];
+  data.idInforme = data.idInformeCvPublicacion || ('INF-' + Date.now());
   
-  if (data.datosDestacados && data.datosDestacados.length > 0) {
-    console.log('📥 [INPUT] datosDestacados detalle:');
-    data.datosDestacados.forEach((item, idx) => {
-      console.log(`   [${idx}] ${item.nombreCompetencia || 'Sin nombre'}: ${item.valorObtenido || 0}/${item.valorEsperado || 0}`);
-    });
+  // VERIFICAR ESTRUCTURA REAL
+  console.log('📥 [ESTRUCTURA] datosPersonales:', data.datosPersonales ? 'Existe' : 'NO EXISTE');
+  console.log('📥 [ESTRUCTURA] informe:', data.informe ? 'Existe' : 'NO EXISTE');
+  console.log('📥 [ESTRUCTURA] experienciasLaborales:', data.experienciasLaborales ? data.experienciasLaborales.length : 'NO EXISTE');
+  console.log('📥 [ESTRUCTURA] formaciones:', data.formaciones ? data.formaciones.length : 'NO EXISTE');
+  console.log('📥 [ESTRUCTURA] competencias:', data.competencias ? data.competencias.length : 'NO EXISTE');
+  
+  // ESTRUCTURA REAL NO TIENE datosDestacados - usar informe en su lugar
+  if (data.informe) {
+    console.log('📥 [INPUT] informe sections disponibles:', Object.keys(data.informe));
   }
   
   // NUEVA ESTRUCTURA MODULAR - 4 MÓDULOS LÓGICOS

@@ -125,11 +125,25 @@
                 <div class="candidate-grid">
                     <div class="candidate-photo-wrapper">
                         {{#if ../datosPersonales.foto}}
+                            <!-- 🔍 DEBUG FOTO -->
+                            <div style="background: orange; padding: 2px; font-size: 10px;">
+                                FOTO: {{../datosPersonales.foto}}
+                            </div>
                             <img
                                     class="candidate-photo"
-                                    src="{{asset '/assets/profiles/AA.jpg' 'dataURI'}}"
-                                    alt="Foto"
+                                    src="{{asset '/assets/profiles/' ../datosPersonales.foto 'dataURI'}}"
+                                    alt="Foto candidato"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
                             />
+                            <div style="display:none; background: #f0f0f0; padding: 10px; text-align: center; border: 1px solid #ccc;">
+                                📷 Foto no disponible<br>
+                                <small>{{../datosPersonales.foto}}</small>
+                            </div>
+                        {{else}}
+                            <!-- Sin foto -->
+                            <div style="background: #f0f0f0; padding: 20px; text-align: center; border: 1px solid #ccc;">
+                                📷 Sin foto
+                            </div>
                         {{/if}}
                     </div>
                     <div class="candidate-info">
