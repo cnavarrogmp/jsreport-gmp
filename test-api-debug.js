@@ -5,7 +5,7 @@ const path = require('path');
 // Configuración JSReport
 const JSREPORT_URL = 'http://localhost:5488';
 const JSREPORT_USERNAME = 'admin';
-const JSREPORT_PASSWORD = '';
+const JSREPORT_PASSWORD = 'admin';
 
 // Datos de prueba (mismo JSON que usa JSReport Studio)
 const testData = {
