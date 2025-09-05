@@ -12,7 +12,7 @@ echo.
 
 REM Variables de configuración
 set JSREPORT_URL=http://localhost:5488
-set OUTPUT_DIR=D:\WorkingGMPCarmen\WorkCarmGMPGit\GPMCarmenGit\jsreport-gmp\output
+set OUTPUT_DIR=D:\Carmen\Escritorio\PRUEBAS DOCUMENTOS API
 set TIMESTAMP=%date:~-4,4%%date:~-7,2%%date:~-10,2%_%time:~0,2%%time:~3,2%%time:~6,2%
 set TIMESTAMP=%TIMESTAMP: =0%
 
