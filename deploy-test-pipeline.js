@@ -232,7 +232,20 @@ async function step4_GeneratePDF() {
       });
     });
     
-    req.on('error', reject);
+    // Configurar timeout de 60 segundos
+    req.setTimeout(60000, () => {
+      req.destroy();
+      reject(new Error('Timeout: La generación del PDF tardó más de 60 segundos'));
+    });
+    
+    req.on('error', (err) => {
+      if (err.code === 'ECONNRESET') {
+        reject(new Error('Conexión perdida con JSReport. Posible timeout o PDF muy pesado. Intenta con menos datos.'));
+      } else {
+        reject(err);
+      }
+    });
+    
     req.write(requestPayload);
     req.end();
   });
