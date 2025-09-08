@@ -877,3 +877,130 @@ p {
 }
 
 /* Eliminadas definiciones duplicadas - ver líneas 127-135 para las reglas principales */
+
+/* =====================================================
+   FASE 3 - OVERRIDES CSS - SISTEMA DE CONTROL
+   ===================================================== 
+   Extraído de content.handlebars (CSS inline)
+   Fecha: 2025-01-09
+   ===================================================== */
+
+/* PREVENCIÓN DE CORTES CRÍTICOS */
+.bloque-editorial, 
+.experiencia-item, 
+.lista-item, 
+.competency-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+/* ESPACIADO OPTIMIZADO */
+.module-header {
+    margin-bottom: 8px !important;
+}
+
+.module-content {
+    margin-top: 0px !important;
+}
+
+.section-title {
+    margin-top: 8px !important;
+    margin-bottom: 6px !important;
+}
+
+/* ESTILOS PARA EL SISTEMA DE CONTROL */
+
+/* Módulo de debug */
+.debug-module {
+    border: 3px dashed #ff6b35 !important;
+    padding: var(--grid-2) !important;
+    margin: var(--grid-2) 0 !important;
+    background: rgba(255, 107, 53, 0.05) !important;
+    border-radius: var(--grid-1) !important;
+}
+
+/* Paneles de información dentro del debug */
+.debug-panel {
+    background: #fffacd !important;
+    padding: var(--grid-2) !important;
+    border-radius: var(--grid-1) !important;
+    margin-bottom: var(--grid-1) !important;
+    font-size: var(--font-size-sm) !important;
+}
+
+.data-check {
+    background: #f0f8ff !important;
+    padding: var(--grid-2) !important;
+    margin-top: var(--grid-1) !important;
+    border-radius: var(--grid-1) !important;
+    font-size: var(--font-size-sm) !important;
+}
+
+.render-test {
+    background: #ffe4e1 !important;
+    padding: var(--grid-2) !important;
+    margin-top: var(--grid-1) !important;
+    border-radius: var(--grid-1) !important;
+    font-size: var(--font-size-sm) !important;
+}
+
+/* Headers contextuales (FASE 4) */
+.contextual-header {
+    position: relative;
+}
+
+.header-continuation {
+    font-size: var(--font-size-sm) !important;
+    color: var(--gray-600) !important;
+    font-style: italic;
+    margin-top: var(--grid-1) !important;
+}
+
+.breadcrumb-indicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: var(--font-size-xs) !important;
+    color: var(--gray-500) !important;
+    background: var(--gray-100);
+    padding: calc(var(--grid-1) / 2) var(--grid-1) !important;
+    border-radius: var(--grid-1) !important;
+}
+
+/* Módulos con contenido vacío */
+.empty-module-message {
+    background: var(--gray-100) !important;
+    padding: var(--grid-2) !important;
+    border-radius: var(--grid-1) !important;
+    color: var(--gray-600) !important;
+    font-style: italic;
+    text-align: center;
+    border-left: 4px solid var(--color-warning) !important;
+}
+
+/* Estados de validación */
+.module[data-validation="valid"] {
+    border-left: 4px solid var(--color-success) !important;
+}
+
+.module[data-validation="invalid"] {
+    border-left: 4px solid var(--color-danger) !important;
+    opacity: 0.7;
+}
+
+.module[data-validation="empty"] {
+    border-left: 4px solid var(--color-warning) !important;
+}
+
+/* RESPONSIVE PARA DEBUG */
+@media print {
+    /* Ocultar módulos de debug en impresión */
+    .debug-module {
+        display: none !important;
+    }
+    
+    /* Simplificar breadcrumbs en impresión */
+    .breadcrumb-indicator {
+        font-size: calc(var(--font-size-xs) - 1px) !important;
+    }
+}

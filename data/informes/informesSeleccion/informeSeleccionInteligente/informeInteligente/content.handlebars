@@ -405,24 +405,51 @@
     </section>
 {{/each}}
 
-<!-- 🧪 MÓDULO DE PRUEBA DIRECTO - CONTROL COMPLETO DEL RENDERIZADO -->
-<section class="module module-test" style="background: lightblue; border: 3px solid blue; padding: 20px; margin: 20px 0;">
+<!-- 🧪 MÓDULO DE PRUEBA CONTROLADO - SISTEMA DE CONTROL ACTIVO -->
+{{#if (validateModule 'prueba' this 'development')}}
+<section class="module debug-module" data-module="99">
     <header class="module-header">
-        <h2 class="module-title">🧪 MÓDULO DE PRUEBA DIRECTO</h2>
-        <div class="module-subtitle">Insertado directamente en template Handlebars</div>
+        <h2 class="module-title">🧪 MÓDULO DE PRUEBA Y DIAGNÓSTICO</h2>
+        <div class="module-subtitle">Sistema de Control Integrado - ACTIVO</div>
     </header>
     <div class="module-content">
-        <p><strong>✅ CONTROL: Template se renderiza correctamente</strong></p>
-        <p>Si aparece este texto azul, el template Handlebars funciona.</p>
-        <p><strong>Módulos detectados por helpers:</strong> {{modulos.length}}</p>
-        <div style="font-family: monospace; font-size: 12px; background: white; padding: 10px; border: 1px solid #ccc;">
-        {{#each modulos}}
-            <strong>{{@index}}:</strong> {{this.titulo}} ({{this.secciones.length}} secciones)<br>
-        {{/each}}
+        <!-- ESTADO DEL SISTEMA -->
+        <div class="debug-panel">
+            <h3>📊 Estado del Sistema:</h3>
+            <ul>
+                <li>Timestamp: {{formatDate 'now' 'DD/MM/YYYY HH:mm:ss'}}</li>
+                <li>Template: ✅ Renderizando correctamente</li>
+                <li>Sistema de Control: ✅ Activo</li>
+                <li>Candidato: {{datosPersonales.nombreCompleto}}</li>
+            </ul>
         </div>
-        <p><strong>Timestamp:</strong> Renderizado en {{now}}</p>
+        
+        <!-- VERIFICACIÓN DE DATOS -->
+        <div class="data-check">
+            <h3>🔍 Datos Recibidos:</h3>
+            <ul>
+                <li>Datos personales: {{#if datosPersonales}}✅ Presente{{else}}❌ Falta{{/if}}</li>
+                <li>Experiencias: {{#if experienciasLaborales}}✅ {{experienciasLaborales.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Formaciones: {{#if formaciones}}✅ {{formaciones.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Competencias: {{#if competencias}}✅ {{competencias.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Referencias: {{#if referencias}}✅ {{referencias.length}} items{{else}}❌ Vacío{{/if}}</li>
+            </ul>
+        </div>
+        
+        <!-- VALIDACIONES DE MÓDULOS -->
+        <div class="render-test">
+            <h3>🎨 Validaciones de Módulos:</h3>
+            <ul>
+                <li>Portada: {{#if (validateModule 'portada' this 'development')}}✅ Se renderiza{{else}}❌ Se omite{{/if}}</li>
+                <li>Presentación: {{#if (validateModule 'presentacion' this 'development')}}✅ Se renderiza{{else}}❌ Se omite{{/if}}</li>
+                <li>Experiencia: {{#if (validateModule 'experiencia' this 'development')}}✅ Se renderiza{{else}}❌ Se omite{{/if}}</li>
+                <li>Competencias: {{#if (validateModule 'competencias' this 'development')}}✅ Se renderiza{{else}}❌ Se omite{{/if}}</li>
+                <li>Conclusiones: {{#if (validateModule 'conclusiones' this 'development')}}✅ Se renderiza{{else}}❌ Se omite{{/if}}</li>
+            </ul>
+        </div>
     </div>
 </section>
+{{/if}}
 
 
 <!-- FOOTER -->
