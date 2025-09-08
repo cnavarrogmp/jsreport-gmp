@@ -406,7 +406,9 @@
 {{/each}}
 
 <!-- 🧪 MÓDULO DE PRUEBA CONTROLADO - SISTEMA DE CONTROL ACTIVO -->
-{{#if (validateModule 'prueba' this 'development')}}
+<!-- DEBUG: validateModule prueba = {{validateModule 'prueba' this 'development'}} -->
+<!-- DEBUG: showDebugModule = {{showDebugModule}} -->
+{{#if (showDebugModule)}}
 <section class="module debug-module" data-module="99">
     <header class="module-header">
         <h2 class="module-title">🧪 MÓDULO DE PRUEBA Y DIAGNÓSTICO</h2>

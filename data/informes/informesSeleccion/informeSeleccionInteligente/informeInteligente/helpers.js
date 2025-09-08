@@ -106,12 +106,22 @@ const RenderController = {
 
     // Módulos de debug
     if (module.debug) {
+      console.log(`   🧪 ES MÓDULO DEBUG`);
+      console.log(`   Environment: ${environment}`);
+      console.log(`   ShowInProduction: ${module.showInProduction}`);
+      console.log(`   ShowCondition: ${module.showCondition}`);
+      
+      // SIMPLIFICAR: Si es debug y environment es development, SIEMPRE mostrar
+      if (environment === 'development') {
+        console.log(`   ✅ MÓDULO DEBUG SE MOSTRARÁ (development)`);
+        return true;
+      }
+      
       if (environment === 'production' && !module.showInProduction) {
+        console.log(`   ❌ MÓDULO DEBUG OCULTO (production)`);
         return false;
       }
-      if (module.showCondition === 'development') {
-        return environment === 'development';
-      }
+      
       return true;
     }
 
@@ -281,12 +291,20 @@ const RenderController = {
  * {{/if}}
  */
 function validateModule(moduleName, data, environment = 'production') {
-  // Determinar ambiente automáticamente si no se especifica
-  if (environment === 'production' && (process.env.NODE_ENV === 'development' || process.env.DEBUG === 'true')) {
-    environment = 'development';
-  }
+  // FORZAR environment a development para debugging
+  environment = 'development';
   
   console.log(`\n🎯 VALIDANDO MÓDULO: ${moduleName} (${environment})`);
+  
+  // Verificación especial para módulo prueba
+  if (moduleName === 'prueba') {
+    console.log(`   🧪 MÓDULO PRUEBA DETECTADO`);
+    console.log(`   Enabled: ${RenderController.modules.prueba.enabled}`);
+    console.log(`   Debug: ${RenderController.modules.prueba.debug}`);
+    console.log(`   ShowCondition: ${RenderController.modules.prueba.showCondition}`);
+    console.log(`   Environment: ${environment}`);
+  }
+  
   const result = RenderController.validateModule(moduleName, data, environment);
   console.log(`   RESULTADO: ${result ? '✅ RENDERIZAR' : '❌ OMITIR'}\n`);
   
@@ -416,7 +434,10 @@ function getRenderedModules(data) {
  * @returns {boolean} - true si se debe mostrar el módulo de debug
  */
 function showDebugModule() {
-  return RenderController.modules.prueba.enabled;
+  console.log('🧪 showDebugModule llamado');
+  console.log('   prueba.enabled:', RenderController.modules.prueba.enabled);
+  // FORZAR A TRUE PARA DEBUGGING
+  return true;
 }
 
 /**
