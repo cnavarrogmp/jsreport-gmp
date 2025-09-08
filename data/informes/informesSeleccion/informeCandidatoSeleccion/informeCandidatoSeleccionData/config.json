@@ -1,5 +1,14 @@
 {
     "name": "informeCandidatoSeleccionData",
     "shortid": "CandData",
+    "creationDate": {
+        "$$date": 1725819600000
+    },
+    "modificationDate": {
+        "$$date": 1725819600000
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "candidato_data_id",
     "$entitySet": "data"
 }
