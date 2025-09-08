@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe Candidato - {{datosPersonales.nombreCompleto}}</title>
+    <style>{{{asset "candidato-styles.css"}}}</style>
+</head>
+<body class="report" data-breadcrumb="Informe de Candidato">
+
+<!-- MÓDULO 0: PORTADA INTRODUCTORIA -->
+<section class="module cover-page" data-breadcrumb="Portada">
+    <header class="main-header" data-breadcrumb="Portada Introductoria">
+        <div class="header-grid">
+            <div class="brand-section">
+                <img class="logo" src="{{asset '/assets/logos/001LogotipoGrupompleo.png' 'dataURI'}}" alt="Grupo Empleo"/>
+                <div class="brand-text">
+                    <h1 class="brand-name">GRUPOMPLEO</h1>
+                    <p class="brand-tagline">Recursos Humanos · Sector Industrial</p>
+                </div>
+            </div>
+            <div class="report-meta">
+                <span class="report-type">INFORME CANDIDATO</span>
+                <span class="report-date">{{formatDate fechaPublicacion}}</span>
+                <span class="report-id">#{{idInformeCvPublicacion}}</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- GRÁFICO INDUSTRIAL -->
+    <div class="cover-image-container">
+        <img class="grafico" src="{{asset '/assets/graphics/GeoColor.png' 'dataURI'}}" alt="Grupo Empleo"/>
+    </div>
+
+    <!-- DATOS ADICIONALES DEL INFORME -->
+    <div class="cover-metadata">
+        <div class="metadata-grid">
+            <div class="metadata-item">
+                <span class="metadata-label">ID Publicación</span>
+                <span class="metadata-value">{{idInformeCvPublicacion}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">ID Pedido</span>
+                <span class="metadata-value">{{idPedidoMaster}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Fecha Publicación</span>
+                <span class="metadata-value">{{formatDate fechaPublicacion}}</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Estado</span>
+                <span class="metadata-value">{{#if publicado}}Publicado{{else}}En proceso{{/if}}</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MÓDULO 1: PRESENTACIÓN -->
+<section class="module presentation-section" data-breadcrumb="Presentación">
+    <header class="module-header">
+        <h2 class="module-title">PRESENTACIÓN</h2>
+        <p class="module-subtitle">Información general y aspectos destacados</p>
+    </header>
+
+    <!-- INFORMACIÓN DEL CANDIDATO - DATOS BÁSICOS -->
+    <section class="candidate-header" data-breadcrumb="Datos del Candidato">
+        <div class="candidate-grid">
+            <div class="candidate-photo-wrapper">
+                {{#if datosPersonales.foto}}
+                    <img class="candidate-photo" src="{{asset '/assets/profiles/AA.jpg' 'dataURI'}}" alt="Foto candidato" />
+                {{else}}
+                    <div class="no-photo">📷 Sin foto</div>
+                {{/if}}
+            </div>
+            <div class="candidate-info">
+                <h2 class="candidate-name">{{datosPersonales.nombreCompleto}}</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Edad</span>
+                        <span class="info-value">{{datosPersonales.edad}} años</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Ubicación</span>
+                        <span class="info-value">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{datosPersonales.email}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Teléfono</span>
+                        <span class="info-value">{{datosPersonales.telefonoMovil}}</span>
+                    </div>
+                </div>
+            </div>
+            {{#if informe.puntuacion}}
+                <div class="candidate-score">
+                    <div class="score-circle">
+                        <span class="score-value">{{informe.puntuacion}}</span>
+                        <span class="score-max">/10</span>
+                    </div>
+                    <span class="score-label">Puntuación Global</span>
+                </div>
+            {{/if}}
+        </div>
+    </section>
+
+    <!-- SECCIÓN: DATOS DESTACADOS -->
+    {{#if informe}}
+    <div class="module-content">
+        <div class="section section-breakable" data-breadcrumb="Presentación › Datos Destacados">
+            <h3 class="section-title">Datos Destacados</h3>
+
+            {{#if informe.valoracion}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Valoración General</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.valoracion}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.aspectosPersonales}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Aspectos Personales</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.aspectosPersonales}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.motivoPresentacion}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.motivoPresentacion}}</p>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+    {{/if}}
+</section>
+
+<!-- MÓDULO 2: EXPERIENCIA & FORMACIÓN -->
+<section class="module experience-education-section" data-breadcrumb="Experiencia & Formación">
+    <header class="module-header">
+        <h2 class="module-title">EXPERIENCIA & FORMACIÓN</h2>
+        <p class="module-subtitle">Trayectoria profesional y académica</p>
+    </header>
+
+    <div class="module-content">
+        <!-- SECCIÓN: EXPERIENCIA LABORAL -->
+        {{#if (hasContent experienciasLaborales)}}
+        <div class="section section-breakable" data-breadcrumb="Experiencia & Formación › Experiencia Laboral">
+            <h3 class="section-title">Experiencia Laboral</h3>
+            {{#each experienciasLaborales}}
+            {{#if empresa}}
+            <div class="experiencia-item lista-item">
+                <div class="experience-header">
+                    <h4 class="job-title">{{puesto}}</h4>
+                    <span class="company">{{empresa}}</span>
+                    <span class="period">{{formatDate fechaInicio}} - {{#if fechaFin}}{{formatDate fechaFin}}{{else}}Actualidad{{/if}}</span>
+                </div>
+                {{#if funcionRealizada}}
+                <div class="job-description">
+                    <p>{{funcionRealizada}}</p>
+                </div>
+                {{/if}}
+            </div>
+            {{/if}}
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- SECCIÓN: FORMACIÓN ACADÉMICA -->
+        {{#if (hasContent formaciones)}}
+        <div class="section section-breakable" data-breadcrumb="Experiencia & Formación › Formación Académica">
+            <h3 class="section-title">Formación Académica</h3>
+            {{#each formaciones}}
+            {{#if centro}}
+            <div class="formacion-item lista-item">
+                <h4 class="degree-title">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</h4>
+                <span class="institution">{{centro}}</span>
+                {{#if fechaFin}}<span class="period">{{formatDate fechaFin 'YYYY'}}</span>{{/if}}
+                {{#if titulo}}<span class="certified">✓ Titulado</span>{{/if}}
+            </div>
+            {{/if}}
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<!-- MÓDULO 3: COMPETENCIAS & REFERENCIAS + COMPLEMENTARIA -->
+<section class="module competencies-section" data-breadcrumb="Competencias & Referencias + Complementaria">
+    <header class="module-header">
+        <h2 class="module-title">COMPETENCIAS & REFERENCIAS + COMPLEMENTARIA</h2>
+        <p class="module-subtitle">Evaluación integral y datos adicionales</p>
+    </header>
+
+    <div class="module-content">
+        <!-- SECCIÓN: COMPETENCIAS EVALUADAS -->
+        {{#if (hasContent competencias)}}
+        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Competencias Evaluadas">
+            <h3 class="section-title">Competencias Evaluadas</h3>
+            {{#each competencias}}
+            <div class="competency-card lista-item">
+                <div class="skill-header">
+                    <span class="skill-name">{{competencia}}</span>
+                    <span class="skill-level">{{puntuacion}}/10</span>
+                </div>
+                {{#if observaciones}}
+                <div class="skill-observations">
+                    <p>{{observaciones}}</p>
+                </div>
+                {{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- SECCIÓN: REFERENCIAS -->
+        {{#if (hasContent referencias)}}
+        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Referencias">
+            <h3 class="section-title">Referencias</h3>
+            {{#each referencias}}
+            <div class="reference-item lista-item">
+                <div class="reference-header">
+                    <span class="reference-name">{{referencia}}</span>
+                    <span class="reference-company">{{empresa}}</span>
+                </div>
+                <span class="reference-function">{{funcionRealizada}}</span>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- SECCIÓN: APLICACIONES INFORMÁTICAS -->
+        {{#if (hasContent aplicacionesInformaticas)}}
+        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Aplicaciones Informáticas">
+            <h3 class="section-title">Aplicaciones Informáticas</h3>
+            {{#each aplicacionesInformaticas}}
+            <div class="software-item lista-item">
+                <span class="software-name">{{aplicacion}}</span>
+                <span class="software-level">{{nivel}}</span>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- SECCIÓN: IDIOMAS -->
+        {{#if (hasContent idiomas)}}
+        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Idiomas">
+            <h3 class="section-title">Idiomas</h3>
+            {{#each idiomas}}
+            <div class="language-item lista-item">
+                <span class="language-name">{{idioma}}</span>
+                <span class="language-level">{{nivel}}</span>
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+<!-- MÓDULO 4: CONCLUSIONES -->
+{{#if informe}}
+<section class="module conclusions-section" data-breadcrumb="Conclusiones">
+    <header class="module-header">
+        <h2 class="module-title">CONCLUSIONES</h2>
+        <p class="module-subtitle">Evaluación final y recomendaciones</p>
+    </header>
+
+    <div class="module-content">
+        <div class="section" data-breadcrumb="Conclusiones › Evaluación Final">
+            <h3 class="section-title">Evaluación Final</h3>
+
+            {{#if informe.trayectoriaProfesional}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Trayectoria Profesional</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.trayectoriaProfesional}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.trayectoriaFormativa}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Trayectoria Formativa</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.trayectoriaFormativa}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.entrevistaPersonal}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Entrevista Personal</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.entrevistaPersonal}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.datosInteres}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Datos de Interés</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.datosInteres}}</p>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</section>
+{{/if}}
+
+<!-- MÓDULO 6: DESARROLLO & DEBUG (TEMPORAL) -->
+<section class="module debug-module" data-module="99">
+    <header class="module-header">
+        <h2 class="module-title">🧪 DESARROLLO & DEBUG</h2>
+        <div class="module-subtitle">Sistema de Control - TEMPORAL</div>
+    </header>
+    <div class="module-content">
+        <!-- ESTADO DEL SISTEMA -->
+        <div class="debug-panel">
+            <h3>📊 Estado del Sistema:</h3>
+            <ul>
+                <li>Timestamp: {{formatDate 'now' 'DD/MM/YYYY HH:mm:ss'}}</li>
+                <li>Template: ✅ informeCandidatoSeleccion</li>
+                <li>Candidato: {{datosPersonales.nombreCompleto}}</li>
+                <li>Orden: Replica informeInteligente</li>
+            </ul>
+        </div>
+        
+        <!-- VERIFICACIÓN DE DATOS -->
+        <div class="data-check">
+            <h3>🔍 Datos Recibidos:</h3>
+            <ul>
+                <li>Datos personales: {{#if datosPersonales}}✅ {{datosPersonales.nombreCompleto}}{{else}}❌ Falta{{/if}}</li>
+                <li>Informe: {{#if informe}}✅ Puntuación: {{informe.puntuacion}}{{else}}❌ Falta{{/if}}</li>
+                <li>Experiencias: {{#if experienciasLaborales}}✅ {{experienciasLaborales.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Formaciones: {{#if formaciones}}✅ {{formaciones.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Competencias: {{#if competencias}}✅ {{competencias.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Referencias: {{#if referencias}}✅ {{referencias.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Idiomas: {{#if idiomas}}✅ {{idiomas.length}} items{{else}}❌ Vacío{{/if}}</li>
+                <li>Apps Informáticas: {{#if aplicacionesInformaticas}}✅ {{aplicacionesInformaticas.length}} items{{else}}❌ Vacío{{/if}}</li>
+            </ul>
+        </div>
+        
+        <!-- VALIDACIONES DEL ORDEN -->
+        <div class="order-check">
+            <h3>📋 Orden de Módulos:</h3>
+            <ol>
+                <li>✅ Módulo 0: Portada</li>
+                <li>✅ Módulo 1: Presentación (Datos personales + Datos destacados)</li>
+                <li>✅ Módulo 2: Experiencia & Formación</li>
+                <li>✅ Módulo 3: Competencias & Referencias + Complementaria</li>
+                <li>✅ Módulo 4: Conclusiones</li>
+                <li>🧪 Módulo 6: DEBUG (se eliminará en producción)</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+    <div class="footer-content">
+        <span class="confidential">CONFIDENCIAL - Uso exclusivo del cliente</span>
+        <span class="page-info">
+            <span class="page-number"></span> / <span class="total-pages"></span>
+        </span>
+    </div>
+</footer>
+
+</body>
+</html>

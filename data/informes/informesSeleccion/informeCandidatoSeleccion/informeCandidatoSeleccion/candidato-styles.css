@@ -1,0 +1,679 @@
+/* Estilos simplificados para informeCandidatoSeleccion */
+/* Sistema de grilla de 8px */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #333;
+  background: white;
+}
+
+/* Layout principal */
+.report {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 16px;
+  margin: 0 auto;
+}
+
+/* Módulos */
+.module {
+  margin-bottom: 32px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.module-header {
+  margin-bottom: 24px;
+}
+
+.module-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 3px solid #3498db;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.module-subtitle {
+  font-size: 12px;
+  color: #7f8c8d;
+  font-style: italic;
+  margin: 0;
+}
+
+.module-content {
+  margin-top: 0;
+}
+
+/* Secciones */
+.section {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 16px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #bdc3c7;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* Elementos Editoriales */
+.bloque-editorial {
+  margin-bottom: 16px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.editorial-subtitulo {
+  font-size: 13px;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 8px;
+}
+
+.texto-editorial p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #2c3e50;
+  text-align: justify;
+  margin: 0;
+}
+
+/* Lista Items */
+.lista-item {
+  margin-bottom: 12px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* PORTADA */
+.cover-page {
+  min-height: 250mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cover-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.grafico {
+  max-width: 400px;
+  max-height: 300px;
+  object-fit: contain;
+  opacity: 0.8;
+}
+
+.cover-metadata {
+  margin-top: auto;
+  padding: 24px 0;
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  font-size: 11px;
+}
+
+.metadata-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metadata-label {
+  font-weight: bold;
+  color: #7f8c8d;
+  text-transform: uppercase;
+  font-size: 10px;
+}
+
+.metadata-value {
+  color: #2c3e50;
+  font-weight: normal;
+}
+
+.main-header {
+  margin-bottom: 32px;
+}
+
+.header-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0;
+}
+
+.brand-tagline {
+  font-size: 12px;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.report-meta {
+  text-align: right;
+  font-size: 11px;
+  color: #7f8c8d;
+}
+
+.report-meta span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.report-type {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* CANDIDATO - DATOS BÁSICOS */
+.candidate-header {
+  margin-bottom: 32px;
+}
+
+.candidate-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 24px;
+  align-items: start;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.candidate-photo-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.candidate-photo {
+  width: 100px;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+}
+
+.no-photo {
+  width: 100px;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ecf0f1;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  font-size: 12px;
+  color: #7f8c8d;
+  text-align: center;
+}
+
+.candidate-info {
+  flex: 1;
+}
+
+.candidate-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 11px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-label {
+  font-weight: bold;
+  color: #7f8c8d;
+  min-width: 60px;
+}
+
+.info-value {
+  color: #2c3e50;
+}
+
+/* CANDIDATO - PUNTUACIÓN */
+.candidate-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.score-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.score-value {
+  font-size: 16px;
+}
+
+.score-max {
+  font-size: 11px;
+}
+
+.score-label {
+  font-size: 10px;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+/* EXPERIENCIA LABORAL */
+.experience-item {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+}
+
+.experience-header {
+  margin-bottom: 12px;
+}
+
+.job-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.company {
+  display: block;
+  font-size: 13px;
+  color: #7f8c8d;
+  margin-bottom: 4px;
+}
+
+.period {
+  display: block;
+  font-size: 11px;
+  color: #95a5a6;
+  font-style: italic;
+}
+
+.job-description p {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* FORMACIÓN */
+.education-item {
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.degree-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.institution {
+  display: block;
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-bottom: 4px;
+}
+
+/* COMPETENCIAS */
+.skill-item {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.skill-name {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.skill-level {
+  font-size: 11px;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+.skill-score {
+  font-size: 11px;
+  color: #555;
+}
+
+.skill-score span {
+  margin-right: 16px;
+}
+
+/* IDIOMAS */
+.language-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.language-name {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.language-level {
+  font-size: 11px;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+/* VALORACIÓN GENERAL */
+.overall-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #3498db;
+  color: white;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  font-weight: bold;
+}
+
+.score-value {
+  font-size: 18px;
+}
+
+.report-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 4px;
+}
+
+.report-section p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #2c3e50;
+  text-align: justify;
+}
+
+/* APLICACIONES INFORMÁTICAS */
+.software-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.software-name {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.software-level {
+  font-size: 11px;
+  color: #7f8c8d;
+  text-transform: uppercase;
+}
+
+/* REFERENCIAS */
+.reference-item {
+  margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.reference-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.reference-name {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.reference-company {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.reference-function {
+  font-size: 11px;
+  color: #95a5a6;
+  font-style: italic;
+}
+
+/* FORMACIÓN - estilos adicionales */
+.certified {
+  font-size: 10px;
+  color: #27ae60;
+  font-weight: bold;
+}
+
+/* COMPETENCIAS - estilos para observaciones */
+.skill-observations {
+  margin-top: 8px;
+}
+
+.skill-observations p {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #555;
+  font-style: italic;
+}
+
+/* MÓDULO DEBUG */
+.debug-module {
+  background: #f8f9fa;
+  border: 2px dashed #e74c3c;
+  padding: 16px;
+  margin-top: 40px;
+}
+
+.debug-module .module-title {
+  color: #e74c3c;
+  border-bottom-color: #e74c3c;
+}
+
+.debug-panel,
+.data-check,
+.order-check {
+  background: white;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: 1px solid #ecf0f1;
+}
+
+.debug-panel h3,
+.data-check h3,
+.order-check h3 {
+  font-size: 12px;
+  color: #e74c3c;
+  margin: 0 0 8px 0;
+}
+
+.debug-panel ul,
+.data-check ul,
+.order-check ol {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.debug-panel li,
+.data-check li,
+.order-check li {
+  margin-bottom: 4px;
+  color: #2c3e50;
+}
+
+/* FOOTER */
+.page-footer {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  height: 32px;
+  font-size: 10px;
+  color: #7f8c8d;
+  border-top: 1px solid #ecf0f1;
+  background: white;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 16px;
+}
+
+.confidential {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.page-info {
+  font-style: italic;
+}
+
+/* COMPETENCY CARDS */
+.competency-card {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 6px;
+  border-left: 3px solid #3498db;
+}
+
+/* EXPERIENCIA Y FORMACIÓN ITEMS */
+.experiencia-item,
+.formacion-item {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #27ae60;
+}
+
+.experiencia-item .job-title,
+.formacion-item .degree-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+/* Evitar cortes de página */
+.bloque-editorial,
+.experiencia-item,
+.formacion-item,
+.competency-card,
+.lista-item,
+.reference-item,
+.software-item,
+.language-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Responsive para impresión */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .module {
+    page-break-inside: avoid;
+  }
+  
+  .debug-module {
+    display: none; /* Ocultar debug en impresión */
+  }
+}

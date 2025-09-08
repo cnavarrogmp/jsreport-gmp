@@ -1,0 +1,15 @@
+{
+  "name": "informeCandidatoSeleccion",
+  "recipe": "chrome-pdf",
+  "engine": "handlebars",
+  "chrome": {
+    "printBackground": true,
+    "format": "A4",
+    "margin": {
+      "top": "0px",
+      "right": "0px",
+      "bottom": "0px",
+      "left": "0px"
+    }
+  }
+}
