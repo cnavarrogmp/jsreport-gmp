@@ -6,12 +6,11 @@ const http = require('http');
 // =============== CONFIGURACIÓN ===============
 const CONFIG = {
   // Rutas
-  workingDir: 'D:\\WorkingGMPCarmen\\WorkCarmGMPGit\\GPMCarmenGit\\jsreport-gmp',
   dockerDir: 'D:\\Docker\\Jsreport',
   outputDir: 'D:\\Carmen\\Escritorio\\PRUEBAS DOCUMENTOS API',
   
   // Git
-  branch: 'SPRINTS/SPRINT10/623CarmenJsReport',
+  branch: 'SPRINTS/SPRINT10/622CarmenJsReport',
   
   // JSReport
   jsreportUrl: 'http://localhost:5488',
@@ -51,23 +50,23 @@ function timestamp() {
 
 // =============== PASO 1: COMMIT Y PUSH ===============
 async function step1_CommitAndPush() {
-  console.log('\n🔹 PASO 1: COMMIT Y PUSH EN CARPETA DE TRABAJO');
+  console.log('\n🔹 PASO 1: COMMIT Y PUSH EN CARPETA DOCKER');
   console.log('=' .repeat(50));
   
   try {
     // Verificar estado
-    await execPromise('git status --short', CONFIG.workingDir);
+    await execPromise('git status --short', CONFIG.dockerDir);
     
     if (CONFIG.autoCommit) {
       // Add todos los cambios
-      await execPromise('git add -A', CONFIG.workingDir);
+      await execPromise('git add -A', CONFIG.dockerDir);
       
       // Commit con timestamp
       const message = `${CONFIG.commitMessage} [${timestamp()}]`;
-      await execPromise(`git commit -m "${message}"`, CONFIG.workingDir);
+      await execPromise(`git commit -m "${message}"`, CONFIG.dockerDir);
       
       // Push
-      await execPromise(`git push origin ${CONFIG.branch}`, CONFIG.workingDir);
+      await execPromise(`git push origin ${CONFIG.branch}`, CONFIG.dockerDir);
       console.log('✅ Cambios enviados al repositorio');
     } else {
       console.log('⚠️ Auto-commit desactivado. Asegúrate de hacer commit manual');
@@ -83,29 +82,9 @@ async function step1_CommitAndPush() {
   }
 }
 
-// =============== PASO 2: PULL Y MERGE EN DOCKER ===============
-async function step2_PullAndMerge() {
-  console.log('\n🔹 PASO 2: PULL Y MERGE EN CARPETA DOCKER');
-  console.log('=' .repeat(50));
-  
-  try {
-    // Fetch últimos cambios
-    await execPromise('git fetch origin', CONFIG.dockerDir);
-    
-    // Merge con la rama
-    await execPromise(`git merge origin/${CONFIG.branch} --no-edit`, CONFIG.dockerDir);
-    console.log('✅ Cambios sincronizados en carpeta Docker');
-    
-    return true;
-  } catch (error) {
-    console.error('❌ Error en merge:', error);
-    throw error;
-  }
-}
-
-// =============== PASO 3: REINICIAR DOCKER ===============
-async function step3_RestartDocker() {
-  console.log('\n🔹 PASO 3: REINICIAR DOCKER');
+// =============== PASO 2: REINICIAR DOCKER ===============
+async function step2_RestartDocker() {
+  console.log('\n🔹 PASO 2: REINICIAR DOCKER');
   console.log('=' .repeat(50));
   
   try {
@@ -132,9 +111,9 @@ async function step3_RestartDocker() {
   }
 }
 
-// =============== PASO 4: LLAMAR API Y GENERAR PDF ===============
-async function step4_GeneratePDF() {
-  console.log('\n🔹 PASO 4: GENERAR PDF VIA API');
+// =============== PASO 3: GENERAR PDF VIA API ===============
+async function step3_GeneratePDF() {
+  console.log('\n🔹 PASO 3: GENERAR PDF VIA API');
   console.log('=' .repeat(50));
   
   // Cargar datos ESTRUCTURA REAL desde archivo
@@ -150,7 +129,7 @@ async function step4_GeneratePDF() {
     console.log(`   - Estructura REAL del sistema`);
     console.log(`   - Candidato: ${testData.datosPersonales.nombreCompleto}`);
   } catch (error) {
-    console.log('⚠️ No se pudo cargar datos-completos-test.json, usando datos básicos');
+    console.log('⚠️ No se pudo cargar datos-estructura-real.json, usando datos básicos');
     testData = {
       datosGenerales: {
         nombreCandidato: "CANDIDATO DE PRUEBA",
@@ -251,12 +230,12 @@ async function step4_GeneratePDF() {
   });
 }
 
+
 // =============== PIPELINE PRINCIPAL ===============
 async function runPipeline() {
   console.log('🚀 INICIANDO PIPELINE DE DEPLOY Y TEST');
   console.log('=' .repeat(60));
   console.log(`⏰ Hora: ${new Date().toLocaleString()}`);
-  console.log(`📁 Working: ${CONFIG.workingDir}`);
   console.log(`📁 Docker: ${CONFIG.dockerDir}`);
   console.log(`📁 Output: ${CONFIG.outputDir}`);
   console.log('=' .repeat(60));
@@ -265,7 +244,6 @@ async function runPipeline() {
     step1: false,
     step2: false,
     step3: false,
-    step4: false,
     pdfPath: null,
     errors: []
   };
@@ -279,23 +257,19 @@ async function runPipeline() {
       console.log('⚠️ Continuando sin commit...');
     }
     
-    // Paso 2: Pull y Merge
-    results.step2 = await step2_PullAndMerge();
+    // Paso 2: Reiniciar Docker
+    results.step2 = await step2_RestartDocker();
     
-    // Paso 3: Reiniciar Docker
-    results.step3 = await step3_RestartDocker();
-    
-    // Paso 4: Generar PDF
-    results.pdfPath = await step4_GeneratePDF();
-    results.step4 = true;
+    // Paso 3: Generar PDF
+    results.pdfPath = await step3_GeneratePDF();
+    results.step3 = true;
     
     // Resumen final
     console.log('\n' + '=' .repeat(60));
     console.log('📊 RESUMEN DE EJECUCIÓN:');
     console.log(`  ✅ Paso 1 (Commit/Push): ${results.step1 ? 'OK' : 'FALLÓ'}`);
-    console.log(`  ✅ Paso 2 (Pull/Merge): ${results.step2 ? 'OK' : 'FALLÓ'}`);
-    console.log(`  ✅ Paso 3 (Docker): ${results.step3 ? 'OK' : 'FALLÓ'}`);
-    console.log(`  ✅ Paso 4 (PDF): ${results.step4 ? 'OK' : 'FALLÓ'}`);
+    console.log(`  ✅ Paso 2 (Docker): ${results.step2 ? 'OK' : 'FALLÓ'}`);
+    console.log(`  ✅ Paso 3 (PDF): ${results.step3 ? 'OK' : 'FALLÓ'}`);
     
     if (results.pdfPath) {
       console.log(`\n🎉 PDF GENERADO EXITOSAMENTE:`);

@@ -7,10 +7,9 @@ echo                      JSREPORT PIPELINE AUTOMATIZADO
 echo ================================================================================
 echo.
 echo Este script ejecuta:
-echo   1. Commit y push en carpeta de trabajo
-echo   2. Pull y merge en carpeta Docker
-echo   3. Reinicio de Docker
-echo   4. Generacion de PDF via API
+echo   1. Commit y push en carpeta Docker
+echo   2. Reinicio de Docker
+echo   3. Generacion de PDF via API
 echo.
 echo ================================================================================
 echo.
