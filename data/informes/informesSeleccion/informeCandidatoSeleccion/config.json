@@ -2,5 +2,14 @@
     "_id": "candidato_main",
     "shortid": "CandMain", 
     "$entitySet": "folders",
-    "name": "informeCandidatoSeleccion"
+    "name": "informeCandidatoSeleccion",
+    "creationDate": {
+        "$$date": 1725819600000
+    },
+    "modificationDate": {
+        "$$date": 1725819600000
+    },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "visibilityPermissions": []
 }
