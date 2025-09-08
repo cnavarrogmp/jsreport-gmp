@@ -1,3 +1,15 @@
 {
-  "name": "candidato-styles.css"
+    "name": "candidato-styles.css",
+    "sharedHelpersScope": null,
+    "creationDate": {
+        "$$date": 1725819600000
+    },
+    "modificationDate": {
+        "$$date": 1725819600000
+    },
+    "shortid": "CandCSS",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "_id": "candidato_css_id",
+    "$entitySet": "assets"
 }
