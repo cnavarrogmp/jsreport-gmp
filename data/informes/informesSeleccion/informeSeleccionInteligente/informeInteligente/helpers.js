@@ -17,25 +17,246 @@
  * ========================================================================
  */
 
-// SISTEMA DE CONTROL TEMPORAL - INTEGRADO DIRECTAMENTE
-// TODO: Integrar render-controller.js correctamente
+// ========================================================================
+// SISTEMA DE CONTROL COMPLETO - INTEGRADO EN HELPERS
+// Versión 4.0 - Incluye validación completa y headers contextuales
+// ========================================================================
 const RenderController = {
   modules: {
-    portada: { id: 0, enabled: true, required: true, title: 'PORTADA' },
-    presentacion: { id: 1, enabled: true, required: true, title: 'PRESENTACIÓN DEL CANDIDATO' },
-    experiencia: { id: 2, enabled: true, required: false, title: 'EXPERIENCIA Y FORMACIÓN' },
-    competencias: { id: 3, enabled: true, required: false, title: 'COMPETENCIAS Y HABILIDADES' },
-    conclusiones: { id: 4, enabled: true, required: true, title: 'CONCLUSIONES Y REFERENCIAS' },
-    prueba: { id: 99, enabled: true, required: false, title: '🧪 MÓDULO DE PRUEBA Y DIAGNÓSTICO', debug: true }
+    portada: {
+      id: 0,
+      enabled: true,
+      required: true,
+      minContent: 0,
+      sections: [],
+      validation: { checkFields: [], checkMinItems: 0 },
+      title: 'PORTADA',
+      description: 'Portada introductoria del informe'
+    },
+    presentacion: {
+      id: 1,
+      enabled: true,
+      required: true,
+      minContent: 100,
+      sections: ['datosPersonales', 'datosDestacados'],
+      validation: { checkFields: ['nombreCompleto'], checkMinItems: 0 },
+      title: 'PRESENTACIÓN DEL CANDIDATO',
+      description: 'Datos personales y aspectos destacados'
+    },
+    experiencia: {
+      id: 2,
+      enabled: true,
+      required: false,
+      minContent: 200,
+      sections: ['experienciasLaborales', 'formaciones'],
+      validation: { checkFields: ['empresa', 'puesto'], checkMinItems: 1 },
+      title: 'EXPERIENCIA Y FORMACIÓN',
+      description: 'Historial laboral y educativo'
+    },
+    competencias: {
+      id: 3,
+      enabled: true,
+      required: false,
+      minContent: 150,
+      sections: ['competencias', 'idiomas', 'habilidades'],
+      validation: { checkFields: ['nombre', 'nivel'], checkMinItems: 1 },
+      title: 'COMPETENCIAS Y HABILIDADES',
+      description: 'Evaluación de competencias, idiomas y habilidades'
+    },
+    conclusiones: {
+      id: 4,
+      enabled: true,
+      required: true,
+      minContent: 100,
+      sections: ['referencias', 'observaciones', 'recomendaciones'],
+      validation: { checkFields: [], checkMinItems: 0 },
+      title: 'CONCLUSIONES Y REFERENCIAS',
+      description: 'Referencias profesionales y observaciones finales'
+    },
+    prueba: {
+      id: 99,
+      enabled: true, // ACTIVADO para debugging
+      required: false,
+      minContent: 0,
+      sections: [],
+      validation: { checkFields: [], checkMinItems: 0 },
+      title: '🧪 MÓDULO DE PRUEBA Y DEBUG',
+      description: 'Panel de control y verificación del sistema',
+      debug: true,
+      showInProduction: false,
+      showCondition: 'development'
+    }
   },
+
+  pageTracking: {},
+  currentPage: 1,
+
   validateModule(moduleName, data, environment = 'development') {
     const module = this.modules[moduleName];
-    if (!module) return false;
-    if (!module.enabled) return false;
-    // Módulos debug se muestran solo en development
-    if (module.debug && environment === 'production') return false;
-    console.log(`✅ Validando ${moduleName}: APROBADO`);
-    return true;
+    if (!module) {
+      console.log(`❌ Módulo ${moduleName} no existe`);
+      return false;
+    }
+
+    // Módulos deshabilitados
+    if (!module.enabled) {
+      console.log(`❌ Módulo ${moduleName} deshabilitado`);
+      return false;
+    }
+
+    // Módulos de debug
+    if (module.debug) {
+      if (environment === 'production' && !module.showInProduction) {
+        return false;
+      }
+      if (module.showCondition === 'development') {
+        return environment === 'development';
+      }
+      return true;
+    }
+
+    // Validar contenido para módulos normales
+    let totalContent = 0;
+    let hasValidItems = false;
+
+    for (const sectionName of module.sections) {
+      const sectionData = data[sectionName];
+      if (!sectionData) continue;
+
+      if (Array.isArray(sectionData)) {
+        if (sectionData.length >= module.validation.checkMinItems) {
+          hasValidItems = true;
+          totalContent += JSON.stringify(sectionData).length;
+        }
+      } else if (typeof sectionData === 'object') {
+        const hasContent = Object.values(sectionData).some(val => 
+          val && val.toString().trim().length > 0
+        );
+        if (hasContent) {
+          hasValidItems = true;
+          totalContent += JSON.stringify(sectionData).length;
+        }
+      }
+    }
+
+    // Decisión final
+    if (module.required) {
+      console.log(`✅ Módulo ${moduleName}: REQUERIDO - se renderiza`);
+      return true;
+    }
+    
+    const shouldRender = totalContent >= module.minContent && hasValidItems;
+    console.log(`${shouldRender ? '✅' : '❌'} Módulo ${moduleName}: ${totalContent} chars (min: ${module.minContent})`);
+    return shouldRender;
+  },
+
+  generateContextualHeader(context) {
+    const { moduleName, sectionName, pageNumber } = context;
+    const module = this.modules[moduleName];
+    
+    if (!module) {
+      return { main: moduleName.toUpperCase(), subtitle: '', breadcrumb: moduleName };
+    }
+
+    // Por ahora, headers simples (FASE 4 completa más adelante)
+    return {
+      main: module.title,
+      subtitle: sectionName || module.description,
+      breadcrumb: module.title,
+      isContinuation: false
+    };
+  },
+
+  prepareModuleData(moduleName, data) {
+    const module = this.modules[moduleName];
+    if (!module) return null;
+
+    const moduleData = {
+      id: module.id,
+      name: moduleName,
+      title: module.title,
+      description: module.description,
+      sections: [],
+      isEmpty: true,
+      contentLength: 0,
+      isDebug: module.debug || false
+    };
+
+    for (const sectionName of module.sections) {
+      const sectionData = data[sectionName];
+      if (sectionData && this.hasValidContent(sectionData)) {
+        moduleData.sections.push({
+          name: sectionName,
+          data: sectionData,
+          itemCount: Array.isArray(sectionData) ? sectionData.length : 1
+        });
+        moduleData.isEmpty = false;
+        moduleData.contentLength += JSON.stringify(sectionData).length;
+      }
+    }
+
+    return moduleData;
+  },
+
+  hasValidContent(data) {
+    if (!data) return false;
+    
+    if (Array.isArray(data)) {
+      return data.length > 0 && data.some(item => {
+        if (!item) return false;
+        if (typeof item === 'object') {
+          return Object.values(item).some(val => 
+            val && val.toString().trim().length > 0
+          );
+        }
+        return item.toString().trim().length > 0;
+      });
+    }
+    
+    if (typeof data === 'object') {
+      return Object.values(data).some(val => 
+        val && val.toString().trim().length > 0
+      );
+    }
+    
+    return data.toString().trim().length > 0;
+  },
+
+  getModuleStats(data) {
+    const stats = {
+      totalModules: Object.keys(this.modules).length,
+      enabledModules: 0,
+      requiredModules: 0,
+      modulesWithContent: 0,
+      modulesToRender: 0,
+      details: []
+    };
+
+    Object.entries(this.modules).forEach(([name, module]) => {
+      if (module.enabled) stats.enabledModules++;
+      if (module.required) stats.requiredModules++;
+      
+      const hasContent = this.validateModule(name, data, 'development');
+      if (hasContent) {
+        stats.modulesWithContent++;
+        if (module.enabled) stats.modulesToRender++;
+      }
+
+      stats.details.push({
+        name: name,
+        enabled: module.enabled,
+        required: module.required,
+        hasContent: hasContent,
+        willRender: module.enabled && hasContent
+      });
+    });
+
+    return stats;
+  },
+
+  setDebugMode(enabled) {
+    this.modules.prueba.enabled = enabled;
+    console.log(`🧪 Modo debug ${enabled ? 'ACTIVADO' : 'DESACTIVADO'}`);
   }
 };
 

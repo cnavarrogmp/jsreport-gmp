@@ -15,7 +15,7 @@ echo ===========================================================================
 echo.
 
 REM Verificar si Node.js está instalado
-where node >nul 2>&1
+where node > NUL 2>&1
 if %errorlevel% neq 0 (
     echo [ERROR] Node.js no encontrado. Por favor instala Node.js
     pause
@@ -23,7 +23,7 @@ if %errorlevel% neq 0 (
 )
 
 REM Verificar si Docker está corriendo
-docker info >nul 2>&1
+docker info > NUL 2>&1
 if %errorlevel% neq 0 (
     echo [ERROR] Docker no esta corriendo. Por favor inicia Docker Desktop
     pause
