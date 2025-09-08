@@ -1,3 +1,5 @@
 {
-  "name": "informeCandidatoSeleccionData"
+    "name": "informeCandidatoSeleccionData",
+    "shortid": "CandData",
+    "$entitySet": "data"
 }

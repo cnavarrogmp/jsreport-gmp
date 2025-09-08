@@ -1,15 +1,21 @@
 {
-  "name": "informeCandidatoSeleccion",
-  "recipe": "chrome-pdf",
-  "engine": "handlebars",
-  "chrome": {
-    "printBackground": true,
-    "format": "A4",
-    "margin": {
-      "top": "0px",
-      "right": "0px",
-      "bottom": "0px",
-      "left": "0px"
-    }
-  }
+    "name": "informeCandidatoSeleccion",
+    "engine": "handlebars",
+    "recipe": "chrome-pdf",
+    "data": {
+        "shortid": "CandData"
+    },
+    "shortid": "CandTmpl",
+    "chrome": {
+        "printBackground": true,
+        "waitForJS": false,
+        "waitForNetworkIdle": false,
+        "format": "A4",
+        "marginTop": "16mm",
+        "marginBottom": "16mm",
+        "marginLeft": "16mm",
+        "marginRight": "16mm",
+        "displayHeaderFooter": false
+    },
+    "$entitySet": "templates"
 }
