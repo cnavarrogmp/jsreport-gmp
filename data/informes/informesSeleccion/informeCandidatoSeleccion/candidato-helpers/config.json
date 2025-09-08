@@ -1,0 +1,16 @@
+{
+    "name": "candidato-helpers",
+    "shortid": "CandHelp",
+    "_id": "candidato_helpers_id",
+    "$entitySet": "scripts",
+    "creationDate": {
+        "$$date": 1725819600000
+    },
+    "modificationDate": {
+        "$$date": 1725819600000
+    },
+    "scope": "template",
+    "isGlobal": false,
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": []
+}

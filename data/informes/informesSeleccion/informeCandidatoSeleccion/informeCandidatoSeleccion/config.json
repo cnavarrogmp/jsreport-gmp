@@ -26,5 +26,10 @@
     "inheritedReadPermissions": [],
     "inheritedEditPermissions": [],
     "_id": "candidato_template_id",
-    "$entitySet": "templates"
+    "$entitySet": "templates",
+    "scripts": [
+        {
+            "shortid": "CandHelp"
+        }
+    ]
 }
