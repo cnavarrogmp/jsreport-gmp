@@ -156,7 +156,7 @@ async function generatePDF(template, testData) {
   return new Promise((resolve, reject) => {
     const requestPayload = JSON.stringify({
       template: {
-        name: template.name
+        name: template.fullPath
       },
       data: testData,
       options: {
