@@ -1,14 +1,14 @@
-// Script controlador - Actúa como intermediario entre JSReport y los helpers
-const helpers = require('../informeCandidatoTemplate/helpers.js');
+// Script controlador - Solo prepara datos
+// Los helpers se cargan automáticamente desde informeCandidatoTemplate/helpers.js
 
 function beforeRender(req, res, done) {
-    // Registrar los helpers importados para que Handlebars los use
-    req.template.helpers = helpers;
-
+    // NO necesitamos registrar helpers aquí
+    // JSReport carga automáticamente helpers.js desde la carpeta del template
+    
     // Lógica de preparación de datos (controlador)
     if (req.data) {
         // Asegurar que los arrays existen para evitar errores en el template
-        const arrays = ['experienciasLaborales', 'formaciones', 'competencias', 'referencias'];
+        var arrays = ['experienciasLaborales', 'formaciones', 'competencias', 'referencias'];
         arrays.forEach(function(key) {
             if (!req.data[key]) {
                 req.data[key] = [];
@@ -18,11 +18,11 @@ function beforeRender(req, res, done) {
         // Añadir metadatos del informe
         req.data.fechaGeneracion = new Date().toISOString();
         
-        // Aquí podrías añadir más lógica de negocio:
+        // Aquí podrías añadir más lógica de negocio cuando crezca:
         // - Validación de datos
-        // - Cálculos agregados
+        // - Cálculos agregados  
         // - Enriquecimiento de datos
-        // - Logging para debugging
+        // - Logging para debugging: console.log('Data:', req.data);
     }
 
     // Continuar con el renderizado

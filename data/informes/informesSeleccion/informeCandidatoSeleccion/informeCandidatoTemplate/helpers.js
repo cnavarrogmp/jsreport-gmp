@@ -1,49 +1,44 @@
-// Funciones helper para el template - Solo lógica de presentación
-const helpers = {
-    // Helper para formatear fechas
-    formatDate: function(date, format) {
-        if (!date) return '';
-        
-        let dateObj;
-        if (date === 'now') {
-            dateObj = new Date();
-        } else {
-            dateObj = new Date(date);
-        }
-        
-        if (isNaN(dateObj.getTime())) return '';
-        
-        const day = String(dateObj.getDate()).padStart(2, '0');
-        const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-        const year = dateObj.getFullYear();
-        const hours = String(dateObj.getHours()).padStart(2, '0');
-        const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-        
-        switch (format) {
-            case 'DD/MM/YYYY':
-                return `${day}/${month}/${year}`;
-            case 'MM/YYYY':
-                return `${month}/${year}`;
-            case 'YYYY':
-                return `${year}`;
-            case 'HH:mm':
-                return `${hours}:${minutes}`;
-            case 'DD/MM/YYYY HH:mm':
-                return `${day}/${month}/${year} ${hours}:${minutes}`;
-            default:
-                return `${day}/${month}/${year}`;
-        }
-    },
+// Helpers para el template - JSReport los carga automáticamente
+// NO usar module.exports, solo funciones globales
 
-    // Helper para verificar si hay contenido en un array
-    hasContent: function(array) {
-        return Array.isArray(array) && array.length > 0;
-    },
-
-    // Helper para verificar si hay texto
-    hasText: function(text) {
-        return text && typeof text === 'string' && text.trim().length > 0;
+function formatDate(date, format) {
+    if (!date) return '';
+    
+    var dateObj;
+    if (date === 'now') {
+        dateObj = new Date();
+    } else {
+        dateObj = new Date(date);
     }
-};
+    
+    if (isNaN(dateObj.getTime())) return '';
+    
+    var day = String(dateObj.getDate()).padStart(2, '0');
+    var month = String(dateObj.getMonth() + 1).padStart(2, '0');
+    var year = dateObj.getFullYear();
+    var hours = String(dateObj.getHours()).padStart(2, '0');
+    var minutes = String(dateObj.getMinutes()).padStart(2, '0');
+    
+    switch (format) {
+        case 'DD/MM/YYYY':
+            return day + '/' + month + '/' + year;
+        case 'MM/YYYY':
+            return month + '/' + year;
+        case 'YYYY':
+            return String(year);
+        case 'HH:mm':
+            return hours + ':' + minutes;
+        case 'DD/MM/YYYY HH:mm':
+            return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+        default:
+            return day + '/' + month + '/' + year;
+    }
+}
 
-module.exports = helpers;
+function hasContent(array) {
+    return Array.isArray(array) && array.length > 0;
+}
+
+function hasText(text) {
+    return text && typeof text === 'string' && text.trim().length > 0;
+}
