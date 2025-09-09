@@ -93,15 +93,6 @@
                     </div>
                 </div>
             </div>
-            {{#if informe.puntuacion}}
-                <div class="candidate-score">
-                    <div class="score-circle">
-                        <span class="score-value">{{informe.puntuacion}}</span>
-                        <span class="score-max">/10</span>
-                    </div>
-                    <span class="score-label">Puntuación Global</span>
-                </div>
-            {{/if}}
         </div>
     </section>
 
@@ -111,11 +102,11 @@
         <div class="section section-breakable" data-breadcrumb="Presentación › Datos Destacados">
             <h3 class="section-title">Datos Destacados</h3>
 
-            {{#if informe.valoracion}}
+            {{#if informe.motivoPresentacion}}
             <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Valoración General</h4>
+                <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
                 <div class="texto-editorial">
-                    <p>{{informe.valoracion}}</p>
+                    <p>{{informe.motivoPresentacion}}</p>
                 </div>
             </div>
             {{/if}}
@@ -129,11 +120,29 @@
             </div>
             {{/if}}
 
-            {{#if informe.motivoPresentacion}}
+            {{#if informe.trayectoriaFormativa}}
             <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
+                <h4 class="editorial-subtitulo">Trayectoria Formativa</h4>
                 <div class="texto-editorial">
-                    <p>{{informe.motivoPresentacion}}</p>
+                    <p>{{informe.trayectoriaFormativa}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.trayectoriaProfesional}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Trayectoria Profesional</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.trayectoriaProfesional}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            {{#if informe.datosInteres}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Datos de Interés</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.datosInteres}}</p>
                 </div>
             </div>
             {{/if}}
@@ -261,6 +270,37 @@
             {{/each}}
         </div>
         {{/if}}
+
+        <!-- SECCIÓN: ACREDITACIONES -->
+        {{#if (hasContent acreditaciones)}}
+        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Acreditaciones">
+            <h3 class="section-title">Acreditaciones</h3>
+            {{#each acreditaciones}}
+            <div class="acreditacion-item lista-item">
+                <h4 class="acreditacion-title">{{descripcion}}</h4>
+                {{#if fecha}}<span class="acreditacion-date">{{formatDate fecha}}</span>{{/if}}
+                {{#if horas}}<span class="acreditacion-hours">{{horas}} horas</span>{{/if}}
+                {{#if acredita}}<span class="acreditacion-certified">✓ Acreditado</span>{{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
+
+        <!-- SECCIÓN: ADJUNTOS -->
+        {{#if (hasContent adjuntos)}}
+        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Adjuntos">
+            <h3 class="section-title">Documentación Adjunta</h3>
+            {{#each adjuntos}}
+            <div class="adjunto-item lista-item">
+                {{#if tipoAdjunto}}
+                <span class="adjunto-type">{{tipoAdjunto.value}}</span>
+                {{/if}}
+                {{#if ruta}}<span class="adjunto-path">{{ruta}}</span>{{/if}}
+                {{#if duracionHoras}}<span class="adjunto-duration">{{duracionHoras}} horas</span>{{/if}}
+            </div>
+            {{/each}}
+        </div>
+        {{/if}}
     </div>
 </section>
 
@@ -276,24 +316,6 @@
         <div class="section" data-breadcrumb="Conclusiones › Evaluación Final">
             <h3 class="section-title">Evaluación Final</h3>
 
-            {{#if informe.trayectoriaProfesional}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Trayectoria Profesional</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.trayectoriaProfesional}}</p>
-                </div>
-            </div>
-            {{/if}}
-
-            {{#if informe.trayectoriaFormativa}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Trayectoria Formativa</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.trayectoriaFormativa}}</p>
-                </div>
-            </div>
-            {{/if}}
-
             {{#if informe.entrevistaPersonal}}
             <div class="bloque-editorial">
                 <h4 class="editorial-subtitulo">Entrevista Personal</h4>
@@ -303,11 +325,24 @@
             </div>
             {{/if}}
 
-            {{#if informe.datosInteres}}
+            {{#if informe.valoracion}}
             <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Datos de Interés</h4>
+                <h4 class="editorial-subtitulo">Valoración Final</h4>
                 <div class="texto-editorial">
-                    <p>{{informe.datosInteres}}</p>
+                    <p>{{informe.valoracion}}</p>
+                </div>
+            </div>
+            {{/if}}
+
+            <!-- PUNTUACIÓN GLOBAL -->
+            {{#if informe.puntuacion}}
+            <div class="section-summary">
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span class="score-number">{{informe.puntuacion}}</span>
+                        <span class="score-max">/10</span>
+                    </div>
+                    <span class="score-label">Puntuación Global Final</span>
                 </div>
             </div>
             {{/if}}
