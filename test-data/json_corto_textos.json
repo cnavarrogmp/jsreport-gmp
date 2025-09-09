@@ -1,0 +1,132 @@
+{
+    "idInformeCvPublicacion": 10008,
+    "idPedidoMaster": 320035,
+    "fechaPublicacion": "2025-06-20T08:15:22.1500000+00:00",
+    "publicado": true,
+    "resumen": "OK",
+    "idTipoInforme": 2,
+    "idEmpresaCentro": 2,
+    "idUsuarioCreador": 3,
+    "datosPersonales": {
+        "idInformeCvPublicacionDatosPersonales": 10008,
+        "idInformeCvPublicacion": 10008,
+        "nombreCompleto": "Juan López",
+        "foto": "12345.jpg",
+        "codigoPostal": "41001",
+        "municipio": "Sevilla",
+        "pais": "España",
+        "direccionTexto": "Calle Sol 1",
+        "poblacion": "Centro",
+        "email": "juan@mail.com",
+        "telefonoMovil": "+34600123456",
+        "nif": "87654321A",
+        "fechaNacimiento": "1990-01-01T00:00:00.0000000+01:00",
+        "edad": 35
+    },
+    "informe": {
+        "idInformeCvPublicacionInforme": 10008,
+        "idInformeCvPublicacion": 10008,
+        "tipoInforme": 0,
+        "valoracion": "Bien",
+        "puntuacion": 3.0,
+        "aspectosPersonales": "OK",
+        "trayectoriaFormativa": "Buena",
+        "trayectoriaProfesional": "Correcta",
+        "entrevistaPersonal": "Bien",
+        "datosInteres": "Disponible",
+        "motivoPresentacion": "Válido",
+        "conocimientos": "Si",
+        "adecuacion": "OK",
+        "motivacion": "Alta",
+        "evolucionProfesional": "Buena",
+        "potencial": "Si"
+    },
+    "acreditaciones": [
+        {
+            "idInformeCvPublicacionAcreditacion": 10005,
+            "idInformeCvPublicacion": 10008,
+            "tipoAcreditacion": "3",
+            "fecha": "2025-03-01T00:00:00.0000000+01:00",
+            "descripcion": "Curso básico",
+            "acredita": true,
+            "horas": 20,
+            "orden": 1
+        }
+    ],
+    "adjuntos": [
+        {
+            "idInformeCvPublicacionAdjunto": 5,
+            "idInformeCvPublicacion": 10008,
+            "ruta": "docs/CV",
+            "duracionHoras": 1.0,
+            "tipoAdjunto": {
+                "id": 1,
+                "value": "CV"
+            },
+            "orden": 1
+        }
+    ],
+    "competencias": [
+        {
+            "idInformeCvPublicacionCompetencia": 10006,
+            "idInformeCvPublicacion": 10008,
+            "competencia": "Trabajo",
+            "puntuacion": 3.0,
+            "observaciones": "OK",
+            "orden": 1
+        }
+    ],
+    "experienciasLaborales": [
+        {
+            "idInformeCvPublicacionExperienciaLaboral": 10011,
+            "idInformeCvPublicacion": 10008,
+            "empresa": "ABC S.L.",
+            "puesto": "EMPLEADO",
+            "funcionRealizada": "Tareas varias",
+            "fechaInicio": "2020-01-01T00:00:00.0000000+01:00",
+            "fechaFin": "2023-12-31T00:00:00.0000000+01:00",
+            "orden": 1
+        }
+    ],
+    "formaciones": [
+        {
+            "idInformeCvPublicacionFormacion": 10014,
+            "idInformeCvPublicacion": 10008,
+            "titulacionAcademica": "ESO",
+            "nombre": "ESO",
+            "centro": "IES Madrid",
+            "titulo": true,
+            "duracionHoras": 100,
+            "fechaFin": "2006-06-30T00:00:00.0000000+02:00",
+            "orden": 1
+        }
+    ],
+    "idiomas": [
+        {
+            "idInformeCvPublicacionIdioma": 9,
+            "idInformeCvPublicacion": 10008,
+            "idioma": "Inglés",
+            "nivel": "A1",
+            "orden": 1
+        }
+    ],
+    "aplicacionesInformaticas": [
+        {
+            "idInformeCvPublicacionInformatica": 8,
+            "idInformeCvPublicacion": 10008,
+            "aplicacion": "Word",
+            "nivel": "Básico",
+            "orden": 1
+        }
+    ],
+    "referencias": [
+        {
+            "idInformeCvPublicacionReferencia": 7,
+            "idInformeCvPublicacion": 10008,
+            "empresa": "XYZ",
+            "funcionRealizada": "Admin",
+            "referencia": "Jefe Ana",
+            "orden": 1
+        }
+    ]
+}
