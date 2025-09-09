@@ -44,22 +44,32 @@ function buildCommitMessage(lines) {
         return `Actualización de plantillas · ${new Date().toLocaleString()}`;
     }
 
-    // Contar tipos de cambio: A=Added, M=Modified, D=Deleted, ?=Untracked
+    // Contadores por tipo de cambio
     let added = 0, modified = 0, deleted = 0, untracked = 0;
+    const files = [];
+
     for (const line of lines) {
-        if (line.startsWith('A')) added++;
-        else if (line.startsWith('M')) modified++;
-        else if (line.startsWith('D')) deleted++;
-        else if (line.startsWith('?')) untracked++;
+        const code = line[0]; // primer carácter del estado
+        if (code === 'A') added++;
+        else if (code === 'M') modified++;
+        else if (code === 'D') deleted++;
+        else if (code === '?') untracked++;
+
+        // quitar códigos y quedarnos con el nombre de archivo
+        files.push(line.replace(/^\s*[A-Z\?\! ]+\s+/, '').trim());
     }
 
+    // Resumen corto
     const parts = [];
     if (added) parts.push(`+${added} añadidos`);
     if (modified) parts.push(`~${modified} modificados`);
     if (deleted) parts.push(`-${deleted} eliminados`);
     if (untracked) parts.push(`?${untracked} nuevos`);
 
-    return `Update: ${parts.join(', ')} · ${new Date().toLocaleString()}`;
+    const summary = parts.join(', ');
+    const fileList = files.slice(0, 5).join(', '); // máx 5 archivos para no alargar
+
+    return `Update: ${summary} · Archivos: ${fileList} · ${new Date().toLocaleString()}`;
 }
 
 async function gitAddCommitPush(cwd) {
