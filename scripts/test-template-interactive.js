@@ -10,7 +10,8 @@ const CONFIG = {
   jsreportPassword: 'admin',
   outputDir: 'D:\\Carmen\\Escritorio\\PRUEBAS DOCUMENTOS API',
   dockerDir: 'D:\\Docker\\Jsreport',
-  templatesPath: 'data/informes/informesSeleccion'
+  templatesPath: 'data/informes/informesSeleccion',
+  testDataPath: 'test-data'
 };
 
 // =============== UTILIDADES ===============
@@ -74,12 +75,26 @@ function findTemplates() {
 function findTestData() {
   const dataFiles = [];
   
-  // Buscar en raíz
+  // Buscar en directorio test-data
+  const testDataDir = path.join(CONFIG.dockerDir, CONFIG.testDataPath);
+  if (fs.existsSync(testDataDir)) {
+    const testFiles = fs.readdirSync(testDataDir);
+    for (const file of testFiles) {
+      if (file.endsWith('.json')) {
+        dataFiles.push({
+          name: file,
+          path: path.join(testDataDir, file)
+        });
+      }
+    }
+  }
+  
+  // También buscar en raíz (por compatibilidad)
   const rootFiles = fs.readdirSync(CONFIG.dockerDir);
   for (const file of rootFiles) {
     if (file.endsWith('.json') && (file.includes('datos') || file.includes('test'))) {
       dataFiles.push({
-        name: file,
+        name: `${file} (raíz - deprecated)`,
         path: path.join(CONFIG.dockerDir, file)
       });
     }
