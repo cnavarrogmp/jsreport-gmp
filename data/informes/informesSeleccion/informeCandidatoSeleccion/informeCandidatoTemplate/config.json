@@ -1,5 +1,5 @@
 {
-    "name": "informeCandidatoSeleccion",
+    "name": "informeCandidatoTemplate",
     "engine": "handlebars",
     "recipe": "chrome-pdf",
     "data": {

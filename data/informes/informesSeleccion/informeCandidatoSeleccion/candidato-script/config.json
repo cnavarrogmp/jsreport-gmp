@@ -1,5 +1,5 @@
 {
-    "name": "candidato-helpers",
+    "name": "candidato-script",
     "shortid": "CandHelp",
     "_id": "candidato_helpers_id",
     "$entitySet": "scripts",
