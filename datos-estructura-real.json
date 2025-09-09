@@ -244,7 +244,21 @@
             "aplicacion": "Autocad",
             "nivel": "Intermedio",
             "orden": 2
-        }
+        },
+      {
+        "idInformeCvPublicacionInformatica": 5,
+        "idInformeCvPublicacion": 10006,
+        "aplicacion": "Ilustrator",
+        "nivel": "Intermedio",
+        "orden": 3
+      },
+      {
+        "idInformeCvPublicacionInformatica": 6,
+        "idInformeCvPublicacion": 10006,
+        "aplicacion": "Ink",
+        "nivel": "Intermedio",
+        "orden": 4
+      }
     ],
     "referencias": [
         {
