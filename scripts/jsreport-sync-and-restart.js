@@ -40,8 +40,26 @@ async function gitStatusPorcelain(cwd) {
 }
 
 function buildCommitMessage(lines) {
-    if (!lines.length) return `Actualización de plantillas · ${new Date().toLocaleString()}`;
-    return `Update (${lines.length} cambios) · ${new Date().toLocaleString()}`;
+    if (!lines.length) {
+        return `Actualización de plantillas · ${new Date().toLocaleString()}`;
+    }
+
+    // Contar tipos de cambio: A=Added, M=Modified, D=Deleted, ?=Untracked
+    let added = 0, modified = 0, deleted = 0, untracked = 0;
+    for (const line of lines) {
+        if (line.startsWith('A')) added++;
+        else if (line.startsWith('M')) modified++;
+        else if (line.startsWith('D')) deleted++;
+        else if (line.startsWith('?')) untracked++;
+    }
+
+    const parts = [];
+    if (added) parts.push(`+${added} añadidos`);
+    if (modified) parts.push(`~${modified} modificados`);
+    if (deleted) parts.push(`-${deleted} eliminados`);
+    if (untracked) parts.push(`?${untracked} nuevos`);
+
+    return `Update: ${parts.join(', ')} · ${new Date().toLocaleString()}`;
 }
 
 async function gitAddCommitPush(cwd) {
