@@ -214,7 +214,21 @@
             "idioma": "Alemán",
             "nivel": "A2",
             "orden": 2
-        }
+        },
+      {
+        "idInformeCvPublicacionIdioma": 6,
+        "idInformeCvPublicacion": 10006,
+        "idioma": "Griego",
+        "nivel": "A2",
+        "orden": 3
+      },
+      {
+        "idInformeCvPublicacionIdioma": 7,
+        "idInformeCvPublicacion": 10006,
+        "idioma": "Gallego",
+        "nivel": "A2",
+        "orden": 4
+      }
     ],
     "aplicacionesInformaticas": [
         {
