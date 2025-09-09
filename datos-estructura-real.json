@@ -90,6 +90,30 @@
             "puntuacion": 7.0,
             "observaciones": "Demuestra capacidad de liderazgo en situaciones estructuradas. Puede motivar y guiar a otros cuando tiene claros los objetivos y procesos.",
             "orden": 3
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10005,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Adaptabilidad",
+            "puntuacion": 8.5,
+            "observaciones": "Excelente capacidad para adaptarse a nuevos entornos y situaciones cambiantes. Demuestra flexibilidad mental y facilidad para aprender nuevos procesos y metodologías. Se ajusta rápidamente a los cambios organizacionales.",
+            "orden": 4
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10006,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Orientación a Resultados",
+            "puntuacion": 6.5,
+            "observaciones": "Muestra un enfoque sólido hacia el logro de objetivos. Mantiene la motivación para completar tareas y proyectos, aunque ocasionalmente necesita seguimiento adicional para mantener el ritmo en proyectos de largo plazo.",
+            "orden": 5
+        },
+        {
+            "idInformeCvPublicacionCompetencia": 10007,
+            "idInformeCvPublicacion": 10006,
+            "competencia": "Comunicación",
+            "puntuacion": 9.0,
+            "observaciones": "Destaca por su capacidad de comunicación clara y efectiva tanto oral como escrita. Facilita la comprensión de ideas complejas y mantiene un diálogo constructivo con diferentes niveles jerárquicos. Excelente habilidad para presentaciones.",
+            "orden": 6
         }
     ],
     "experienciasLaborales": [
@@ -276,6 +300,30 @@
             "funcionRealizada": "PEÓN",
             "referencia": "Jefe Juan Martínez",
             "orden": 2
+        },
+        {
+            "idInformeCvPublicacionReferencia": 5,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "TECNIBERIA CONSULTORES",
+            "funcionRealizada": "TÉCNICO INFORMÁTICO",
+            "referencia": "Supervisora María Carmen García",
+            "orden": 3
+        },
+        {
+            "idInformeCvPublicacionReferencia": 6,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "CONSTRUCCIONES VIZCAÍNAS",
+            "funcionRealizada": "ADMINISTRATIVO",
+            "referencia": "Gerente Eduardo Ruiz Sainz",
+            "orden": 4
+        },
+        {
+            "idInformeCvPublicacionReferencia": 7,
+            "idInformeCvPublicacion": 10006,
+            "empresa": "MERCADONA SA",
+            "funcionRealizada": "REPONEDOR",
+            "referencia": "Coordinador Andrés Fernández Vila",
+            "orden": 5
         }
     ]
 }

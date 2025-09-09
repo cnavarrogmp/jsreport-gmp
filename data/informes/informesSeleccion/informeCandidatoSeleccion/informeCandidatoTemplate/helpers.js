@@ -1,5 +1,4 @@
 // Helpers para el template - JSReport los carga automáticamente
-// NO usar module.exports, solo funciones globales
 
 function formatDate(date, format) {
     if (!date) return '';
