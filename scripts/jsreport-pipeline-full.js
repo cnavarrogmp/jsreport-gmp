@@ -11,11 +11,12 @@ const readline = require('readline');
 // =============== CONFIG ===============
 const CONFIG = {
     dockerDir: 'D:\\Docker\\Jsreport',
-    outputDir: 'D:\\Carmen\\Escritorio\\PRUEBAS DOCUMENTOS API',
+    outputDir: 'D:\\Carmen\\Escritorio\\pruebasDocumentosAPI',
     jsreportUrl: 'http://localhost:5488',
     jsreportUser: 'admin',
     jsreportPassword: 'admin',
     templatesPath: 'data/informes/informesSeleccion',
+    testDataPath: 'test-data',
     waitForDocker: 30000 // ms
 };
 
@@ -35,6 +36,13 @@ function wait(ms) {
 
 function timestamp() {
     return new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
+}
+
+function ensureOutputDir() {
+    if (!fs.existsSync(CONFIG.outputDir)) {
+        fs.mkdirSync(CONFIG.outputDir, { recursive: true });
+        console.log(`📁 Carpeta creada: ${CONFIG.outputDir}`);
+    }
 }
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -153,6 +161,44 @@ function findTemplates() {
     return templates.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function findTestData() {
+    const dataFiles = [];
+    const testDataDir = path.join(CONFIG.dockerDir, CONFIG.testDataPath);
+    
+    // Buscar en carpeta test-data
+    if (fs.existsSync(testDataDir)) {
+        const testFiles = fs.readdirSync(testDataDir);
+        for (const file of testFiles) {
+            if (file.endsWith('.json')) {
+                dataFiles.push({ 
+                    name: file, 
+                    path: path.join(testDataDir, file) 
+                });
+            }
+        }
+    }
+    
+    // Buscar en raíz (deprecated pero por compatibilidad)
+    const rootFiles = fs.readdirSync(CONFIG.dockerDir);
+    for (const file of rootFiles) {
+        if (file.endsWith('.json') && (file.includes('datos') || file.includes('test'))) {
+            dataFiles.push({ 
+                name: `${file} (raíz - deprecated)`, 
+                path: path.join(CONFIG.dockerDir, file) 
+            });
+        }
+    }
+    
+    // Opción de generar datos mínimos
+    dataFiles.push({ 
+        name: 'Datos mínimos de prueba (generados)', 
+        path: 'GENERATED', 
+        isGenerated: true 
+    });
+    
+    return dataFiles;
+}
+
 function loadTemplateDataIfAny(templateDir) {
     const candidates = ['data.json', 'test-data.json', 'datos.json'];
     for (const f of candidates) {
@@ -233,6 +279,9 @@ async function renderReportByName(shortName, data) {
 // =============== MAIN ===============
 async function main() {
     console.log('🚀 Pipeline completo: git + docker + render');
+    
+    // Asegurar carpeta de salida
+    ensureOutputDir();
 
     // GIT
     console.log('\n🔹 PASO 1: Git (pull / add / commit / push) en la rama actual');
@@ -260,12 +309,30 @@ async function main() {
     }
     console.log(`✅ Seleccionado: ${selected.name}`);
 
-    // DATA automática (no se pregunta): busca data.json dentro del template
-    let data = loadTemplateDataIfAny(selected.dir);
-    if (data) {
-        console.log('📄 Cargando datos del template (data.json/test-data.json)');
+    // DATA: buscar archivos de prueba disponibles
+    let data;
+    const dataFiles = findTestData();
+    if (dataFiles.length > 0) {
+        console.log('\n📋 DATOS DISPONIBLES:');
+        dataFiles.forEach((d, i) => console.log(`   ${i + 1}. ${d.name}`));
+        
+        const dataChoice = await ask('\nSelecciona datos de prueba (número): ');
+        const selectedData = dataFiles[parseInt(dataChoice, 10) - 1];
+        
+        if (!selectedData) {
+            console.log('❌ Selección inválida');
+            process.exit(1);
+        }
+        
+        if (selectedData.isGenerated) {
+            data = minimalData();
+            console.log('✅ Datos de prueba generados');
+        } else {
+            data = JSON.parse(fs.readFileSync(selectedData.path, 'utf-8'));
+            console.log(`✅ Datos cargados desde: ${selectedData.name}`);
+        }
     } else {
-        console.log('ℹ️ No hay data.json en el template. Usando datos mínimos.');
+        console.log('ℹ️ No hay archivos de datos disponibles. Usando datos mínimos.');
         data = minimalData();
     }
 
