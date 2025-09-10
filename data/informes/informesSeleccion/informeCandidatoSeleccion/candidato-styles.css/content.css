@@ -13,6 +13,7 @@ body {
   line-height: 1.4;
   color: #333;
   background: white;
+  padding-bottom: 60px; /* Espacio para footer + margen */
 }
 
 /* Layout principal */
@@ -23,11 +24,10 @@ body {
   margin: 0 auto;
 }
 
-/* Módulos */
+/* Módulos - PUEDEN cortarse entre páginas */
 .module {
   margin-bottom: 32px;
-  page-break-inside: avoid;
-  break-inside: avoid;
+  /* Permitimos que los módulos se corten */
 }
 
 .module-header {
@@ -56,9 +56,21 @@ body {
   margin-top: 0;
 }
 
-/* Secciones */
+/* Secciones - PUEDEN cortarse pero mantienen integridad de bloques internos */
 .section {
   margin-bottom: 24px;
+}
+
+/* Clase especial para secciones que NO deben cortarse */
+.section-breakable {
+  /* Puede cortarse entre sus elementos internos */
+}
+
+/* REGLAS DE CABECERAS - Siempre deben aparecer con contenido mínimo */
+.module-header {
+  /* Si una cabecera de módulo aparece, debe tener al menos una sección */
+  page-break-after: avoid;
+  break-after: avoid;
 }
 
 .section-title {
@@ -70,6 +82,12 @@ body {
   border-bottom: 1px solid #bdc3c7;
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  /* Si una cabecera de sección aparece, debe tener al menos un elemento */
+  page-break-after: avoid;
+  break-after: avoid;
+  /* Mantener con el siguiente elemento */
+  orphans: 2;
+  widows: 2;
 }
 
 /* Elementos Editoriales */
@@ -594,7 +612,7 @@ body {
   color: #2c3e50;
 }
 
-/* FOOTER */
+/* FOOTER - No debe tapar contenido */
 .page-footer {
   position: fixed;
   bottom: 16px;
@@ -605,7 +623,10 @@ body {
   color: #7f8c8d;
   border-top: 1px solid #ecf0f1;
   background: white;
+  z-index: 10;
 }
+
+/* Espacio ya aplicado en el body principal */
 
 .footer-content {
   display: flex;
@@ -649,7 +670,7 @@ body {
   margin-bottom: 4px;
 }
 
-/* Evitar cortes de página */
+/* INTEGRIDAD DE BLOQUES - Los elementos individuales NUNCA se cortan */
 .bloque-editorial,
 .experiencia-item,
 .formacion-item,
@@ -657,9 +678,38 @@ body {
 .lista-item,
 .reference-item,
 .software-item,
-.language-item {
+.language-item,
+.acreditacion-item,
+.adjunto-item {
   page-break-inside: avoid;
   break-inside: avoid;
+  /* Asegurar que cada ítem se muestra completo */
+}
+
+/* INTEGRIDAD DE TEXTOS - Los párrafos y contenidos no se dividen */
+.texto-editorial,
+.job-description,
+.skill-observations {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* MEJORAS DE FLUJO GENERAL */
+.module + .module {
+  /* Evitar grandes espacios entre módulos */
+  margin-top: 0;
+}
+
+/* Asegurar que las secciones fluyan naturalmente */
+.section + .section {
+  margin-top: 0;
+}
+
+/* CONTINUIDAD DE CONTENIDO */
+.module-header + .module-content {
+  /* Asegurar que el header y contenido estén unidos */
+  page-break-before: avoid;
+  break-before: avoid;
 }
 
 /* Responsive para impresión */
@@ -669,11 +719,18 @@ body {
     print-color-adjust: exact;
   }
   
+  /* Permitir que módulos se corten en impresión */
   .module {
-    page-break-inside: avoid;
+    page-break-inside: auto;
   }
   
   .debug-module {
     display: none; /* Ocultar debug en impresión */
+  }
+  
+  /* Optimización de página para impresión */
+  @page {
+    margin: 15mm;
+    size: A4;
   }
 }
