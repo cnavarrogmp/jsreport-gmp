@@ -5,27 +5,34 @@ const http = require('http');
 
 // =============== CONFIGURACIÓN ===============
 const CONFIG = {
-  jsreportUrl: 'http://localhost:5488',
-  jsreportUser: 'admin',
-  jsreportPassword: 'admin',
-  outputDir: 'D:\\Carmen\\Escritorio\\PRUEBAS DOCUMENTOS API',
-  dockerDir: 'D:\\Docker\\Jsreport',
-  templatesPath: 'data/informes/informesSeleccion',
-  testDataPath: 'test-data'
+    jsreportUrl: 'http://localhost:5488',
+    jsreportUser: 'admin',
+    jsreportPassword: 'admin',
+    outputDir: 'D:\\Carmen\\Escritorio\\pruebasDocumentosAPI', // <- camelCase
+    dockerDir: 'D:\\Docker\\Jsreport',
+    templatesPath: 'data/informes/informesSeleccion',
+    testDataPath: 'test-data'
 };
 
 // =============== UTILIDADES ===============
 const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+    input: process.stdin,
+    output: process.stdout
 });
 
 function question(prompt) {
-  return new Promise(resolve => rl.question(prompt, resolve));
+    return new Promise(resolve => rl.question(prompt, resolve));
 }
 
 function timestamp() {
-  return new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
+    return new Date().toISOString().replace(/:/g, '-').replace(/\..+/, '');
+}
+
+function ensureOutputDir() {
+    if (!fs.existsSync(CONFIG.outputDir)) {
+        fs.mkdirSync(CONFIG.outputDir, { recursive: true });
+        console.log(`📁 Carpeta creada: ${CONFIG.outputDir}`);
+    }
 }
 
 // =============== FUNCIONES PRINCIPALES ===============
@@ -34,307 +41,232 @@ function timestamp() {
  * Busca templates disponibles
  */
 function findTemplates() {
-  const templatesDir = path.join(CONFIG.dockerDir, CONFIG.templatesPath);
-  const templates = [];
-  
-  try {
-    const folders = fs.readdirSync(templatesDir, { withFileTypes: true });
-    
-    for (const folder of folders) {
-      if (folder.isDirectory()) {
-        const templatePath = path.join(templatesDir, folder.name);
-        
-        // Buscar subcarpetas que parecen ser templates (tienen content.handlebars)
-        const subfolders = fs.readdirSync(templatePath, { withFileTypes: true });
-        
-        for (const subfolder of subfolders) {
-          if (subfolder.isDirectory()) {
-            const handlebarsPath = path.join(templatePath, subfolder.name, 'content.handlebars');
-            if (fs.existsSync(handlebarsPath)) {
-              templates.push({
-                name: `${folder.name}/${subfolder.name}`,
-                shortName: subfolder.name,
-                fullPath: `/informes/informesSeleccion/${folder.name}/${subfolder.name}`,
-                folder: folder.name
-              });
+    const templatesDir = path.join(CONFIG.dockerDir, CONFIG.templatesPath);
+    const templates = [];
+
+    try {
+        const folders = fs.readdirSync(templatesDir, { withFileTypes: true });
+        for (const folder of folders) {
+            if (folder.isDirectory()) {
+                const templatePath = path.join(templatesDir, folder.name);
+                const subfolders = fs.readdirSync(templatePath, { withFileTypes: true });
+                for (const subfolder of subfolders) {
+                    if (subfolder.isDirectory()) {
+                        const handlebarsPath = path.join(templatePath, subfolder.name, 'content.handlebars');
+                        if (fs.existsSync(handlebarsPath)) {
+                            templates.push({
+                                name: `${folder.name}/${subfolder.name}`,
+                                shortName: subfolder.name,
+                                fullPath: `/informes/informesSeleccion/${folder.name}/${subfolder.name}`,
+                                folder: folder.name
+                            });
+                        }
+                    }
+                }
             }
-          }
         }
-      }
+    } catch (error) {
+        console.error('Error buscando templates:', error);
     }
-  } catch (error) {
-    console.error('Error buscando templates:', error);
-  }
-  
-  return templates;
+    return templates;
 }
 
 /**
  * Busca datos de prueba disponibles
  */
 function findTestData() {
-  const dataFiles = [];
-  
-  // Buscar en directorio test-data
-  const testDataDir = path.join(CONFIG.dockerDir, CONFIG.testDataPath);
-  if (fs.existsSync(testDataDir)) {
-    const testFiles = fs.readdirSync(testDataDir);
-    for (const file of testFiles) {
-      if (file.endsWith('.json')) {
-        dataFiles.push({
-          name: file,
-          path: path.join(testDataDir, file)
-        });
-      }
+    const dataFiles = [];
+    const testDataDir = path.join(CONFIG.dockerDir, CONFIG.testDataPath);
+    if (fs.existsSync(testDataDir)) {
+        const testFiles = fs.readdirSync(testDataDir);
+        for (const file of testFiles) {
+            if (file.endsWith('.json')) {
+                dataFiles.push({ name: file, path: path.join(testDataDir, file) });
+            }
+        }
     }
-  }
-  
-  // También buscar en raíz (por compatibilidad)
-  const rootFiles = fs.readdirSync(CONFIG.dockerDir);
-  for (const file of rootFiles) {
-    if (file.endsWith('.json') && (file.includes('datos') || file.includes('test'))) {
-      dataFiles.push({
-        name: `${file} (raíz - deprecated)`,
-        path: path.join(CONFIG.dockerDir, file)
-      });
+    const rootFiles = fs.readdirSync(CONFIG.dockerDir);
+    for (const file of rootFiles) {
+        if (file.endsWith('.json') && (file.includes('datos') || file.includes('test'))) {
+            dataFiles.push({ name: `${file} (raíz - deprecated)`, path: path.join(CONFIG.dockerDir, file) });
+        }
     }
-  }
-  
-  // Agregar opción de datos personalizados
-  dataFiles.push({
-    name: 'Datos mínimos de prueba (generados)',
-    path: 'GENERATED',
-    isGenerated: true
-  });
-  
-  return dataFiles;
+    dataFiles.push({ name: 'Datos mínimos de prueba (generados)', path: 'GENERATED', isGenerated: true });
+    return dataFiles;
 }
 
 /**
  * Genera datos mínimos de prueba
  */
 function generateMinimalTestData() {
-  return {
-    datosPersonales: {
-      nombreCompleto: "CANDIDATO DE PRUEBA",
-      email: "prueba@test.com",
-      telefono: "600000000",
-      codigoPostal: "28001",
-      municipio: "Madrid"
-    },
-    experienciasLaborales: [
-      {
-        empresa: "Empresa Prueba 1",
-        puesto: "Puesto Prueba",
-        fechaInicio: "2020-01-01",
-        fechaFin: "2023-12-31",
-        descripcion: "Descripción de prueba"
-      }
-    ],
-    formaciones: [
-      {
-        titulo: "Formación de Prueba",
-        centro: "Centro de Prueba",
-        fechaInicio: "2015-09-01",
-        fechaFin: "2019-06-30"
-      }
-    ],
-    competencias: [
-      {
-        nombre: "Competencia 1",
-        nivel: "Alto",
-        valorObtenido: 8,
-        valorEsperado: 7
-      }
-    ],
-    idiomas: [
-      {
-        idioma: "Inglés",
-        nivel: "B2"
-      }
-    ],
-    referencias: [
-      {
-        nombre: "Referencia Prueba",
-        cargo: "Director",
-        empresa: "Empresa Ref",
-        telefono: "600111222"
-      }
-    ]
-  };
+    return {
+        datosPersonales: {
+            nombreCompleto: "CANDIDATO DE PRUEBA",
+            email: "prueba@test.com",
+            telefono: "600000000",
+            codigoPostal: "28001",
+            municipio: "Madrid"
+        },
+        experienciasLaborales: [
+            { empresa: "Empresa Prueba 1", puesto: "Puesto Prueba", fechaInicio: "2020-01-01", fechaFin: "2023-12-31", descripcion: "Descripción de prueba" }
+        ],
+        formaciones: [
+            { titulo: "Formación de Prueba", centro: "Centro de Prueba", fechaInicio: "2015-09-01", fechaFin: "2019-06-30" }
+        ],
+        competencias: [
+            { nombre: "Competencia 1", nivel: "Alto", valorObtenido: 8, valorEsperado: 7 }
+        ],
+        idiomas: [
+            { idioma: "Inglés", nivel: "B2" }
+        ],
+        referencias: [
+            { nombre: "Referencia Prueba", cargo: "Director", empresa: "Empresa Ref", telefono: "600111222" }
+        ]
+    };
 }
 
 /**
  * Genera PDF via API
  */
 async function generatePDF(template, testData) {
-  return new Promise((resolve, reject) => {
-    const requestPayload = JSON.stringify({
-      template: {
-        name: template.shortName
-      },
-      data: testData,
-      options: {
-        debug: {
-          logsToResponseHeader: true
-        }
-      }
+    return new Promise((resolve, reject) => {
+        const requestPayload = JSON.stringify({
+            template: { name: template.shortName },
+            data: testData,
+            options: { debug: { logsToResponseHeader: true } }
+        });
+
+        const auth = Buffer.from(`${CONFIG.jsreportUser}:${CONFIG.jsreportPassword}`).toString('base64');
+
+        const options = {
+            hostname: 'localhost',
+            port: 5488,
+            path: '/api/report',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(requestPayload),
+                'Authorization': `Basic ${auth}`
+            }
+        };
+
+        console.log(`\n📤 Enviando solicitud a JSReport...`);
+        console.log(`   Template: ${template.name}`);
+
+        const req = http.request(options, (res) => {
+            const chunks = [];
+            res.on('data', (chunk) => chunks.push(chunk));
+            res.on('end', () => {
+                if (res.statusCode === 200) {
+                    const pdfBuffer = Buffer.concat(chunks);
+                    const outputFile = path.join(CONFIG.outputDir, `test_${template.folder}_${timestamp()}.pdf`);
+                    // La carpeta ya está asegurada, pero por si acaso:
+                    if (!fs.existsSync(CONFIG.outputDir)) fs.mkdirSync(CONFIG.outputDir, { recursive: true });
+                    fs.writeFileSync(outputFile, pdfBuffer);
+                    console.log(`\n✅ PDF generado exitosamente:`);
+                    console.log(`   📄 ${outputFile}`);
+                    console.log(`   📊 Tamaño: ${(pdfBuffer.length / 1024 / 1024).toFixed(2)} MB`);
+                    resolve(outputFile);
+                } else {
+                    console.error(`\n❌ Error HTTP ${res.statusCode}`);
+                    const errorMsg = Buffer.concat(chunks).toString();
+                    console.error(errorMsg.substring(0, 500));
+                    reject(new Error(`HTTP ${res.statusCode}`));
+                }
+            });
+        });
+
+        req.setTimeout(60000, () => {
+            req.destroy();
+            reject(new Error('Timeout: La generación tardó más de 60 segundos'));
+        });
+
+        req.on('error', (err) => {
+            console.error('\n❌ Error de conexión:', err.message);
+            reject(err);
+        });
+
+        req.write(requestPayload);
+        req.end();
     });
-    
-    const auth = Buffer.from(`${CONFIG.jsreportUser}:${CONFIG.jsreportPassword}`).toString('base64');
-    
-    const options = {
-      hostname: 'localhost',
-      port: 5488,
-      path: '/api/report',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(requestPayload),
-        'Authorization': `Basic ${auth}`
-      }
-    };
-    
-    console.log(`\n📤 Enviando solicitud a JSReport...`);
-    console.log(`   Template: ${template.name}`);
-    
-    const req = http.request(options, (res) => {
-      let data = [];
-      
-      res.on('data', (chunk) => {
-        data.push(chunk);
-      });
-      
-      res.on('end', () => {
-        if (res.statusCode === 200) {
-          const pdfBuffer = Buffer.concat(data);
-          const outputFile = path.join(CONFIG.outputDir, `test_${template.folder}_${timestamp()}.pdf`);
-          
-          // Crear directorio si no existe
-          if (!fs.existsSync(CONFIG.outputDir)) {
-            fs.mkdirSync(CONFIG.outputDir, { recursive: true });
-          }
-          
-          fs.writeFileSync(outputFile, pdfBuffer);
-          console.log(`\n✅ PDF generado exitosamente:`);
-          console.log(`   📄 ${outputFile}`);
-          console.log(`   📊 Tamaño: ${(pdfBuffer.length / 1024 / 1024).toFixed(2)} MB`);
-          
-          resolve(outputFile);
-        } else {
-          console.error(`\n❌ Error HTTP ${res.statusCode}`);
-          const errorMsg = Buffer.concat(data).toString();
-          console.error(errorMsg.substring(0, 500));
-          reject(new Error(`HTTP ${res.statusCode}`));
-        }
-      });
-    });
-    
-    req.setTimeout(60000, () => {
-      req.destroy();
-      reject(new Error('Timeout: La generación tardó más de 60 segundos'));
-    });
-    
-    req.on('error', (err) => {
-      console.error('\n❌ Error de conexión:', err.message);
-      reject(err);
-    });
-    
-    req.write(requestPayload);
-    req.end();
-  });
 }
 
 /**
  * Menú principal interactivo
  */
 async function main() {
-  console.log('\n');
-  console.log('================================================================================');
-  console.log('                     PROBADOR INTERACTIVO DE TEMPLATES                         ');
-  console.log('================================================================================');
-  console.log('\n');
-  
-  try {
-    // Paso 1: Buscar templates
-    console.log('🔍 Buscando templates disponibles...\n');
-    const templates = findTemplates();
-    
-    if (templates.length === 0) {
-      console.log('❌ No se encontraron templates');
-      process.exit(1);
-    }
-    
-    // Mostrar templates
-    console.log('📋 TEMPLATES DISPONIBLES:\n');
-    templates.forEach((t, i) => {
-      console.log(`   ${i + 1}. ${t.name}`);
-    });
-    
-    // Seleccionar template
     console.log('\n');
-    const templateChoice = await question('Selecciona un template (número): ');
-    const selectedTemplate = templates[parseInt(templateChoice) - 1];
-    
-    if (!selectedTemplate) {
-      console.log('❌ Selección inválida');
-      process.exit(1);
-    }
-    
-    console.log(`\n✅ Template seleccionado: ${selectedTemplate.name}`);
-    
-    // Paso 2: Seleccionar datos
-    console.log('\n🔍 Buscando archivos de datos...\n');
-    const dataFiles = findTestData();
-    
-    console.log('📋 DATOS DISPONIBLES:\n');
-    dataFiles.forEach((d, i) => {
-      console.log(`   ${i + 1}. ${d.name}`);
-    });
-    
+    console.log('================================================================================');
+    console.log('                     PROBADOR INTERACTIVO DE TEMPLATES                         ');
+    console.log('================================================================================');
     console.log('\n');
-    const dataChoice = await question('Selecciona datos de prueba (número): ');
-    const selectedData = dataFiles[parseInt(dataChoice) - 1];
-    
-    if (!selectedData) {
-      console.log('❌ Selección inválida');
-      process.exit(1);
+
+    // Asegurar carpeta de salida
+    ensureOutputDir();
+
+    try {
+        console.log('🔍 Buscando templates disponibles...\n');
+        const templates = findTemplates();
+        if (templates.length === 0) {
+            console.log('❌ No se encontraron templates');
+            process.exit(1);
+        }
+        console.log('📋 TEMPLATES DISPONIBLES:\n');
+        templates.forEach((t, i) => console.log(`   ${i + 1}. ${t.name}`));
+
+        console.log('\n');
+        const templateChoice = await question('Selecciona un template (número): ');
+        const selectedTemplate = templates[parseInt(templateChoice, 10) - 1];
+        if (!selectedTemplate) {
+            console.log('❌ Selección inválida');
+            process.exit(1);
+        }
+        console.log(`\n✅ Template seleccionado: ${selectedTemplate.name}`);
+
+        console.log('\n🔍 Buscando archivos de datos...\n');
+        const dataFiles = findTestData();
+        console.log('📋 DATOS DISPONIBLES:\n');
+        dataFiles.forEach((d, i) => console.log(`   ${i + 1}. ${d.name}`));
+
+        console.log('\n');
+        const dataChoice = await question('Selecciona datos de prueba (número): ');
+        const selectedData = dataFiles[parseInt(dataChoice, 10) - 1];
+        if (!selectedData) {
+            console.log('❌ Selección inválida');
+            process.exit(1);
+        }
+
+        let testData;
+        if (selectedData.isGenerated) {
+            testData = generateMinimalTestData();
+            console.log('\n✅ Datos de prueba generados');
+        } else {
+            testData = JSON.parse(fs.readFileSync(selectedData.path, 'utf-8'));
+            console.log(`\n✅ Datos cargados desde: ${selectedData.name}`);
+        }
+
+        console.log('\n================================================================================');
+        console.log('RESUMEN:');
+        console.log(`   Template: ${selectedTemplate.name}`);
+        console.log(`   Datos: ${selectedData.name}`);
+        console.log('================================================================================\n');
+
+        const confirm = await question('¿Generar PDF? (s/n): ');
+        if (confirm.toLowerCase() === 's') {
+            await generatePDF(selectedTemplate, testData);
+        } else {
+            console.log('\n❌ Generación cancelada');
+        }
+
+    } catch (error) {
+        console.error('\n❌ Error:', error.message);
+        console.error(error.stack);
+    } finally {
+        rl.close();
     }
-    
-    // Cargar o generar datos
-    let testData;
-    if (selectedData.isGenerated) {
-      testData = generateMinimalTestData();
-      console.log('\n✅ Datos de prueba generados');
-    } else {
-      testData = JSON.parse(fs.readFileSync(selectedData.path, 'utf-8'));
-      console.log(`\n✅ Datos cargados desde: ${selectedData.name}`);
-    }
-    
-    // Paso 3: Confirmar y generar
-    console.log('\n================================================================================');
-    console.log('RESUMEN:');
-    console.log(`   Template: ${selectedTemplate.name}`);
-    console.log(`   Datos: ${selectedData.name}`);
-    console.log('================================================================================\n');
-    
-    const confirm = await question('¿Generar PDF? (s/n): ');
-    
-    if (confirm.toLowerCase() === 's') {
-      await generatePDF(selectedTemplate, testData);
-    } else {
-      console.log('\n❌ Generación cancelada');
-    }
-    
-  } catch (error) {
-    console.error('\n❌ Error:', error.message);
-    console.error(error.stack);
-  } finally {
-    rl.close();
-  }
 }
 
 // =============== EJECUTAR ===============
 if (require.main === module) {
-  main();
+    main();
 }
