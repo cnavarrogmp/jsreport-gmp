@@ -73,6 +73,26 @@ body {
   break-after: avoid;
 }
 
+/* AGRUPACIÓN ATÓMICA - Cabecera + Primera Sección + Primer Elemento */
+.module-header,
+.module-header + .candidate-header,
+.module-header + .module-content > .section:first-child,
+.module-header + .module-content > .section:first-child > *:first-child {
+  /* Crear unidad indivisible */
+  page-break-inside: avoid;
+  break-inside: avoid;
+  page-break-before: avoid;
+  break-before: avoid;
+}
+
+/* Asegurar que el contenido inmediatamente después de cabecera no se separe */
+.module-header + *,
+.module-header + .candidate-header,
+.module-header + .module-content {
+  page-break-before: avoid;
+  break-before: avoid;
+}
+
 .section-title {
   font-size: 14px;
   font-weight: bold;
@@ -88,6 +108,22 @@ body {
   /* Mantener con el siguiente elemento */
   orphans: 2;
   widows: 2;
+}
+
+/* SECCIONES ATÓMICAS - Título + Primer elemento siempre juntos */
+.section-title + *,
+.section-title + .bloque-editorial:first-of-type,
+.section-title + .experiencia-item:first-of-type,
+.section-title + .formacion-item:first-of-type,
+.section-title + .competency-card:first-of-type {
+  page-break-before: avoid;
+  break-before: avoid;
+}
+
+/* Agrupación específica para primera sección de cada módulo */
+.module-content > .section:first-child {
+  page-break-before: avoid;
+  break-before: avoid;
 }
 
 /* Elementos Editoriales */
@@ -125,6 +161,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  /* Respetar espacio del footer */
+  margin-bottom: 60px;
 }
 
 .cover-image-container {
