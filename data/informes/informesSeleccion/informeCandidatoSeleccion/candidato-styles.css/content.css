@@ -26,12 +26,12 @@ body {
 
 /* Módulos - PUEDEN cortarse entre páginas */
 .module {
-  margin-bottom: 32px;
+  margin-bottom: 24px; /* 8px × 3 */
   /* Permitimos que los módulos se corten */
 }
 
 .module-header {
-  margin-bottom: 24px;
+  margin-bottom: 16px; /* 8px × 2 */
 }
 
 .module-title {
@@ -58,7 +58,7 @@ body {
 
 /* Secciones - PUEDEN cortarse pero mantienen integridad de bloques internos */
 .section {
-  margin-bottom: 24px;
+  margin-bottom: 16px; /* 8px × 2 */
 }
 
 /* Clase especial para secciones que NO deben cortarse */
@@ -73,25 +73,23 @@ body {
   break-after: avoid;
 }
 
-/* AGRUPACIÓN ATÓMICA - Cabecera + Primera Sección + Primer Elemento */
-.module-header,
-.module-header + .candidate-header,
-.module-header + .module-content > .section:first-child,
-.module-header + .module-content > .section:first-child > *:first-child {
-  /* Crear unidad indivisible */
-  page-break-inside: avoid;
-  break-inside: avoid;
+/* AGRUPACIÓN ATÓMICA CORREGIDA - Según jerarquía real */
+
+/* 1. Cabecera módulo + primera sección (Datos Básicos) = juntos */
+.module-header + .candidate-header {
   page-break-before: avoid;
   break-before: avoid;
 }
 
-/* Asegurar que el contenido inmediatamente después de cabecera no se separe */
-.module-header + *,
-.module-header + .candidate-header,
-.module-header + .module-content {
+/* 2. Título sección + primer bloque = juntos */
+.section-title + .bloque-editorial:first-of-type {
   page-break-before: avoid;
   break-before: avoid;
 }
+
+/* 3. PERMITIR que las secciones se separen */
+/* .candidate-header + .module-content NO tiene page-break-before: avoid */
+/* Esto permite que Datos Destacados vaya a página siguiente si no cabe */
 
 .section-title {
   font-size: 14px;
@@ -128,7 +126,7 @@ body {
 
 /* Elementos Editoriales */
 .bloque-editorial {
-  margin-bottom: 16px;
+  margin-bottom: 8px; /* 8px × 1 */
   page-break-inside: avoid;
   break-inside: avoid;
 }
@@ -265,7 +263,7 @@ body {
 
 /* CANDIDATO - DATOS BÁSICOS */
 .candidate-header {
-  margin-bottom: 32px;
+  margin-bottom: 24px; /* 8px × 3 */
 }
 
 .candidate-grid {
