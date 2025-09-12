@@ -69,52 +69,73 @@
 
 <!-- MÓDULO 1: PRESENTACIÓN -->
 <section class="module presentation-section" data-breadcrumb="Presentación">
-    <header class="module-header">
-        <h2 class="module-title">PRESENTACIÓN</h2>
-        <p class="module-subtitle">Información general y aspectos destacados</p>
-    </header>
+    <div class="module-prolog keep-together">
+        <header class="module-header">
+            <h2 class="module-title">PRESENTACIÓN</h2>
+            <p class="module-subtitle">Información general y aspectos destacados</p>
+        </header>
 
-    <!-- INFORMACIÓN DEL CANDIDATO - DATOS BÁSICOS -->
-    <section class="candidate-header" data-breadcrumb="Datos del Candidato">
-        <div class="candidate-grid">
-            <div class="candidate-photo-wrapper">
-                {{#if datosPersonales.foto}}
-                    <img class="candidate-photo" src="{{asset '/assets/profiles/AA.jpg' 'dataURI'}}" alt="Foto candidato" />
-                {{else}}
-                    <div class="no-photo">📷 Sin foto</div>
-                {{/if}}
-            </div>
-            <div class="candidate-info">
-                <h2 class="candidate-name">{{datosPersonales.nombreCompleto}}</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <span class="info-label">Edad</span>
-                        <span class="info-value">{{datosPersonales.edad}} años</span>
+        {{!-- PRIMERA CABEZA: datos del candidato --}}
+        {{#if datosPersonales}}
+        <div class="section-head keep-together">
+            <section class="candidate-header" data-breadcrumb="Datos del Candidato">
+                <div class="candidate-grid">
+                    <div class="candidate-photo-wrapper">
+                        {{#if datosPersonales.foto}}
+                            <img class="candidate-photo" src="{{asset '/assets/profiles/AA.jpg' 'dataURI'}}" alt="Foto candidato" />
+                        {{else}}
+                            <div class="no-photo">📷 Sin foto</div>
+                        {{/if}}
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Ubicación</span>
-                        <span class="info-value">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Email</span>
-                        <span class="info-value">{{datosPersonales.email}}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Teléfono</span>
-                        <span class="info-value">{{datosPersonales.telefonoMovil}}</span>
+                    <div class="candidate-info">
+                        <h2 class="candidate-name">{{datosPersonales.nombreCompleto}}</h2>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Edad</span>
+                                <span class="info-value">{{datosPersonales.edad}} años</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Ubicación</span>
+                                <span class="info-value">{{datosPersonales.municipio}}, {{datosPersonales.pais}}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value">{{datosPersonales.email}}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Teléfono</span>
+                                <span class="info-value">{{datosPersonales.telefonoMovil}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
+        {{else}}
+        {{!-- Si no hay datos personales, usar primer bloque editorial como cabeza --}}
+        {{#if informe}}
+            <div class="section-head keep-together">
+                <h3 class="section-title">Datos Destacados</h3>
+                {{#if informe.motivoPresentacion}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
+                    <div class="texto-editorial"><p>{{informe.motivoPresentacion}}</p></div>
+                </div>
+                {{/if}}
+            </div>
+        {{/if}}
+        {{/if}}
+    </div>
 
-    <!-- SECCIÓN: DATOS DESTACADOS -->
+    {{!-- EL RESTO DEL CONTENIDO DEL MÓDULO --}}
     {{#if informe}}
     <div class="module-content">
+        {{#if datosPersonales}}
+        {{!-- Si hay datos personales, mostrar Datos Destacados completos --}}
         <div class="section section-breakable" data-breadcrumb="Presentación › Datos Destacados">
             <div class="section-head keep-together">
                 <h3 class="section-title">Datos Destacados</h3>
-                {{!-- Primer bloque editorial disponible dentro de section-head --}}
+                {{!-- Primer bloque editorial dentro de section-head --}}
                 {{#if informe.motivoPresentacion}}
                 <div class="bloque-editorial">
                     <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
@@ -164,6 +185,49 @@
                 {{/if}}
             </div>
         </div>
+        {{else}}
+        {{!-- Si no hay datos personales, el primer bloque ya está en prólogo, mostrar el resto --}}
+        <div class="section">
+            <div class="section-body">
+                {{!-- Resto de bloques editoriales (excluyendo motivoPresentacion que ya está en prólogo) --}}
+                {{#if informe.aspectosPersonales}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Aspectos Personales</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.aspectosPersonales}}</p>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if informe.trayectoriaFormativa}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Trayectoria Formativa</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.trayectoriaFormativa}}</p>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if informe.trayectoriaProfesional}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Trayectoria Profesional</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.trayectoriaProfesional}}</p>
+                    </div>
+                </div>
+                {{/if}}
+
+                {{#if informe.datosInteres}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Datos de Interés</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.datosInteres}}</p>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
     </div>
     {{/if}}
 </section>

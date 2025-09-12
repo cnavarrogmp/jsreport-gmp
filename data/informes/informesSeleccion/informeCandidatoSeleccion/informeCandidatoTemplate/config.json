@@ -12,10 +12,10 @@
         "waitForNetworkIdle": false,
         "format": "A4",
         "marginTop": "16mm",
-        "marginBottom": "16mm",
+        "marginBottom": "24mm",
         "marginLeft": "16mm",
         "marginRight": "16mm",
-        "displayHeaderFooter": false
+        "displayHeaderFooter": true
     },
     "creationDate": {
         "$$date": 1725819600000

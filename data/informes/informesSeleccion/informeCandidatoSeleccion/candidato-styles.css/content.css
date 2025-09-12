@@ -4,8 +4,7 @@
 /* Configuración de página para PDF */
 @page {
   size: A4;
-  margin: 15mm;
-  margin-bottom: 25mm; /* Espacio reservado para footer */
+  margin: 16mm; /* Chrome displayHeaderFooter maneja marginBottom automáticamente */
 }
 
 * {
@@ -20,7 +19,7 @@ body {
   line-height: 1.4;
   color: #333;
   background: white;
-  /* El espacio para footer ahora se maneja con @page margin-bottom */
+  /* padding-bottom eliminado - Chrome maneja el área imprimible */
 }
 
 /* Layout principal */
@@ -121,13 +120,14 @@ body {
   page-break-after: avoid;
 }
 
-/* Eliminado - ya no necesario con wrappers .section-head */
-
-/* Limpieza de .section-title duplicado - ya está definido arriba */
-
-/* Eliminado - controlado por .section-head wrapper */
-
-/* Eliminado - controlado por .module-prolog wrapper */
+/* ================================
+   Textos seguros (URLs, texto largo)
+   ================================ */
+.texto-editorial p,
+.job-description p,
+.skill-observations p {
+  overflow-wrap: anywhere;
+}
 
 /* ================================
    Elementos atómicos (no dividir)
@@ -667,28 +667,11 @@ body {
   color: #2c3e50;
 }
 
-/* FOOTER - No debe tapar contenido */
+/* ================================
+   Footer nativo Chrome - HTML footer deshabilitado
+   ================================ */
 .page-footer {
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
-  height: 32px;
-  font-size: 10px;
-  color: #7f8c8d;
-  border-top: 1px solid #ecf0f1;
-  background: white;
-  z-index: 10;
-}
-
-/* Espacio ya aplicado en el body principal */
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  padding: 0 16px;
+  display: none; /* Chrome displayHeaderFooter maneja automáticamente */
 }
 
 .confidential {

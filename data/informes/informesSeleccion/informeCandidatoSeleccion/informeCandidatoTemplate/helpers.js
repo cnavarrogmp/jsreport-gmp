@@ -56,6 +56,33 @@ function hasSomeWhere(arr, predicateFn) {
     return false;
 }
 
+// Helpers para obtener primer válido y resto
+function firstWhereProp(arr, prop) {
+    if (!Array.isArray(arr)) return null;
+    for (var i = 0; i < arr.length; i++) {
+        var x = arr[i];
+        if (x && hasText(x[prop])) return x;
+    }
+    return null;
+}
+
+function restWhereProp(arr, prop) {
+    var out = [];
+    if (!Array.isArray(arr)) return out;
+    var used = false;
+    for (var i = 0; i < arr.length; i++) {
+        var x = arr[i];
+        if (x && hasText(x[prop])) {
+            if (!used) { 
+                used = true; 
+                continue; // Saltar el primero
+            }
+            out.push(x);
+        }
+    }
+    return out;
+}
+
 // Helper global para determinar si un módulo tiene contenido mínimo
 function hasMinimumContent(module, data) {
     var informe = data.informe || {};
@@ -69,12 +96,12 @@ function hasMinimumContent(module, data) {
                    hasText(informe.datosInteres);
         
         case 'experience':
-            // Experiencia válida = tiene puesto; Formación válida = tiene nombre
+            // Alineado con plantilla: Experiencia válida = tiene empresa; Formación válida = tiene centro
             return hasSomeWhere(data.experienciasLaborales || [], function(x) { 
-                return x && hasText(x.puesto);
+                return x && hasText(x.empresa); 
             }) ||
             hasSomeWhere(data.formaciones || [], function(x) { 
-                return x && hasText(x.nombre) || hasText(x.titulacionAcademica);
+                return x && hasText(x.centro); 
             });
         
         case 'competencies':
