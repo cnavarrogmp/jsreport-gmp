@@ -1,6 +1,13 @@
 /* Estilos simplificados para informeCandidatoSeleccion */
 /* Sistema de grilla de 8px */
 
+/* Configuración de página para PDF */
+@page {
+  size: A4;
+  margin: 15mm;
+  margin-bottom: 25mm; /* Espacio reservado para footer */
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -13,7 +20,7 @@ body {
   line-height: 1.4;
   color: #333;
   background: white;
-  padding-bottom: 60px; /* Espacio para footer + margen */
+  /* El espacio para footer ahora se maneja con @page margin-bottom */
 }
 
 /* Layout principal */
@@ -159,8 +166,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* Respetar espacio del footer */
-  margin-bottom: 60px;
+  /* Forzar nueva página después de portada */
+  page-break-after: always;
+  break-after: page;
 }
 
 .cover-image-container {
@@ -767,6 +775,7 @@ body {
   /* Optimización de página para impresión */
   @page {
     margin: 15mm;
+    margin-bottom: 25mm; /* Espacio extra para footer */
     size: A4;
   }
 }
