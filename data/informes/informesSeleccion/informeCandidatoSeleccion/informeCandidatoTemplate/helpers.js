@@ -41,3 +41,56 @@ function hasContent(array) {
 function hasText(text) {
     return text && typeof text === 'string' && text.trim().length > 0;
 }
+
+// Helper para verificar arrays con contenido
+function hasArrayContent(array) {
+    return Array.isArray(array) && array.length > 0;
+}
+
+// Helper para verificar si al menos un elemento cumple condición
+function hasSomeWhere(arr, predicateFn) {
+    if (!Array.isArray(arr)) return false;
+    for (var i = 0; i < arr.length; i++) {
+        if (predicateFn(arr[i])) return true;
+    }
+    return false;
+}
+
+// Helper global para determinar si un módulo tiene contenido mínimo
+function hasMinimumContent(module, data) {
+    var informe = data.informe || {};
+    
+    switch(module) {
+        case 'presentation':
+            return hasText(informe.motivoPresentacion) || 
+                   hasText(informe.aspectosPersonales) ||
+                   hasText(informe.trayectoriaFormativa) || 
+                   hasText(informe.trayectoriaProfesional) ||
+                   hasText(informe.datosInteres);
+        
+        case 'experience':
+            // Experiencia válida = tiene puesto; Formación válida = tiene nombre
+            return hasSomeWhere(data.experienciasLaborales || [], function(x) { 
+                return x && hasText(x.puesto);
+            }) ||
+            hasSomeWhere(data.formaciones || [], function(x) { 
+                return x && hasText(x.nombre) || hasText(x.titulacionAcademica);
+            });
+        
+        case 'competencies':
+            return hasArrayContent(data.competencias) || 
+                   hasArrayContent(data.referencias) ||
+                   hasArrayContent(data.aplicacionesInformaticas) || 
+                   hasArrayContent(data.idiomas) ||
+                   hasArrayContent(data.acreditaciones) || 
+                   hasArrayContent(data.adjuntos);
+        
+        case 'conclusions':
+            return hasText(informe.entrevistaPersonal) || 
+                   hasText(informe.valoracion) ||
+                   (informe.puntuacion != null);
+        
+        default:
+            return true;
+    }
+}

@@ -112,52 +112,57 @@
     {{#if informe}}
     <div class="module-content">
         <div class="section section-breakable" data-breadcrumb="Presentación › Datos Destacados">
-            <h3 class="section-title">Datos Destacados</h3>
-
-            {{#if informe.motivoPresentacion}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.motivoPresentacion}}</p>
+            <div class="section-head keep-together">
+                <h3 class="section-title">Datos Destacados</h3>
+                {{!-- Primer bloque editorial disponible dentro de section-head --}}
+                {{#if informe.motivoPresentacion}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Motivo de Presentación</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.motivoPresentacion}}</p>
+                    </div>
                 </div>
+                {{/if}}
             </div>
-            {{/if}}
-
-            {{#if informe.aspectosPersonales}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Aspectos Personales</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.aspectosPersonales}}</p>
+            
+            <div class="section-body">
+                {{!-- Resto de bloques editoriales --}}
+                {{#if informe.aspectosPersonales}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Aspectos Personales</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.aspectosPersonales}}</p>
+                    </div>
                 </div>
-            </div>
-            {{/if}}
+                {{/if}}
 
-            {{#if informe.trayectoriaFormativa}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Trayectoria Formativa</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.trayectoriaFormativa}}</p>
+                {{#if informe.trayectoriaFormativa}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Trayectoria Formativa</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.trayectoriaFormativa}}</p>
+                    </div>
                 </div>
-            </div>
-            {{/if}}
+                {{/if}}
 
-            {{#if informe.trayectoriaProfesional}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Trayectoria Profesional</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.trayectoriaProfesional}}</p>
+                {{#if informe.trayectoriaProfesional}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Trayectoria Profesional</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.trayectoriaProfesional}}</p>
+                    </div>
                 </div>
-            </div>
-            {{/if}}
+                {{/if}}
 
-            {{#if informe.datosInteres}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Datos de Interés</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.datosInteres}}</p>
+                {{#if informe.datosInteres}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Datos de Interés</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.datosInteres}}</p>
+                    </div>
                 </div>
+                {{/if}}
             </div>
-            {{/if}}
         </div>
     </div>
     {{/if}}
@@ -174,40 +179,88 @@
         <!-- SECCIÓN: EXPERIENCIA LABORAL -->
         {{#if (hasContent experienciasLaborales)}}
         <div class="section section-breakable" data-breadcrumb="Experiencia & Formación › Experiencia Laboral">
-            <h3 class="section-title">Experiencia Laboral</h3>
-            {{#each experienciasLaborales}}
-            {{#if empresa}}
-            <div class="experiencia-item lista-item">
-                <div class="experience-header">
-                    <h4 class="job-title">{{puesto}}</h4>
-                    <span class="company">{{empresa}}</span>
-                    <span class="period">{{formatDate fechaInicio}} - {{#if fechaFin}}{{formatDate fechaFin}}{{else}}Actualidad{{/if}}</span>
-                </div>
-                {{#if funcionRealizada}}
-                <div class="job-description">
-                    <p>{{funcionRealizada}}</p>
-                </div>
-                {{/if}}
+            <div class="section-head keep-together">
+                <h3 class="section-title">Experiencia Laboral</h3>
+                {{!-- Primera experiencia dentro de section-head --}}
+                {{#each experienciasLaborales}}
+                    {{#if @first}}
+                        {{#if empresa}}
+                        <div class="experiencia-item lista-item">
+                            <div class="experience-header">
+                                <h4 class="job-title">{{puesto}}</h4>
+                                <span class="company">{{empresa}}</span>
+                                <span class="period">{{formatDate fechaInicio}} - {{#if fechaFin}}{{formatDate fechaFin}}{{else}}Actualidad{{/if}}</span>
+                            </div>
+                            {{#if funcionRealizada}}
+                            <div class="job-description">
+                                <p>{{funcionRealizada}}</p>
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/if}}
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de experiencias --}}
+                {{#each experienciasLaborales}}
+                    {{#unless @first}}
+                        {{#if empresa}}
+                        <div class="experiencia-item lista-item">
+                            <div class="experience-header">
+                                <h4 class="job-title">{{puesto}}</h4>
+                                <span class="company">{{empresa}}</span>
+                                <span class="period">{{formatDate fechaInicio}} - {{#if fechaFin}}{{formatDate fechaFin}}{{else}}Actualidad{{/if}}</span>
+                            </div>
+                            {{#if funcionRealizada}}
+                            <div class="job-description">
+                                <p>{{funcionRealizada}}</p>
+                            </div>
+                            {{/if}}
+                        </div>
+                        {{/if}}
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         <!-- SECCIÓN: FORMACIÓN ACADÉMICA -->
         {{#if (hasContent formaciones)}}
         <div class="section section-breakable" data-breadcrumb="Experiencia & Formación › Formación Académica">
-            <h3 class="section-title">Formación Académica</h3>
-            {{#each formaciones}}
-            {{#if centro}}
-            <div class="formacion-item lista-item">
-                <h4 class="degree-title">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</h4>
-                <span class="institution">{{centro}}</span>
-                {{#if fechaFin}}<span class="period">{{formatDate fechaFin 'YYYY'}}</span>{{/if}}
-                {{#if titulo}}<span class="certified">✓ Titulado</span>{{/if}}
+            <div class="section-head keep-together">
+                <h3 class="section-title">Formación Académica</h3>
+                {{!-- Primer ítem dentro de section-head --}}
+                {{#each formaciones}}
+                    {{#if @first}}
+                        {{#if centro}}
+                        <div class="formacion-item lista-item">
+                            <h4 class="degree-title">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</h4>
+                            <span class="institution">{{centro}}</span>
+                            {{#if fechaFin}}<span class="period">{{formatDate fechaFin 'YYYY'}}</span>{{/if}}
+                            {{#if titulo}}<span class="certified">✓ Titulado</span>{{/if}}
+                        </div>
+                        {{/if}}
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/if}}
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de ítems --}}
+                {{#each formaciones}}
+                    {{#unless @first}}
+                        {{#if centro}}
+                        <div class="formacion-item lista-item">
+                            <h4 class="degree-title">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</h4>
+                            <span class="institution">{{centro}}</span>
+                            {{#if fechaFin}}<span class="period">{{formatDate fechaFin 'YYYY'}}</span>{{/if}}
+                            {{#if titulo}}<span class="certified">✓ Titulado</span>{{/if}}
+                        </div>
+                        {{/if}}
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
     </div>
@@ -224,93 +277,210 @@
         <!-- SECCIÓN: COMPETENCIAS EVALUADAS -->
         {{#if (hasContent competencias)}}
         <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Competencias Evaluadas">
-            <h3 class="section-title">Competencias Evaluadas</h3>
-            {{#each competencias}}
-            <div class="competency-card lista-item">
-                <div class="skill-header">
-                    <span class="skill-name">{{competencia}}</span>
-                    <span class="skill-level">{{puntuacion}}/10</span>
-                </div>
-                {{#if observaciones}}
-                <div class="skill-observations">
-                    <p>{{observaciones}}</p>
-                </div>
-                {{/if}}
+            <div class="section-head keep-together">
+                <h3 class="section-title">Competencias Evaluadas</h3>
+                {{!-- Primera competencia dentro de section-head --}}
+                {{#each competencias}}
+                    {{#if @first}}
+                    <div class="competency-card lista-item">
+                        <div class="skill-header">
+                            <span class="skill-name">{{competencia}}</span>
+                            <span class="skill-level">{{puntuacion}}/10</span>
+                        </div>
+                        {{#if observaciones}}
+                        <div class="skill-observations">
+                            <p>{{observaciones}}</p>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de competencias --}}
+                {{#each competencias}}
+                    {{#unless @first}}
+                    <div class="competency-card lista-item">
+                        <div class="skill-header">
+                            <span class="skill-name">{{competencia}}</span>
+                            <span class="skill-level">{{puntuacion}}/10</span>
+                        </div>
+                        {{#if observaciones}}
+                        <div class="skill-observations">
+                            <p>{{observaciones}}</p>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         <!-- SECCIÓN: REFERENCIAS -->
         {{#if (hasContent referencias)}}
         <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Referencias">
-            <h3 class="section-title">Referencias</h3>
-            {{#each referencias}}
-            <div class="reference-item lista-item">
-                <div class="reference-header">
-                    <span class="reference-name">{{referencia}}</span>
-                    <span class="reference-company">{{empresa}}</span>
-                </div>
-                <span class="reference-function">{{funcionRealizada}}</span>
+            <div class="section-head keep-together">
+                <h3 class="section-title">Referencias</h3>
+                {{!-- Primera referencia dentro de section-head --}}
+                {{#each referencias}}
+                    {{#if @first}}
+                    <div class="reference-item lista-item">
+                        <div class="reference-header">
+                            <span class="reference-name">{{referencia}}</span>
+                            <span class="reference-company">{{empresa}}</span>
+                        </div>
+                        <span class="reference-function">{{funcionRealizada}}</span>
+                    </div>
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de referencias --}}
+                {{#each referencias}}
+                    {{#unless @first}}
+                    <div class="reference-item lista-item">
+                        <div class="reference-header">
+                            <span class="reference-name">{{referencia}}</span>
+                            <span class="reference-company">{{empresa}}</span>
+                        </div>
+                        <span class="reference-function">{{funcionRealizada}}</span>
+                    </div>
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         <!-- SECCIÓN: APLICACIONES INFORMÁTICAS -->
         {{#if (hasContent aplicacionesInformaticas)}}
         <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Aplicaciones Informáticas">
-            <h3 class="section-title">Aplicaciones Informáticas</h3>
-            {{#each aplicacionesInformaticas}}
-            <div class="software-item lista-item">
-                <span class="software-name">{{aplicacion}}</span>
-                <span class="software-level">{{nivel}}</span>
+            <div class="section-head keep-together">
+                <h3 class="section-title">Aplicaciones Informáticas</h3>
+                {{!-- Primera aplicación dentro de section-head --}}
+                {{#each aplicacionesInformaticas}}
+                    {{#if @first}}
+                    <div class="software-item lista-item">
+                        <span class="software-name">{{aplicacion}}</span>
+                        <span class="software-level">{{nivel}}</span>
+                    </div>
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de aplicaciones --}}
+                {{#each aplicacionesInformaticas}}
+                    {{#unless @first}}
+                    <div class="software-item lista-item">
+                        <span class="software-name">{{aplicacion}}</span>
+                        <span class="software-level">{{nivel}}</span>
+                    </div>
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         <!-- SECCIÓN: IDIOMAS -->
         {{#if (hasContent idiomas)}}
         <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Idiomas">
-            <h3 class="section-title">Idiomas</h3>
-            {{#each idiomas}}
-            <div class="language-item lista-item">
-                <span class="language-name">{{idioma}}</span>
-                <span class="language-level">{{nivel}}</span>
+            <div class="section-head keep-together">
+                <h3 class="section-title">Idiomas</h3>
+                {{!-- Primer idioma dentro de section-head --}}
+                {{#each idiomas}}
+                    {{#if @first}}
+                    <div class="language-item lista-item">
+                        <span class="language-name">{{idioma}}</span>
+                        <span class="language-level">{{nivel}}</span>
+                    </div>
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de idiomas --}}
+                {{#each idiomas}}
+                    {{#unless @first}}
+                    <div class="language-item lista-item">
+                        <span class="language-name">{{idioma}}</span>
+                        <span class="language-level">{{nivel}}</span>
+                    </div>
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         <!-- SECCIÓN: ACREDITACIONES -->
         {{#if (hasContent acreditaciones)}}
         <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Acreditaciones">
-            <h3 class="section-title">Acreditaciones</h3>
-            {{#each acreditaciones}}
-            <div class="acreditacion-item lista-item">
-                <h4 class="acreditacion-title">{{descripcion}}</h4>
-                {{#if fecha}}<span class="acreditacion-date">{{formatDate fecha}}</span>{{/if}}
-                {{#if horas}}<span class="acreditacion-hours">{{horas}} horas</span>{{/if}}
-                {{#if acredita}}<span class="acreditacion-certified">✓ Acreditado</span>{{/if}}
+            <div class="section-head keep-together">
+                <h3 class="section-title">Acreditaciones</h3>
+                {{!-- Primera acreditación dentro de section-head --}}
+                {{#each acreditaciones}}
+                    {{#if @first}}
+                    <div class="acreditacion-item lista-item">
+                        <h4 class="acreditacion-title">{{descripcion}}</h4>
+                        {{#if fecha}}<span class="acreditacion-date">{{formatDate fecha}}</span>{{/if}}
+                        {{#if horas}}<span class="acreditacion-hours">{{horas}} horas</span>{{/if}}
+                        {{#if acredita}}<span class="acreditacion-certified">✓ Acreditado</span>{{/if}}
+                    </div>
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de acreditaciones --}}
+                {{#each acreditaciones}}
+                    {{#unless @first}}
+                    <div class="acreditacion-item lista-item">
+                        <h4 class="acreditacion-title">{{descripcion}}</h4>
+                        {{#if fecha}}<span class="acreditacion-date">{{formatDate fecha}}</span>{{/if}}
+                        {{#if horas}}<span class="acreditacion-hours">{{horas}} horas</span>{{/if}}
+                        {{#if acredita}}<span class="acreditacion-certified">✓ Acreditado</span>{{/if}}
+                    </div>
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
 
         <!-- SECCIÓN: ADJUNTOS -->
         {{#if (hasContent adjuntos)}}
         <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Adjuntos">
-            <h3 class="section-title">Documentación Adjunta</h3>
-            {{#each adjuntos}}
-            <div class="adjunto-item lista-item">
-                {{#if tipoAdjunto}}
-                <span class="adjunto-type">{{tipoAdjunto.value}}</span>
-                {{/if}}
-                {{#if ruta}}<span class="adjunto-path">{{ruta}}</span>{{/if}}
-                {{#if duracionHoras}}<span class="adjunto-duration">{{duracionHoras}} horas</span>{{/if}}
+            <div class="section-head keep-together">
+                <h3 class="section-title">Documentación Adjunta</h3>
+                {{!-- Primer adjunto dentro de section-head --}}
+                {{#each adjuntos}}
+                    {{#if @first}}
+                    <div class="adjunto-item lista-item">
+                        {{#if tipoAdjunto}}
+                        <span class="adjunto-type">{{tipoAdjunto.value}}</span>
+                        {{/if}}
+                        {{#if ruta}}<span class="adjunto-path">{{ruta}}</span>{{/if}}
+                        {{#if duracionHoras}}<span class="adjunto-duration">{{duracionHoras}} horas</span>{{/if}}
+                    </div>
+                    {{/if}}
+                {{/each}}
             </div>
-            {{/each}}
+            
+            <div class="section-body">
+                {{!-- Resto de adjuntos --}}
+                {{#each adjuntos}}
+                    {{#unless @first}}
+                    <div class="adjunto-item lista-item">
+                        {{#if tipoAdjunto}}
+                        <span class="adjunto-type">{{tipoAdjunto.value}}</span>
+                        {{/if}}
+                        {{#if ruta}}<span class="adjunto-path">{{ruta}}</span>{{/if}}
+                        {{#if duracionHoras}}<span class="adjunto-duration">{{duracionHoras}} horas</span>{{/if}}
+                    </div>
+                    {{/unless}}
+                {{/each}}
+            </div>
         </div>
         {{/if}}
     </div>
@@ -326,38 +496,43 @@
 
     <div class="module-content">
         <div class="section" data-breadcrumb="Conclusiones › Evaluación Final">
-            <h3 class="section-title">Evaluación Final</h3>
-
-            {{#if informe.entrevistaPersonal}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Entrevista Personal</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.entrevistaPersonal}}</p>
-                </div>
-            </div>
-            {{/if}}
-
-            {{#if informe.valoracion}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Valoración Final</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.valoracion}}</p>
-                </div>
-            </div>
-            {{/if}}
-
-            <!-- PUNTUACIÓN GLOBAL -->
-            {{#if informe.puntuacion}}
-            <div class="section-summary">
-                <div class="score-display">
-                    <div class="score-circle">
-                        <span class="score-number">{{informe.puntuacion}}</span>
-                        <span class="score-max">/10</span>
+            <div class="section-head keep-together">
+                <h3 class="section-title">Evaluación Final</h3>
+                {{!-- Primer bloque editorial dentro de section-head --}}
+                {{#if informe.entrevistaPersonal}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Entrevista Personal</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.entrevistaPersonal}}</p>
                     </div>
-                    <span class="score-label">Puntuación Global Final</span>
                 </div>
+                {{/if}}
             </div>
-            {{/if}}
+            
+            <div class="section-body">
+                {{!-- Resto de bloques --}}
+                {{#if informe.valoracion}}
+                <div class="bloque-editorial">
+                    <h4 class="editorial-subtitulo">Valoración Final</h4>
+                    <div class="texto-editorial">
+                        <p>{{informe.valoracion}}</p>
+                    </div>
+                </div>
+                {{/if}}
+
+                <!-- PUNTUACIÓN GLOBAL -->
+                {{#if informe.puntuacion}}
+                <div class="section-summary">
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span class="score-number">{{informe.puntuacion}}</span>
+                            <span class="score-max">/10</span>
+                        </div>
+                        <span class="score-label">Puntuación Global Final</span>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
         </div>
     </div>
 </section>

@@ -73,31 +73,40 @@ body {
   /* Puede cortarse entre sus elementos internos */
 }
 
-/* REGLAS DE CABECERAS - Siempre deben aparecer con contenido mínimo */
-.module-header {
-  /* Si una cabecera de módulo aparece, debe tener al menos una sección */
-  page-break-after: avoid;
+/* ================================
+   Utilidades de fragmentación
+   ================================ */
+.keep-together {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.keep-with-next {
   break-after: avoid;
+  page-break-after: avoid;
 }
 
-/* AGRUPACIÓN ATÓMICA CORREGIDA - Según jerarquía real */
-
-/* 1. Cabecera módulo + su contenido inmediato = juntos */
-.module-header + .candidate-header,
-.module-header + .module-content {
-  page-break-before: avoid;
-  break-before: avoid;
+/* ================================
+   Estructura section-head/body
+   ================================ */
+.section-head {
+  /* El grupo título + primer ítem no debe romperse */
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
-/* 2. Asegurar que primera sección de module-content no se separe */
-.module-content > .section:first-child {
-  page-break-before: avoid;
-  break-before: avoid;
+.section-body {
+  /* El cuerpo puede dividirse entre sus elementos */
+  break-inside: auto;
+  page-break-inside: auto;
 }
 
-/* 3. Título sección + primer elemento (cualquier tipo) = juntos */
-.section-title + *:first-of-type {
-  page-break-before: avoid;
+/* Título de sección: no terminar página justo después */
+.section-title {
+  break-after: avoid;
+  page-break-after: avoid;
+  display: block;
+  padding-bottom: 4px; /* Evita colapso de márgenes */
   break-before: avoid;
 }
 
@@ -146,11 +155,38 @@ body {
   break-before: avoid;
 }
 
+/* El header del módulo no debe separarse de su contenido */
+.module-header {
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+/* El header del módulo + primera sección deben ir juntos */
+.module-header + .module-content > .section:first-child .section-head {
+  page-break-before: avoid;
+  break-before: avoid;
+}
+
+/* ================================
+   Elementos atómicos (no dividir)
+   ================================ */
+.bloque-editorial,
+.lista-item,
+.experiencia-item,
+.formacion-item,
+.competency-card,
+.reference-item,
+.software-item,
+.language-item,
+.acreditacion-item,
+.adjunto-item {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
 /* Elementos Editoriales */
 .bloque-editorial {
   margin-bottom: 8px; /* 8px × 1 */
-  page-break-inside: avoid;
-  break-inside: avoid;
 }
 
 .editorial-subtitulo {
@@ -171,8 +207,6 @@ body {
 /* Lista Items */
 .lista-item {
   margin-bottom: 12px;
-  page-break-inside: avoid;
-  break-inside: avoid;
 }
 
 /* PORTADA */
