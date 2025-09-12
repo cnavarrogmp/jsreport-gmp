@@ -82,21 +82,36 @@ body {
 
 /* AGRUPACIÓN ATÓMICA CORREGIDA - Según jerarquía real */
 
-/* 1. Cabecera módulo + primera sección (Datos Básicos) = juntos */
-.module-header + .candidate-header {
+/* 1. Cabecera módulo + su contenido inmediato = juntos */
+.module-header + .candidate-header,
+.module-header + .module-content {
   page-break-before: avoid;
   break-before: avoid;
 }
 
-/* 2. Título sección + primer bloque = juntos */
-.section-title + .bloque-editorial:first-of-type {
+/* 2. Asegurar que primera sección de module-content no se separe */
+.module-content > .section:first-child {
   page-break-before: avoid;
   break-before: avoid;
 }
 
-/* 3. PERMITIR que las secciones se separen */
-/* .candidate-header + .module-content NO tiene page-break-before: avoid */
-/* Esto permite que Datos Destacados vaya a página siguiente si no cabe */
+/* 3. Título sección + primer elemento (cualquier tipo) = juntos */
+.section-title + *:first-of-type {
+  page-break-before: avoid;
+  break-before: avoid;
+}
+
+/* Específicos para diferentes tipos de primeros elementos */
+.section-title + .bloque-editorial:first-of-type,
+.section-title + .competency-card:first-of-type,
+.section-title + .reference-item:first-of-type,
+.section-title + .software-item:first-of-type,
+.section-title + .language-item:first-of-type,
+.section-title + .experiencia-item:first-of-type,
+.section-title + .formacion-item:first-of-type {
+  page-break-before: avoid;
+  break-before: avoid;
+}
 
 .section-title {
   font-size: 14px;
