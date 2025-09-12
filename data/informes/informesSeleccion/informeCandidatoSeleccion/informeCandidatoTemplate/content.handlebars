@@ -170,38 +170,63 @@
 
 <!-- MÓDULO 2: EXPERIENCIA & FORMACIÓN -->
 <section class="module experience-education-section" data-breadcrumb="Experiencia & Formación">
-    <header class="module-header">
-        <h2 class="module-title">EXPERIENCIA & FORMACIÓN</h2>
-        <p class="module-subtitle">Trayectoria profesional y académica</p>
-    </header>
+    <div class="module-prolog keep-together">
+        <header class="module-header">
+            <h2 class="module-title">EXPERIENCIA & FORMACIÓN</h2>
+            <p class="module-subtitle">Trayectoria profesional y académica</p>
+        </header>
 
-    <div class="module-content">
-        <!-- SECCIÓN: EXPERIENCIA LABORAL -->
+        {{!-- PRIMERA SECCIÓN PEGADA A LA CABECERA DEL MÓDULO --}}
         {{#if (hasContent experienciasLaborales)}}
-        <div class="section section-breakable" data-breadcrumb="Experiencia & Formación › Experiencia Laboral">
-            <div class="section-head keep-together">
-                <h3 class="section-title">Experiencia Laboral</h3>
-                {{!-- Primera experiencia dentro de section-head --}}
-                {{#each experienciasLaborales}}
-                    {{#if @first}}
-                        {{#if empresa}}
-                        <div class="experiencia-item lista-item">
-                            <div class="experience-header">
-                                <h4 class="job-title">{{puesto}}</h4>
-                                <span class="company">{{empresa}}</span>
-                                <span class="period">{{formatDate fechaInicio}} - {{#if fechaFin}}{{formatDate fechaFin}}{{else}}Actualidad{{/if}}</span>
-                            </div>
-                            {{#if funcionRealizada}}
-                            <div class="job-description">
-                                <p>{{funcionRealizada}}</p>
-                            </div>
-                            {{/if}}
+        <div class="section-head keep-together">
+            <h3 class="section-title">Experiencia Laboral</h3>
+            {{!-- Primera experiencia dentro de section-head --}}
+            {{#each experienciasLaborales}}
+                {{#if @first}}
+                    {{#if empresa}}
+                    <div class="experiencia-item lista-item">
+                        <div class="experience-header">
+                            <h4 class="job-title">{{puesto}}</h4>
+                            <span class="company">{{empresa}}</span>
+                            <span class="period">{{formatDate fechaInicio}} - {{#if fechaFin}}{{formatDate fechaFin}}{{else}}Actualidad{{/if}}</span>
+                        </div>
+                        {{#if funcionRealizada}}
+                        <div class="job-description">
+                            <p>{{funcionRealizada}}</p>
                         </div>
                         {{/if}}
+                    </div>
                     {{/if}}
-                {{/each}}
-            </div>
-            
+                {{/if}}
+            {{/each}}
+        </div>
+        {{else}}
+        {{!-- Si no hay experiencia, pero sí formación, usar formación como primera sección --}}
+        {{#if (hasContent formaciones)}}
+        <div class="section-head keep-together">
+            <h3 class="section-title">Formación Académica</h3>
+            {{!-- Primera formación dentro de section-head --}}
+            {{#each formaciones}}
+                {{#if @first}}
+                    {{#if centro}}
+                    <div class="formacion-item lista-item">
+                        <h4 class="degree-title">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</h4>
+                        <span class="institution">{{centro}}</span>
+                        {{#if fechaFin}}<span class="period">{{formatDate fechaFin 'YYYY'}}</span>{{/if}}
+                        {{#if titulo}}<span class="certified">✓ Titulado</span>{{/if}}
+                    </div>
+                    {{/if}}
+                {{/if}}
+            {{/each}}
+        </div>
+        {{/if}}
+        {{/if}}
+    </div>
+
+    {{!-- EL RESTO DEL CONTENIDO DEL MÓDULO --}}
+    <div class="module-content">
+        {{#if (hasContent experienciasLaborales)}}
+        <div class="section">
             <div class="section-body">
                 {{!-- Resto de experiencias --}}
                 {{#each experienciasLaborales}}
@@ -229,6 +254,8 @@
         <!-- SECCIÓN: FORMACIÓN ACADÉMICA -->
         {{#if (hasContent formaciones)}}
         <div class="section section-breakable" data-breadcrumb="Experiencia & Formación › Formación Académica">
+            {{#if (hasContent experienciasLaborales)}}
+            {{!-- Si hay experiencias, mostrar formación completa con section-head --}}
             <div class="section-head keep-together">
                 <h3 class="section-title">Formación Académica</h3>
                 {{!-- Primer ítem dentro de section-head --}}
@@ -261,6 +288,24 @@
                     {{/unless}}
                 {{/each}}
             </div>
+            {{else}}
+            {{!-- Si no hay experiencias, la formación ya está en el prólogo, mostrar solo el resto --}}
+            <div class="section-body">
+                {{!-- Resto de formaciones (excluyendo la primera que ya está en prólogo) --}}
+                {{#each formaciones}}
+                    {{#unless @first}}
+                        {{#if centro}}
+                        <div class="formacion-item lista-item">
+                            <h4 class="degree-title">{{#if nombre}}{{nombre}}{{else}}{{titulacionAcademica}}{{/if}}</h4>
+                            <span class="institution">{{centro}}</span>
+                            {{#if fechaFin}}<span class="period">{{formatDate fechaFin 'YYYY'}}</span>{{/if}}
+                            {{#if titulo}}<span class="certified">✓ Titulado</span>{{/if}}
+                        </div>
+                        {{/if}}
+                    {{/unless}}
+                {{/each}}
+            </div>
+            {{/if}}
         </div>
         {{/if}}
     </div>
@@ -268,35 +313,40 @@
 
 <!-- MÓDULO 3: COMPETENCIAS & REFERENCIAS + COMPLEMENTARIA -->
 <section class="module competencies-section" data-breadcrumb="Competencias & Referencias + Complementaria">
-    <header class="module-header">
-        <h2 class="module-title">COMPETENCIAS & REFERENCIAS + COMPLEMENTARIA</h2>
-        <p class="module-subtitle">Evaluación integral y datos adicionales</p>
-    </header>
+    <div class="module-prolog keep-together">
+        <header class="module-header">
+            <h2 class="module-title">COMPETENCIAS & REFERENCIAS + COMPLEMENTARIA</h2>
+            <p class="module-subtitle">Evaluación integral y datos adicionales</p>
+        </header>
 
-    <div class="module-content">
-        <!-- SECCIÓN: COMPETENCIAS EVALUADAS -->
+        {{!-- PRIMERA CABEZA DE SECCIÓN PEGADA A LA CABECERA DEL MÓDULO --}}
         {{#if (hasContent competencias)}}
-        <div class="section section-breakable" data-breadcrumb="Competencias & Referencias › Competencias Evaluadas">
-            <div class="section-head keep-together">
-                <h3 class="section-title">Competencias Evaluadas</h3>
-                {{!-- Primera competencia dentro de section-head --}}
-                {{#each competencias}}
-                    {{#if @first}}
-                    <div class="competency-card lista-item">
-                        <div class="skill-header">
-                            <span class="skill-name">{{competencia}}</span>
-                            <span class="skill-level">{{puntuacion}}/10</span>
-                        </div>
-                        {{#if observaciones}}
-                        <div class="skill-observations">
-                            <p>{{observaciones}}</p>
-                        </div>
-                        {{/if}}
+        <div class="section-head keep-together">
+            <h3 class="section-title">Competencias Evaluadas</h3>
+            {{!-- Primera competencia dentro de section-head --}}
+            {{#each competencias}}
+                {{#if @first}}
+                <div class="competency-card lista-item">
+                    <div class="skill-header">
+                        <span class="skill-name">{{competencia}}</span>
+                        <span class="skill-level">{{puntuacion}}/10</span>
+                    </div>
+                    {{#if observaciones}}
+                    <div class="skill-observations">
+                        <p>{{observaciones}}</p>
                     </div>
                     {{/if}}
-                {{/each}}
-            </div>
-            
+                </div>
+                {{/if}}
+            {{/each}}
+        </div>
+        {{/if}}
+    </div>
+
+    {{!-- EL RESTO DEL CONTENIDO DEL MÓDULO --}}
+    <div class="module-content">
+        {{#if (hasContent competencias)}}
+        <div class="section">
             <div class="section-body">
                 {{!-- Resto de competencias --}}
                 {{#each competencias}}
@@ -489,35 +539,53 @@
 <!-- MÓDULO 4: CONCLUSIONES -->
 {{#if informe}}
 <section class="module conclusions-section" data-breadcrumb="Conclusiones">
-    <header class="module-header">
-        <h2 class="module-title">CONCLUSIONES</h2>
-        <p class="module-subtitle">Evaluación final y recomendaciones</p>
-    </header>
+    <div class="module-prolog keep-together">
+        <header class="module-header">
+            <h2 class="module-title">CONCLUSIONES</h2>
+            <p class="module-subtitle">Evaluación final y recomendaciones</p>
+        </header>
 
-    <div class="module-content">
-        <div class="section" data-breadcrumb="Conclusiones › Evaluación Final">
-            <div class="section-head keep-together">
-                <h3 class="section-title">Evaluación Final</h3>
-                {{!-- Primer bloque editorial dentro de section-head --}}
-                {{#if informe.entrevistaPersonal}}
-                <div class="bloque-editorial">
-                    <h4 class="editorial-subtitulo">Entrevista Personal</h4>
-                    <div class="texto-editorial">
-                        <p>{{informe.entrevistaPersonal}}</p>
-                    </div>
+        {{!-- PRIMERA SECCIÓN PEGADA A LA CABECERA DEL MÓDULO --}}
+        <div class="section-head keep-together">
+            <h3 class="section-title">Evaluación Final</h3>
+            {{!-- Primer bloque editorial disponible dentro de section-head --}}
+            {{#if informe.entrevistaPersonal}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Entrevista Personal</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.entrevistaPersonal}}</p>
                 </div>
-                {{/if}}
             </div>
-            
-            <div class="section-body">
-                {{!-- Resto de bloques --}}
-                {{#if informe.valoracion}}
-                <div class="bloque-editorial">
-                    <h4 class="editorial-subtitulo">Valoración Final</h4>
-                    <div class="texto-editorial">
-                        <p>{{informe.valoracion}}</p>
-                    </div>
+            {{else}}
+            {{!-- Si no hay entrevista, usar valoración como primer bloque --}}
+            {{#if informe.valoracion}}
+            <div class="bloque-editorial">
+                <h4 class="editorial-subtitulo">Valoración Final</h4>
+                <div class="texto-editorial">
+                    <p>{{informe.valoracion}}</p>
                 </div>
+            </div>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+
+    {{!-- EL RESTO DEL CONTENIDO DEL MÓDULO --}}
+    <div class="module-content">
+        <div class="section">
+            <div class="section-body">
+                {{!-- Resto de bloques editoriales --}}
+                {{#if informe.entrevistaPersonal}}
+                    {{#if informe.valoracion}}
+                    <div class="bloque-editorial">
+                        <h4 class="editorial-subtitulo">Valoración Final</h4>
+                        <div class="texto-editorial">
+                            <p>{{informe.valoracion}}</p>
+                        </div>
+                    </div>
+                    {{/if}}
+                {{else}}
+                    {{!-- Si entrevista ya está en prólogo, no duplicar valoración --}}
                 {{/if}}
 
                 <!-- PUNTUACIÓN GLOBAL -->

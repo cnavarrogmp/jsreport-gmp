@@ -86,6 +86,11 @@ body {
   page-break-after: avoid;
 }
 
+.module-prolog {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 /* ================================
    Estructura section-head/body
    ================================ */
@@ -103,69 +108,26 @@ body {
 
 /* Título de sección: no terminar página justo después */
 .section-title {
-  break-after: avoid;
-  page-break-after: avoid;
-  display: block;
-  padding-bottom: 4px; /* Evita colapso de márgenes */
-  break-before: avoid;
-}
-
-/* Específicos para diferentes tipos de primeros elementos */
-.section-title + .bloque-editorial:first-of-type,
-.section-title + .competency-card:first-of-type,
-.section-title + .reference-item:first-of-type,
-.section-title + .software-item:first-of-type,
-.section-title + .language-item:first-of-type,
-.section-title + .experiencia-item:first-of-type,
-.section-title + .formacion-item:first-of-type {
-  page-break-before: avoid;
-  break-before: avoid;
-}
-
-.section-title {
   font-size: 14px;
   font-weight: bold;
   color: #2c3e50;
   margin-bottom: 16px;
-  padding-bottom: 4px;
+  padding-bottom: 4px; /* Evita colapso de márgenes */
   border-bottom: 1px solid #bdc3c7;
   text-transform: uppercase;
   letter-spacing: 0.3px;
-  /* Si una cabecera de sección aparece, debe tener al menos un elemento */
-  page-break-after: avoid;
+  display: block;
   break-after: avoid;
-  /* Mantener con el siguiente elemento */
-  orphans: 2;
-  widows: 2;
-}
-
-/* SECCIONES ATÓMICAS - Título + Primer elemento siempre juntos */
-.section-title + *,
-.section-title + .bloque-editorial:first-of-type,
-.section-title + .experiencia-item:first-of-type,
-.section-title + .formacion-item:first-of-type,
-.section-title + .competency-card:first-of-type {
-  page-break-before: avoid;
-  break-before: avoid;
-}
-
-/* Agrupación específica para primera sección de cada módulo */
-.module-content > .section:first-child {
-  page-break-before: avoid;
-  break-before: avoid;
-}
-
-/* El header del módulo no debe separarse de su contenido */
-.module-header {
   page-break-after: avoid;
-  break-after: avoid;
 }
 
-/* El header del módulo + primera sección deben ir juntos */
-.module-header + .module-content > .section:first-child .section-head {
-  page-break-before: avoid;
-  break-before: avoid;
-}
+/* Eliminado - ya no necesario con wrappers .section-head */
+
+/* Limpieza de .section-title duplicado - ya está definido arriba */
+
+/* Eliminado - controlado por .section-head wrapper */
+
+/* Eliminado - controlado por .module-prolog wrapper */
 
 /* ================================
    Elementos atómicos (no dividir)
