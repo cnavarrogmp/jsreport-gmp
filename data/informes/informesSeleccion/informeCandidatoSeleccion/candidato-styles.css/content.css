@@ -182,8 +182,8 @@ body {
   flex-direction: column;
   justify-content: space-between;
   /* Forzar nueva página después de portada */
- /* page-break-after: always;
-  break-after: page;*/
+  page-break-after: always;
+  break-after: page;
 }
 
 .cover-image-container {
