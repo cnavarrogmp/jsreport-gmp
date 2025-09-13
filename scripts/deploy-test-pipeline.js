@@ -146,7 +146,8 @@ async function step3_GeneratePDF() {
       ]
     };
   }
-  
+
+  /*Aquí construimos la llamada a la API de JSReport para generar el PDF*/
   return new Promise((resolve, reject) => {
     const requestPayload = JSON.stringify({
       template: {
@@ -292,7 +293,13 @@ async function runPipeline() {
 
 // =============== EJECUCIÓN ===============
 if (require.main === module) {
-  runPipeline();
+    runPipeline()
+        .then(() => process.exit(0))   // salida limpia si todo fue bien
+        .catch((err) => {
+            console.error('\n❌ ERROR CRÍTICO:', err);
+            console.error('Stack:', err.stack);
+            process.exit(1);             // salida con error si algo falla
+        });
 }
 
 module.exports = { runPipeline, CONFIG };
