@@ -668,20 +668,8 @@ body {
 }
 
 /* ================================
-   Footer nativo Chrome - HTML footer deshabilitado
+   Footer nativo Chrome - Migrado a headerTemplate.html/footerTemplate.html
    ================================ */
-.page-footer {
-  display: none; /* Chrome displayHeaderFooter maneja automáticamente */
-}
-
-.confidential {
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.page-info {
-  font-style: italic;
-}
 
 /* COMPETENCY CARDS */
 .competency-card {

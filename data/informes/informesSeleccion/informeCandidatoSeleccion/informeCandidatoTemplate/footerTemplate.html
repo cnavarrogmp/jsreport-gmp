@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Footer · Informe de Selección</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .footer-container{
+            width: 100%;
+            padding: 0 16mm;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 10px;
+            color: #7f8c8d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ecf0f1;
+            height: 16mm; /* visual; el alto real lo define chrome.marginBottom */
+        }
+        .confidential{ font-weight: bold; text-transform: uppercase; }
+        .page-info{ font-size: 10px; }
+    </style>
+</head>
+<body>
+<div class="footer-container">
+    <span class="confidential">CONFIDENCIAL - Uso exclusivo del cliente</span>
+    <!-- Chrome reemplaza estas clases automáticamente -->
+    <span class="page-info">Página <span class="pageNumber"></span> de <span class="totalPages"></span></span>
+</div>
+</body>
+</html>

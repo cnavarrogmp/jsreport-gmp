@@ -11,11 +11,13 @@
         "waitForJS": false,
         "waitForNetworkIdle": false,
         "format": "A4",
-        "marginTop": "16mm",
+        "marginTop": "24mm",
         "marginBottom": "24mm",
         "marginLeft": "16mm",
         "marginRight": "16mm",
-        "displayHeaderFooter": true
+        "displayHeaderFooter": true,
+        "headerTemplate": "{{asset \"headerTemplate.html\" \"utf8\"}}",
+        "footerTemplate": "{{asset \"footerTemplate.html\" \"utf8\"}}"
     },
     "creationDate": {
         "$$date": 1725819600000
