@@ -19,6 +19,7 @@ body {
   line-height: 1.4;
   color: #333;
   background: white;
+    margin-top: 16px;
   /* padding-bottom eliminado - Chrome maneja el área imprimible */
 }
 
