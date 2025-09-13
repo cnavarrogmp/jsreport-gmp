@@ -299,7 +299,7 @@ async function main() {
 
     try {
         // ---- 1) Buscar plantillas
-        console.log('🔍 Buscando templates disponibles...\n');
+        console.log('🔍 Buscando templates disponibless...\n');
         const templates = findTemplates();
         if (templates.length === 0) {
             console.log('❌ No se encontraron templates. Revisa CONFIG.templatesPath y tu estructura.');
