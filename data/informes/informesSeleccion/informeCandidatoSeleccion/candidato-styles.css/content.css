@@ -19,7 +19,7 @@ body {
   line-height: 1.4;
   color: #333;
   background: white;
-    margin-top: 16px;
+    /*margin-top: 16px;*/
   /* padding-bottom eliminado - Chrome maneja el área imprimible */
 }
 
@@ -177,7 +177,7 @@ body {
 
 /* PORTADA */
 .cover-page {
-  min-height: 250mm;
+  /*min-height: 250mm;*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -757,11 +757,5 @@ body {
   .debug-module {
     display: none; /* Ocultar debug en impresión */
   }
-  
-  /* Optimización de página para impresión */
-  @page {
-    margin: 15mm;
-    margin-bottom: 25mm; /* Espacio extra para footer */
-    size: A4;
-  }
+
 }
