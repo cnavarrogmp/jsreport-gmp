@@ -4,7 +4,7 @@
 /* Configuración de página para PDF */
 @page {
   size: A4;
-  margin: 16mm; /* Chrome displayHeaderFooter maneja marginBottom automáticamente */
+ /* margin: 16mm;*/ /* Chrome displayHeaderFooter maneja marginBottom automáticamente */
 }
 
 * {
@@ -23,12 +23,15 @@ body {
 }
 
 /* Layout principal */
+/*
 .report {
   width: 210mm;
   min-height: 297mm;
   padding: 16px;
   margin: 0 auto;
 }
+*/
+.report { width: auto; max-width: 100%; padding: 16px; margin: 0 auto; }
 
 /* Módulos - PUEDEN cortarse entre páginas */
 .module {
