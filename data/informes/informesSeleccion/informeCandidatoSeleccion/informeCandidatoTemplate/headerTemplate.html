@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Header · Informe de Selección</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        .header-container{
+            width: 100%;
+            padding: 0 16mm;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 10px;
+            color: #7f8c8d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ecf0f1;
+            height: 16mm; /* visual; el alto real lo define chrome.marginTop */
+        }
+        .breadcrumb { font-size: 10px; color: #95a5a6; }
+        .report-info { font-size: 10px; font-weight: bold; color: #34495e; }
+    </style>
+</head>
+<body>
+<div class="header-container">
+    <span class="breadcrumb"><!-- migas/contexto dinámico --></span>
+    <!-- Chrome puede inyectar: <span class="date"></span> <span class="title"></span> -->
+    <span class="report-info">Informe de Selección de Personal</span>
+</div>
+</body>
+</html>
