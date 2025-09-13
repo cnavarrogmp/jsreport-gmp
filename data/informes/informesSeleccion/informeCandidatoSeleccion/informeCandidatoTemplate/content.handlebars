@@ -609,63 +609,54 @@
             <p class="module-subtitle">Evaluación final y recomendaciones</p>
         </header>
 
-        {{!-- PRIMERA SECCIÓN PEGADA A LA CABECERA DEL MÓDULO --}}
+        {{!-- SECCIÓN 1: ENTREVISTA PERSONAL - pegada a cabecera del módulo --}}
+        {{#if informe.entrevistaPersonal}}
         <div class="section-head keep-together">
-            <h3 class="section-title">Evaluación Final</h3>
-            {{!-- Primer bloque editorial disponible dentro de section-head --}}
-            {{#if informe.entrevistaPersonal}}
+            <h3 class="section-title">Entrevista Personal</h3>
             <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Entrevista Personal</h4>
                 <div class="texto-editorial">
                     <p>{{informe.entrevistaPersonal}}</p>
                 </div>
             </div>
-            {{else}}
-            {{!-- Si no hay entrevista, usar valoración como primer bloque --}}
-            {{#if informe.valoracion}}
-            <div class="bloque-editorial">
-                <h4 class="editorial-subtitulo">Valoración Final</h4>
-                <div class="texto-editorial">
-                    <p>{{informe.valoracion}}</p>
-                </div>
-            </div>
-            {{/if}}
-            {{/if}}
         </div>
+        {{/if}}
     </div>
 
-    {{!-- EL RESTO DEL CONTENIDO DEL MÓDULO --}}
+    {{!-- CONTENIDO DEL MÓDULO --}}
     <div class="module-content">
-        <div class="section">
-            <div class="section-body">
-                {{!-- Resto de bloques editoriales --}}
-                {{#if informe.entrevistaPersonal}}
-                    {{#if informe.valoracion}}
-                    <div class="bloque-editorial">
-                        <h4 class="editorial-subtitulo">Valoración Final</h4>
-                        <div class="texto-editorial">
-                            <p>{{informe.valoracion}}</p>
-                        </div>
-                    </div>
-                    {{/if}}
-                {{else}}
-                    {{!-- Si entrevista ya está en prólogo, no duplicar valoración --}}
-                {{/if}}
-
-                <!-- PUNTUACIÓN GLOBAL -->
-                {{#if informe.puntuacion}}
-                <div class="section-summary">
-                    <div class="score-display">
-                        <div class="score-circle">
-                            <span class="score-number">{{informe.puntuacion}}</span>
-                            <span class="score-max">/10</span>
-                        </div>
-                        <span class="score-label">Puntuación Global Final</span>
+        {{!-- SECCIÓN 2: VALORACIÓN FINAL - con su propia cabecera --}}
+        {{#if informe.valoracion}}
+        <div class="section section-breakable">
+            <div class="section-head keep-together">
+                <h3 class="section-title">Valoración Final</h3>
+                <div class="bloque-editorial">
+                    <div class="texto-editorial">
+                        <p>{{informe.valoracion}}</p>
                     </div>
                 </div>
-                {{/if}}
             </div>
         </div>
+        {{/if}}
+
+        {{!-- SECCIÓN 3: PUNTUACIÓN GLOBAL FINAL - bloque irrompible sin cabecera --}}
+        {{#if informe.puntuacion}}
+        <div class="puntuacion-global-final keep-together">
+            <div class="score-display">
+                <div class="score-circle">
+                    <span class="score-number">{{informe.puntuacion}}</span>
+                    <span class="score-max">/10</span>
+                </div>
+                <span class="score-label">Puntuación Global Final</span>
+            </div>
+            {{#if informe.recomendacion}}
+            <div class="recomendacion-final">
+                <div class="texto-editorial">
+                    <p>{{informe.recomendacion}}</p>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+        {{/if}}
     </div>
 </section>
 {{/if}}
