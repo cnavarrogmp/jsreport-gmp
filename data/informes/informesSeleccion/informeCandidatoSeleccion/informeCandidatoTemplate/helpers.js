@@ -123,37 +123,13 @@ function hasMinimumContent(module, data) {
 }
 
 // ================================
-// SISTEMA DE BREADCRUMBS - FASE 2
+// SISTEMA DE BREADCRUMBS - FASE 2  
 // ================================
 
 /**
- * Helper básico para obtener información de página actual
- * Utilizará $pdf.pages cuando esté disponible en el contexto
+ * Helper para breadcrumb - por ahora estático
+ * Reservado para futura implementación de contexto dinámico
  */
-function getCurrentPageContext(options) {
-    // Por ahora retornamos contexto básico
-    // En siguientes iteraciones implementaremos la lógica completa
-    return {
-        pageNumber: 1,
-        totalPages: 1,
-        breadcrumb: "Informe de Candidato"
-    };
-}
-
-/**
- * Helper para obtener breadcrumb simplificado para header
- * Retorna solo el contexto más específico, no toda la jerarquía
- */
-function getSimpleBreadcrumb(fullBreadcrumb) {
-    if (!fullBreadcrumb || typeof fullBreadcrumb !== 'string') {
-        return '';
-    }
-    
-    // Si tiene jerarquía (contiene ›), tomar la parte más específica
-    if (fullBreadcrumb.includes('›')) {
-        const parts = fullBreadcrumb.split('›');
-        return parts[parts.length - 1].trim();
-    }
-    
-    return fullBreadcrumb.trim();
+function getCurrentBreadcrumb() {
+    return "Informe de Candidato";
 }

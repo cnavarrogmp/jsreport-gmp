@@ -23,9 +23,9 @@
 </head>
 <body>
 <div class="header-container">
-    <span class="breadcrumb">{{#if $pdf.pages}}Dinámico{{else}}Informe de Candidato{{/if}}</span>
+    <span class="breadcrumb">{{getCurrentBreadcrumb}}</span>
     <!-- Chrome puede inyectar: <span class="date"></span> <span class="title"></span> -->
-    <span class="report-info">Informe de Selección de Personal</span>
+    <span class="report-info">Informe de Selección</span>
 </div>
 </body>
 </html>
